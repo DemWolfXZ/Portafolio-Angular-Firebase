@@ -1,3 +1,42 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<!-- Aplicación principal - SPA con scroll nativo HTML -->
+<div class="app-container">
+  <!-- Header fijo global -->
+  <app-header></app-header>
+
+  <!-- Contenido principal con scroll nativo -->
+  <main class="main-content" role="main">
+    
+    <!-- Hero Section - Inicio -->
+    <section id="home" class="section hero-section-wrapper">
+      <app-hero-section></app-hero-section>
+    </section>
+
+    <!-- About Section - Sobre Mí -->
+    <section id="about" class="section about-section-wrapper">
+      <app-about-section></app-about-section>
+    </section>
+
+    <!-- Experience Section - Experiencia -->
+    <section id="experience" class="section experience-section-wrapper">
+      <app-experience-section></app-experience-section>
+    </section>
+
+    <!-- Projects Section - Proyectos -->
+    <section id="projects" class="section projects-section-wrapper">
+      <app-projects-section></app-projects-section>
+    </section>
+
+    <!-- Skills Section - Competencias -->
+    <section id="skills" class="section skills-section-wrapper">
+      <app-skills-section></app-skills-section>
+    </section>
+
+    <!-- Contact Section - Contacto -->
+    <section id="contact" class="section contact-section-wrapper">
+      <app-contact-section></app-contact-section>
+    </section>
+  </main>
+
+  <!-- Footer global -->
+  <app-footer></app-footer>
+</div>

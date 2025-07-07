@@ -1,16 +1,18 @@
+// src/app/app-routing.module.ts
+// Módulo de rutas simplificado para SPA
+// Redirige todo a la página principal sin lazy loading
+
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+// Rutas simplificadas para SPA - todo se maneja en app.component
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
-  },
-  {
     path: '',
-    redirectTo: 'home',
+    redirectTo: '',
     pathMatch: 'full'
-  },
+  }
+  // Sin lazy loading - todo se carga en app.component como SPA
 ];
 
 @NgModule({

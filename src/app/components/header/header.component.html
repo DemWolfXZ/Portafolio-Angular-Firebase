@@ -1,0 +1,113 @@
+<!-- Header fijo con navegación principal - MENÚ FUNCIONANDO -->
+<header class="header" [class.scrolled]="isScrolled">
+  <div class="header-container">
+    
+    <!-- Logo y nombre -->
+    <div class="header-brand" (click)="navigateToSection('home')">
+      <div class="brand-logo">
+        <ion-icon name="code-slash" class="brand-icon"></ion-icon>
+      </div>
+      <div class="brand-text">
+        <span class="brand-name">Alejandro Villa</span>
+        <span class="brand-title">Technical Business Analyst</span>
+      </div>
+    </div>
+
+    <!-- Navegación desktop -->
+    <nav class="header-nav desktop-nav" aria-label="Navegación principal">
+      <ul class="nav-list">
+        <li class="nav-item" *ngFor="let item of navItems">
+          <button 
+            class="nav-link"
+            [class.active]="isActiveSection(item.id)"
+            (click)="navigateToSection(item.id)"
+            type="button"
+          >
+            <ion-icon [name]="item.icon" class="nav-icon"></ion-icon>
+            <span class="nav-label">{{ item.label }}</span>
+          </button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Controles de header -->
+    <div class="header-controls">
+      
+      <!-- Toggle de tema -->
+      <button 
+        class="theme-toggle"
+        (click)="toggleTheme()"
+        type="button"
+      >
+        <ion-icon 
+          [name]="isDarkMode() ? 'sunny' : 'moon'" 
+          class="theme-icon"
+        ></ion-icon>
+      </button>
+
+      <!-- Botón menú móvil -->
+      <button 
+        class="mobile-menu-toggle"
+        (click)="toggleMobileMenu()"
+        [class.active]="mobileMenuOpen"
+        type="button"
+      >
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menú móvil -->
+  <div 
+    class="mobile-nav" 
+    [class.open]="mobileMenuOpen"
+  >
+    <div class="mobile-nav-overlay" (click)="closeMobileMenu()"></div>
+    <div class="mobile-nav-content">
+      
+      <!-- Header del menú móvil -->
+      <div class="mobile-nav-header">
+        <div class="mobile-brand">
+          <ion-icon name="code-slash" class="mobile-brand-icon"></ion-icon>
+          <span class="mobile-brand-name">Alejandro Villa</span>
+        </div>
+        <button 
+          class="mobile-close"
+          (click)="closeMobileMenu()"
+          type="button"
+        >
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </div>
+
+      <!-- Lista de navegación móvil -->
+      <ul class="mobile-nav-list">
+        <li class="mobile-nav-item" *ngFor="let item of navItems">
+          <button 
+            class="mobile-nav-link"
+            [class.active]="isActiveSection(item.id)"
+            (click)="navigateToSection(item.id)"
+            type="button"
+          >
+            <ion-icon [name]="item.icon" class="mobile-nav-icon"></ion-icon>
+            <span class="mobile-nav-label">{{ item.label }}</span>
+            <ion-icon name="chevron-forward" class="mobile-nav-arrow"></ion-icon>
+          </button>
+        </li>
+      </ul>
+
+      <!-- Footer del menú móvil -->
+      <div class="mobile-nav-footer">
+        <div class="mobile-theme-toggle">
+          <span class="theme-label">Tema oscuro</span>
+          <ion-toggle 
+            [checked]="isDarkMode()"
+            (ionChange)="toggleTheme()"
+          ></ion-toggle>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

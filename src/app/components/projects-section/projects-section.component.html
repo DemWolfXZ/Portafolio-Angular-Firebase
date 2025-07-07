@@ -1,0 +1,403 @@
+<!-- Sección de Proyectos -->
+<div class="projects-section" [class.loaded]="animationsLoaded">
+  <div class="projects-container">
+    
+    <!-- Header de la sección -->
+    <div class="projects-header projects-animate">
+      <h2 class="section-title">Proyectos</h2>
+      <p class="section-subtitle">
+        Sistemas en producción, desarrollos académicos y creatividad técnica aplicada
+      </p>
+    </div>
+
+    <!-- Filtros de categoría -->
+    <div class="projects-filters projects-animate">
+      <div class="filters-container">
+        <button 
+          *ngFor="let filter of filters"
+          class="filter-button"
+          [class.active]="activeFilter === filter.id"
+          (click)="setActiveFilter(filter.id)"
+        >
+          <div class="filter-icon">
+            <ion-icon [name]="filter.icon"></ion-icon>
+            <span class="filter-count">{{ filter.count }}</span>
+          </div>
+          <div class="filter-content">
+            <span class="filter-label">{{ filter.label }}</span>
+            <span class="filter-description">{{ filter.description }}</span>
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <!-- Grid de proyectos -->
+    <div class="projects-grid projects-animate">
+      <div 
+        *ngFor="let project of getFilteredProjects()" 
+        class="project-card"
+        [class.featured]="project.featured"
+      >
+        
+        <!-- Header de la tarjeta -->
+        <div class="project-header">
+          <div class="project-category" [style.background-color]="getCategoryColor(project.category)">
+            <ion-icon [name]="getCategoryIcon(project.category)" class="category-icon"></ion-icon>
+            <span class="category-label">{{ project.category }}</span>
+          </div>
+          
+          <div class="project-status" [class]="'status-' + project.status">
+            {{ getStatusLabel(project.status) }}
+          </div>
+        </div>
+
+        <!-- Imagen del proyecto -->
+        <div class="project-image">
+          <img 
+            [src]="project.images.thumbnail" 
+            [alt]="project.title"
+            class="project-thumbnail"
+            loading="lazy"
+            (error)="onImageError($event)"
+          />
+          <div class="project-overlay">
+            <div class="overlay-actions">
+              <button 
+                *ngIf="project.links.live || project.links.demo"
+                class="overlay-button primary"
+                (click)="openProject(project)"
+              >
+                <ion-icon name="open" class="overlay-icon"></ion-icon>
+                <span>Ver Proyecto</span>
+              </button>
+              
+              <button 
+                class="overlay-button secondary"
+                (click)="openProjectDetail(project)"
+              >
+                <ion-icon name="information-circle" class="overlay-icon"></ion-icon>
+                <span>Detalles</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contenido de la tarjeta -->
+        <div class="project-content">
+          
+          <!-- Título y descripción -->
+          <div class="project-info">
+            <h4 class="project-title">{{ project.title }}</h4>
+            <p class="project-description">{{ project.shortDescription }}</p>
+          </div>
+
+          <!-- Tecnologías -->
+          <div class="project-technologies" *ngIf="project.technologies.length > 0">
+            <div class="tech-tags">
+              <span 
+                *ngFor="let tech of project.technologies.slice(0, 3)" 
+                class="tech-tag"
+                [style.color]="tech.color"
+              >
+                {{ tech.name }}{{ tech.version ? ' ' + tech.version : '' }}
+              </span>
+              <span 
+                *ngIf="project.technologies.length > 3" 
+                class="more-tech"
+              >
+                +{{ project.technologies.length - 3 }}
+              </span>
+            </div>
+          </div>
+
+          <!-- Información del proyecto -->
+          <div class="project-meta">
+            <div class="meta-item">
+              <ion-icon name="person" class="meta-icon"></ion-icon>
+              <span class="meta-text">{{ project.role }}</span>
+            </div>
+            
+            <div class="meta-item" *ngIf="project.client">
+              <ion-icon name="business" class="meta-icon"></ion-icon>
+              <span class="meta-text">{{ project.client }}</span>
+            </div>
+            
+            <div class="meta-item">
+              <ion-icon name="calendar" class="meta-icon"></ion-icon>
+              <span class="meta-text">{{ formatDate(project.dates.startDate) }}</span>
+            </div>
+          </div>
+
+          <!-- Acciones de la tarjeta -->
+          <div class="project-actions">
+            
+            <!-- Botón principal según tipo de proyecto -->
+            <ion-button 
+              *ngIf="project.links.live"
+              expand="block" 
+              class="action-button primary"
+              (click)="openProject(project)"
+            >
+              <ion-icon name="open" slot="start"></ion-icon>
+              Ver Sistema
+            </ion-button>
+            
+            <ion-button 
+              *ngIf="project.links.download && !project.links.live"
+              expand="block" 
+              class="action-button creative"
+              (click)="downloadWAD(project)"
+            >
+              <ion-icon name="download" slot="start"></ion-icon>
+              Descargar WAD
+            </ion-button>
+
+            <!-- Botones secundarios -->
+            <div class="secondary-actions">
+              <ion-button 
+                *ngIf="project.links.repository"
+                fill="clear" 
+                size="small"
+                (click)="openRepository(project)"
+              >
+                <ion-icon name="logo-github" slot="start"></ion-icon>
+                Código
+              </ion-button>
+              
+              <ion-button 
+                fill="clear" 
+                size="small"
+                (click)="openProjectDetail(project)"
+              >
+                <ion-icon name="information-circle" slot="start"></ion-icon>
+                Detalles
+              </ion-button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badge de proyecto destacado -->
+        <div *ngIf="project.featured" class="featured-badge">
+          <ion-icon name="star" class="featured-icon"></ion-icon>
+          <span class="featured-text">Destacado</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección especial WADs de Doom -->
+    <div class="doom-section projects-animate" *ngIf="activeFilter === 'all' || activeFilter === 'creative'">
+      <div class="doom-card">
+        <div class="doom-header">
+          <div class="doom-icon">
+            <ion-icon name="game-controller" class="game-icon"></ion-icon>
+          </div>
+          <div class="doom-content">
+            <h4 class="doom-title">WADs para Doom - Creatividad Técnica</h4>
+            <p class="doom-description">
+              Años de experiencia diseñando niveles personalizados que demuestran pensamiento espacial, 
+              diseño de experiencias y resolución de problemas creativos.
+            </p>
+          </div>
+        </div>
+        
+        <div class="doom-relevance">
+          <h5 class="relevance-title">Relevancia Profesional:</h5>
+          <ul class="relevance-list">
+            <li class="relevance-item">
+              <ion-icon name="checkmark-circle" class="relevance-icon"></ion-icon>
+              Demuestra capacidad de pensamiento sistemático
+            </li>
+            <li class="relevance-item">
+              <ion-icon name="checkmark-circle" class="relevance-icon"></ion-icon>
+              Resolución de problemas creativos bajo limitaciones técnicas
+            </li>
+            <li class="relevance-item">
+              <ion-icon name="checkmark-circle" class="relevance-icon"></ion-icon>
+              Experiencia en diseño de experiencias de usuario
+            </li>
+          </ul>
+        </div>
+
+        <div class="doom-actions">
+          <ion-button 
+            expand="block" 
+            class="doom-download-button"
+            (click)="downloadWAD(creativeProjects[0])"
+          >
+            <ion-icon name="download" slot="start"></ion-icon>
+            Descargar WAD de Ejemplo
+          </ion-button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Llamada a la acción -->
+    <div class="projects-cta projects-animate">
+      <div class="cta-content">
+        <h4 class="cta-title">¿Interesado en colaborar?</h4>
+        <p class="cta-description">
+          Estos proyectos demuestran mi capacidad para entregar soluciones técnicas robustas 
+          y coordinar implementaciones complejas.
+        </p>
+        
+        <div class="cta-actions">
+          <ion-button 
+            expand="block" 
+            class="cta-button primary"
+            (click)="scrollToContact()"
+          >
+            <ion-icon name="mail" slot="start"></ion-icon>
+            Proponer Proyecto
+          </ion-button>
+          
+          <ion-button 
+            expand="block" 
+            fill="outline" 
+            class="cta-button"
+            (click)="scrollToSkills()"
+          >
+            <ion-icon name="code-slash" slot="start"></ion-icon>
+            Ver Competencias Técnicas
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de detalles del proyecto -->
+<ion-modal [isOpen]="!!selectedProject" (willDismiss)="closeProjectDetail()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{ selectedProject?.title }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeProjectDetail()">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    
+    <ion-content class="project-modal-content" *ngIf="selectedProject">
+      <div class="modal-body">
+        
+        <!-- Header del modal -->
+        <div class="modal-header">
+          <h3 class="modal-title">{{ selectedProject.title }}</h3>
+          <div class="modal-meta">
+            <span class="modal-category" [style.background-color]="getCategoryColor(selectedProject.category)">
+              {{ selectedProject.category }}
+            </span>
+            <span class="modal-status">{{ getStatusLabel(selectedProject.status) }}</span>
+            <span class="modal-role">{{ selectedProject.role }}</span>
+          </div>
+        </div>
+
+        <!-- Descripción completa -->
+        <div class="modal-section">
+          <h5 class="modal-section-title">Descripción del Proyecto</h5>
+          <p class="modal-description">{{ selectedProject.fullDescription }}</p>
+        </div>
+
+        <!-- Logros y resultados -->
+        <div class="modal-section" *ngIf="selectedProject.achievements.length > 0">
+          <h5 class="modal-section-title">Logros y Resultados</h5>
+          <ul class="modal-list">
+            <li *ngFor="let achievement of selectedProject.achievements" class="modal-list-item">
+              <ion-icon name="trophy" class="list-icon"></ion-icon>
+              {{ achievement }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Desafíos técnicos -->
+        <div class="modal-section" *ngIf="selectedProject.challenges.length > 0">
+          <h5 class="modal-section-title">Desafíos Técnicos</h5>
+          <ul class="modal-list">
+            <li *ngFor="let challenge of selectedProject.challenges" class="modal-list-item">
+              <ion-icon name="construct" class="list-icon"></ion-icon>
+              {{ challenge }}
+            </li>
+          </ul>
+        </div>
+
+        <!-- Stack tecnológico completo -->
+        <div class="modal-section" *ngIf="selectedProject.technologies.length > 0">
+          <h5 class="modal-section-title">Stack Tecnológico</h5>
+          <div class="modal-tech-grid">
+            <div 
+              *ngFor="let tech of selectedProject.technologies" 
+              class="modal-tech-item"
+              [style.border-color]="tech.color"
+            >
+              <span class="tech-name">{{ tech.name }}</span>
+              <span class="tech-version" *ngIf="tech.version">{{ tech.version }}</span>
+              <span class="tech-category">{{ tech.category }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Enlaces del proyecto -->
+        <div class="modal-section" *ngIf="hasAvailableLinks(selectedProject)">
+          <h5 class="modal-section-title">Enlaces del Proyecto</h5>
+          <div class="modal-links">
+            <ion-button 
+              *ngIf="selectedProject.links.live"
+              expand="block" 
+              class="link-button"
+              (click)="openProject(selectedProject)"
+            >
+              <ion-icon name="open" slot="start"></ion-icon>
+              Ver Proyecto en Vivo
+            </ion-button>
+            
+            <ion-button 
+              *ngIf="selectedProject.links.repository"
+              expand="block" 
+              fill="outline"
+              class="link-button"
+              (click)="openRepository(selectedProject)"
+            >
+              <ion-icon name="logo-github" slot="start"></ion-icon>
+              Ver Código Fuente
+            </ion-button>
+            
+            <ion-button 
+              *ngIf="selectedProject.links.download"
+              expand="block" 
+              color="secondary"
+              class="link-button"
+              (click)="downloadWAD(selectedProject)"
+            >
+              <ion-icon name="download" slot="start"></ion-icon>
+              Descargar Archivo
+            </ion-button>
+          </div>
+        </div>
+
+        <!-- Información temporal -->
+        <div class="modal-section">
+          <h5 class="modal-section-title">Cronología</h5>
+          <div class="modal-timeline">
+            <div class="timeline-item">
+              <ion-icon name="play" class="timeline-icon"></ion-icon>
+              <span class="timeline-label">Inicio:</span>
+              <span class="timeline-date">{{ formatDate(selectedProject.dates.startDate) }}</span>
+            </div>
+            <div class="timeline-item" *ngIf="selectedProject.dates.endDate">
+              <ion-icon name="checkmark" class="timeline-icon"></ion-icon>
+              <span class="timeline-label">Finalización:</span>
+              <span class="timeline-date">{{ formatDate(selectedProject.dates.endDate) }}</span>
+            </div>
+            <div class="timeline-item" *ngIf="selectedProject.dates.launchDate">
+              <ion-icon name="rocket" class="timeline-icon"></ion-icon>
+              <span class="timeline-label">Lanzamiento:</span>
+              <span class="timeline-date">{{ formatDate(selectedProject.dates.launchDate) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

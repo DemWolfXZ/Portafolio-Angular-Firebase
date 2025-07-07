@@ -1,0 +1,360 @@
+<!-- Sección de Contacto -->
+<div class="contact-section" [class.loaded]="animationsLoaded">
+  <div class="contact-container">
+    
+    <!-- Header de la sección -->
+    <div class="contact-header contact-animate">
+      <h2 class="section-title">Contacto</h2>
+      <p class="section-subtitle">
+        ¿Tienes un proyecto en mente? ¡Hablemos sobre cómo puedo ayudarte!
+      </p>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="contact-content">
+      
+      <!-- Información de contacto -->
+      <div class="contact-info contact-animate">
+        <div class="info-card">
+          
+          <!-- Header de la info -->
+          <div class="info-header">
+            <div class="avatar">
+              <img 
+                src="assets/images/alejandro-villa-avatar.jpg" 
+                alt="Alejandro Villa"
+                class="avatar-image"
+                (error)="onAvatarError($event)"
+              />
+            </div>
+            <div class="info-details">
+              <h4 class="info-name">{{ contactInfo.name }}</h4>
+              <p class="info-title">{{ contactInfo.title }}</p>
+              <p class="info-availability">{{ contactInfo.availability }}</p>
+            </div>
+          </div>
+
+          <!-- Métodos de contacto directo -->
+          <div class="contact-methods">
+            <h5 class="methods-title">Contacto Directo</h5>
+            
+            <div class="method-item">
+              <button class="method-button" (click)="sendDirectEmail()">
+                <ion-icon name="mail" class="method-icon"></ion-icon>
+                <div class="method-info">
+                  <span class="method-label">Email</span>
+                  <span class="method-value">{{ contactInfo.email }}</span>
+                </div>
+                <ion-icon name="copy" class="copy-icon" (click)="$event.stopPropagation(); copyEmail()"></ion-icon>
+              </button>
+            </div>
+
+            <div class="method-item">
+              <button class="method-button" (click)="callPhone()">
+                <ion-icon name="call" class="method-icon"></ion-icon>
+                <div class="method-info">
+                  <span class="method-label">Teléfono</span>
+                  <span class="method-value">{{ contactInfo.phone }}</span>
+                </div>
+                <ion-icon name="chevron-forward" class="arrow-icon"></ion-icon>
+              </button>
+            </div>
+
+            <div class="method-item">
+              <button class="method-button" (click)="openWhatsApp()">
+                <ion-icon name="logo-whatsapp" class="method-icon whatsapp"></ion-icon>
+                <div class="method-info">
+                  <span class="method-label">WhatsApp</span>
+                  <span class="method-value">Mensaje directo</span>
+                </div>
+                <ion-icon name="chevron-forward" class="arrow-icon"></ion-icon>
+              </button>
+            </div>
+
+            <div class="method-item">
+              <button class="method-button" (click)="openLinkedIn()">
+                <ion-icon name="logo-linkedin" class="method-icon linkedin"></ion-icon>
+                <div class="method-info">
+                  <span class="method-label">LinkedIn</span>
+                  <span class="method-value">Perfil profesional</span>
+                </div>
+                <ion-icon name="chevron-forward" class="arrow-icon"></ion-icon>
+              </button>
+            </div>
+          </div>
+
+          <!-- Horario de disponibilidad -->
+          <div class="availability-info">
+            <h5 class="availability-title">Horario de Atención</h5>
+            <div 
+              *ngFor="let schedule of availabilitySchedule" 
+              class="schedule-item"
+            >
+              <ion-icon [name]="schedule.icon" class="schedule-icon"></ion-icon>
+              <div class="schedule-details">
+                <span class="schedule-day">{{ schedule.day }}</span>
+                <span class="schedule-hours">{{ schedule.hours }}</span>
+                <span class="schedule-timezone">{{ schedule.timezone }}</span>
+              </div>
+            </div>
+            
+            <div class="response-time">
+              <ion-icon name="time" class="response-icon"></ion-icon>
+              <span class="response-text">{{ contactInfo.responseTime }}</span>
+            </div>
+          </div>
+
+          <!-- Acción de descarga CV -->
+          <div class="cv-download">
+            <ion-button 
+              expand="block" 
+              fill="outline" 
+              class="cv-button"
+              (click)="downloadCV()"
+            >
+              <ion-icon name="download" slot="start"></ion-icon>
+              Descargar CV Completo
+            </ion-button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de contacto -->
+      <div class="contact-form contact-animate">
+        <div class="form-card">
+          
+          <div class="form-header">
+            <h4 class="form-title">Envíame un Mensaje</h4>
+            <p class="form-description">
+              Completa el formulario y me pondré en contacto contigo lo antes posible
+            </p>
+          </div>
+
+          <!-- Alertas de estado -->
+          <div *ngIf="submitSuccess" class="alert success">
+            <ion-icon name="checkmark-circle" class="alert-icon"></ion-icon>
+            <div class="alert-content">
+              <strong>¡Mensaje enviado correctamente!</strong>
+              <span>Te responderé en las próximas 24-48 horas.</span>
+            </div>
+          </div>
+
+          <div *ngIf="submitError" class="alert error">
+            <ion-icon name="alert-circle" class="alert-icon"></ion-icon>
+            <div class="alert-content">
+              <strong>Error al enviar el mensaje</strong>
+              <span>{{ errorMessage }}</span>
+            </div>
+          </div>
+
+          <!-- Formulario -->
+          <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form-element">
+            
+            <!-- Fila 1: Nombre y Email -->
+            <div class="form-row">
+              <div class="form-field">
+                <label class="field-label" for="name">
+                  Nombre Completo *
+                </label>
+                <ion-input
+                  id="name"
+                  formControlName="name"
+                  placeholder="Tu nombre completo"
+                  class="field-input"
+                  [class.error]="hasFieldError('name')"
+                ></ion-input>
+                <div *ngIf="hasFieldError('name')" class="field-error">
+                  {{ getFieldError('name') }}
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label" for="email">
+                  Email *
+                </label>
+                <ion-input
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  placeholder="tu@email.com"
+                  class="field-input"
+                  [class.error]="hasFieldError('email')"
+                ></ion-input>
+                <div *ngIf="hasFieldError('email')" class="field-error">
+                  {{ getFieldError('email') }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Fila 2: Teléfono y Empresa -->
+            <div class="form-row">
+              <div class="form-field">
+                <label class="field-label" for="phone">
+                  Teléfono
+                  <span *ngIf="contactForm.get('preferredContact')?.value === 'phone' || contactForm.get('preferredContact')?.value === 'whatsapp'">*</span>
+                </label>
+                <ion-input
+                  id="phone"
+                  type="tel"
+                  formControlName="phone"
+                  placeholder="+56 9 1234 5678"
+                  class="field-input"
+                  [class.error]="hasFieldError('phone')"
+                ></ion-input>
+                <div *ngIf="hasFieldError('phone')" class="field-error">
+                  {{ getFieldError('phone') }}
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label" for="company">
+                  Empresa/Organización
+                </label>
+                <ion-input
+                  id="company"
+                  formControlName="company"
+                  placeholder="Nombre de tu empresa"
+                  class="field-input"
+                  [class.error]="hasFieldError('company')"
+                ></ion-input>
+                <div *ngIf="hasFieldError('company')" class="field-error">
+                  {{ getFieldError('company') }}
+                </div>
+              </div>
+            </div>
+
+            <!-- Método de contacto preferido -->
+            <div class="form-field">
+              <label class="field-label">
+                ¿Cómo prefieres que te contacte? *
+              </label>
+              <div class="contact-methods-grid">
+                <label 
+                  *ngFor="let method of contactMethods" 
+                  class="method-option"
+                  [class.selected]="contactForm.get('preferredContact')?.value === method.value"
+                >
+                  <input 
+                    type="radio" 
+                    [value]="method.value" 
+                    formControlName="preferredContact"
+                    (change)="onPreferredContactChange()"
+                    class="method-radio"
+                  />
+                  <div class="method-content">
+                    <ion-icon [name]="method.icon" class="method-icon-option"></ion-icon>
+                    <span class="method-label-option">{{ method.label }}</span>
+                    <span class="method-description-option">{{ method.description }}</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Asunto -->
+            <div class="form-field">
+              <label class="field-label" for="subject">
+                Asunto *
+                <span class="char-count" [class.near-limit]="isNearLimit('subject', 200)">
+                  {{ getRemainingChars('subject', 200) }} caracteres restantes
+                </span>
+              </label>
+              <ion-select
+                id="subject-select"
+                formControlName="subject"
+                placeholder="Selecciona un asunto o escribe uno personalizado"
+                class="field-select"
+                [class.error]="hasFieldError('subject')"
+              >
+                <ion-select-option 
+                  *ngFor="let option of subjectOptions" 
+                  [value]="option.label"
+                >
+                  {{ option.label }} - {{ option.description }}
+                </ion-select-option>
+                <ion-select-option value="custom">
+                  Otro asunto (especificar abajo)
+                </ion-select-option>
+              </ion-select>
+              
+              <!-- Input personalizado si selecciona "custom" -->
+              <ion-input
+                *ngIf="contactForm.get('subject')?.value === 'custom'"
+                formControlName="subject"
+                placeholder="Escribe tu asunto personalizado"
+                class="field-input custom-subject"
+                maxlength="200"
+              ></ion-input>
+              
+              <div *ngIf="hasFieldError('subject')" class="field-error">
+                {{ getFieldError('subject') }}
+              </div>
+            </div>
+
+            <!-- Mensaje -->
+            <div class="form-field">
+              <label class="field-label" for="message">
+                Mensaje *
+                <span class="char-count" [class.near-limit]="isNearLimit('message', 2000)">
+                  {{ getRemainingChars('message', 2000) }} caracteres restantes
+                </span>
+              </label>
+              <ion-textarea
+                id="message"
+                formControlName="message"
+                placeholder="Describe tu proyecto, consulta o propuesta. Incluye detalles relevantes como tecnologías, alcance, timeline, etc."
+                rows="6"
+                maxlength="2000"
+                class="field-textarea"
+                [class.error]="hasFieldError('message')"
+              ></ion-textarea>
+              <div *ngIf="hasFieldError('message')" class="field-error">
+                {{ getFieldError('message') }}
+              </div>
+            </div>
+
+            <!-- Botón de envío -->
+            <div class="form-actions">
+              <ion-button 
+                type="submit"
+                expand="block"
+                class="submit-button"
+                [disabled]="isSubmitting || contactForm.invalid"
+              >
+                <ion-icon 
+                  [name]="isSubmitting ? 'refresh' : 'send'" 
+                  slot="start"
+                  [class.spinning]="isSubmitting"
+                ></ion-icon>
+                {{ isSubmitting ? 'Enviando...' : 'Enviar Mensaje' }}
+              </ion-button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer de la sección -->
+    <div class="contact-footer contact-animate">
+      <div class="footer-content">
+        <div class="footer-message">
+          <h4 class="footer-title">¡Gracias por tu interés!</h4>
+          <p class="footer-description">
+            Ya sea para una oportunidad laboral, proyecto de consultoría o simplemente 
+            para conectar profesionalmente, estaré encantado de conversar contigo.
+          </p>
+        </div>
+        
+        <div class="footer-actions">
+          <ion-button 
+            fill="clear" 
+            class="footer-button"
+            (click)="scrollToTop()"
+          >
+            <ion-icon name="arrow-up" slot="start"></ion-icon>
+            Volver al Inicio
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

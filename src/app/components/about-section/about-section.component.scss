@@ -1,0 +1,606 @@
+/**
+ * Estilos del componente About Section
+ * Sección biográfica con historia cronológica, filosofía profesional e intereses
+ * Diseño responsivo con animaciones suaves
+ */
+
+.about-section {
+  min-height: 100vh;
+  padding: var(--spacing-3xl) 0;
+  background: linear-gradient(
+    135deg, 
+    var(--ion-background-color) 0%, 
+    var(--ion-background-color-secondary) 100%
+  );
+  
+  // Animación de entrada
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+  
+  &.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  
+  @media (max-width: 768px) {
+    padding: 0 var(--spacing-md);
+  }
+}
+
+// ========================================
+// HEADER DE LA SECCIÓN
+// ========================================
+.about-header {
+  text-align: center;
+  margin-bottom: var(--spacing-3xl);
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--ion-text-color);
+  margin: 0 0 var(--spacing-md) 0;
+  background: linear-gradient(135deg, var(--ion-text-color) 0%, var(--ion-color-primary) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--ion-text-color-secondary);
+  margin: 0;
+  font-weight: 500;
+}
+
+// ========================================
+// INTRODUCCIÓN PERSONAL
+// ========================================
+.about-intro {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--spacing-2xl);
+  align-items: center;
+  margin-bottom: var(--spacing-3xl);
+  padding: var(--spacing-2xl);
+  background: var(--ion-surface-color);
+  border-radius: var(--border-radius-xl);
+  border: 1px solid var(--ion-border-color);
+  box-shadow: var(--ion-box-shadow);
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+}
+
+.intro-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--ion-text-color);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.intro-description {
+  font-size: var(--font-size-lg);
+  color: var(--ion-text-color-secondary);
+  margin: 0 0 var(--spacing-sm) 0;
+  font-weight: 500;
+}
+
+.intro-location {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--ion-text-color-tertiary);
+  font-size: var(--font-size-base);
+  margin: 0;
+  
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+}
+
+.location-icon {
+  font-size: 18px;
+  color: var(--ion-color-primary);
+}
+
+.experience-highlight {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-accent));
+  border-radius: var(--border-radius-lg);
+  color: white;
+  min-width: 120px;
+}
+
+.highlight-number {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: var(--spacing-xs);
+}
+
+.highlight-text {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// ========================================
+// BIOGRAFÍA CRONOLÓGICA
+// ========================================
+.biography-section {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.biography-block {
+  margin-bottom: var(--spacing-2xl);
+  padding: var(--spacing-2xl);
+  background: var(--ion-surface-color);
+  border-radius: var(--border-radius-lg);
+  border-left: 4px solid var(--ion-color-primary);
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    transform: translateX(8px);
+    box-shadow: var(--ion-box-shadow-hover);
+  }
+}
+
+.bio-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+}
+
+.bio-icon {
+  font-size: 24px;
+  color: var(--ion-color-primary);
+  padding: var(--spacing-sm);
+  background: var(--ion-background-color-secondary);
+  border-radius: var(--border-radius-md);
+}
+
+.bio-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--ion-text-color);
+  margin: 0;
+}
+
+.bio-description {
+  font-size: var(--font-size-base);
+  color: var(--ion-text-color-secondary);
+  line-height: 1.6;
+  margin: 0 0 var(--spacing-lg) 0;
+}
+
+.bio-highlights {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bio-highlight {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-base);
+  color: var(--ion-text-color);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.highlight-icon {
+  font-size: 18px;
+  color: var(--ion-color-accent);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+// ========================================
+// DIFERENCIAL ÚNICO
+// ========================================
+.unique-value-section {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.value-card {
+  padding: var(--spacing-2xl);
+  background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-accent));
+  border-radius: var(--border-radius-xl);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+}
+
+.value-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  z-index: 2;
+}
+
+.value-icon {
+  font-size: 28px;
+  padding: var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-md);
+}
+
+.value-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  margin: 0;
+}
+
+.value-description {
+  font-size: var(--font-size-lg);
+  margin: 0 0 var(--spacing-xl) 0;
+  line-height: 1.5;
+  position: relative;
+  z-index: 2;
+}
+
+.value-points {
+  position: relative;
+  z-index: 2;
+}
+
+.value-point {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.point-icon {
+  font-size: 18px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.point-text {
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+}
+
+// ========================================
+// FILOSOFÍA PROFESIONAL
+// ========================================
+.philosophy-section {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.philosophy-card {
+  padding: var(--spacing-2xl);
+  background: var(--ion-surface-color);
+  border-radius: var(--border-radius-xl);
+  border: 1px solid var(--ion-border-color);
+  text-align: center;
+  position: relative;
+}
+
+.quote-mark {
+  font-size: 4rem;
+  color: var(--ion-color-primary);
+  opacity: 0.3;
+  position: absolute;
+  top: var(--spacing-lg);
+  left: var(--spacing-lg);
+  font-family: Georgia, serif;
+}
+
+.philosophy-quote {
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  color: var(--ion-text-color);
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.6;
+  margin: var(--spacing-xl) 0 var(--spacing-lg) 0;
+  position: relative;
+  z-index: 2;
+}
+
+.philosophy-context {
+  font-size: var(--font-size-base);
+  color: var(--ion-text-color-secondary);
+  margin: 0;
+  font-weight: 500;
+}
+
+// ========================================
+// INTERESES PERSONALES
+// ========================================
+.interests-section {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.interests-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--ion-text-color);
+  text-align: center;
+  margin: 0 0 var(--spacing-2xl) 0;
+}
+
+.interests-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.interest-card {
+  padding: var(--spacing-xl);
+  background: var(--ion-surface-color);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--ion-border-color);
+  text-align: center;
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ion-box-shadow-hover);
+  }
+}
+
+.interest-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto var(--spacing-md) auto;
+  background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-accent));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.interest-icon {
+  font-size: 28px;
+  color: white;
+}
+
+.interest-name {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--ion-text-color);
+  margin: 0 0 var(--spacing-sm) 0;
+}
+
+.interest-description {
+  font-size: var(--font-size-base);
+  color: var(--ion-text-color-secondary);
+  margin: 0 0 var(--spacing-sm) 0;
+  font-weight: 500;
+}
+
+.interest-relevance {
+  font-size: var(--font-size-sm);
+  color: var(--ion-color-primary);
+  margin: 0;
+  font-style: italic;
+}
+
+// ========================================
+// TIMELINE
+// ========================================
+.timeline-section {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.timeline-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--ion-text-color);
+  text-align: center;
+  margin: 0 0 var(--spacing-2xl) 0;
+}
+
+.timeline {
+  position: relative;
+  padding-left: var(--spacing-xl);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    left: var(--spacing-lg);
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--ion-color-primary), var(--ion-color-accent));
+    border-radius: 2px;
+  }
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: var(--spacing-xl);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.timeline-marker {
+  position: absolute;
+  left: -var(--spacing-xl);
+  top: 8px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--ion-color-primary);
+  border: 3px solid var(--ion-background-color);
+  z-index: 2;
+}
+
+.timeline-personal .timeline-marker {
+  background: var(--ion-color-accent);
+}
+
+.timeline-education .timeline-marker {
+  background: var(--ion-color-primary);
+}
+
+.timeline-professional .timeline-marker {
+  background: #6C5CE7;
+}
+
+.timeline-content {
+  background: var(--ion-surface-color);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--ion-border-color);
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    transform: translateX(8px);
+    box-shadow: var(--ion-box-shadow);
+  }
+}
+
+.timeline-year {
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  color: var(--ion-color-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: var(--spacing-xs);
+}
+
+.timeline-event {
+  font-size: var(--font-size-base);
+  color: var(--ion-text-color);
+  font-weight: 500;
+  margin: 0;
+}
+
+// ========================================
+// ACCIONES
+// ========================================
+.about-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-3xl);
+  
+  @media (max-width: 480px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.action-button {
+  min-height: 56px;
+  font-weight: 600;
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-normal);
+  
+  &.primary {
+    --background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-accent));
+    --color: white;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--ion-box-shadow-hover);
+    }
+  }
+  
+  &.social {
+    --color: var(--ion-color-primary);
+    
+    &:hover {
+      --color: var(--ion-color-accent);
+      transform: translateY(-2px);
+    }
+  }
+  
+  &:not(.primary):not(.social) {
+    --border-color: var(--ion-color-primary);
+    --color: var(--ion-color-primary);
+    
+    &:hover {
+      --background: var(--ion-color-primary);
+      --color: white;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// ========================================
+// ANIMACIONES
+// ========================================
+@keyframes shimmer {
+  0%, 100% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  50% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+// Clases de animación para elementos
+.about-animate {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+  
+  &.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// ========================================
+// RESPONSIVE BREAKPOINTS
+// ========================================
+@media (max-width: 480px) {
+  .about-section {
+    padding: var(--spacing-2xl) 0;
+  }
+  
+  .biography-block {
+    padding: var(--spacing-lg);
+  }
+  
+  .value-card {
+    padding: var(--spacing-lg);
+  }
+  
+  .philosophy-card {
+    padding: var(--spacing-lg);
+  }
+}

@@ -1,2 +1,161 @@
-// For information on how to create your own theme, please see:
-// http://ionicframework.com/docs/theming/
+/**
+ * Variables de color para los temas claro y oscuro
+ * Colores profesionales que no molestan a la vista
+ * MANTENIENDO TUS COLORES ORIGINALES EXACTOS
+ */
+
+// ========================================
+// TEMA CLARO - Tonos suaves y profesionales
+// ========================================
+.light-theme {
+  // Colores de fondo - Grises claros en lugar de blanco puro
+  --ion-background-color: #f8f9fa;
+  --ion-background-color-rgb: 248, 249, 250;
+  --ion-background-color-secondary: #f1f3f4;
+  --ion-background-color-tertiary: #e8eaed;
+  
+  // Colores de superficie para cards y componentes
+  --ion-surface-color: #ffffff;
+  --ion-surface-color-secondary: #f8f9fa;
+  
+  // Colores de texto
+  --ion-text-color: #202124;
+  --ion-text-color-secondary: #5f6368;
+  --ion-text-color-tertiary: #80868b;
+  
+  // Color primario - Azul profesional
+  --ion-color-primary: #1a73e8;
+  --ion-color-primary-rgb: 26, 115, 232;
+  --ion-color-primary-shade: #1557b0;
+  --ion-color-primary-tint: #3182f6;
+  
+  // Color de acento
+  --ion-color-accent: #34a853;
+  --ion-color-accent-rgb: 52, 168, 83;
+  
+  // Bordes y separadores
+  --ion-border-color: #dadce0;
+  --ion-border-color-secondary: #e8eaed;
+  
+  // Sombras suaves
+  --ion-box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
+  --ion-box-shadow-hover: 0 4px 8px rgba(60, 64, 67, 0.3);
+}
+
+// ========================================
+// TEMA OSCURO - Azul profesional oscuro
+// ========================================
+.dark-theme {
+  // Colores de fondo - Azules oscuros profesionales
+  --ion-background-color: #0f1419;
+  --ion-background-color-rgb: 15, 20, 25;
+  --ion-background-color-secondary: #1a1f2e;
+  --ion-background-color-tertiary: #252a3a;
+  
+  // Colores de superficie
+  --ion-surface-color: #1e293b;
+  --ion-surface-color-secondary: #334155;
+  
+  // Colores de texto - Blancos y grises claros
+  --ion-text-color: #f1f5f9;
+  --ion-text-color-secondary: #cbd5e1;
+  --ion-text-color-tertiary: #94a3b8;
+  
+  // Color primario - Azul brillante para contraste
+  --ion-color-primary: #60a5fa;
+  --ion-color-primary-rgb: 96, 165, 250;
+  --ion-color-primary-shade: #3b82f6;
+  --ion-color-primary-tint: #93c5fd;
+  
+  // Color de acento
+  --ion-color-accent: #10b981;
+  --ion-color-accent-rgb: 16, 185, 129;
+  
+  // Bordes y separadores
+  --ion-border-color: #475569;
+  --ion-border-color-secondary: #334155;
+  
+  // Sombras para modo oscuro
+  --ion-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --ion-box-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.4);
+}
+
+// ========================================
+// VARIABLES GLOBALES COMPARTIDAS
+// ========================================
+:root {
+  // Tipografía
+  --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family-secondary: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  // Tamaños de fuente
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  
+  // Espaciado
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  
+  // Border radius
+  --border-radius-sm: 0.375rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  --border-radius-xl: 1rem;
+  
+  // Transiciones
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  // Z-index layers
+  --z-header: 1000;
+  --z-modal: 2000;
+  --z-tooltip: 3000;
+}
+
+// ========================================
+// UTILIDADES GLOBALES
+// ========================================
+
+// Scroll suave para toda la aplicación
+html {
+  scroll-behavior: smooth;
+}
+
+// Reset de márgenes y padding base
+* {
+  box-sizing: border-box;
+}
+
+// Estilos de texto responsive
+.text-responsive {
+  font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-base));
+}
+
+.heading-responsive {
+  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
+}
+
+// Clases de utilidad para spacing
+.p-xs { padding: var(--spacing-xs) !important; }
+.p-sm { padding: var(--spacing-sm) !important; }
+.p-md { padding: var(--spacing-md) !important; }
+.p-lg { padding: var(--spacing-lg) !important; }
+.p-xl { padding: var(--spacing-xl) !important; }
+
+.m-xs { margin: var(--spacing-xs) !important; }
+.m-sm { margin: var(--spacing-sm) !important; }
+.m-md { margin: var(--spacing-md) !important; }
+.m-lg { margin: var(--spacing-lg) !important; }
+.m-xl { margin: var(--spacing-xl) !important; }

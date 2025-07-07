@@ -1,12 +1,8 @@
 /*
- * App Global CSS
+ * App Global CSS - CORREGIDO SIN IMPORT
  * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+ * Estilos globales optimizados para responsividad y funcionalidad móvil
+ * Las variables se cargan automáticamente desde variables.scss en el theme
  */
 
 /* Core CSS required for Ionic components to work properly */
@@ -35,3 +31,275 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+/**
+ * Fixes globales para responsividad
+ * -----------------------------------------------------
+ */
+
+// Fix para ion-input en modo responsive
+ion-input {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  
+  @media (max-width: 480px) {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+  }
+}
+
+// Fix para ion-textarea responsivo
+ion-textarea {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  
+  @media (max-width: 480px) {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+  }
+}
+
+// Fix para ion-select responsivo
+ion-select {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  
+  @media (max-width: 480px) {
+    --padding-start: 8px;
+    --padding-end: 8px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+  }
+}
+
+// Fix para ion-button responsivo
+ion-button {
+  --padding-start: 16px;
+  --padding-end: 16px;
+  --padding-top: 12px;
+  --padding-bottom: 12px;
+  
+  @media (max-width: 480px) {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --padding-top: 10px;
+    --padding-bottom: 10px;
+  }
+}
+
+// Fix para ion-modal responsivo
+ion-modal {
+  @media (max-width: 768px) {
+    --width: 95%;
+    --height: 90%;
+    --border-radius: 16px;
+  }
+  
+  @media (max-width: 480px) {
+    --width: 100%;
+    --height: 100%;
+    --border-radius: 0;
+  }
+}
+
+// Fix para ion-toggle en header móvil
+ion-toggle {
+  --handle-width: 20px;
+  --handle-height: 20px;
+  --track-width: 40px;
+  --track-height: 24px;
+  
+  @media (max-width: 480px) {
+    --handle-width: 18px;
+    --handle-height: 18px;
+    --track-width: 36px;
+    --track-height: 22px;
+  }
+}
+
+/**
+ * Clase especial para prevenir scroll cuando menú móvil está abierto
+ * Se aplica al body desde el header component
+ */
+body.mobile-menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+}
+
+/**
+ * Fixes para mejorar experiencia táctil en móviles
+ */
+ 
+// Tamaño mínimo de tap targets
+button, 
+.clickable,
+[role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+  
+  @media (max-width: 480px) {
+    min-height: 48px; // Aumentar en móviles
+    min-width: 48px;
+  }
+}
+
+// Prevenir zoom en inputs en iOS
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+  font-size: 16px !important; // Previene zoom automático en iOS
+  
+  @media (max-width: 480px) {
+    font-size: 16px !important; // Mantener 16px mínimo
+  }
+}
+
+// Mejorar scrolling en dispositivos iOS
+@supports (-webkit-overflow-scrolling: touch) {
+  .scrollable,
+  .main-content,
+  .mobile-nav-content {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/**
+ * Utilidades específicas para el portafolio
+ */
+
+// Clase para secciones del portafolio
+.portfolio-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 0;
+  
+  @media (max-width: 768px) {
+    min-height: auto;
+    padding: 3rem 0;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 2rem 0;
+  }
+}
+
+// Animaciones globales
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-in-out forwards;
+}
+
+.slide-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+.slide-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.95);
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/**
+ * Print styles
+ */
+@media print {
+  .header,
+  .mobile-nav,
+  .footer,
+  .floating-elements {
+    display: none !important;
+  }
+  
+  .main-content {
+    padding-top: 0 !important;
+  }
+  
+  .section {
+    page-break-inside: avoid;
+    min-height: auto !important;
+  }
+}
+
+/**
+ * Modo de alto contraste
+ */
+@media (prefers-contrast: high) {
+  .header {
+    border-bottom: 3px solid;
+  }
+  
+  .mobile-nav-content {
+    border-left: 3px solid;
+  }
+  
+  button {
+    border: 2px solid currentColor;
+  }
+}
+
+/**
+ * Reducir movimiento si el usuario lo prefiere
+ */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in,
+  .slide-in-up,
+  .slide-in-left,
+  .scale-in {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

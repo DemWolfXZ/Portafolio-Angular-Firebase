@@ -1,0 +1,219 @@
+<!-- Footer del Portafolio -->
+<footer class="footer">
+  <div class="footer-container">
+    
+    <!-- Contenido principal del footer -->
+    <div class="footer-main">
+      
+      <!-- Información personal -->
+      <div class="footer-section personal-info">
+        <div class="section-header">
+          <div class="brand-logo">
+            <ion-icon name="code-slash" class="brand-icon"></ion-icon>
+          </div>
+          <div class="brand-text">
+            <h4 class="brand-name">{{ personalInfo.name }}</h4>
+            <p class="brand-title">{{ personalInfo.title }}</p>
+          </div>
+        </div>
+        
+        <p class="brand-description">
+          Ingeniero Informático con 20+ años de experiencia práctica. 
+          Especializado en coordinación técnica y análisis de sistemas.
+        </p>
+        
+        <div class="status-message">
+          <ion-icon name="radio-button-on" class="status-icon"></ion-icon>
+          <span class="status-text">{{ getStatusMessage() }}</span>
+        </div>
+
+        <!-- Contacto directo -->
+        <div class="direct-contact">
+          <div class="contact-item">
+            <ion-icon name="mail" class="contact-icon"></ion-icon>
+            <span class="contact-text" (click)="copyEmail()">{{ personalInfo.email }}</span>
+          </div>
+          <div class="contact-item">
+            <ion-icon name="call" class="contact-icon"></ion-icon>
+            <span class="contact-text">{{ personalInfo.phone }}</span>
+          </div>
+          <div class="contact-item">
+            <ion-icon name="location" class="contact-icon"></ion-icon>
+            <span class="contact-text">{{ personalInfo.location }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navegación -->
+      <div class="footer-section navigation">
+        <h5 class="section-title">Navegación</h5>
+        <ul class="nav-list">
+          <li 
+            *ngFor="let link of navigationLinks" 
+            class="nav-item"
+          >
+            <button 
+              class="nav-link"
+              (click)="navigateToSection(link.id)"
+            >
+              <ion-icon [name]="link.icon" class="nav-icon"></ion-icon>
+              <span class="nav-label">{{ link.label }}</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Enlaces rápidos -->
+      <div class="footer-section quick-links">
+        <h5 class="section-title">Enlaces Rápidos</h5>
+        <ul class="quick-list">
+          <li 
+            *ngFor="let link of quickLinks" 
+            class="quick-item"
+          >
+            <button 
+              class="quick-link"
+              (click)="link.action()"
+            >
+              <ion-icon [name]="link.icon" class="quick-icon"></ion-icon>
+              <span class="quick-label">{{ link.label }}</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Proyectos destacados -->
+      <div class="footer-section projects">
+        <h5 class="section-title">Proyectos Destacados</h5>
+        <ul class="project-list">
+          <li 
+            *ngFor="let project of featuredProjects" 
+            class="project-item"
+          >
+            <button 
+              class="project-link"
+              (click)="openProject(project)"
+            >
+              <div class="project-info">
+                <span class="project-name">{{ project.name }}</span>
+                <span class="project-description">{{ project.description }}</span>
+              </div>
+              <ion-icon name="open" class="project-icon"></ion-icon>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Separador -->
+    <div class="footer-separator"></div>
+
+    <!-- Footer inferior -->
+    <div class="footer-bottom">
+      
+      <!-- Información técnica -->
+      <div class="footer-tech">
+        <div class="tech-info">
+          <span class="tech-label">Desarrollado con:</span>
+          <div class="tech-stack">
+            <span 
+              *ngFor="let tech of siteInfo.builtWith; let last = last" 
+              class="tech-item"
+            >
+              {{ tech }}<span *ngIf="!last">, </span>
+            </span>
+          </div>
+        </div>
+        
+        <div class="site-info">
+          <span class="version">v{{ siteInfo.version }}</span>
+          <span class="separator">•</span>
+          <span class="last-update">Actualizado {{ getTimeSinceUpdate() }}</span>
+        </div>
+      </div>
+
+      <!-- Controles y copyright -->
+      <div class="footer-controls">
+        
+        <!-- Toggle de tema -->
+        <button 
+          class="theme-toggle-footer"
+          (click)="toggleTheme()"
+          [attr.aria-label]="isDarkMode() ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
+        >
+          <ion-icon 
+            [name]="isDarkMode() ? 'sunny' : 'moon'" 
+            class="theme-icon"
+          ></ion-icon>
+          <span class="theme-label">{{ isDarkMode() ? 'Tema Claro' : 'Tema Oscuro' }}</span>
+        </button>
+
+        <!-- Botón volver arriba -->
+        <button 
+          class="scroll-top"
+          (click)="scrollToTop()"
+          aria-label="Volver al inicio"
+        >
+          <ion-icon name="arrow-up" class="scroll-icon"></ion-icon>
+          <span class="scroll-label">Inicio</span>
+        </button>
+      </div>
+
+      <!-- Copyright -->
+      <div class="footer-copyright">
+        <div class="copyright-text">
+          <span class="copyright-symbol">©</span>
+          <span class="copyright-year">{{ currentYear }}</span>
+          <span class="copyright-name">{{ personalInfo.name }}</span>
+        </div>
+        <div class="copyright-details">
+          <span class="rights">Todos los derechos reservados</span>
+          <span class="separator">•</span>
+          <span class="location">{{ personalInfo.location }}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enlaces sociales flotantes -->
+    <div class="social-links">
+      <button 
+        class="social-link linkedin"
+        (click)="openLinkedIn()"
+        aria-label="LinkedIn"
+      >
+        <ion-icon name="logo-linkedin" class="social-icon"></ion-icon>
+      </button>
+      
+      <button 
+        class="social-link email"
+        (click)="sendEmail()"
+        aria-label="Email"
+      >
+        <ion-icon name="mail" class="social-icon"></ion-icon>
+      </button>
+      
+      <button 
+        class="social-link whatsapp"
+        (click)="openWhatsApp()"
+        aria-label="WhatsApp"
+      >
+        <ion-icon name="logo-whatsapp" class="social-icon"></ion-icon>
+      </button>
+      
+      <button 
+        class="social-link phone"
+        (click)="callPhone()"
+        aria-label="Teléfono"
+      >
+        <ion-icon name="call" class="social-icon"></ion-icon>
+      </button>
+    </div>
+
+    <!-- Elementos decorativos -->
+    <div class="footer-decoration">
+      <div class="decoration-element element-1"></div>
+      <div class="decoration-element element-2"></div>
+      <div class="decoration-element element-3"></div>
+    </div>
+  </div>
+</footer>

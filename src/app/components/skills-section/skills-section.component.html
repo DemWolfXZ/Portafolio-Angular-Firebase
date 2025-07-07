@@ -1,0 +1,357 @@
+<!-- Sección de Competencias Técnicas -->
+<div class="skills-section" [class.loaded]="animationsLoaded">
+  <div class="skills-container">
+    
+    <!-- Header de la sección -->
+    <div class="skills-header skills-animate">
+      <h2 class="section-title">Competencias Técnicas</h2>
+      <p class="section-subtitle">
+        Años de experiencia real, no solo conocimiento teórico
+      </p>
+      
+      <!-- Estadísticas rápidas -->
+      <div class="skills-stats">
+        <div class="stat-item">
+          <div class="stat-number">{{ getSkillsStats().totalSkills }}</div>
+          <div class="stat-label">Competencias</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">{{ getSkillsStats().expertSkills }}</div>
+          <div class="stat-label">Nivel Experto</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">{{ getSkillsStats().maxExperience }}+</div>
+          <div class="stat-label">Años Máximo</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">{{ getSkillsStats().categories }}</div>
+          <div class="stat-label">Categorías</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtros de vista -->
+    <div class="skills-view-controls skills-animate">
+      <div class="view-modes">
+        <button 
+          class="view-mode-button"
+          [class.active]="viewMode === 'category'"
+          (click)="setViewMode('category')"
+        >
+          <ion-icon name="apps" class="view-icon"></ion-icon>
+          <span>Por Categoría</span>
+        </button>
+        <button 
+          class="view-mode-button"
+          [class.active]="viewMode === 'featured'"
+          (click)="setViewMode('featured')"
+        >
+          <ion-icon name="star" class="view-icon"></ion-icon>
+          <span>Destacadas</span>
+        </button>
+        <button 
+          class="view-mode-button"
+          [class.active]="viewMode === 'level'"
+          (click)="setViewMode('level')"
+        >
+          <ion-icon name="bar-chart" class="view-icon"></ion-icon>
+          <span>Por Nivel</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Vista por categorías -->
+    <div *ngIf="viewMode === 'category'" class="skills-by-category skills-animate">
+      <div 
+        *ngFor="let category of skillCategories" 
+        class="category-section"
+      >
+        <div class="category-header" *ngIf="category.featured">
+          <div class="category-info">
+            <div class="category-icon" [style.background-color]="category.color">
+              <ion-icon [name]="category.icon" class="cat-icon"></ion-icon>
+            </div>
+            <div class="category-details">
+              <h4 class="category-title">{{ category.name }}</h4>
+              <p class="category-description">{{ category.description }}</p>
+            </div>
+          </div>
+          <div class="category-meta">
+            <div class="skills-count">{{ getSkillsByCategories()[category.id]?.skills?.length || 0 }} skills</div>
+            <div class="max-experience">{{ getSkillsByCategories()[category.id]?.totalYears || 0 }}+ años</div>
+          </div>
+        </div>
+
+        <div class="category-skills" *ngIf="category.featured">
+          <div 
+            *ngFor="let skill of getSkillsByCategories()[category.id]?.skills" 
+            class="skill-card"
+            [class.featured]="skill.featured"
+            (click)="openSkillDetail(skill)"
+          >
+            <div class="skill-header">
+              <div class="skill-info">
+                <h5 class="skill-name">{{ skill.name }}</h5>
+                <p class="skill-years">{{ formatYearsOfExperience(skill.yearsOfExperience) }}</p>
+              </div>
+              <div class="skill-level" [style.background-color]="getLevelColor(skill.level)">
+                {{ getLevelLabel(skill.level) }}
+              </div>
+            </div>
+
+            <div class="skill-progress">
+              <div class="progress-info">
+                <span class="progress-label">Experiencia</span>
+                <span class="progress-percentage">{{ getSkillPercentage(skill) }}%</span>
+              </div>
+              <div class="progress-bar">
+                <div 
+                  class="skill-progress-bar"
+                  [attr.data-percentage]="getSkillPercentage(skill)"
+                  [style.background-color]="getCategoryColor(skill.category)"
+                ></div>
+              </div>
+            </div>
+
+            <p class="skill-description">{{ skill.description }}</p>
+
+            <div class="skill-projects" *ngIf="skill.projectsUsed.length > 0">
+              <span class="projects-label">Usado en:</span>
+              <div class="projects-tags">
+                <span 
+                  *ngFor="let project of skill.projectsUsed.slice(0, 2)" 
+                  class="project-tag"
+                >
+                  {{ project }}
+                </span>
+                <span 
+                  *ngIf="skill.projectsUsed.length > 2" 
+                  class="more-projects"
+                >
+                  +{{ skill.projectsUsed.length - 2 }}
+                </span>
+              </div>
+            </div>
+
+            <div *ngIf="skill.featured" class="featured-badge">
+              <ion-icon name="star" class="featured-icon"></ion-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vista de skills destacadas -->
+    <div *ngIf="viewMode === 'featured'" class="skills-featured skills-animate">
+      <div class="featured-grid">
+        <div 
+          *ngFor="let skill of getFeaturedSkills()" 
+          class="featured-skill-card"
+          (click)="openSkillDetail(skill)"
+        >
+          <div class="featured-skill-header">
+            <div class="skill-icon" [style.background-color]="getCategoryColor(skill.category)">
+              <ion-icon [name]="skill.icon || 'code-slash'" class="skill-icon-svg"></ion-icon>
+            </div>
+            <div class="skill-years-badge">{{ skill.yearsOfExperience }}+ años</div>
+          </div>
+
+          <h5 class="featured-skill-name">{{ skill.name }}</h5>
+          <p class="featured-skill-description">{{ skill.description }}</p>
+
+          <div class="featured-skill-level" [style.color]="getLevelColor(skill.level)">
+            {{ getLevelLabel(skill.level) }}
+          </div>
+
+          <div class="featured-progress">
+            <div 
+              class="featured-progress-bar"
+              [attr.data-percentage]="getSkillPercentage(skill)"
+              [style.background-color]="getCategoryColor(skill.category)"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Vista por nivel -->
+    <div *ngIf="viewMode === 'level'" class="skills-by-level skills-animate">
+      <div *ngFor="let level of ['expert', 'advanced', 'intermediate', 'learning']" class="level-section">
+        <div class="level-header">
+          <div class="level-badge" [style.background-color]="getLevelColor(level)">
+            {{ getLevelLabel(level) }}
+          </div>
+          <div class="level-count">
+            {{ getSkillsByLevel(level).length }} competencias
+          </div>
+        </div>
+
+        <div class="level-skills">
+          <div 
+            *ngFor="let skill of getSkillsByLevel(level)" 
+            class="level-skill-item"
+            (click)="openSkillDetail(skill)"
+          >
+            <div class="level-skill-info">
+              <span class="level-skill-name">{{ skill.name }}</span>
+              <span class="level-skill-years">{{ formatYearsOfExperience(skill.yearsOfExperience) }}</span>
+            </div>
+            <div class="level-skill-category" [style.color]="getCategoryColor(skill.category)">
+              {{ skill.category }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensaje diferenciador -->
+    <div class="skills-highlight skills-animate">
+      <div class="highlight-card">
+        <div class="highlight-icon">
+          <ion-icon name="trophy" class="trophy-icon"></ion-icon>
+        </div>
+        <div class="highlight-content">
+          <h4 class="highlight-title">Experiencia Práctica Real</h4>
+          <p class="highlight-description">
+            Mis competencias no son solo certificados o cursos completados. Son años de experiencia 
+            práctica resolviendo problemas reales, desde reparar hardware hasta coordinar 
+            implementaciones empresariales complejas.
+          </p>
+          <div class="highlight-points">
+            <div class="highlight-point">
+              <ion-icon name="checkmark-circle" class="point-icon"></ion-icon>
+              <span>20+ años de experiencia práctica desde adolescencia</span>
+            </div>
+            <div class="highlight-point">
+              <ion-icon name="checkmark-circle" class="point-icon"></ion-icon>
+              <span>Formación académica que complementa experiencia real</span>
+            </div>
+            <div class="highlight-point">
+              <ion-icon name="checkmark-circle" class="point-icon"></ion-icon>
+              <span>Enfoque en aplicación práctica vs conocimiento teórico</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Llamadas a la acción -->
+    <div class="skills-actions skills-animate">
+      <div class="actions-content">
+        <h4 class="actions-title">¿Te interesa mi perfil técnico?</h4>
+        <p class="actions-description">
+          Estas competencias las aplico diariamente en proyectos reales y coordinación técnica.
+        </p>
+        
+        <div class="actions-buttons">
+          <ion-button 
+            expand="block" 
+            class="action-button primary"
+            (click)="scrollToContact()"
+          >
+            <ion-icon name="mail" slot="start"></ion-icon>
+            Proponer Colaboración
+          </ion-button>
+          
+          <ion-button 
+            expand="block" 
+            fill="outline" 
+            class="action-button"
+            (click)="scrollToProjects()"
+          >
+            <ion-icon name="folder" slot="start"></ion-icon>
+            Ver Proyectos Aplicados
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal de detalles de skill -->
+<ion-modal [isOpen]="!!selectedSkill" (willDismiss)="closeSkillDetail()">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>{{ selectedSkill?.name }}</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="closeSkillDetail()">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    
+    <ion-content class="skill-modal-content" *ngIf="selectedSkill">
+      <div class="modal-body">
+        
+        <!-- Header del modal -->
+        <div class="modal-header">
+          <div class="modal-skill-icon" [style.background-color]="getCategoryColor(selectedSkill.category)">
+            <ion-icon [name]="selectedSkill.icon || 'code-slash'" class="modal-icon"></ion-icon>
+          </div>
+          <h3 class="modal-skill-name">{{ selectedSkill.name }}</h3>
+          <div class="modal-skill-meta">
+            <span class="modal-category" [style.background-color]="getCategoryColor(selectedSkill.category)">
+              {{ selectedSkill.category }}
+            </span>
+            <span class="modal-level" [style.background-color]="getLevelColor(selectedSkill.level)">
+              {{ getLevelLabel(selectedSkill.level) }}
+            </span>
+            <span class="modal-years">{{ formatYearsOfExperience(selectedSkill.yearsOfExperience) }}</span>
+          </div>
+        </div>
+
+        <!-- Progreso de experiencia -->
+        <div class="modal-section">
+          <h5 class="modal-section-title">Nivel de Experiencia</h5>
+          <div class="modal-progress">
+            <div class="modal-progress-info">
+              <span class="modal-progress-label">{{ selectedSkill.yearsOfExperience }} años de experiencia práctica</span>
+              <span class="modal-progress-percentage">{{ getSkillPercentage(selectedSkill) }}%</span>
+            </div>
+            <div class="modal-progress-bar-container">
+              <div 
+                class="modal-progress-bar"
+                [style.width.%]="getSkillPercentage(selectedSkill)"
+                [style.background-color]="getCategoryColor(selectedSkill.category)"
+              ></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Descripción -->
+        <div class="modal-section">
+          <h5 class="modal-section-title">Descripción</h5>
+          <p class="modal-description">{{ selectedSkill.description }}</p>
+        </div>
+
+        <!-- Proyectos donde se usó -->
+        <div class="modal-section" *ngIf="selectedSkill.projectsUsed.length > 0">
+          <h5 class="modal-section-title">Proyectos Donde la Apliqué</h5>
+          <div class="modal-projects">
+            <div 
+              *ngFor="let project of selectedSkill.projectsUsed" 
+              class="modal-project-tag"
+            >
+              <ion-icon name="folder" class="project-icon"></ion-icon>
+              {{ project }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Contexto de la competencia -->
+        <div class="modal-section" *ngIf="selectedSkill.featured">
+          <h5 class="modal-section-title">¿Por qué es una Competencia Destacada?</h5>
+          <div class="modal-featured-info">
+            <ion-icon name="star" class="featured-star"></ion-icon>
+            <p class="featured-explanation">
+              Esta competencia es fundamental en mi perfil profesional debido a mi extensiva 
+              experiencia práctica y su aplicación constante en proyectos reales.
+            </p>
+          </div>
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>

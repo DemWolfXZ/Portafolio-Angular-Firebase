@@ -1,0 +1,622 @@
+/**
+ * Estilos del Hero Section
+ * Sección principal de presentación con foto profesional y información clave
+ * Incluye animaciones y diseño responsivo
+ */
+
+.hero-section {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: linear-gradient(135deg, 
+    var(--ion-background-color) 0%, 
+    var(--ion-background-color-secondary) 100%
+  );
+  
+  // Animaciones de entrada
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease-out;
+  
+  &.loaded {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+}
+
+// ========================================
+// CONTENIDO PRINCIPAL
+// ========================================
+.hero-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3xl);
+  align-items: center;
+  margin-bottom: var(--spacing-3xl);
+  
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-2xl);
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    gap: var(--spacing-xl);
+  }
+}
+
+// ========================================
+// INFORMACIÓN DEL HERO
+// ========================================
+.hero-info {
+  animation: slideInFromLeft 1s ease-out 0.3s both;
+  
+  @media (max-width: 968px) {
+    order: 2;
+    animation: slideInFromBottom 1s ease-out 0.3s both;
+  }
+}
+
+.hero-greeting {
+  margin-bottom: var(--spacing-lg);
+}
+
+.greeting-text {
+  display: block;
+  font-size: var(--font-size-lg);
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: 0.5px;
+}
+
+.hero-name {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: var(--ion-text-color);
+  line-height: 1.1;
+  margin: 0 0 var(--spacing-sm) 0;
+  background: linear-gradient(135deg, var(--ion-text-color) 0%, var(--ion-color-primary) 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-title {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+  font-weight: 600;
+  color: var(--ion-text-color-secondary);
+  line-height: 1.3;
+  margin: 0;
+}
+
+.hero-tagline {
+  margin: var(--spacing-xl) 0 var(--spacing-lg) 0;
+}
+
+.tagline-text {
+  font-size: clamp(1rem, 2.5vw, 1.4rem);
+  color: var(--ion-color-primary);
+  font-weight: 600;
+  font-style: italic;
+  margin: 0;
+  position: relative;
+  
+  &::before {
+    content: '"';
+    font-size: 2em;
+    color: var(--ion-color-primary);
+    opacity: 0.3;
+    position: absolute;
+    left: -0.3em;
+    top: -0.1em;
+  }
+  
+  &::after {
+    content: '"';
+    font-size: 2em;
+    color: var(--ion-color-primary);
+    opacity: 0.3;
+    position: absolute;
+    right: -0.3em;
+    bottom: -0.3em;
+  }
+}
+
+.hero-description {
+  margin-bottom: var(--spacing-xl);
+}
+
+.description-text {
+  font-size: var(--font-size-lg);
+  color: var(--ion-text-color-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+// ========================================
+// INFORMACIÓN DE CONTACTO RÁPIDA
+// ========================================
+.hero-contact-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-2xl);
+  
+  @media (max-width: 968px) {
+    align-items: center;
+  }
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--ion-text-color-secondary);
+  font-size: var(--font-size-base);
+}
+
+.contact-icon {
+  font-size: 18px;
+  color: var(--ion-color-primary);
+  min-width: 18px;
+}
+
+.contact-text {
+  font-weight: 500;
+}
+
+// ========================================
+// BOTONES DE ACCIÓN
+// ========================================
+.hero-actions {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.primary-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+  }
+}
+
+.action-button {
+  min-height: 56px;
+  font-weight: 600;
+  font-size: var(--font-size-base);
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-normal);
+  
+  &.primary {
+    --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-accent) 100%);
+    --color: white;
+    box-shadow: var(--ion-box-shadow);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--ion-box-shadow-hover);
+    }
+    
+    &:active {
+      transform: translateY(0);
+    }
+  }
+  
+  &.secondary {
+    --border-color: var(--ion-color-primary);
+    --color: var(--ion-color-primary);
+    
+    &:hover {
+      --background: var(--ion-color-primary);
+      --color: white;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.secondary-actions {
+  display: flex;
+  gap: var(--spacing-md);
+  
+  @media (max-width: 480px) {
+    justify-content: center;
+  }
+}
+
+.social-button {
+  --color: var(--ion-text-color-secondary);
+  font-weight: 500;
+  
+  &:hover {
+    --color: var(--ion-color-primary);
+    transform: translateY(-1px);
+  }
+}
+
+// ========================================
+// INDICADOR DE SCROLL
+// ========================================
+.scroll-indicator {
+  margin-top: var(--spacing-2xl);
+  
+  @media (max-width: 968px) {
+    text-align: center;
+  }
+}
+
+.scroll-button {
+  background: none;
+  border: none;
+  color: var(--ion-text-color-tertiary);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    color: var(--ion-color-primary);
+    transform: translateY(-2px);
+  }
+}
+
+.scroll-text {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+}
+
+.scroll-icon {
+  font-size: 20px;
+  animation: bounce 2s infinite;
+}
+
+// ========================================
+// IMAGEN PROFESIONAL
+// ========================================
+.hero-image {
+  position: relative;
+  animation: slideInFromRight 1s ease-out 0.5s both;
+  
+  @media (max-width: 968px) {
+    order: 1;
+    animation: slideInFromTop 1s ease-out 0.5s both;
+  }
+}
+
+.image-container {
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.profile-image {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  box-shadow: 0 20px 40px rgba(var(--ion-color-primary-rgb), 0.3);
+  transition: all var(--transition-slow);
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 25px 50px rgba(var(--ion-color-primary-rgb), 0.4);
+  }
+  
+  @media (max-width: 768px) {
+    max-width: 280px;
+  }
+}
+
+// Elementos decorativos alrededor de la imagen
+.image-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+.decoration-element {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-accent));
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+  
+  &.element-1 {
+    width: 60px;
+    height: 60px;
+    top: 10%;
+    right: 10%;
+    animation-delay: 0s;
+  }
+  
+  &.element-2 {
+    width: 40px;
+    height: 40px;
+    bottom: 20%;
+    left: 5%;
+    animation-delay: 2s;
+  }
+  
+  &.element-3 {
+    width: 30px;
+    height: 30px;
+    top: 60%;
+    right: 5%;
+    animation-delay: 4s;
+  }
+}
+
+// Badge de experiencia
+.experience-badge {
+  position: absolute;
+  bottom: 10%;
+  right: -10px;
+  background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-accent));
+  border-radius: var(--border-radius-xl);
+  padding: var(--spacing-md) var(--spacing-lg);
+  color: white;
+  box-shadow: var(--ion-box-shadow-hover);
+  animation: pulse 3s ease-in-out infinite;
+  
+  @media (max-width: 768px) {
+    right: 10px;
+    bottom: 5%;
+  }
+}
+
+.badge-content {
+  text-align: center;
+}
+
+.badge-number {
+  display: block;
+  font-size: var(--font-size-2xl);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.badge-text {
+  display: block;
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// ========================================
+// ESTADÍSTICAS
+// ========================================
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-3xl);
+  padding: var(--spacing-2xl) 0;
+  border-top: 1px solid var(--ion-border-color);
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+    padding: var(--spacing-xl) 0;
+  }
+}
+
+.stat-item {
+  text-align: center;
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  background: var(--ion-surface-color);
+  border: 1px solid var(--ion-border-color);
+  transition: all var(--transition-normal);
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--ion-box-shadow-hover);
+    border-color: var(--ion-color-primary);
+  }
+}
+
+.stat-number {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  color: var(--ion-color-primary);
+  line-height: 1;
+  margin-bottom: var(--spacing-xs);
+}
+
+.stat-label {
+  font-size: var(--font-size-sm);
+  color: var(--ion-text-color-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+// ========================================
+// BACKGROUND DECORATIVO
+// ========================================
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.bg-decoration {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-accent));
+  opacity: 0.05;
+  animation: rotate 20s linear infinite;
+  
+  &.bg-1 {
+    width: 300px;
+    height: 300px;
+    top: 10%;
+    right: -150px;
+    animation-duration: 25s;
+  }
+  
+  &.bg-2 {
+    width: 200px;
+    height: 200px;
+    bottom: 20%;
+    left: -100px;
+    animation-duration: 30s;
+    animation-direction: reverse;
+  }
+  
+  &.bg-3 {
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-duration: 40s;
+  }
+}
+
+// ========================================
+// MODAL DE CV
+// ========================================
+.cv-modal-content {
+  padding: 0;
+}
+
+.cv-preview {
+  height: 70vh;
+  margin: var(--spacing-md);
+}
+
+.cv-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--ion-box-shadow);
+}
+
+.cv-modal-actions {
+  padding: var(--spacing-lg);
+  border-top: 1px solid var(--ion-border-color);
+  background: var(--ion-background-color-secondary);
+}
+
+.download-button {
+  --background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-accent));
+  --color: white;
+  min-height: 56px;
+  font-weight: 600;
+}
+
+// ========================================
+// ANIMACIONES
+// ========================================
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
