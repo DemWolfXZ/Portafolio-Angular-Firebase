@@ -1,0 +1,7 @@
+{
+  "name": "portafolio-av",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
