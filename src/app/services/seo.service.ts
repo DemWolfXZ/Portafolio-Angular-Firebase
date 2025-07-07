@@ -32,7 +32,7 @@ export class SeoService {
   private readonly SITE_CONFIG = {
     siteName: 'Alejandro Villa - Technical Business Analyst',
     baseUrl: 'https://portafolio-alejandro-villa.web.app',
-    defaultImage: 'assets/images/alejandro-villa-og.jpg',
+    defaultImage: 'assets/images/placeholder.svg',
     author: 'Alejandro Villa Villavicencio',
     locale: 'es_CL'
   };

@@ -46,12 +46,12 @@ export class HeroSectionComponent implements OnInit {
    */
   downloadCV(): void {
     // URL del CV en Firebase Storage o assets
-    const cvUrl = 'assets/cv/CV_Alejandro_Villa_2025.pdf';
+    const cvUrl = 'assets/cv/CV Alejandro Villa Villavicencio.pdf';
     
     // Crear enlace temporal para descarga
     const link = document.createElement('a');
     link.href = cvUrl;
-    link.download = 'CV_Alejandro_Villa_2025.pdf';
+    link.download = 'CV Alejandro Villa Villavicencio.pdf';
     link.target = '_blank';
     
     // Trigger de descarga

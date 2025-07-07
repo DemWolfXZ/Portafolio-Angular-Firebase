@@ -12,8 +12,10 @@
 html {
   scroll-behavior: smooth;
   font-size: 16px;
-  height: 100%;
+  height: auto !important; // Cambiado de 100% a auto para permitir scroll
+  min-height: 100vh;
   overflow-x: hidden; // Prevenir scroll horizontal
+  overflow-y: auto !important; // Asegurar scroll vertical
   
   // Mejorar scroll táctil en iOS
   -webkit-overflow-scrolling: touch;
@@ -28,7 +30,9 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; // Prevenir scroll horizontal
-  height: 100%;
+  overflow-y: auto !important; // IMPORTANTE: Asegurar scroll vertical
+  height: auto !important; // Cambiado de 100% a auto
+  min-height: 100vh;
   line-height: 1.6;
   font-family: var(--font-family-primary, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
   
@@ -95,23 +99,23 @@ ion-app {
   position: relative;
   scroll-behavior: smooth;
   
-  // Padding superior para compensar header fijo
-  padding-top: 80px;
+  // Padding superior MÁS GENEROSO para compensar header fijo
+  padding-top: 90px !important; // Incrementado desde 80px
   
   // Scroll optimizado para móviles
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
   
   @media (max-width: 768px) {
-    padding-top: 70px;
+    padding-top: 80px !important; // Incrementado desde 70px
   }
   
   @media (max-width: 480px) {
-    padding-top: 60px;
+    padding-top: 70px !important; // Incrementado desde 60px
   }
   
   @media (max-width: 320px) {
-    padding-top: 56px;
+    padding-top: 66px !important; // Incrementado desde 56px
   }
 }
 
@@ -121,26 +125,26 @@ ion-app {
 
 .section {
   width: 100%;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 90px); // Ajustado para el nuevo padding
   position: relative;
-  scroll-margin-top: 80px; // Para navegación precisa
+  scroll-margin-top: 90px !important; // Incrementado para navegación precisa
   
   // Mejorar el posicionamiento en scroll
   scroll-snap-align: start;
   
   @media (max-width: 768px) {
-    min-height: calc(100vh - 70px);
-    scroll-margin-top: 70px;
+    min-height: calc(100vh - 80px);
+    scroll-margin-top: 80px !important;
   }
   
   @media (max-width: 480px) {
-    min-height: calc(100vh - 60px);
-    scroll-margin-top: 60px;
+    min-height: calc(100vh - 70px);
+    scroll-margin-top: 70px !important;
   }
   
   @media (max-width: 320px) {
-    min-height: calc(100vh - 56px);
-    scroll-margin-top: 56px;
+    min-height: calc(100vh - 66px);
+    scroll-margin-top: 66px !important;
   }
 }
 
@@ -222,6 +226,8 @@ ion-app {
 // PREVENIR SCROLL CUANDO MENU MÓVIL ESTÁ ABIERTO
 // ========================================
 
+/* 
+// DESHABILITADO - Ya no necesario con dropdown menu
 body.mobile-menu-open {
   overflow: hidden !important;
   position: fixed !important;
@@ -238,6 +244,7 @@ body.mobile-menu-open {
     overflow: hidden;
   }
 }
+*/
 
 // ========================================
 // OPTIMIZACIONES PARA DIFERENTES DISPOSITIVOS

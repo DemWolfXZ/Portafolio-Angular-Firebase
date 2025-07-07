@@ -14,7 +14,7 @@ import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss', './header-override.scss'],
 })
 export class HeaderComponent implements OnInit {
 
@@ -65,14 +65,14 @@ export class HeaderComponent implements OnInit {
 
   /**
    * Listener para detectar el scroll y aplicar efectos visuales al header
-   * Cambia el estilo del header cuando el usuario hace scroll
+   * SIMPLIFICADO: Solo cambia una clase CSS, NUNCA oculta el header
    */
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     this.isScrolled = scrollTop > 50;
     
-    // Detectar sección activa basada en el scroll
+    // SOLO detectar sección activa, NO hacer nada que afecte la visibilidad
     this.detectActiveSection();
   }
 
@@ -88,48 +88,124 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * Navegación suave entre secciones
-   * Utiliza scroll behavior smooth para una transición fluida
+   * Listener para cerrar menú móvil al hacer clic fuera
+   */
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: Event): void {
+    const target = event.target as HTMLElement;
+    const header = target.closest('.header');
+    
+    // Si el clic no fue dentro del header y el menú está abierto, cerrarlo
+    if (!header && this.mobileMenuOpen) {
+      this.closeMobileMenu();
+    }
+  }
+
+  /**
+   * Navegación suave entre secciones - VERSIÓN SIMPLIFICADA Y RESPONSIVA
    * @param sectionId - ID de la sección destino
    */
   navigateToSection(sectionId: string): void {
-    console.log('Navegando a sección:', sectionId); // Debug
+    console.log('🚀 [NAVEGACIÓN] Iniciando navegación a:', sectionId);
 
-    const element = document.getElementById(sectionId);
-    if (element) {
-      // Calcular offset para el header fijo
-      let headerHeight = 80;
+    // Cerrar menú móvil inmediatamente
+    this.closeMobileMenu();
+
+    // Buscar el elemento por ID
+    const targetElement = document.getElementById(sectionId);
+    
+    if (!targetElement) {
+      console.error('❌ [ERROR] Sección no encontrada:', sectionId);
       
-      // Ajustar altura del header según el dispositivo
-      if (window.innerWidth <= 768) {
-        headerHeight = 70;
-      }
-      if (window.innerWidth <= 480) {
-        headerHeight = 60;
-      }
-      if (window.innerWidth <= 320) {
-        headerHeight = 56;
-      }
-      
-      let elementPosition = element.offsetTop - headerHeight;
-      
-      // Para el home, ir al top absoluto
-      if (sectionId === 'home') {
-        elementPosition = 0;
-      }
-      
-      console.log('Scrolling to position:', elementPosition); // Debug
-      
+      // Debug: mostrar todas las secciones disponibles
+      const allSections = document.querySelectorAll('section[id]');
+      console.log('🔍 [DEBUG] Secciones disponibles:', 
+        Array.from(allSections).map(section => section.id)
+      );
+      return;
+    }
+
+    console.log('✅ [ENCONTRADO] Elemento objetivo:', targetElement);
+
+    // Calcular posición de scroll responsiva
+    const headerHeight = this.getResponsiveHeaderHeight();
+    const elementRect = targetElement.getBoundingClientRect();
+    const currentScrollY = window.pageYOffset || document.documentElement.scrollTop;
+    
+    let targetScrollY: number;
+
+    if (sectionId === 'home') {
+      // Para home, ir al top absoluto
+      targetScrollY = 0;
+    } else {
+      // Para otras secciones, calcular con offset del header
+      targetScrollY = currentScrollY + elementRect.top - headerHeight;
+    }
+
+    console.log('� [CÁLCULOS] Información de scroll:', {
+      sectionId,
+      headerHeight,
+      elementRect: {
+        top: elementRect.top,
+        bottom: elementRect.bottom,
+        height: elementRect.height
+      },
+      currentScrollY,
+      targetScrollY,
+      windowInnerHeight: window.innerHeight
+    });
+
+    // Realizar scroll suave
+    try {
       window.scrollTo({
-        top: elementPosition,
+        top: Math.max(0, targetScrollY), // Asegurar que no sea negativo
         behavior: 'smooth'
       });
-      
-      // Cerrar menú móvil después de navegar
-      this.closeMobileMenu();
+
+      // Actualizar sección activa
       this.activeSection = sectionId;
+      
+      console.log('🎯 [ÉXITO] Scroll iniciado a posición:', targetScrollY);
+
+      // Verificar el scroll después de completarse
+      setTimeout(() => {
+        const finalPosition = window.pageYOffset || document.documentElement.scrollTop;
+        console.log('✨ [VERIFICACIÓN] Posición final del scroll:', finalPosition);
+        
+        // Verificar si el elemento está visible
+        const finalRect = targetElement.getBoundingClientRect();
+        const isVisible = finalRect.top >= 0 && finalRect.top <= window.innerHeight;
+        console.log('👁️ [VISIBILIDAD] Elemento visible en viewport:', isVisible);
+        
+      }, 1000); // 1 segundo después del scroll
+      
+    } catch (error) {
+      console.error('❌ [ERROR] Error en scroll:', error);
+      
+      // Fallback: scroll simple sin animación
+      try {
+        window.scrollTo(0, Math.max(0, targetScrollY));
+        console.log('🔄 [FALLBACK] Scroll sin animación ejecutado');
+      } catch (fallbackError) {
+        console.error('❌ [ERROR CRÍTICO] Fallback falló:', fallbackError);
+      }
+    }
+  }
+
+  /**
+   * Calcula la altura del header de forma responsiva - ACTUALIZADO
+   */
+  private getResponsiveHeaderHeight(): number {
+    const windowWidth = window.innerWidth;
+    
+    if (windowWidth <= 320) {
+      return 66; // Actualizado
+    } else if (windowWidth <= 480) {
+      return 70; // Actualizado
+    } else if (windowWidth <= 768) {
+      return 80; // Actualizado
     } else {
-      console.error('Elemento no encontrado:', sectionId); // Debug
+      return 90; // Actualizado
     }
   }
 
@@ -169,15 +245,12 @@ export class HeaderComponent implements OnInit {
 
   /**
    * Abre el menú móvil
-   * Previene el scroll del body cuando está abierto
+   * Para dropdown no necesitamos bloquear el scroll del body
    */
   openMobileMenu(): void {
     console.log('Opening mobile menu'); // Debug
     
     this.mobileMenuOpen = true;
-    
-    // Prevenir scroll del body
-    this.renderer.addClass(this.document.body, 'mobile-menu-open');
     
     // Focus management para accesibilidad
     setTimeout(() => {
@@ -190,15 +263,11 @@ export class HeaderComponent implements OnInit {
 
   /**
    * Cierra el menú móvil
-   * Restaura el scroll del body
    */
   closeMobileMenu(): void {
     console.log('Closing mobile menu'); // Debug
     
     this.mobileMenuOpen = false;
-    
-    // Restaurar scroll del body
-    this.renderer.removeClass(this.document.body, 'mobile-menu-open');
   }
 
   /**
@@ -209,16 +278,16 @@ export class HeaderComponent implements OnInit {
     const sections = this.navItems.map(item => item.id);
     let currentSection = 'home';
     
-    // Calcular altura del header según el dispositivo
-    let headerHeight = 80;
+    // Calcular altura del header según el dispositivo - ACTUALIZADO
+    let headerHeight = 90; // Actualizado desde 80
     if (window.innerWidth <= 768) {
-      headerHeight = 70;
+      headerHeight = 80; // Actualizado desde 70
     }
     if (window.innerWidth <= 480) {
-      headerHeight = 60;
+      headerHeight = 70; // Actualizado desde 60
     }
     if (window.innerWidth <= 320) {
-      headerHeight = 56;
+      headerHeight = 66; // Actualizado desde 56
     }
     
     for (const sectionId of sections) {
