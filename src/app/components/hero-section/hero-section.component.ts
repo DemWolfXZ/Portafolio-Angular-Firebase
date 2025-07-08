@@ -34,10 +34,8 @@ export class HeroSectionComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // Activar animaciones después de que se carga el componente
-    setTimeout(() => {
-      this.animationsLoaded = true;
-    }, 500);
+    // Componente visible desde el inicio - sin dependencias de animaciones
+    this.animationsLoaded = true;
   }
 
   /**

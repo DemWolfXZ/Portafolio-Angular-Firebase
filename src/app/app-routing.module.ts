@@ -1,23 +1,60 @@
-// src/app/app-routing.module.ts
-// Módulo de rutas simplificado para SPA
-// Redirige todo a la página principal sin lazy loading
+/**
+ * ARCHIVO: src/app/app-routing.module.ts
+ * 
+ * DESCRIPCIÓN:
+ * Configuración de rutas con lazy loading para cada sección.
+ * Cada componente tiene su propio módulo que se carga bajo demanda.
+ * Rutas limpias y navegación directa por URL.
+ */
 
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
-// Rutas simplificadas para SPA - todo se maneja en app.component
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '',
+    redirectTo: '/home',
     pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    loadChildren: () => import('./components/hero-section/hero-section.module').then(m => m.HeroSectionModule)
+  },
+  {
+    path: 'about',
+    loadChildren: () => import('./components/about-section/about-section.module').then(m => m.AboutSectionModule)
+  },
+  {
+    path: 'experience',
+    loadChildren: () => import('./components/experience-section/experience-section.module').then(m => m.ExperienceSectionModule)
+  },
+  {
+    path: 'projects',
+    loadChildren: () => import('./components/projects-section/projects-section.module').then(m => m.ProjectsSectionModule)
+  },
+  {
+    path: 'skills',
+    loadChildren: () => import('./components/skills-section/skills-section.module').then(m => m.SkillsSectionModule)
+  },
+  {
+    path: 'contact',
+    loadChildren: () => import('./components/contact-section/contact-section.module').then(m => m.ContactSectionModule)
+  },
+  {
+    path: '**',
+    redirectTo: '/home'
   }
-  // Sin lazy loading - todo se carga en app.component como SPA
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { 
+      preloadingStrategy: PreloadAllModules,
+      // Opciones para mejor SEO y navegación
+      enableTracing: false, // Solo para debug
+      scrollPositionRestoration: 'top', // Scroll al top en navegación
+      anchorScrolling: 'enabled' // Soporte para anchors
+    })
   ],
   exports: [RouterModule]
 })

@@ -9,7 +9,6 @@
   position: relative;
   display: flex;
   align-items: center;
-  overflow: hidden;
   background: linear-gradient(135deg, 
     var(--ion-background-color) 0%, 
     var(--ion-background-color-secondary) 100%
@@ -30,14 +29,17 @@
     padding-top: 66px;
   }
   
-  // Animaciones de entrada
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 1s ease-out;
+  // Visible desde el inicio - sin animaciones que interfieran
+  opacity: 1;
+  transform: translateY(0);
   
-  &.loaded {
-    opacity: 1;
-    transform: translateY(0);
+  // Animación suave opcional solo para elementos internos
+  .hero-info {
+    animation: slideInFromLeft 0.8s ease-out 0.2s both;
+  }
+  
+  .hero-photo {
+    animation: slideInFromRight 0.8s ease-out 0.4s both;
   }
 }
 
@@ -581,44 +583,36 @@ ion-modal {
 // ========================================
 @keyframes slideInFromLeft {
   from {
-    opacity: 0;
     transform: translateX(-100px);
   }
   to {
-    opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes slideInFromRight {
   from {
-    opacity: 0;
     transform: translateX(100px);
   }
   to {
-    opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes slideInFromTop {
   from {
-    opacity: 0;
     transform: translateY(-50px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
 
 @keyframes slideInFromBottom {
   from {
-    opacity: 0;
     transform: translateY(50px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }

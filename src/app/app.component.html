@@ -1,42 +1,132 @@
-<!-- Aplicación principal - SPA con scroll nativo HTML -->
-<div class="app-container">
-  <!-- Header fijo global -->
-  <app-header></app-header>
-
-  <!-- Contenido principal con scroll nativo -->
-  <main class="main-content" role="main">
+<!-- Layout principal con sidemenu nativo de Ionic -->
+<ion-app>
+  <ion-split-pane contentId="main-content">
     
-    <!-- Hero Section - Inicio -->
-    <section id="home" class="section hero-section-wrapper">
-      <app-hero-section></app-hero-section>
-    </section>
+    <!-- Sidemenu lateral -->
+    <ion-menu menuId="main-menu" contentId="main-content" type="overlay">
+      <ion-header>
+        <ion-toolbar color="primary">
+          <ion-title>Alejandro Villa</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      
+      <ion-content>
+        
+        <!-- Información personal en el menú -->
+        <div class="menu-profile">
+          <div class="profile-avatar">
+            <img 
+              src="assets/images/placeholder.svg" 
+              alt="Alejandro Villa"
+              class="avatar-image"
+            />
+          </div>
+          <div class="profile-info">
+            <h3 class="profile-name">{{ personalInfo.name }}</h3>
+            <p class="profile-title">{{ personalInfo.title }}</p>
+            <p class="profile-subtitle">{{ personalInfo.subtitle }}</p>
+          </div>
+        </div>
 
-    <!-- About Section - Sobre Mí -->
-    <section id="about" class="section about-section-wrapper">
-      <app-about-section></app-about-section>
-    </section>
+        <!-- Navegación principal -->
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Navegación</ion-label>
+          </ion-list-header>
+          
+          <ion-menu-toggle 
+            *ngFor="let page of appPages" 
+            autoHide="false"
+          >
+            <ion-item 
+              button 
+              [class.selected]="isPageActive(page.url)"
+              (click)="navigateToPage(page.url)"
+              lines="none"
+            >
+              <ion-icon 
+                [name]="page.icon" 
+                slot="start"
+                [color]="isPageActive(page.url) ? 'primary' : ''"
+              ></ion-icon>
+              <ion-label>
+                <h3>{{ page.title }}</h3>
+                <p *ngIf="page.description">{{ page.description }}</p>
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
 
-    <!-- Experience Section - Experiencia -->
-    <section id="experience" class="section experience-section-wrapper">
-      <app-experience-section></app-experience-section>
-    </section>
+        <!-- Acciones rápidas -->
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Acciones Rápidas</ion-label>
+          </ion-list-header>
+          
+          <ion-menu-toggle 
+            *ngFor="let action of actionPages" 
+            autoHide="false"
+          >
+            <ion-item 
+              button 
+              (click)="navigateToPage(action.url)"
+              lines="none"
+            >
+              <ion-icon 
+                [name]="action.icon" 
+                slot="start"
+              ></ion-icon>
+              <ion-label>{{ action.title }}</ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
 
-    <!-- Projects Section - Proyectos -->
-    <section id="projects" class="section projects-section-wrapper">
-      <app-projects-section></app-projects-section>
-    </section>
+        <!-- Contacto directo -->
+        <ion-list>
+          <ion-list-header>
+            <ion-label>Contacto Directo</ion-label>
+          </ion-list-header>
+          
+          <ion-item button (click)="sendEmail()" lines="none">
+            <ion-icon name="mail" slot="start" color="primary"></ion-icon>
+            <ion-label>
+              <h3>Email</h3>
+              <p>{{ personalInfo.email }}</p>
+            </ion-label>
+          </ion-item>
+          
+          <ion-item button (click)="callPhone()" lines="none">
+            <ion-icon name="call" slot="start" color="success"></ion-icon>
+            <ion-label>
+              <h3>Teléfono</h3>
+              <p>{{ personalInfo.phone }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
 
-    <!-- Skills Section - Competencias -->
-    <section id="skills" class="section skills-section-wrapper">
-      <app-skills-section></app-skills-section>
-    </section>
+        <!-- Toggle de tema -->
+        <div class="menu-theme-toggle">
+          <ion-item lines="none">
+            <ion-icon 
+              [name]="isDarkMode() ? 'sunny' : 'moon'" 
+              slot="start"
+            ></ion-icon>
+            <ion-label>{{ isDarkMode() ? 'Tema Claro' : 'Tema Oscuro' }}</ion-label>
+            <ion-toggle 
+              slot="end"
+              [checked]="isDarkMode()"
+              (ionChange)="toggleTheme()"
+            ></ion-toggle>
+          </ion-item>
+        </div>
+      </ion-content>
+    </ion-menu>
 
-    <!-- Contact Section - Contacto -->
-    <section id="contact" class="section contact-section-wrapper">
-      <app-contact-section></app-contact-section>
-    </section>
-  </main>
+    <!-- Contenido principal -->
+    <ion-router-outlet id="main-content" main></ion-router-outlet>
+    
+  </ion-split-pane>
 
-  <!-- Footer global -->
+  <!-- Footer global - siempre visible -->
   <app-footer></app-footer>
-</div>
+</ion-app>
