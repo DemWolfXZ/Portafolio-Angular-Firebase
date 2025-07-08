@@ -1,8 +1,8 @@
 /**
  * GLOBAL CSS - PORTAFOLIO PROFESIONAL 100% RESPONSIVO
  * ====================================================
- * Estilos globales optimizados para todas las pantallas y dispositivos
- * Scroll nativo perfecto, responsividad total, y rendimiento óptimo
+ * Layout global optimizado para header fijo, body completo y footer
+ * Soluciona problemas de altura y espaciado inconsistente
  */
 
 /* Core CSS required for Ionic components to work properly */
@@ -33,7 +33,7 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 // ========================================
-// CONFIGURACIÓN BASE RESPONSIVA
+// CONFIGURACIÓN BASE CRÍTICA PARA LAYOUT
 // ========================================
 
 // Reset y configuración base
@@ -85,11 +85,11 @@ body {
   color: var(--ion-text-color, #202124);
   background-color: var(--ion-background-color, #f8f9fa);
   
-  // NO agregar padding-top aquí, se maneja en .main-content
+  // CRÍTICO: NO agregar padding-top aquí, se maneja en .main-content
 }
 
 // ========================================
-// OPTIMIZACIÓN DE ION-APP PARA RESPONSIVIDAD
+// ION-APP - LAYOUT FLEX OPTIMIZADO
 // ========================================
 
 ion-app {
@@ -97,6 +97,62 @@ ion-app {
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
+  
+  // Layout flex para distribuir: header | main | footer
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+// ========================================
+// SECCIONES - ALTURA OPTIMIZADA
+// ========================================
+
+// Asegurar que todas las secciones ocupen el espacio adecuado
+app-hero-section,
+app-about-section,
+app-experience-section,
+app-projects-section,
+app-skills-section,
+app-contact-section {
+  display: block;
+  width: 100%;
+  
+  // Altura automática basada en contenido - NO forzar alturas
+  min-height: auto;
+  
+  // Permitir que crezcan según necesidad
+  flex-shrink: 0;
+  
+  // Posición relativa para animaciones
+  position: relative;
+  
+  // Padding consistente para todas las secciones (excepto hero)
+  &:not(app-hero-section) {
+    padding: var(--spacing-3xl) 0;
+    
+    @media (max-width: 768px) {
+      padding: var(--spacing-xl) 0;
+    }
+    
+    @media (max-width: 480px) {
+      padding: var(--spacing-lg) 0;
+    }
+  }
+}
+
+// Hero section tiene su propio manejo de altura completa
+app-hero-section {
+  // Altura completa del viewport menos header
+  min-height: calc(100vh - 80px);
+  
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 70px);
+  }
+  
+  @media (max-width: 480px) {
+    min-height: calc(100vh - 65px);
+  }
 }
 
 // ========================================
@@ -193,57 +249,6 @@ p {
   @media (min-width: 768px) {
     padding: 0 2rem;
   }
-}
-
-// ========================================
-// SECCIONES RESPONSIVAS
-// ========================================
-
-.section {
-  position: relative;
-  width: 100%;
-  padding: 3rem 0;
-  overflow: hidden;
-  
-  @media (max-width: 768px) {
-    padding: 2rem 0;
-  }
-  
-  @media (max-width: 480px) {
-    padding: 1.5rem 0;
-  }
-}
-
-.section-hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  
-  @media (max-width: 768px) {
-    min-height: calc(100vh - 70px);
-  }
-  
-  @media (max-width: 480px) {
-    min-height: calc(100vh - 65px);
-  }
-}
-
-// ========================================
-// ESPACIADO GLOBAL PARA SECCIONES
-// ========================================
-
-// Asegurar que todas las secciones tengan espacio suficiente
-// El espaciado principal se maneja en .main-content del app.component
-app-hero-section,
-app-about-section,
-app-experience-section,
-app-projects-section,
-app-skills-section,
-app-contact-section {
-  display: block;
-  // El padding-bottom se maneja globalmente en .main-content
 }
 
 // ========================================
@@ -569,7 +574,7 @@ img {
 }
 
 // ========================================
-// ANIMACIONES RESPONSIVAS
+// ANIMACIONES RESPONSIVAS - SIN TRANSFORMS QUE AFECTEN LAYOUT
 // ========================================
 
 .fade-in {
@@ -579,47 +584,86 @@ img {
 
 .slide-up {
   opacity: 0;
-  transform: translateY(30px);
-  animation: slideUp 0.6s ease-out forwards;
+  animation: slideUpOpacity 0.6s ease-out forwards;
 }
 
 .slide-left {
   opacity: 0;
-  transform: translateX(30px);
-  animation: slideLeft 0.6s ease-out forwards;
+  animation: slideLeftOpacity 0.6s ease-out forwards;
 }
 
 .scale-in {
   opacity: 0;
-  transform: scale(0.9);
-  animation: scaleIn 0.6s ease-out forwards;
+  animation: scaleInOpacity 0.6s ease-out forwards;
 }
 
+// Animaciones que NO afectan el layout usando solo opacity
 @keyframes fadeIn {
   to {
     opacity: 1;
   }
 }
 
-@keyframes slideUp {
-  to {
+@keyframes slideUpOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
     opacity: 1;
-    transform: translateY(0);
   }
 }
 
-@keyframes slideLeft {
-  to {
+@keyframes slideLeftOpacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
     opacity: 1;
-    transform: translateX(0);
   }
 }
 
-@keyframes scaleIn {
-  to {
-    opacity: 1;
-    transform: scale(1);
+@keyframes scaleInOpacity {
+  0% {
+    opacity: 0;
   }
+  100% {
+    opacity: 1;
+  }
+}
+
+// ========================================
+// CLASES HELPER PARA LAYOUT
+// ========================================
+
+// Para forzar altura completa cuando sea necesario
+.section-fullheight {
+  min-height: calc(100vh - 80px);
+  
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 70px);
+  }
+  
+  @media (max-width: 480px) {
+    min-height: calc(100vh - 65px);
+  }
+}
+
+// Para secciones de altura mínima
+.section-minheight {
+  min-height: 50vh;
+}
+
+// Para mantener proporción en contenedores
+.aspect-ratio-16-9 {
+  aspect-ratio: 16 / 9;
+}
+
+.aspect-ratio-4-3 {
+  aspect-ratio: 4 / 3;
+}
+
+.aspect-ratio-1-1 {
+  aspect-ratio: 1 / 1;
 }
 
 // ========================================
@@ -694,6 +738,30 @@ select {
 }
 
 // ========================================
+// BORDER RADIUS CONSISTENTE
+// ========================================
+
+:root {
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 16px;
+  --border-radius-2xl: 20px;
+  --border-radius-3xl: 24px;
+}
+
+// ========================================
+// TRANSICIONES CONSISTENTES
+// ========================================
+
+:root {
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+// ========================================
 // PRINT STYLES
 // ========================================
 
@@ -713,5 +781,15 @@ select {
   
   body {
     padding-top: 0 !important;
+  }
+  
+  app-hero-section,
+  app-about-section,
+  app-experience-section,
+  app-projects-section,
+  app-skills-section,
+  app-contact-section {
+    padding: 1rem 0 !important;
+    min-height: auto !important;
   }
 }

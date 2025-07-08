@@ -3,9 +3,9 @@
  * 
  * DESCRIPCIÓN:
  * Componente Footer del portafolio de Alejandro Villa.
+ * Versión compacta con acordeón para información de desarrollo.
  * Incluye links de navegación, información de contacto, enlaces sociales,
- * información de copyright y accesos rápidos a descarga de CV y WADs.
- * Diseño responsivo con animaciones sutiles.
+ * información de copyright y accesos rápidos.
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -35,7 +35,7 @@ export class FooterComponent implements OnInit {
     { id: 'about', label: 'Sobre Mí', icon: 'person' },
     { id: 'experience', label: 'Experiencia', icon: 'briefcase' },
     { id: 'projects', label: 'Proyectos', icon: 'folder' },
-    { id: 'skills', label: 'Competencias', icon: 'code-slash' },
+    { id: 'skills', label: 'Skills', icon: 'code-slash' },
     { id: 'contact', label: 'Contacto', icon: 'mail' }
   ];
 
@@ -47,7 +47,7 @@ export class FooterComponent implements OnInit {
       icon: 'download'
     },
     {
-      label: 'WAD Doom Ejemplo',
+      label: 'WAD Doom',
       action: () => this.downloadWAD(),
       icon: 'game-controller'
     },
@@ -57,28 +57,9 @@ export class FooterComponent implements OnInit {
       icon: 'logo-linkedin'
     },
     {
-      label: 'Email Directo',
+      label: 'Email',
       action: () => this.sendEmail(),
       icon: 'mail'
-    }
-  ];
-
-  // Enlaces de proyectos destacados
-  public featuredProjects = [
-    {
-      name: 'Sistema SRM Portal',
-      url: 'https://portal-superacionpobreza.web.app/tesis-pais',
-      description: 'Sistema en producción'
-    },
-    {
-      name: 'Sistema Unidad Territorial',
-      url: 'https://sistema-unidad-terrritorial.web.app/#/login',
-      description: 'Proyecto de título'
-    },
-    {
-      name: 'AST Digital',
-      url: 'https://ast-digital.web.app/',
-      description: 'Formulario profesional'
     }
   ];
 
@@ -93,11 +74,8 @@ export class FooterComponent implements OnInit {
   // Año actual para copyright
   public currentYear = new Date().getFullYear();
 
-  // Estados de acordeones colapsables
+  // Estado del acordeón - SOLO PARA LA SECCIÓN DE DESARROLLO
   public accordionStates = {
-    navigation: false,
-    quickLinks: false,
-    projects: false,
     development: false
   };
 
@@ -193,14 +171,6 @@ export class FooterComponent implements OnInit {
   }
 
   /**
-   * Abre un proyecto destacado en nueva pestaña
-   * @param project - Proyecto a abrir
-   */
-  openProject(project: any): void {
-    window.open(project.url, '_blank', 'noopener,noreferrer');
-  }
-
-  /**
    * Toggle del tema desde el footer
    */
   toggleTheme(): void {
@@ -222,22 +192,10 @@ export class FooterComponent implements OnInit {
     try {
       await navigator.clipboard.writeText(this.personalInfo.email);
       // Aquí podrías mostrar un toast de confirmación
+      console.log('Email copiado al portapapeles');
     } catch (error) {
       console.warn('No se pudo copiar al portapapeles:', error);
     }
-  }
-
-  /**
-   * Formatea la fecha de última actualización
-   * @returns String con fecha formateada
-   */
-  getFormattedLastUpdate(): string {
-    const options: Intl.DateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    };
-    return this.siteInfo.lastUpdate.toLocaleDateString('es-CL', options);
   }
 
   /**
@@ -281,7 +239,7 @@ export class FooterComponent implements OnInit {
   }
 
   /**
-   * Toggle del estado de acordeón
+   * Toggle del estado de acordeón SOLO para desarrollo
    * @param section - Sección del acordeón a toggle
    */
   toggleAccordion(section: keyof typeof this.accordionStates): void {

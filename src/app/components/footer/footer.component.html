@@ -1,11 +1,11 @@
-<!-- Footer del Portafolio -->
+<!-- Footer Compacto del Portafolio -->
 <footer class="footer">
   <div class="footer-container">
     
-    <!-- Contenido principal del footer -->
+    <!-- Contenido principal del footer - MÁS COMPACTO -->
     <div class="footer-main">
       
-      <!-- Información personal -->
+      <!-- Información personal - SIMPLIFICADA -->
       <div class="footer-section personal-info">
         <div class="section-header">
           <div class="brand-logo">
@@ -18,17 +18,57 @@
         </div>
         
         <p class="brand-description">
-          Ingeniero Informático con 20+ años de experiencia práctica. 
-          Especializado en coordinación técnica y análisis de sistemas.
+          Technical Business Analyst con 20+ años de experiencia práctica.
         </p>
         
         <div class="status-message">
           <ion-icon name="radio-button-on" class="status-icon"></ion-icon>
           <span class="status-text">{{ getStatusMessage() }}</span>
         </div>
+      </div>
 
-        <!-- Contacto directo -->
-        <div class="direct-contact">
+      <!-- Navegación rápida - COMPACTA -->
+      <div class="footer-section navigation">
+        <h5 class="section-title">Navegación</h5>
+        <ul class="nav-list">
+          <li 
+            *ngFor="let link of navigationLinks" 
+            class="nav-item"
+          >
+            <button 
+              class="nav-link"
+              (click)="navigateToSection(link.id)"
+            >
+              <ion-icon [name]="link.icon" class="nav-icon"></ion-icon>
+              <span class="nav-label">{{ link.label }}</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Enlaces rápidos - COMPACTOS -->
+      <div class="footer-section quick-links">
+        <h5 class="section-title">Enlaces Rápidos</h5>
+        <ul class="quick-list">
+          <li 
+            *ngFor="let link of quickLinks" 
+            class="quick-item"
+          >
+            <button 
+              class="quick-link"
+              (click)="link.action()"
+            >
+              <ion-icon [name]="link.icon" class="quick-icon"></ion-icon>
+              <span class="quick-label">{{ link.label }}</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contacto directo - COMPACTO -->
+      <div class="footer-section contact-direct">
+        <h5 class="section-title">Contacto</h5>
+        <div class="contact-methods">
           <div class="contact-item">
             <ion-icon name="mail" class="contact-icon"></ion-icon>
             <span class="contact-text" (click)="copyEmail()">{{ personalInfo.email }}</span>
@@ -43,124 +83,19 @@
           </div>
         </div>
       </div>
-
-      <!-- Navegación con acordeón -->
-      <div class="footer-section navigation">
-        <button 
-          class="section-toggle" 
-          (click)="toggleAccordion('navigation')"
-          [class.expanded]="isAccordionExpanded('navigation')"
-        >
-          <h5 class="section-title">Navegación</h5>
-          <ion-icon 
-            [name]="isAccordionExpanded('navigation') ? 'chevron-up' : 'chevron-down'" 
-            class="toggle-icon"
-          ></ion-icon>
-        </button>
-        <div 
-          class="accordion-content"
-          [class.expanded]="isAccordionExpanded('navigation')"
-        >
-          <ul class="nav-list">
-            <li 
-              *ngFor="let link of navigationLinks" 
-              class="nav-item"
-            >
-              <button 
-                class="nav-link"
-                (click)="navigateToSection(link.id)"
-              >
-                <ion-icon [name]="link.icon" class="nav-icon"></ion-icon>
-                <span class="nav-label">{{ link.label }}</span>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Enlaces rápidos con acordeón -->
-      <div class="footer-section quick-links">
-        <button 
-          class="section-toggle" 
-          (click)="toggleAccordion('quickLinks')"
-          [class.expanded]="isAccordionExpanded('quickLinks')"
-        >
-          <h5 class="section-title">Enlaces Rápidos</h5>
-          <ion-icon 
-            [name]="isAccordionExpanded('quickLinks') ? 'chevron-up' : 'chevron-down'" 
-            class="toggle-icon"
-          ></ion-icon>
-        </button>
-        <div 
-          class="accordion-content"
-          [class.expanded]="isAccordionExpanded('quickLinks')"
-        >
-          <ul class="quick-list">
-            <li 
-              *ngFor="let link of quickLinks" 
-              class="quick-item"
-            >
-              <button 
-                class="quick-link"
-                (click)="link.action()"
-              >
-                <ion-icon [name]="link.icon" class="quick-icon"></ion-icon>
-                <span class="quick-label">{{ link.label }}</span>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Proyectos destacados con acordeón -->
-      <div class="footer-section projects">
-        <button 
-          class="section-toggle" 
-          (click)="toggleAccordion('projects')"
-          [class.expanded]="isAccordionExpanded('projects')"
-        >
-          <h5 class="section-title">Proyectos</h5>
-          <ion-icon 
-            [name]="isAccordionExpanded('projects') ? 'chevron-up' : 'chevron-down'" 
-            class="toggle-icon"
-          ></ion-icon>
-        </button>
-        <div 
-          class="accordion-content"
-          [class.expanded]="isAccordionExpanded('projects')"
-        >
-          <ul class="project-list">
-            <li 
-              *ngFor="let project of featuredProjects" 
-              class="project-item"
-            >
-              <button 
-                class="project-link"
-                (click)="openProject(project)"
-              >
-                <div class="project-info">
-                  <span class="project-name">{{ project.name }}</span>
-                  <span class="project-description">{{ project.description }}</span>
-                </div>
-                <ion-icon name="open" class="project-icon"></ion-icon>
-              </button>
-            </li>
-          </ul>
-        </div>
-      </div>
     </div>
 
-    <!-- Sección: Sobre el desarrollo con acordeón -->
+    <!-- Sección: Sobre el desarrollo - ACORDEÓN COMPACTO -->
     <div class="footer-development">
       <button 
-        class="section-toggle development-toggle" 
+        class="development-toggle" 
         (click)="toggleAccordion('development')"
         [class.expanded]="isAccordionExpanded('development')"
       >
-        <h5 class="development-title">
+        <div class="toggle-content">
           <ion-icon name="construct" class="development-icon"></ion-icon>
-          Sobre el desarrollo de este sitio
-        </h5>
+          <span class="development-title">Sobre el desarrollo de este sitio</span>
+        </div>
         <ion-icon 
           [name]="isAccordionExpanded('development') ? 'chevron-up' : 'chevron-down'" 
           class="toggle-icon"
@@ -210,10 +145,7 @@
       </div>
     </div>
 
-    <!-- Separador -->
-    <div class="footer-separator"></div>
-
-    <!-- Footer inferior -->
+    <!-- Footer inferior - COMPACTO -->
     <div class="footer-bottom">
       
       <!-- Información técnica -->
@@ -285,7 +217,7 @@
             [name]="isDarkMode() ? 'sunny' : 'moon'" 
             class="theme-icon"
           ></ion-icon>
-          <span class="theme-label">{{ isDarkMode() ? 'Tema Claro' : 'Tema Oscuro' }}</span>
+          <span class="theme-label">{{ isDarkMode() ? 'Claro' : 'Oscuro' }}</span>
         </button>
 
         <!-- Botón volver arriba -->
@@ -312,13 +244,6 @@
           <span class="location">{{ personalInfo.location }}</span>
         </div>
       </div>
-    </div>
-
-    <!-- Elementos decorativos -->
-    <div class="footer-decoration">
-      <div class="decoration-element element-1"></div>
-      <div class="decoration-element element-2"></div>
-      <div class="decoration-element element-3"></div>
     </div>
   </div>
 </footer>
