@@ -1,12 +1,8 @@
-/*
- * App Global CSS
- * ----------------------------------------------------------------------------
- * Put style rules here that you want to apply globally. These styles are for
- * the entire app and not just one component. Additionally, this file can be
- * used as an entry point to import other CSS/Sass files to be included in the
- * output CSS.
- * For more information on global stylesheets, visit the documentation:
- * https://ionicframework.com/docs/layout/global-stylesheets
+/**
+ * GLOBAL CSS - PORTAFOLIO PROFESIONAL 100% RESPONSIVO
+ * ====================================================
+ * Estilos globales optimizados para todas las pantallas y dispositivos
+ * Scroll nativo perfecto, responsividad total, y rendimiento óptimo
  */
 
 /* Core CSS required for Ionic components to work properly */
@@ -35,3 +31,687 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+// ========================================
+// CONFIGURACIÓN BASE RESPONSIVA
+// ========================================
+
+// Reset y configuración base
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  
+  // Responsive font scaling
+  @media (max-width: 320px) {
+    font-size: 14px;
+  }
+  
+  @media (min-width: 321px) and (max-width: 480px) {
+    font-size: 15px;
+  }
+  
+  @media (min-width: 1200px) {
+    font-size: 18px;
+  }
+  
+  @media (min-width: 1600px) {
+    font-size: 20px;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  font-family: var(--font-family-primary, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  line-height: 1.6;
+  color: var(--ion-text-color, #202124);
+  background-color: var(--ion-background-color, #f8f9fa);
+  
+  // NO agregar padding-top aquí, se maneja en .main-content
+}
+
+// ========================================
+// OPTIMIZACIÓN DE ION-APP PARA RESPONSIVIDAD
+// ========================================
+
+ion-app {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+}
+
+// ========================================
+// TIPOGRAFÍA RESPONSIVA GLOBAL
+// ========================================
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family-primary, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif);
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ion-text-color, #202124);
+  margin: 0 0 1rem 0;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  
+  @media (max-width: 480px) {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+}
+
+h2 {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  
+  @media (max-width: 480px) {
+    font-size: clamp(1.5rem, 7vw, 2rem);
+  }
+}
+
+h3 {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  
+  @media (max-width: 480px) {
+    font-size: clamp(1.25rem, 6vw, 1.75rem);
+  }
+}
+
+h4 {
+  font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+}
+
+h5 {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+}
+
+h6 {
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+}
+
+p {
+  font-size: clamp(0.875rem, 2vw, 1.125rem);
+  line-height: 1.6;
+  margin: 0 0 1rem 0;
+  color: var(--ion-text-color-secondary, #5f6368);
+}
+
+// ========================================
+// CONTENEDORES RESPONSIVOS GLOBALES
+// ========================================
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  
+  @media (min-width: 576px) {
+    padding: 0 1.5rem;
+  }
+  
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
+  
+  @media (min-width: 992px) {
+    padding: 0 2.5rem;
+  }
+  
+  @media (min-width: 1200px) {
+    padding: 0 3rem;
+  }
+  
+  @media (min-width: 1600px) {
+    max-width: 1600px;
+    padding: 0 4rem;
+  }
+}
+
+.container-fluid {
+  width: 100%;
+  padding: 0 1rem;
+  
+  @media (min-width: 768px) {
+    padding: 0 2rem;
+  }
+}
+
+// ========================================
+// SECCIONES RESPONSIVAS
+// ========================================
+
+.section {
+  position: relative;
+  width: 100%;
+  padding: 3rem 0;
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    padding: 2rem 0;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 1.5rem 0;
+  }
+}
+
+.section-hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 70px);
+  }
+  
+  @media (max-width: 480px) {
+    min-height: calc(100vh - 65px);
+  }
+}
+
+// ========================================
+// ESPACIADO GLOBAL PARA SECCIONES
+// ========================================
+
+// Asegurar que todas las secciones tengan espacio suficiente
+// El espaciado principal se maneja en .main-content del app.component
+app-hero-section,
+app-about-section,
+app-experience-section,
+app-projects-section,
+app-skills-section,
+app-contact-section {
+  display: block;
+  // El padding-bottom se maneja globalmente en .main-content
+}
+
+// ========================================
+// GRIDS RESPONSIVOS
+// ========================================
+
+.grid {
+  display: grid;
+  gap: 2rem;
+  
+  @media (max-width: 768px) {
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 1rem;
+  }
+}
+
+.grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.grid-4 {
+  grid-template-columns: repeat(4, 1fr);
+  
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ========================================
+// FLEXBOX RESPONSIVO
+// ========================================
+
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row {
+  flex-direction: row;
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  justify-content: space-between;
+}
+
+.flex-around {
+  justify-content: space-around;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+// ========================================
+// BOTONES RESPONSIVOS
+// ========================================
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+  min-height: 44px; // Minimum tap target
+  
+  @media (max-width: 768px) {
+    padding: 0.625rem 1.25rem;
+    font-size: 0.9rem;
+    min-height: 42px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    min-height: 40px;
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--ion-color-primary, #1a73e8), var(--ion-color-accent, #34a853));
+  color: #ffffff;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(26, 115, 232, 0.3);
+  }
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--ion-color-primary, #1a73e8);
+  border: 2px solid var(--ion-color-primary, #1a73e8);
+  
+  &:hover {
+    background: var(--ion-color-primary, #1a73e8);
+    color: #ffffff;
+  }
+}
+
+// ========================================
+// IMÁGENES RESPONSIVAS
+// ========================================
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.img-responsive {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.img-round {
+  border-radius: 50%;
+}
+
+.img-rounded {
+  border-radius: 12px;
+}
+
+// ========================================
+// CARDS RESPONSIVAS
+// ========================================
+
+.card {
+  background: var(--ion-surface-color, #ffffff);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  }
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+    border-radius: 12px;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 1rem;
+    border-radius: 8px;
+  }
+}
+
+// ========================================
+// ESPACIADO RESPONSIVO
+// ========================================
+
+.p-0 { padding: 0 !important; }
+.p-1 { padding: 0.25rem !important; }
+.p-2 { padding: 0.5rem !important; }
+.p-3 { padding: 1rem !important; }
+.p-4 { padding: 1.5rem !important; }
+.p-5 { padding: 3rem !important; }
+
+.m-0 { margin: 0 !important; }
+.m-1 { margin: 0.25rem !important; }
+.m-2 { margin: 0.5rem !important; }
+.m-3 { margin: 1rem !important; }
+.m-4 { margin: 1.5rem !important; }
+.m-5 { margin: 3rem !important; }
+
+// Espaciado vertical responsivo
+.py-responsive {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  
+  @media (max-width: 768px) {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+// ========================================
+// TEXTO RESPONSIVO
+// ========================================
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-responsive {
+  text-align: center;
+  
+  @media (min-width: 768px) {
+    text-align: left;
+  }
+}
+
+// ========================================
+// VISIBILITY HELPERS RESPONSIVOS
+// ========================================
+
+.hidden { display: none !important; }
+.visible { display: block !important; }
+
+.d-none { display: none !important; }
+.d-block { display: block !important; }
+.d-flex { display: flex !important; }
+.d-grid { display: grid !important; }
+
+// Mobile only
+.d-mobile {
+  @media (min-width: 769px) {
+    display: none !important;
+  }
+}
+
+// Desktop only
+.d-desktop {
+  @media (max-width: 768px) {
+    display: none !important;
+  }
+}
+
+// Tablet only
+.d-tablet {
+  display: none !important;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    display: block !important;
+  }
+}
+
+// ========================================
+// SCROLL OPTIMIZADO
+// ========================================
+
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+// Ocultar scrollbar pero mantener funcionalidad
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+// ========================================
+// ANIMACIONES RESPONSIVAS
+// ========================================
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.slide-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.slide-left {
+  opacity: 0;
+  transform: translateX(30px);
+  animation: slideLeft 0.6s ease-out forwards;
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  animation: scaleIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+// ========================================
+// ACCESIBILIDAD RESPONSIVA
+// ========================================
+
+// Respetar preferencias de movimiento reducido
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// Alto contraste
+@media (prefers-contrast: high) {
+  .btn {
+    border: 2px solid currentColor;
+  }
+  
+  .card {
+    border: 1px solid var(--ion-border-color, #e1e5e9);
+  }
+}
+
+// ========================================
+// FOCUS STATES ACCESIBLES
+// ========================================
+
+button:focus,
+a:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--ion-color-primary, #1a73e8);
+  outline-offset: 2px;
+}
+
+// ========================================
+// FIXES ESPECÍFICOS PARA IONIC EN MÓVIL
+// ========================================
+
+// Prevenir zoom en inputs en iOS
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+  font-size: 16px;
+  
+  @media (max-width: 768px) {
+    font-size: 16px !important; // Prevent zoom on iOS
+  }
+}
+
+// Mejorar touch targets en móvil
+@media (max-width: 768px) {
+  button,
+  .btn,
+  .nav-link,
+  [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+// ========================================
+// PRINT STYLES
+// ========================================
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  
+  .header,
+  .footer,
+  .mobile-nav-dropdown {
+    display: none !important;
+  }
+  
+  body {
+    padding-top: 0 !important;
+  }
+}

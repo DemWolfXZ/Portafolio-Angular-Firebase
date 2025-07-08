@@ -1,132 +1,14 @@
-<!-- Layout principal con sidemenu nativo de Ionic -->
+<!-- Aplicación principal - SPA con header horizontal fijo profesional -->
 <ion-app>
-  <ion-split-pane contentId="main-content">
-    
-    <!-- Sidemenu lateral -->
-    <ion-menu menuId="main-menu" contentId="main-content" type="overlay">
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>Alejandro Villa</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      
-      <ion-content>
-        
-        <!-- Información personal en el menú -->
-        <div class="menu-profile">
-          <div class="profile-avatar">
-            <img 
-              src="assets/images/placeholder.svg" 
-              alt="Alejandro Villa"
-              class="avatar-image"
-            />
-          </div>
-          <div class="profile-info">
-            <h3 class="profile-name">{{ personalInfo.name }}</h3>
-            <p class="profile-title">{{ personalInfo.title }}</p>
-            <p class="profile-subtitle">{{ personalInfo.subtitle }}</p>
-          </div>
-        </div>
+  <!-- Header fijo horizontal profesional -->
+  <app-header></app-header>
 
-        <!-- Navegación principal -->
-        <ion-list>
-          <ion-list-header>
-            <ion-label>Navegación</ion-label>
-          </ion-list-header>
-          
-          <ion-menu-toggle 
-            *ngFor="let page of appPages" 
-            autoHide="false"
-          >
-            <ion-item 
-              button 
-              [class.selected]="isPageActive(page.url)"
-              (click)="navigateToPage(page.url)"
-              lines="none"
-            >
-              <ion-icon 
-                [name]="page.icon" 
-                slot="start"
-                [color]="isPageActive(page.url) ? 'primary' : ''"
-              ></ion-icon>
-              <ion-label>
-                <h3>{{ page.title }}</h3>
-                <p *ngIf="page.description">{{ page.description }}</p>
-              </ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
+  <!-- Contenido principal con router -->
+  <main class="main-content" role="main">
+    <!-- Router outlet para navegación entre secciones -->
+    <ion-router-outlet></ion-router-outlet>
+  </main>
 
-        <!-- Acciones rápidas -->
-        <ion-list>
-          <ion-list-header>
-            <ion-label>Acciones Rápidas</ion-label>
-          </ion-list-header>
-          
-          <ion-menu-toggle 
-            *ngFor="let action of actionPages" 
-            autoHide="false"
-          >
-            <ion-item 
-              button 
-              (click)="navigateToPage(action.url)"
-              lines="none"
-            >
-              <ion-icon 
-                [name]="action.icon" 
-                slot="start"
-              ></ion-icon>
-              <ion-label>{{ action.title }}</ion-label>
-            </ion-item>
-          </ion-menu-toggle>
-        </ion-list>
-
-        <!-- Contacto directo -->
-        <ion-list>
-          <ion-list-header>
-            <ion-label>Contacto Directo</ion-label>
-          </ion-list-header>
-          
-          <ion-item button (click)="sendEmail()" lines="none">
-            <ion-icon name="mail" slot="start" color="primary"></ion-icon>
-            <ion-label>
-              <h3>Email</h3>
-              <p>{{ personalInfo.email }}</p>
-            </ion-label>
-          </ion-item>
-          
-          <ion-item button (click)="callPhone()" lines="none">
-            <ion-icon name="call" slot="start" color="success"></ion-icon>
-            <ion-label>
-              <h3>Teléfono</h3>
-              <p>{{ personalInfo.phone }}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-
-        <!-- Toggle de tema -->
-        <div class="menu-theme-toggle">
-          <ion-item lines="none">
-            <ion-icon 
-              [name]="isDarkMode() ? 'sunny' : 'moon'" 
-              slot="start"
-            ></ion-icon>
-            <ion-label>{{ isDarkMode() ? 'Tema Claro' : 'Tema Oscuro' }}</ion-label>
-            <ion-toggle 
-              slot="end"
-              [checked]="isDarkMode()"
-              (ionChange)="toggleTheme()"
-            ></ion-toggle>
-          </ion-item>
-        </div>
-      </ion-content>
-    </ion-menu>
-
-    <!-- Contenido principal -->
-    <ion-router-outlet id="main-content" main></ion-router-outlet>
-    
-  </ion-split-pane>
-
-  <!-- Footer global - siempre visible -->
+  <!-- Footer global -->
   <app-footer></app-footer>
 </ion-app>

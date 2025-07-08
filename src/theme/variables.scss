@@ -1,84 +1,8 @@
 /**
- * Variables de color para los temas claro y oscuro
- * Colores profesionales que no molestan a la vista
- * MANTENIENDO TUS COLORES ORIGINALES EXACTOS
+ * VARIABLES DE TEMA - PORTAFOLIO PROFESIONAL
+ * ==========================================
+ * Variables optimizadas basadas en las imágenes de referencia
  */
-
-// ========================================
-// TEMA CLARO - Tonos suaves y profesionales
-// ========================================
-.light-theme {
-  // Colores de fondo - Grises claros en lugar de blanco puro.
-  --ion-background-color: #f8f9fa;
-  --ion-background-color-rgb: 248, 249, 250;
-  --ion-background-color-secondary: #f1f3f4;
-  --ion-background-color-tertiary: #e8eaed;
-  
-  // Colores de superficie para cards y componentes
-  --ion-surface-color: #ffffff;
-  --ion-surface-color-secondary: #f8f9fa;
-  
-  // Colores de texto
-  --ion-text-color: #202124;
-  --ion-text-color-secondary: #5f6368;
-  --ion-text-color-tertiary: #80868b;
-  
-  // Color primario - Azul profesional
-  --ion-color-primary: #1a73e8;
-  --ion-color-primary-rgb: 26, 115, 232;
-  --ion-color-primary-shade: #1557b0;
-  --ion-color-primary-tint: #3182f6;
-  
-  // Color de acento
-  --ion-color-accent: #34a853;
-  --ion-color-accent-rgb: 52, 168, 83;
-  
-  // Bordes y separadores
-  --ion-border-color: #dadce0;
-  --ion-border-color-secondary: #e8eaed;
-  
-  // Sombras suaves
-  --ion-box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
-  --ion-box-shadow-hover: 0 4px 8px rgba(60, 64, 67, 0.3);
-}
-
-// ========================================
-// TEMA OSCURO - Azul profesional oscuro
-// ========================================
-.dark-theme {
-  // Colores de fondo - Azules oscuros profesionales
-  --ion-background-color: #0f1419;
-  --ion-background-color-rgb: 15, 20, 25;
-  --ion-background-color-secondary: #1a1f2e;
-  --ion-background-color-tertiary: #252a3a;
-  
-  // Colores de superficie
-  --ion-surface-color: #1e293b;
-  --ion-surface-color-secondary: #334155;
-  
-  // Colores de texto - Blancos y grises claros
-  --ion-text-color: #f1f5f9;
-  --ion-text-color-secondary: #cbd5e1;
-  --ion-text-color-tertiary: #94a3b8;
-  
-  // Color primario - Azul brillante para contraste
-  --ion-color-primary: #60a5fa;
-  --ion-color-primary-rgb: 96, 165, 250;
-  --ion-color-primary-shade: #3b82f6;
-  --ion-color-primary-tint: #93c5fd;
-  
-  // Color de acento
-  --ion-color-accent: #10b981;
-  --ion-color-accent-rgb: 16, 185, 129;
-  
-  // Bordes y separadores
-  --ion-border-color: #475569;
-  --ion-border-color-secondary: #334155;
-  
-  // Sombras para modo oscuro
-  --ion-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  --ion-box-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.4);
-}
 
 // ========================================
 // VARIABLES GLOBALES COMPARTIDAS
@@ -86,76 +10,195 @@
 :root {
   // Tipografía
   --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-family-secondary: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-family-secondary: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   
-  // Tamaños de fuente
-  --font-size-xs: 0.75rem;
-  --font-size-sm: 0.875rem;
-  --font-size-base: 1rem;
-  --font-size-lg: 1.125rem;
-  --font-size-xl: 1.25rem;
-  --font-size-2xl: 1.5rem;
-  --font-size-3xl: 1.875rem;
-  --font-size-4xl: 2.25rem;
+  // Tamaños de fuente responsivos
+  --font-size-xs: clamp(0.7rem, 1.5vw, 0.75rem);
+  --font-size-sm: clamp(0.8rem, 1.8vw, 0.875rem);
+  --font-size-base: clamp(0.9rem, 2vw, 1rem);
+  --font-size-lg: clamp(1rem, 2.5vw, 1.125rem);
+  --font-size-xl: clamp(1.125rem, 3vw, 1.25rem);
+  --font-size-2xl: clamp(1.25rem, 3.5vw, 1.5rem);
+  --font-size-3xl: clamp(1.5rem, 4vw, 1.875rem);
+  --font-size-4xl: clamp(1.875rem, 5vw, 2.25rem);
+  --font-size-5xl: clamp(2.25rem, 6vw, 3rem);
+  --font-size-6xl: clamp(3rem, 8vw, 4rem);
   
-  // Espaciado
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
-  --spacing-md: 1rem;
-  --spacing-lg: 1.5rem;
-  --spacing-xl: 2rem;
-  --spacing-2xl: 3rem;
-  --spacing-3xl: 4rem;
+  // Espaciado responsivo
+  --spacing-xs: clamp(0.25rem, 1vw, 0.375rem);
+  --spacing-sm: clamp(0.5rem, 1.5vw, 0.75rem);
+  --spacing-md: clamp(1rem, 2vw, 1.5rem);
+  --spacing-lg: clamp(1.5rem, 3vw, 2rem);
+  --spacing-xl: clamp(2rem, 4vw, 3rem);
+  --spacing-2xl: clamp(3rem, 5vw, 4rem);
+  --spacing-3xl: clamp(4rem, 6vw, 6rem);
+  --spacing-4xl: clamp(6rem, 8vw, 8rem);
+  --spacing-5xl: clamp(8rem, 10vw, 10rem);
+  --spacing-6xl: clamp(10rem, 12vw, 12rem);
   
-  // Border radius
-  --border-radius-sm: 0.375rem;
-  --border-radius-md: 0.5rem;
-  --border-radius-lg: 0.75rem;
-  --border-radius-xl: 1rem;
+  // Header heights responsivos
+  --header-height-mobile: 65px;
+  --header-height-tablet: 70px;
+  --header-height-desktop: 80px;
+  
+  // Container widths
+  --container-max-width: 1400px;
+  --container-max-width-wide: 1600px;
+  
+  // Z-index layers
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal: 1050;
   
   // Transiciones
   --transition-fast: 0.15s ease;
-  --transition-normal: 0.3s ease;
+  --transition-base: 0.3s ease;
   --transition-slow: 0.5s ease;
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// ========================================
+// TEMA CLARO - TONOS PROFESIONALES
+// ========================================
+.light-theme,
+:root {
+  // Colores de fondo principales
+  --ion-background-color: #f8f9fa;
+  --ion-background-color-rgb: 248, 249, 250;
+  --ion-background-color-secondary: #f1f3f4;
+  --ion-background-color-tertiary: #e8eaed;
   
-  // Z-index layers
-  --z-header: 1000;
-  --z-modal: 2000;
-  --z-tooltip: 3000;
+  // Colores de superficie para componentes
+  --ion-surface-color: #ffffff;
+  --ion-surface-color-rgb: 255, 255, 255;
+  --ion-surface-color-secondary: #f8f9fa;
+  --ion-surface-color-tertiary: #f1f3f4;
+  
+  // Colores de texto
+  --ion-text-color: #202124;
+  --ion-text-color-rgb: 32, 33, 36;
+  --ion-text-color-secondary: #5f6368;
+  --ion-text-color-tertiary: #80868b;
+  --ion-text-color-quaternary: #9aa0a6;
+  
+  // Color primario - Azul profesional (como en las imágenes)
+  --ion-color-primary: #1a73e8;
+  --ion-color-primary-rgb: 26, 115, 232;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #1557cd;
+  --ion-color-primary-tint: #3182ea;
+  
+  // Color de acento - Verde profesional
+  --ion-color-accent: #34a853;
+  --ion-color-accent-rgb: 52, 168, 83;
+  --ion-color-accent-contrast: #ffffff;
+  --ion-color-accent-contrast-rgb: 255, 255, 255;
+  --ion-color-accent-shade: #2e924a;
+  --ion-color-accent-tint: #48b464;
+  
+  // Bordes y separadores
+  --ion-border-color: #dadce0;
+  --ion-border-color-secondary: #e8eaed;
+  --ion-border-color-tertiary: #f1f3f4;
+  
+  // Sombras profesionales
+  --ion-box-shadow: 0 4px 6px rgba(60, 64, 67, 0.1);
+  --ion-box-shadow-hover: 0 8px 16px rgba(26, 115, 232, 0.15);
 }
 
 // ========================================
-// UTILIDADES GLOBALES
+// TEMA OSCURO - AZUL PROFESIONAL OSCURO
+// ========================================
+.dark-theme {
+  // Colores de fondo - Azul oscuro profesional
+  --ion-background-color: #0f1419;
+  --ion-background-color-rgb: 15, 20, 25;
+  --ion-background-color-secondary: #1a1f26;
+  --ion-background-color-tertiary: #252a3a;
+  
+  // Colores de superficie
+  --ion-surface-color: #1e293b;
+  --ion-surface-color-rgb: 30, 41, 59;
+  --ion-surface-color-secondary: #334155;
+  --ion-surface-color-tertiary: #475569;
+  
+  // Colores de texto - Blancos y grises claros
+  --ion-text-color: #f1f5f9;
+  --ion-text-color-rgb: 241, 245, 249;
+  --ion-text-color-secondary: #cbd5e1;
+  --ion-text-color-tertiary: #94a3b8;
+  --ion-text-color-quaternary: #64748b;
+  
+  // Color primario - Azul brillante para contraste
+  --ion-color-primary: #60a5fa;
+  --ion-color-primary-rgb: 96, 165, 250;
+  --ion-color-primary-contrast: #1e293b;
+  --ion-color-primary-contrast-rgb: 30, 41, 59;
+  --ion-color-primary-shade: #3b82f6;
+  --ion-color-primary-tint: #93c5fd;
+  
+  // Color de acento - Verde brillante
+  --ion-color-accent: #10b981;
+  --ion-color-accent-rgb: 16, 185, 129;
+  --ion-color-accent-contrast: #1e293b;
+  --ion-color-accent-contrast-rgb: 30, 41, 59;
+  --ion-color-accent-shade: #059669;
+  --ion-color-accent-tint: #34d399;
+  
+  // Bordes y separadores para modo oscuro
+  --ion-border-color: #475569;
+  --ion-border-color-secondary: #334155;
+  --ion-border-color-tertiary: #1e293b;
+  
+  // Sombras para modo oscuro
+  --ion-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --ion-box-shadow-hover: 0 8px 16px rgba(96, 165, 250, 0.2);
+}
+
+// ========================================
+// CLASES DE UTILIDAD PARA SPACING
 // ========================================
 
-// Scroll suave para toda la aplicación
-html {
-  scroll-behavior: smooth;
-}
-
-// Reset de márgenes y padding base
-* {
-  box-sizing: border-box;
-}
-
-// Estilos de texto responsive
-.text-responsive {
-  font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-base));
-}
-
-.heading-responsive {
-  font-size: clamp(var(--font-size-2xl), 4vw, var(--font-size-4xl));
-}
-
-// Clases de utilidad para spacing
+// Padding classes
 .p-xs { padding: var(--spacing-xs) !important; }
 .p-sm { padding: var(--spacing-sm) !important; }
 .p-md { padding: var(--spacing-md) !important; }
 .p-lg { padding: var(--spacing-lg) !important; }
 .p-xl { padding: var(--spacing-xl) !important; }
 
+.px-xs { padding-left: var(--spacing-xs) !important; padding-right: var(--spacing-xs) !important; }
+.px-sm { padding-left: var(--spacing-sm) !important; padding-right: var(--spacing-sm) !important; }
+.px-md { padding-left: var(--spacing-md) !important; padding-right: var(--spacing-md) !important; }
+.px-lg { padding-left: var(--spacing-lg) !important; padding-right: var(--spacing-lg) !important; }
+.px-xl { padding-left: var(--spacing-xl) !important; padding-right: var(--spacing-xl) !important; }
+
+.py-xs { padding-top: var(--spacing-xs) !important; padding-bottom: var(--spacing-xs) !important; }
+.py-sm { padding-top: var(--spacing-sm) !important; padding-bottom: var(--spacing-sm) !important; }
+.py-md { padding-top: var(--spacing-md) !important; padding-bottom: var(--spacing-md) !important; }
+.py-lg { padding-top: var(--spacing-lg) !important; padding-bottom: var(--spacing-lg) !important; }
+.py-xl { padding-top: var(--spacing-xl) !important; padding-bottom: var(--spacing-xl) !important; }
+
+// Margin classes
 .m-xs { margin: var(--spacing-xs) !important; }
 .m-sm { margin: var(--spacing-sm) !important; }
 .m-md { margin: var(--spacing-md) !important; }
 .m-lg { margin: var(--spacing-lg) !important; }
 .m-xl { margin: var(--spacing-xl) !important; }
+
+.mx-xs { margin-left: var(--spacing-xs) !important; margin-right: var(--spacing-xs) !important; }
+.mx-sm { margin-left: var(--spacing-sm) !important; margin-right: var(--spacing-sm) !important; }
+.mx-md { margin-left: var(--spacing-md) !important; margin-right: var(--spacing-md) !important; }
+.mx-lg { margin-left: var(--spacing-lg) !important; margin-right: var(--spacing-lg) !important; }
+.mx-xl { margin-left: var(--spacing-xl) !important; margin-right: var(--spacing-xl) !important; }
+
+.my-xs { margin-top: var(--spacing-xs) !important; margin-bottom: var(--spacing-xs) !important; }
+.my-sm { margin-top: var(--spacing-sm) !important; margin-bottom: var(--spacing-sm) !important; }
+.my-md { margin-top: var(--spacing-md) !important; margin-bottom: var(--spacing-md) !important; }
+.my-lg { margin-top: var(--spacing-lg) !important; margin-bottom: var(--spacing-lg) !important; }
+.my-xl { margin-top: var(--spacing-xl) !important; margin-bottom: var(--spacing-xl) !important; }
+
+// Auto margins for centering
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+.my-auto { margin-top: auto !important; margin-bottom: auto !important; }

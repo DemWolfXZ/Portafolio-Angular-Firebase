@@ -93,6 +93,14 @@ export class FooterComponent implements OnInit {
   // Año actual para copyright
   public currentYear = new Date().getFullYear();
 
+  // Estados de acordeones colapsables
+  public accordionStates = {
+    navigation: false,
+    quickLinks: false,
+    projects: false,
+    development: false
+  };
+
   constructor(
     private downloadService: DownloadService,
     private themeService: ThemeService
@@ -270,5 +278,22 @@ export class FooterComponent implements OnInit {
     // Usar el día del año para obtener siempre el mismo mensaje por día
     const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
     return messages[dayOfYear % messages.length];
+  }
+
+  /**
+   * Toggle del estado de acordeón
+   * @param section - Sección del acordeón a toggle
+   */
+  toggleAccordion(section: keyof typeof this.accordionStates): void {
+    this.accordionStates[section] = !this.accordionStates[section];
+  }
+
+  /**
+   * Verifica si un acordeón está expandido
+   * @param section - Sección del acordeón
+   * @returns true si está expandido
+   */
+  isAccordionExpanded(section: keyof typeof this.accordionStates): boolean {
+    return this.accordionStates[section];
   }
 }

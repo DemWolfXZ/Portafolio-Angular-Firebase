@@ -18,6 +18,7 @@ import { AppComponent } from './app.component';
 
 // Componentes del layout principal
 import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 // Firebase v9 modular imports
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -30,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent, // Nuevo header horizontal profesional
     FooterComponent  // Footer se queda en el layout principal
   ],
   

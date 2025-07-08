@@ -1,346 +1,178 @@
 /**
- * Estilos del componente principal con sidemenu
- * Diseño profesional y responsivo para el menú lateral
- * Optimizado para móvil y desktop
+ * Estilos base de la aplicación - Layout profesional con header fijo como en las imágenes de referencia
+ * Colores exactos del diseño: azul profesional (#1a73e8) y verde (#34a853)
  */
 
 // ========================================
-// PERFIL EN EL MENÚ
+// CONFIGURACIÓN BASE PARA SCROLL NATIVO
 // ========================================
-.menu-profile {
-  padding: var(--spacing-xl) var(--spacing-lg);
-  text-align: center;
-  background: linear-gradient(
-    135deg, 
-    var(--ion-color-primary) 0%, 
-    var(--ion-color-accent) 100%
-  );
-  color: white;
-  margin-bottom: var(--spacing-md);
-}
 
-.profile-avatar {
-  width: 80px;
-  height: 80px;
-  margin: 0 auto var(--spacing-md) auto;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.avatar-image {
-  width: 100%;
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
   height: 100%;
-  object-fit: cover;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
 }
 
-.profile-info {
-  text-align: center;
-}
-
-.profile-name {
-  font-size: var(--font-size-lg);
-  font-weight: 700;
-  margin: 0 0 var(--spacing-xs) 0;
-  color: white;
-}
-
-.profile-title {
-  font-size: var(--font-size-sm);
-  font-weight: 500;
-  margin: 0 0 var(--spacing-xs) 0;
-  opacity: 0.9;
-}
-
-.profile-subtitle {
-  font-size: var(--font-size-xs);
-  font-weight: 600;
+body {
+  scroll-behavior: smooth;
   margin: 0;
-  opacity: 0.8;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+  // El padding se maneja en .main-content, no en body
 }
 
 // ========================================
-// ELEMENTOS DEL MENÚ
+// CONFIGURACIÓN DE ION-APP
 // ========================================
 
-// Headers de las listas
-ion-list-header {
-  padding: var(--spacing-md) var(--spacing-lg);
-  min-height: auto;
+ion-app {
+  // Configuración del layout flex para distribuir espacio correctamente
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   
-  ion-label {
-    font-size: var(--font-size-xs);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--ion-text-color-secondary);
-  }
-}
+  // Colores principales exactos como en las imágenes
+  --ion-color-primary: #1a73e8;
+  --ion-color-primary-rgb: 26, 115, 232;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-shade: #1557cd;
+  --ion-color-primary-tint: #3182ea;
 
-// Items del menú
-ion-item {
-  --padding-start: var(--spacing-lg);
-  --padding-end: var(--spacing-lg);
-  --inner-padding-end: 0;
-  --inner-border-width: 0;
-  --min-height: 48px;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    --background: var(--ion-background-color-secondary);
-  }
-  
-  &.selected {
-    --background: rgba(var(--ion-color-primary-rgb), 0.1);
-    --color: var(--ion-color-primary);
-    font-weight: 600;
-    
-    ion-icon {
-      color: var(--ion-color-primary);
-    }
-  }
-  
-  ion-icon {
-    margin-right: var(--spacing-md);
-    font-size: 20px;
-    min-width: 20px;
-  }
-  
-  ion-label {
-    h3 {
-      font-size: var(--font-size-base);
-      font-weight: 500;
-      margin: 0 0 var(--spacing-xs) 0;
-      color: var(--ion-text-color);
-    }
-    
-    p {
-      font-size: var(--font-size-xs);
-      color: var(--ion-text-color-secondary);
-      margin: 0;
-    }
-  }
+  --ion-color-accent: #34a853;
+  --ion-color-accent-rgb: 52, 168, 83;
+  --ion-color-accent-contrast: #ffffff;
+  --ion-color-accent-shade: #2e924a;
+  --ion-color-accent-tint: #48b464;
 }
 
 // ========================================
-// TOGGLE DE TEMA
-// ========================================
-.menu-theme-toggle {
-  margin-top: var(--spacing-xl);
-  padding: var(--spacing-md) 0;
-  border-top: 1px solid var(--ion-border-color);
-  
-  ion-item {
-    --background: transparent;
-    
-    ion-icon {
-      color: var(--ion-text-color-secondary);
-    }
-    
-    ion-label {
-      font-size: var(--font-size-sm);
-      font-weight: 500;
-      color: var(--ion-text-color);
-    }
-    
-    ion-toggle {
-      --background: var(--ion-background-color-tertiary);
-      --background-checked: var(--ion-color-primary);
-      --handle-background: white;
-      --handle-background-checked: white;
-    }
-  }
-}
-
-// ========================================
-// AJUSTES DEL MENÚ PRINCIPAL
+// CONTENIDO PRINCIPAL - ESPACIADO PERFECTO
 // ========================================
 
-// Contenido del menú
-ion-menu {
-  ion-content {
-    --background: var(--ion-background-color);
-  }
-  
-  ion-toolbar {
-    --background: var(--ion-color-primary);
-    --color: white;
-    
-    ion-title {
-      font-weight: 700;
-      font-size: var(--font-size-lg);
-    }
-  }
-}
-
-// ========================================
-// CONTENIDO PRINCIPAL
-// ========================================
-
-// Router outlet principal
-ion-router-outlet {
-  background: var(--ion-background-color);
-}
-
-// Split pane - comportamiento responsivo
-ion-split-pane {
-  --side-width: 280px;
-  --side-min-width: 280px;
-  --side-max-width: 320px;
+.main-content {
+  flex: 1; // Ocupa todo el espacio disponible
+  padding-top: 80px; // Exactamente la altura del header
+  padding-bottom: var(--spacing-4xl); // Separación del footer
+  min-height: auto; // Altura natural según el contenido
+  overflow: visible; // Permitir que el contenido se expanda
   
   @media (max-width: 768px) {
-    --side-width: 260px;
-    --side-min-width: 260px;
+    padding-top: 70px;
+    padding-bottom: var(--spacing-3xl);
   }
+  
+  @media (max-width: 480px) {
+    padding-top: 65px;
+    padding-bottom: var(--spacing-xl);
+  }
+}
+
+// ========================================
+// ROUTER OUTLET CONTAINER
+// ========================================
+
+ion-router-outlet {
+  display: block;
+  width: 100%;
+  flex: 1;
+  min-height: auto; // Permitir que cada componente determine su altura natural
+  position: relative;
+}
+
+// ========================================
+// HEADER GLOBAL SIEMPRE VISIBLE
+// ========================================
+
+app-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 999999 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: none !important;
+  overflow: visible !important;
+  pointer-events: auto !important;
 }
 
 // ========================================
 // FOOTER GLOBAL
 // ========================================
+
 app-footer {
+  flex-shrink: 0; // No se encoge nunca
   position: relative;
   z-index: 1;
-  margin-top: auto; // Empujar al fondo si la página es corta
+  width: 100%;
+  // Eliminado el margin-top: auto para evitar comprimir el contenido
 }
 
 // ========================================
-// RESPONSIVE ADJUSTMENTS
+// CONFIGURACIONES GLOBALES
 // ========================================
 
-@media (max-width: 768px) {
-  .menu-profile {
-    padding: var(--spacing-lg);
-  }
-  
-  .profile-avatar {
-    width: 60px;
-    height: 60px;
-  }
-  
-  .profile-name {
-    font-size: var(--font-size-base);
-  }
-  
-  .profile-title {
-    font-size: var(--font-size-xs);
-  }
-  
-  ion-item {
-    --min-height: 44px;
-    --padding-start: var(--spacing-md);
-    --padding-end: var(--spacing-md);
-    
-    ion-icon {
-      font-size: 18px;
-      margin-right: var(--spacing-sm);
-    }
-    
-    ion-label {
-      h3 {
-        font-size: var(--font-size-sm);
-      }
-      
-      p {
-        font-size: 10px;
-      }
-    }
+// Prevenir scroll horizontal en toda la app
+* {
+  box-sizing: border-box;
+}
+
+// Mejorar scroll táctil en dispositivos móviles
+@supports (-webkit-overflow-scrolling: touch) {
+  .main-content,
+  ion-router-outlet {
+    -webkit-overflow-scrolling: touch;
   }
 }
 
-@media (max-width: 480px) {
-  .menu-profile {
-    padding: var(--spacing-md);
-  }
-  
-  .profile-avatar {
-    width: 50px;
-    height: 50px;
-  }
-  
-  ion-list-header {
-    padding: var(--spacing-sm) var(--spacing-md);
-  }
-}
-
-// ========================================
-// MODO OSCURO ESPECÍFICO
-// ========================================
-.dark-theme {
-  .menu-profile {
-    background: linear-gradient(
-      135deg, 
-      #1e293b 0%, 
-      #334155 100%
-    );
-  }
-  
-  ion-menu {
-    ion-toolbar {
-      --background: #1e293b;
-    }
-  }
-  
-  .menu-theme-toggle {
-    border-top-color: rgba(255, 255, 255, 0.1);
-  }
-}
-
-// ========================================
-// ANIMACIONES SUAVES
-// ========================================
-ion-item {
-  transition: all 0.2s ease;
-}
-
-.profile-avatar {
-  transition: transform 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.05);
-  }
-}
-
-// Animación de entrada para items del menú
-ion-list {
-  ion-item {
-    opacity: 0;
-    transform: translateX(-20px);
-    animation: slideInFromLeft 0.3s ease forwards;
-    
-    @for $i from 1 through 10 {
-      &:nth-child(#{$i}) {
-        animation-delay: #{($i - 1) * 0.05}s;
-      }
-    }
-  }
-}
-
-@keyframes slideInFromLeft {
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+// Transiciones globales optimizadas
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
 // ========================================
 // ACCESIBILIDAD
 // ========================================
 
-// Mejorar contraste en modo alto contraste
-@media (prefers-contrast: high) {
-  ion-item.selected {
-    --background: var(--ion-color-primary);
-    --color: white;
+// Respetar preferencias de movimiento reducido
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
-// Respetar preferencias de movimiento reducido
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+// ========================================
+// RESPONSIVE BREAKPOINTS
+// ========================================
+
+// Dispositivos muy pequeños
+@media (max-width: 320px) {
+  .main-content {
+    padding-top: 60px;
+    padding-bottom: var(--spacing-lg);
+  }
+}
+
+// Pantallas muy grandes
+@media (min-width: 1400px) {
+  .main-content {
+    padding-top: 80px;
+    padding-bottom: var(--spacing-3xl);
   }
 }

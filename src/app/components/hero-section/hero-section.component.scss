@@ -5,7 +5,7 @@
  */
 
 .hero-section {
-  min-height: 100vh;
+  min-height: auto; // Altura variable según el contenido
   position: relative;
   display: flex;
   align-items: center;
@@ -14,19 +14,15 @@
     var(--ion-background-color-secondary) 100%
   );
   
-  // Padding superior para evitar solapamiento con header fijo
-  padding-top: 90px;
+  // Padding generoso para dar espacio al contenido
+  padding: var(--spacing-3xl) 0 var(--spacing-4xl) 0;
   
   @media (max-width: 768px) {
-    padding-top: 80px;
+    padding: var(--spacing-xl) 0 var(--spacing-3xl) 0;
   }
   
   @media (max-width: 480px) {
-    padding-top: 70px;
-  }
-  
-  @media (max-width: 320px) {
-    padding-top: 66px;
+    padding: var(--spacing-lg) 0 var(--spacing-xl) 0;
   }
   
   // Visible desde el inicio - sin animaciones que interfieran
@@ -46,22 +42,18 @@
 .hero-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: var(--spacing-2xl) var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-md);
   position: relative;
   z-index: 2;
   width: 100%;
   
   @media (max-width: 768px) {
-    padding: var(--spacing-xl) var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-sm);
     max-width: 100%;
   }
   
   @media (max-width: 480px) {
-    padding: var(--spacing-lg) var(--spacing-sm);
-  }
-  
-  @media (max-width: 320px) {
-    padding: var(--spacing-md) var(--spacing-xs);
+    padding: var(--spacing-sm) var(--spacing-xs);
   }
 }
 
@@ -71,29 +63,24 @@
 .hero-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-3xl);
+  gap: var(--spacing-xl);
   align-items: center;
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-lg);
   
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
-    gap: var(--spacing-2xl);
+    gap: var(--spacing-lg);
     text-align: center;
   }
   
   @media (max-width: 768px) {
-    gap: var(--spacing-xl);
-    margin-bottom: var(--spacing-xl);
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
   }
   
   @media (max-width: 480px) {
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-lg);
-  }
-  
-  @media (max-width: 320px) {
-    gap: var(--spacing-md);
-    margin-bottom: var(--spacing-md);
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
   }
 }
 

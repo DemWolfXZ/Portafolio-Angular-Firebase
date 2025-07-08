@@ -1,0 +1,659 @@
+/**
+ * HEADER COMPONENT - DISEÑO PROFESIONAL HORIZONTAL
+ * Basado exactamente en las imágenes de referencia proporcionadas
+ * Colores: Azul profesional (#1a73e8) y verde (#34a853)
+ */
+
+// ========================================
+// HEADER PRINCIPAL - DISEÑO HORIZONTAL FIJO
+// ========================================
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 80px;
+  background: var(--ion-surface-color, #ffffff);
+  border-bottom: 1px solid var(--ion-border-color, #e1e5e9);
+  z-index: 1000;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Header con scroll - efecto sombra
+  &.scrolled {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+    
+    .dark-theme & {
+      background: rgba(15, 20, 25, 0.95);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    height: 70px;
+  }
+  
+  @media (max-width: 480px) {
+    height: 65px;
+  }
+}
+
+// ========================================
+// CONTENEDOR PRINCIPAL DEL HEADER
+// ========================================
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  
+  @media (max-width: 1024px) {
+    padding: 0 1.5rem;
+  }
+  
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 0 0.75rem;
+  }
+}
+
+// ========================================
+// BRAND/LOGO - LADO IZQUIERDO
+// ========================================
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: var(--ion-color-primary-tint, #3182f6);
+    transform: translateY(-1px);
+    
+    .brand-icon {
+      color: #ffffff;
+      transform: scale(1.1);
+    }
+    
+    .brand-name {
+      color: #ffffff;
+    }
+    
+    .brand-title {
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    gap: 0.75rem;
+  }
+  
+  @media (max-width: 480px) {
+    gap: 0.5rem;
+  }
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, var(--ion-color-primary, #1a73e8), var(--ion-color-accent, #34a853));
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+  
+  @media (max-width: 480px) {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+  }
+}
+
+.brand-icon {
+  color: #ffffff;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  
+  @media (max-width: 480px) {
+    font-size: 1.25rem;
+  }
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+  
+  @media (max-width: 768px) {
+    display: none; // Ocultar en móvil para dar más espacio
+  }
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ion-text-color, #202124);
+  letter-spacing: -0.025em;
+  transition: color 0.3s ease;
+  
+  @media (max-width: 1024px) {
+    font-size: 1.125rem;
+  }
+}
+
+.brand-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--ion-text-color-secondary, #5f6368);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+  
+  @media (max-width: 1024px) {
+    font-size: 0.7rem;
+  }
+}
+
+// ========================================
+// NAVEGACIÓN DESKTOP - CENTRO
+// ========================================
+
+.header-nav.desktop-nav {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  
+  @media (max-width: 768px) {
+    display: none; // Ocultar navegación desktop en móvil
+  }
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-item {
+  margin: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: none;
+  border-radius: 25px;
+  color: var(--ion-text-color-secondary, #5f6368);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+  }
+  
+  &:hover {
+    color: var(--ion-color-primary, #1a73e8);
+    background: rgba(26, 115, 232, 0.05);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.15);
+    
+    &::before {
+      left: 100%;
+    }
+    
+    .nav-icon {
+      color: var(--ion-color-primary, #1a73e8);
+      transform: scale(1.1);
+    }
+  }
+  
+  &.active {
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--ion-color-primary, #1a73e8), var(--ion-color-accent, #34a853));
+    box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+    
+    .nav-icon {
+      color: #ffffff;
+    }
+    
+    &:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 6px 16px rgba(26, 115, 232, 0.4);
+    }
+  }
+  
+  @media (max-width: 1024px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    gap: 0.375rem;
+  }
+}
+
+.nav-icon {
+  font-size: 1.125rem;
+  transition: all 0.3s ease;
+  
+  @media (max-width: 1024px) {
+    font-size: 1rem;
+  }
+}
+
+.nav-label {
+  white-space: nowrap;
+  
+  @media (max-width: 1024px) {
+    display: none; // Solo iconos en pantallas medias
+  }
+}
+
+// ========================================
+// CONTROLES DEL HEADER - LADO DERECHO
+// ========================================
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  
+  @media (max-width: 480px) {
+    gap: 0.75rem;
+  }
+}
+
+// Toggle de tema
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 2px solid var(--ion-border-color, #e1e5e9);
+  border-radius: 50%;
+  color: var(--ion-text-color-secondary, #5f6368);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    border-color: var(--ion-color-primary, #1a73e8);
+    color: var(--ion-color-primary, #1a73e8);
+    background: rgba(26, 115, 232, 0.05);
+    transform: rotate(180deg) scale(1.1);
+  }
+  
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.theme-icon {
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  
+  @media (max-width: 480px) {
+    font-size: 1.125rem;
+  }
+}
+
+// Botón hamburguesa móvil
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  gap: 4px;
+  transition: all 0.3s ease;
+  
+  @media (max-width: 768px) {
+    display: flex;
+  }
+  
+  @media (max-width: 480px) {
+    width: 40px;
+    height: 40px;
+    padding: 6px;
+  }
+  
+  &:hover {
+    background: rgba(26, 115, 232, 0.05);
+    border-radius: 8px;
+    
+    .hamburger-line {
+      background: var(--ion-color-primary, #1a73e8);
+    }
+  }
+  
+  &.active {
+    .hamburger-line {
+      background: var(--ion-color-primary, #1a73e8);
+      
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      
+      &:nth-child(2) {
+        opacity: 0;
+        transform: scale(0);
+      }
+      
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+  }
+}
+
+.hamburger-line {
+  width: 20px;
+  height: 2px;
+  background: var(--ion-text-color-secondary, #5f6368);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  @media (max-width: 480px) {
+    width: 18px;
+    height: 2px;
+  }
+}
+
+// ========================================
+// MENÚ MÓVIL - DROPDOWN DESDE ARRIBA
+// ========================================
+
+.mobile-nav-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--ion-surface-color, #ffffff);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--ion-border-color, #e1e5e9);
+  border-top: none;
+  z-index: 999;
+  
+  &.open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  @media (min-width: 769px) {
+    display: none; // No mostrar en desktop
+  }
+}
+
+.mobile-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 1rem 0;
+}
+
+.mobile-nav-item {
+  margin: 0;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--ion-text-color, #202124);
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-left: 4px solid transparent;
+  
+  &:hover {
+    background: rgba(26, 115, 232, 0.05);
+    color: var(--ion-color-primary, #1a73e8);
+    border-left-color: var(--ion-color-primary, #1a73e8);
+    
+    .mobile-nav-icon {
+      color: var(--ion-color-primary, #1a73e8);
+      transform: scale(1.1);
+    }
+  }
+  
+  &.active {
+    background: linear-gradient(90deg, rgba(26, 115, 232, 0.1), transparent);
+    color: var(--ion-color-primary, #1a73e8);
+    border-left-color: var(--ion-color-primary, #1a73e8);
+    font-weight: 600;
+    
+    .mobile-nav-icon {
+      color: var(--ion-color-primary, #1a73e8);
+    }
+  }
+}
+
+.mobile-nav-icon {
+  font-size: 1.25rem;
+  transition: all 0.3s ease;
+  min-width: 24px;
+}
+
+.mobile-nav-label {
+  flex: 1;
+}
+
+// Sección de tema en menú móvil
+.mobile-theme-section {
+  border-top: 1px solid var(--ion-border-color, #e1e5e9);
+  padding: 1rem 0 0.5rem;
+}
+
+.mobile-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--ion-text-color-secondary, #5f6368);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(52, 168, 83, 0.05);
+    color: var(--ion-color-accent, #34a853);
+    
+    .mobile-theme-icon {
+      color: var(--ion-color-accent, #34a853);
+      transform: scale(1.1) rotate(180deg);
+    }
+  }
+}
+
+.mobile-theme-icon {
+  font-size: 1.125rem;
+  transition: all 0.3s ease;
+  min-width: 20px;
+}
+
+.mobile-theme-label {
+  flex: 1;
+}
+
+// ========================================
+// ANIMACIONES Y EFECTOS
+// ========================================
+
+// Efecto de ondas en los botones
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+// Efecto de brillo en hover
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+// ========================================
+// TEMA OSCURO - ADAPTACIONES ESPECÍFICAS
+// ========================================
+
+.dark-theme {
+  .header {
+    background: var(--ion-background-color-secondary, #1a1f26);
+    border-bottom-color: var(--ion-border-color, #2d333a);
+    
+    &.scrolled {
+      background: rgba(26, 31, 38, 0.95);
+    }
+  }
+  
+  .nav-link:hover {
+    background: rgba(26, 115, 232, 0.15);
+  }
+  
+  .theme-toggle:hover {
+    background: rgba(26, 115, 232, 0.1);
+  }
+  
+  .mobile-menu-toggle:hover {
+    background: rgba(26, 115, 232, 0.1);
+  }
+  
+  .mobile-nav-dropdown {
+    background: var(--ion-background-color-secondary, #1a1f26);
+    border-color: var(--ion-border-color, #2d333a);
+  }
+  
+  .mobile-nav-link:hover {
+    background: rgba(26, 115, 232, 0.15);
+  }
+  
+  .mobile-theme-toggle:hover {
+    background: rgba(52, 168, 83, 0.15);
+  }
+}
+
+// ========================================
+// RESPONSIVE BREAKPOINTS ESPECÍFICOS
+// ========================================
+
+// Pantallas ultra pequeñas (320px)
+@media (max-width: 320px) {
+  .header-container {
+    padding: 0 0.5rem;
+  }
+  
+  .brand-logo {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .brand-icon {
+    font-size: 1.125rem;
+  }
+  
+  .theme-toggle,
+  .mobile-menu-toggle {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .hamburger-line {
+    width: 16px;
+  }
+}
+
+// Tablets y pantallas medianas (768px - 1024px)
+@media (min-width: 768px) and (max-width: 1024px) {
+  .nav-list {
+    gap: 0.25rem;
+  }
+  
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+// Pantallas grandes (1200px+)
+@media (min-width: 1200px) {
+  .header-container {
+    max-width: 1600px;
+    padding: 0 3rem;
+  }
+  
+  .nav-list {
+    gap: 0.75rem;
+  }
+  
+  .nav-link {
+    padding: 0.875rem 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .nav-label {
+    display: block; // Mostrar etiquetas en pantallas grandes
+  }
+}

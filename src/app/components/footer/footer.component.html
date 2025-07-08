@@ -44,75 +44,133 @@
         </div>
       </div>
 
-      <!-- Navegación -->
+      <!-- Navegación con acordeón -->
       <div class="footer-section navigation">
-        <h5 class="section-title">Navegación</h5>
-        <ul class="nav-list">
-          <li 
-            *ngFor="let link of navigationLinks" 
-            class="nav-item"
-          >
-            <button 
-              class="nav-link"
-              (click)="navigateToSection(link.id)"
+        <button 
+          class="section-toggle" 
+          (click)="toggleAccordion('navigation')"
+          [class.expanded]="isAccordionExpanded('navigation')"
+        >
+          <h5 class="section-title">Navegación</h5>
+          <ion-icon 
+            [name]="isAccordionExpanded('navigation') ? 'chevron-up' : 'chevron-down'" 
+            class="toggle-icon"
+          ></ion-icon>
+        </button>
+        <div 
+          class="accordion-content"
+          [class.expanded]="isAccordionExpanded('navigation')"
+        >
+          <ul class="nav-list">
+            <li 
+              *ngFor="let link of navigationLinks" 
+              class="nav-item"
             >
-              <ion-icon [name]="link.icon" class="nav-icon"></ion-icon>
-              <span class="nav-label">{{ link.label }}</span>
-            </button>
-          </li>
-        </ul>
+              <button 
+                class="nav-link"
+                (click)="navigateToSection(link.id)"
+              >
+                <ion-icon [name]="link.icon" class="nav-icon"></ion-icon>
+                <span class="nav-label">{{ link.label }}</span>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <!-- Enlaces rápidos -->
+      <!-- Enlaces rápidos con acordeón -->
       <div class="footer-section quick-links">
-        <h5 class="section-title">Enlaces Rápidos</h5>
-        <ul class="quick-list">
-          <li 
-            *ngFor="let link of quickLinks" 
-            class="quick-item"
-          >
-            <button 
-              class="quick-link"
-              (click)="link.action()"
+        <button 
+          class="section-toggle" 
+          (click)="toggleAccordion('quickLinks')"
+          [class.expanded]="isAccordionExpanded('quickLinks')"
+        >
+          <h5 class="section-title">Enlaces Rápidos</h5>
+          <ion-icon 
+            [name]="isAccordionExpanded('quickLinks') ? 'chevron-up' : 'chevron-down'" 
+            class="toggle-icon"
+          ></ion-icon>
+        </button>
+        <div 
+          class="accordion-content"
+          [class.expanded]="isAccordionExpanded('quickLinks')"
+        >
+          <ul class="quick-list">
+            <li 
+              *ngFor="let link of quickLinks" 
+              class="quick-item"
             >
-              <ion-icon [name]="link.icon" class="quick-icon"></ion-icon>
-              <span class="quick-label">{{ link.label }}</span>
-            </button>
-          </li>
-        </ul>
+              <button 
+                class="quick-link"
+                (click)="link.action()"
+              >
+                <ion-icon [name]="link.icon" class="quick-icon"></ion-icon>
+                <span class="quick-label">{{ link.label }}</span>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <!-- Proyectos destacados -->
+      <!-- Proyectos destacados con acordeón -->
       <div class="footer-section projects">
-        <h5 class="section-title">Proyectos Destacados</h5>
-        <ul class="project-list">
-          <li 
-            *ngFor="let project of featuredProjects" 
-            class="project-item"
-          >
-            <button 
-              class="project-link"
-              (click)="openProject(project)"
+        <button 
+          class="section-toggle" 
+          (click)="toggleAccordion('projects')"
+          [class.expanded]="isAccordionExpanded('projects')"
+        >
+          <h5 class="section-title">Proyectos</h5>
+          <ion-icon 
+            [name]="isAccordionExpanded('projects') ? 'chevron-up' : 'chevron-down'" 
+            class="toggle-icon"
+          ></ion-icon>
+        </button>
+        <div 
+          class="accordion-content"
+          [class.expanded]="isAccordionExpanded('projects')"
+        >
+          <ul class="project-list">
+            <li 
+              *ngFor="let project of featuredProjects" 
+              class="project-item"
             >
-              <div class="project-info">
-                <span class="project-name">{{ project.name }}</span>
-                <span class="project-description">{{ project.description }}</span>
-              </div>
-              <ion-icon name="open" class="project-icon"></ion-icon>
-            </button>
-          </li>
-        </ul>
+              <button 
+                class="project-link"
+                (click)="openProject(project)"
+              >
+                <div class="project-info">
+                  <span class="project-name">{{ project.name }}</span>
+                  <span class="project-description">{{ project.description }}</span>
+                </div>
+                <ion-icon name="open" class="project-icon"></ion-icon>
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
 
-    <!-- Sección: Sobre el desarrollo de este sitio -->
+    <!-- Sección: Sobre el desarrollo con acordeón -->
     <div class="footer-development">
-      <div class="development-content">
+      <button 
+        class="section-toggle development-toggle" 
+        (click)="toggleAccordion('development')"
+        [class.expanded]="isAccordionExpanded('development')"
+      >
         <h5 class="development-title">
           <ion-icon name="construct" class="development-icon"></ion-icon>
           Sobre el desarrollo de este sitio
         </h5>
-        
+        <ion-icon 
+          [name]="isAccordionExpanded('development') ? 'chevron-up' : 'chevron-down'" 
+          class="toggle-icon"
+        ></ion-icon>
+      </button>
+      
+      <div 
+        class="accordion-content development-content"
+        [class.expanded]="isAccordionExpanded('development')"
+      >
         <div class="development-text">
           <p class="development-description">
             Si bien este portafolio fue desarrollado con la asistencia de <strong>IA (Claude)</strong>, 
@@ -179,8 +237,43 @@
         </div>
       </div>
 
-      <!-- Controles y copyright -->
+      <!-- Controles y redes sociales -->
       <div class="footer-controls">
+        
+        <!-- Enlaces sociales -->
+        <div class="social-links">
+          <button 
+            class="social-link linkedin"
+            (click)="openLinkedIn()"
+            aria-label="LinkedIn"
+          >
+            <ion-icon name="logo-linkedin" class="social-icon"></ion-icon>
+          </button>
+          
+          <button 
+            class="social-link email"
+            (click)="sendEmail()"
+            aria-label="Email"
+          >
+            <ion-icon name="mail" class="social-icon"></ion-icon>
+          </button>
+          
+          <button 
+            class="social-link whatsapp"
+            (click)="openWhatsApp()"
+            aria-label="WhatsApp"
+          >
+            <ion-icon name="logo-whatsapp" class="social-icon"></ion-icon>
+          </button>
+          
+          <button 
+            class="social-link phone"
+            (click)="callPhone()"
+            aria-label="Teléfono"
+          >
+            <ion-icon name="call" class="social-icon"></ion-icon>
+          </button>
+        </div>
         
         <!-- Toggle de tema -->
         <button 
@@ -219,41 +312,6 @@
           <span class="location">{{ personalInfo.location }}</span>
         </div>
       </div>
-    </div>
-
-    <!-- Enlaces sociales flotantes -->
-    <div class="social-links">
-      <button 
-        class="social-link linkedin"
-        (click)="openLinkedIn()"
-        aria-label="LinkedIn"
-      >
-        <ion-icon name="logo-linkedin" class="social-icon"></ion-icon>
-      </button>
-      
-      <button 
-        class="social-link email"
-        (click)="sendEmail()"
-        aria-label="Email"
-      >
-        <ion-icon name="mail" class="social-icon"></ion-icon>
-      </button>
-      
-      <button 
-        class="social-link whatsapp"
-        (click)="openWhatsApp()"
-        aria-label="WhatsApp"
-      >
-        <ion-icon name="logo-whatsapp" class="social-icon"></ion-icon>
-      </button>
-      
-      <button 
-        class="social-link phone"
-        (click)="callPhone()"
-        aria-label="Teléfono"
-      >
-        <ion-icon name="call" class="social-icon"></ion-icon>
-      </button>
     </div>
 
     <!-- Elementos decorativos -->
