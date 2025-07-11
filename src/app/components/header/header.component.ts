@@ -1,23 +1,28 @@
 /**
- * ARCHIVO: src/app/components/header/header.component.ts - PROFESIONAL
+ * ARCHIVO: src/app/components/header/header.component.ts - NAVEGACIÓN ROUTER
  * 
  * DESCRIPCIÓN:
- * Header horizontal fijo profesional como en las imágenes de referencia.
- * Diseño similar al proyecto anterior con colores azul profesional.
- * Navegación horizontal en desktop, hamburguesa en móvil.
+ * Header horizontal fijo con navegación por router de Angular.
+ * Detecta ruta activa automáticamente y maneja navegación entre páginas.
+ * Diseño similar al proyecto anterior pero con routing real.
  */
 
-import { Component, OnInit, HostListener, Renderer2, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy, HostListener, Renderer2, Inject } from '@angular/core';
+import { Router, NavigationEnd } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { ThemeService } from '@services/theme.service';
+import { filter, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+
+  // Subject para cleanup de suscripciones
+  private destroy$ = new Subject<void>();
 
   // Estado del menú móvil
   public mobileMenuOpen: boolean = false;
@@ -28,7 +33,7 @@ export class HeaderComponent implements OnInit {
   // Ruta activa actual
   public activeRoute: string = '/home';
 
-  // Lista de elementos de navegación - RUTAS DEL ROUTER
+  // Lista de elementos de navegación - RUTAS REALES DEL ROUTER
   public navItems = [
     { id: 'home', label: 'Inicio', icon: 'home', route: '/home' },
     { id: 'about', label: 'Sobre Mí', icon: 'person', route: '/about' },
@@ -48,6 +53,19 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // Detectar ruta activa al cargar
     this.detectActiveRoute();
+    
+    // Suscribirse a cambios de ruta
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((event) => {
+        const navigationEvent = event as NavigationEnd;
+        this.activeRoute = navigationEvent.url;
+        this.closeMobileMenu(); // Cerrar menú móvil al navegar
+        console.log('🔄 [ROUTER] Nueva ruta activa:', this.activeRoute);
+      });
     
     // Listener para cerrar menú con tecla Escape
     this.renderer.listen('document', 'keydown.escape', () => {
@@ -106,9 +124,14 @@ export class HeaderComponent implements OnInit {
       if (success) {
         this.activeRoute = route;
         console.log('✅ [NAVEGACIÓN] Navegación exitosa a:', route);
+        
+        // Scroll to top al cambiar de ruta
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
         console.error('❌ [NAVEGACIÓN] Error navegando a:', route);
       }
+    }).catch(error => {
+      console.error('❌ [NAVEGACIÓN] Error en navegación:', error);
     });
   }
 
@@ -117,6 +140,7 @@ export class HeaderComponent implements OnInit {
    */
   toggleTheme(): void {
     this.themeService.toggleTheme();
+    console.log('🎨 [TEMA] Tema cambiado a:', this.themeService.getCurrentTheme());
   }
 
   /**
@@ -144,6 +168,9 @@ export class HeaderComponent implements OnInit {
   openMobileMenu(): void {
     this.mobileMenuOpen = true;
     console.log('📱 [MENÚ] Menú móvil abierto');
+    
+    // Prevenir scroll del body cuando el menú está abierto
+    this.renderer.addClass(this.document.body, 'menu-open');
   }
 
   /**
@@ -152,6 +179,9 @@ export class HeaderComponent implements OnInit {
   closeMobileMenu(): void {
     this.mobileMenuOpen = false;
     console.log('📱 [MENÚ] Menú móvil cerrado');
+    
+    // Restaurar scroll del body
+    this.renderer.removeClass(this.document.body, 'menu-open');
   }
 
   /**
@@ -159,6 +189,7 @@ export class HeaderComponent implements OnInit {
    */
   private detectActiveRoute(): void {
     this.activeRoute = this.router.url;
+    console.log('🎯 [ROUTER] Ruta inicial detectada:', this.activeRoute);
   }
 
   /**
@@ -167,6 +198,84 @@ export class HeaderComponent implements OnInit {
    * @returns true si la ruta está activa
    */
   isActiveRoute(route: string): boolean {
-    return this.activeRoute === route;
+    // Comparación exacta de rutas
+    const isActive = this.activeRoute === route;
+    
+    // Para rutas que redirectan a /home
+    if (!isActive && route === '/home') {
+      return this.activeRoute === '/' || this.activeRoute === '/home';
+    }
+    
+    return isActive;
+  }
+
+  /**
+   * Obtiene el label del item de navegación para el estado activo
+   * @param route - Ruta del item
+   * @returns Label del item o cadena vacía
+   */
+  getNavItemLabel(route: string): string {
+    const item = this.navItems.find(nav => nav.route === route);
+    return item ? item.label : '';
+  }
+
+  /**
+   * Obtiene el ícono del item de navegación
+   * @param route - Ruta del item
+   * @returns Ícono del item o ícono por defecto
+   */
+  getNavItemIcon(route: string): string {
+    const item = this.navItems.find(nav => nav.route === route);
+    return item ? item.icon : 'help-circle';
+  }
+
+  /**
+   * Maneja errores de navegación
+   * @param route - Ruta que falló
+   */
+  private handleNavigationError(route: string): void {
+    console.error(`❌ [NAVEGACIÓN] No se pudo navegar a: ${route}`);
+    
+    // Intentar navegar a home como fallback
+    if (route !== '/home') {
+      console.log('🔄 [NAVEGACIÓN] Intentando fallback a /home');
+      this.router.navigate(['/home']).catch(error => {
+        console.error('❌ [NAVEGACIÓN] Error en fallback:', error);
+      });
+    }
+  }
+
+  /**
+   * Verifica si el router está configurado correctamente
+   * @returns true si hay rutas configuradas
+   */
+  private isRouterConfigured(): boolean {
+    return this.navItems.length > 0;
+  }
+
+  /**
+   * Inicializa la detección de rutas activas
+   */
+  private initRouteDetection(): void {
+    // Verificar configuración del router
+    if (!this.isRouterConfigured()) {
+      console.warn('⚠️ [ROUTER] No hay items de navegación configurados');
+      return;
+    }
+
+    // Log de rutas disponibles
+    console.log('📋 [ROUTER] Rutas disponibles:', this.navItems.map(item => item.route));
+  }
+
+  /**
+   * Cleanup al destruir el componente
+   */
+  ngOnDestroy(): void {
+    // Completar subject para cleanup de suscripciones
+    this.destroy$.next();
+    this.destroy$.complete();
+    
+    // Asegurar que el menú móvil se cierre
+    this.closeMobileMenu();
   }
 }

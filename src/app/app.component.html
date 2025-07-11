@@ -1,14 +1,14 @@
-<!-- Aplicación principal - SPA con header horizontal fijo profesional -->
+<!-- Aplicación principal - ROUTER con header fijo -->
 <ion-app>
-  <!-- Header fijo horizontal profesional -->
+  <!-- Header fijo que permanece en todas las rutas -->
   <app-header></app-header>
 
-  <!-- Contenido principal con router -->
+  <!-- Contenido principal con router - SIN flex layout -->
   <main class="main-content" role="main">
-    <!-- Router outlet para navegación entre secciones -->
+    <!-- Router outlet para navegación entre rutas -->
     <ion-router-outlet></ion-router-outlet>
   </main>
 
-  <!-- Footer global -->
+  <!-- Footer que aparece al final de cada ruta -->
   <app-footer></app-footer>
 </ion-app>
