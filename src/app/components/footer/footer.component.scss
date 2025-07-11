@@ -5,6 +5,18 @@
  * Diseño responsivo optimizado para ocupar menos espacio vertical
  */
 
+// ========================================
+// CONFIGURACIÓN ESPECÍFICA PARA LAYOUT FLEX
+// ========================================
+:host {
+  display: block;
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: auto;
+  position: relative;
+  z-index: 1;
+}
+
 .footer {
   background: linear-gradient(
     135deg, 

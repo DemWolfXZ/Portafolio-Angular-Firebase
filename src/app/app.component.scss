@@ -67,26 +67,31 @@ ion-app {
   display: flex;
   flex-direction: column;
   
-  // Padding-top para compensar header fijo
-  padding-top: 80px;
+  // Padding-top suficiente para compensar header fijo + margen de seguridad
+  padding-top: 100px;
   
   // Sin padding-bottom porque el footer es parte del layout
   padding-bottom: 0;
   
-  // Altura mínima para asegurar contenido
-  min-height: calc(100vh - 80px);
+  // Altura mínima para asegurar contenido adecuado
+  min-height: calc(100vh - 100px);
   
   // Permitir overflow natural para scroll
   overflow: visible;
   
   @media (max-width: 768px) {
-    padding-top: 70px;
-    min-height: calc(100vh - 70px);
+    padding-top: 90px;
+    min-height: calc(100vh - 90px);
   }
   
   @media (max-width: 480px) {
-    padding-top: 65px;
-    min-height: calc(100vh - 65px);
+    padding-top: 85px;
+    min-height: calc(100vh - 85px);
+  }
+  
+  @media (max-width: 320px) {
+    padding-top: 80px;
+    min-height: calc(100vh - 80px);
   }
 }
 
@@ -108,6 +113,12 @@ ion-router-outlet {
   
   // Permitir scroll natural
   overflow: visible;
+  
+  // Asegurar que cada ruta/sección ocupe el espacio necesario
+  > * {
+    flex: 1;
+    min-height: 100%;
+  }
 }
 
 // ========================================
@@ -155,12 +166,15 @@ app-footer {
   // Altura automática según contenido
   height: auto;
   
-  // No margin-top auto porque estamos en flex layout
-  margin-top: 0;
+  // Margin-top automático para empujar al final en flex layout
+  margin-top: auto;
+  
+  // Asegurar que se mantenga abajo del contenido
+  order: 999;
 }
 
 // ========================================
-// SECCIONES INDIVIDUALES - ALTURA COMPLETA
+// SECCIONES INDIVIDUALES - ALTURA COMPLETA Y RESPONSIVA
 // ========================================
 
 // Cada sección del portafolio debe ocupar el espacio necesario
@@ -173,36 +187,62 @@ app-contact-section {
   display: block;
   width: 100%;
   
-  // Altura automática basada en contenido
-  min-height: auto;
+  // Altura mínima para que cada sección tenga presencia adecuada
+  min-height: calc(100vh - 100px);
   
   // Permitir que crezcan según necesidad
   flex-shrink: 0;
   
   // Posición relativa para animaciones
   position: relative;
+  
+  // Padding interno para contenido
+  padding: var(--spacing-xl) 0;
+  
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 90px);
+    padding: var(--spacing-lg) 0;
+  }
+  
+  @media (max-width: 480px) {
+    min-height: calc(100vh - 85px);
+    padding: var(--spacing-md) 0;
+  }
+  
+  @media (max-width: 320px) {
+    min-height: calc(100vh - 80px);
+    padding: var(--spacing-sm) 0;
+  }
 }
 
 // ========================================
-// CLASES HELPER PARA SECCIONES
+// CLASES HELPER PARA SECCIONES RESPONSIVAS
 // ========================================
 
 // Para secciones que necesitan altura completa de viewport
 .section-fullheight {
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 100px);
   
   @media (max-width: 768px) {
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 90px);
   }
   
   @media (max-width: 480px) {
-    min-height: calc(100vh - 65px);
+    min-height: calc(100vh - 85px);
+  }
+  
+  @media (max-width: 320px) {
+    min-height: calc(100vh - 80px);
   }
 }
 
 // Para secciones que necesitan altura mínima
 .section-minheight {
-  min-height: 50vh;
+  min-height: 60vh;
+  
+  @media (max-width: 768px) {
+    min-height: 50vh;
+  }
 }
 
 // Para secciones de contenido normal
@@ -216,6 +256,10 @@ app-contact-section {
   
   @media (max-width: 480px) {
     padding: var(--spacing-lg) 0;
+  }
+  
+  @media (max-width: 320px) {
+    padding: var(--spacing-md) 0;
   }
 }
 
@@ -244,12 +288,26 @@ app-contact-section {
 }
 
 // ========================================
-// SCROLL OPTIMIZADO
+// SCROLL OPTIMIZADO Y MEJORADO
 // ========================================
 
-// Configuración de scroll suave
+// Configuración de scroll suave y optimizado
 * {
   box-sizing: border-box;
+}
+
+// Scroll específico para el contenido principal
+.main-content {
+  // Scroll suave en Y, sin scroll horizontal
+  overflow-x: hidden;
+  overflow-y: auto;
+  
+  // Optimizaciones para scroll en móviles
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  
+  // Mejora la performance del scroll
+  will-change: scroll-position;
 }
 
 // Mejoras para scroll en dispositivos táctiles
@@ -260,31 +318,75 @@ app-contact-section {
   }
 }
 
+// Scroll snap para mejor experiencia en móviles
+@media (max-width: 768px) {
+  .main-content {
+    scroll-snap-type: y proximity;
+  }
+  
+  app-hero-section,
+  app-about-section,
+  app-experience-section,
+  app-projects-section,
+  app-skills-section,
+  app-contact-section {
+    scroll-snap-align: start;
+  }
+}
+
 // ========================================
-// RESPONSIVE ADJUSTMENTS
+// RESPONSIVE ADJUSTMENTS - MEJORADOS
 // ========================================
 
-// Dispositivos muy pequeños
+// Dispositivos muy pequeños (320px y menos)
 @media (max-width: 320px) {
   .main-content {
-    padding-top: 60px;
-    min-height: calc(100vh - 60px);
+    padding-top: 80px;
+    min-height: calc(100vh - 80px);
+  }
+  
+  ion-router-outlet {
+    min-height: calc(100vh - 80px);
   }
 }
 
-// Tablets y pantallas medianas
-@media (min-width: 768px) and (max-width: 1024px) {
-  .main-content {
-    padding-top: 75px;
-    min-height: calc(100vh - 75px);
-  }
-}
-
-// Pantallas muy grandes
-@media (min-width: 1400px) {
+// Dispositivos pequeños (321px - 480px)
+@media (min-width: 321px) and (max-width: 480px) {
   .main-content {
     padding-top: 85px;
     min-height: calc(100vh - 85px);
+  }
+}
+
+// Tablets y pantallas medianas (481px - 768px)
+@media (min-width: 481px) and (max-width: 768px) {
+  .main-content {
+    padding-top: 90px;
+    min-height: calc(100vh - 90px);
+  }
+}
+
+// Tablets grandes (769px - 1024px)
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-content {
+    padding-top: 95px;
+    min-height: calc(100vh - 95px);
+  }
+}
+
+// Pantallas grandes (1025px - 1399px)
+@media (min-width: 1025px) and (max-width: 1399px) {
+  .main-content {
+    padding-top: 100px;
+    min-height: calc(100vh - 100px);
+  }
+}
+
+// Pantallas muy grandes (1400px y más)
+@media (min-width: 1400px) {
+  .main-content {
+    padding-top: 105px;
+    min-height: calc(100vh - 105px);
   }
 }
 

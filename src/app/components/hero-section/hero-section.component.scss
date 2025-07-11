@@ -6,8 +6,8 @@
  */
 
 .hero-section {
-  // ALTURA COMPLETA DEL VIEWPORT MENOS HEADER
-  min-height: calc(100vh - 80px);
+  // ALTURA COMPLETA AJUSTADA AL NUEVO LAYOUT
+  min-height: calc(100vh - 100px);
   height: auto; // Permitir crecimiento según contenido
   
   // Layout flex para centrar contenido
@@ -24,10 +24,24 @@
   // Posición relativa para elementos decorativos
   position: relative;
   
-  // Padding interno optimizado
-  padding: var(--spacing-xl) 0;
+  // Padding interno optimizado - menos porque ya tenemos padding en el layout principal
+  padding: var(--spacing-lg) 0;
   
   // Responsive adjustments
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 90px);
+    padding: var(--spacing-md) 0;
+  }
+  
+  @media (max-width: 480px) {
+    min-height: calc(100vh - 85px);
+    padding: var(--spacing-sm) 0;
+  }
+  
+  @media (max-width: 320px) {
+    min-height: calc(100vh - 80px);
+    padding: var(--spacing-xs) 0;
+  }
   @media (max-width: 768px) {
     min-height: calc(100vh - 70px);
     padding: var(--spacing-lg) 0;
