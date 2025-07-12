@@ -1,12 +1,14 @@
 /**
- * HERO SECTION - ALTURA OPTIMIZADA PARA ROUTER
- * =============================================
- * Sección hero como ruta independiente con footer natural
+ * HERO SECTION - ALTURA COMPLETA OPTIMIZADA
+ * ==========================================
+ * Sección hero que ocupa la altura completa del viewport
+ * menos el header, con contenido centrado y responsivo
  */
 
 .hero-section {
-  // ALTURA COMPLETA menos el header fijo
-  min-height: calc(100vh - 80px);
+  // ALTURA COMPLETA AJUSTADA AL NUEVO LAYOUT
+  min-height: calc(100vh - 100px);
+  height: auto; // Permitir crecimiento según contenido
   
   // Layout flex para centrar contenido
   display: flex;
@@ -22,26 +24,40 @@
   // Posición relativa para elementos decorativos
   position: relative;
   
-  // Padding interno - SIN compensation porque ya no hay footer fijo
-  padding: var(--spacing-lg) 0 var(--spacing-2xl) 0;
+  // Padding interno optimizado - menos porque ya tenemos padding en el layout principal
+  padding: var(--spacing-lg) 0;
   
   // Responsive adjustments
   @media (max-width: 768px) {
+    min-height: calc(100vh - 90px);
+    padding: var(--spacing-md) 0;
+  }
+  
+  @media (max-width: 480px) {
+    min-height: calc(100vh - 85px);
+    padding: var(--spacing-sm) 0;
+  }
+  
+  @media (max-width: 320px) {
+    min-height: calc(100vh - 80px);
+    padding: var(--spacing-xs) 0;
+  }
+  @media (max-width: 768px) {
     min-height: calc(100vh - 70px);
-    padding: var(--spacing-md) 0 var(--spacing-xl) 0;
+    padding: var(--spacing-lg) 0;
   }
   
   @media (max-width: 480px) {
     min-height: calc(100vh - 65px);
-    padding: var(--spacing-sm) 0 var(--spacing-lg) 0;
+    padding: var(--spacing-md) 0;
   }
   
   @media (max-width: 320px) {
     min-height: calc(100vh - 60px);
-    padding: var(--spacing-xs) 0 var(--spacing-md) 0;
+    padding: var(--spacing-sm) 0;
   }
   
-  // Animación de entrada simple para router
+  // Animación de entrada SIN transform que afecte layout
   opacity: 0;
   transition: opacity 0.8s ease-out;
   
@@ -56,7 +72,10 @@
   margin: 0 auto;
   padding: 0 var(--spacing-md);
   
-  // Flex para organizar contenido verticalmente
+  // Altura completa para centrado vertical
+  min-height: 100%;
+  
+  // Flex para organizar contenido
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,10 +100,14 @@
   align-items: center;
   margin-bottom: var(--spacing-lg);
   
+  // Altura mínima para el contenido principal
+  min-height: 60vh;
+  
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
     gap: var(--spacing-lg);
     text-align: center;
+    min-height: auto;
   }
   
   @media (max-width: 768px) {
@@ -102,7 +125,7 @@
 // INFORMACIÓN DEL HERO
 // ========================================
 .hero-info {
-  // Animación simple sin transform para router
+  // Animación SIN transform que afecte layout
   opacity: 0;
   transition: opacity 1s ease-out 0.3s;
   
@@ -295,7 +318,7 @@
 }
 
 // ========================================
-// INDICADOR DE SCROLL - NAVEGACIÓN ROUTER
+// INDICADOR DE SCROLL
 // ========================================
 .scroll-indicator {
   margin-top: var(--spacing-2xl);
@@ -337,7 +360,7 @@
 // ========================================
 .hero-image {
   position: relative;
-  // Animación simple para router
+  // Animación SIN transform de layout
   opacity: 0;
   transition: opacity 1s ease-out 0.5s;
   
@@ -453,21 +476,21 @@
 }
 
 // ========================================
-// ESTADÍSTICAS - SEPARADAS DEL HERO PRINCIPAL
+// ESTADÍSTICAS - FUERA DEL HERO PRINCIPAL
 // ========================================
 .hero-stats {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: var(--spacing-lg);
   margin-top: var(--spacing-2xl);
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-xl) 0 0 0; // Solo padding-top
   border-top: 1px solid var(--ion-border-color);
   
   @media (max-width: 768px) {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-md);
     margin-top: var(--spacing-xl);
-    padding: var(--spacing-lg) 0;
+    padding: var(--spacing-lg) 0 0 0;
   }
 }
 
@@ -551,14 +574,10 @@
 }
 
 // ========================================
-// MODAL DE CV - Z-INDEX CORREGIDO
+// MODAL DE CV
 // ========================================
 ion-modal {
-  z-index: 20000 !important;
-  
-  &::part(backdrop) {
-    background: rgba(0, 0, 0, 0.6);
-  }
+  z-index: 50000 !important;
 }
 
 .cv-modal-content {

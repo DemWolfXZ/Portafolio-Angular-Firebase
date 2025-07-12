@@ -13,6 +13,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { ContactSectionComponent } from './contact-section.component';
+import { FooterModule } from '../footer/footer.module';
 
 const routes: Routes = [
   {
@@ -27,7 +28,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,  // Para el formulario de contacto
-    FormsModule          // Para ngModel si es necesario
+    FormsModule,          // Para ngModel si es necesario
+    FooterModule
   ],
   declarations: [ContactSectionComponent]
 })

@@ -7,16 +7,20 @@
  */
 
 import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
 
 import { SkillsSectionComponent } from './skills-section.component';
+// import { SkillsTestComponent } from './skills-test.component';
+// import { SkillsSimpleComponent } from './skills-simple.component';
+import { FooterModule } from '../footer/footer.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: SkillsSectionComponent
+    component: SkillsSectionComponent  // Volver al componente original con estilos
   }
 ];
 
@@ -24,8 +28,10 @@ const routes: Routes = [
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FooterModule
   ],
-  declarations: [SkillsSectionComponent]
+  declarations: [SkillsSectionComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SkillsSectionModule { }

@@ -1,11 +1,12 @@
 /**
- * LAYOUT PRINCIPAL CORREGIDO PARA NAVEGACIÓN POR ROUTER
- * =====================================================
- * Layout optimizado para navegación entre rutas en lugar de SPA
+ * LAYOUT PRINCIPAL MEJORADO - app.component.scss
+ * ===============================================
+ * Layout flex optimizado para header fijo, body completo y footer
+ * Solucionando problemas de altura y espaciado inconsistente
  */
 
 // ========================================
-// CONFIGURACIÓN BASE PARA LAYOUT CON ROUTER
+// CONFIGURACIÓN BASE PARA LAYOUT PERFECTO
 // ========================================
 
 html {
@@ -28,17 +29,19 @@ body {
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  // IMPORTANTE: Sin padding-top fijo aquí
+  // IMPORTANTE: No agregar padding-top aquí
 }
 
 // ========================================
-// ION-APP - LAYOUT ESTÁNDAR PARA ROUTER
+// ION-APP - LAYOUT FLEX PRINCIPAL
 // ========================================
 
 ion-app {
-  // Layout vertical estándar para router
-  display: block;
+  // Layout flex vertical para distribuir: header | main | footer
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
+  height: 100%;
   
   // Colores principales exactos
   --ion-color-primary: #1a73e8;
@@ -55,54 +58,82 @@ ion-app {
 }
 
 // ========================================
-// MAIN CONTENT - ÁREA DE ROUTER OUTLET
+// MAIN CONTENT - OCUPA TODO EL ESPACIO DISPONIBLE
 // ========================================
 
 .main-content {
-  // Padding-top para compensar header fijo
-  padding-top: 80px;
+  // Flex: 1 hace que ocupe todo el espacio entre header y footer
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   
-  // Altura mínima para contenido
-  min-height: calc(100vh - 80px);
+  // Padding-top suficiente para compensar header fijo + margen de seguridad
+  padding-top: 100px;
   
-  // Layout block normal para router
-  display: block;
-  width: 100%;
+  // Sin padding-bottom porque el footer es parte del layout
+  padding-bottom: 0;
+  
+  // Altura mínima para asegurar contenido adecuado
+  min-height: calc(100vh - 100px);
+  
+  // Permitir overflow natural para scroll
+  overflow: visible;
   
   @media (max-width: 768px) {
-    padding-top: 70px;
-    min-height: calc(100vh - 70px);
+    padding-top: 90px;
+    min-height: calc(100vh - 90px);
   }
   
   @media (max-width: 480px) {
-    padding-top: 65px;
-    min-height: calc(100vh - 65px);
+    padding-top: 85px;
+    min-height: calc(100vh - 85px);
+  }
+  
+  @media (max-width: 320px) {
+    padding-top: 80px;
+    min-height: calc(100vh - 80px);
   }
 }
 
 // ========================================
-// ION-ROUTER-OUTLET - COMPORTAMIENTO ESTÁNDAR
+// ION-ROUTER-OUTLET - OCUPAR ESPACIO COMPLETO
 // ========================================
 
 ion-router-outlet {
-  // Comportamiento estándar para router
-  display: block;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   width: 100%;
+  
+  // Altura mínima para contenido
   min-height: 100%;
+  
+  // Posición relativa para animaciones
   position: relative;
+  
+  // Permitir scroll natural
+  overflow: visible;
+  
+  // Asegurar que cada ruta/sección ocupe el espacio necesario
+  > * {
+    flex: 1;
+    min-height: 100%;
+  }
 }
 
 // ========================================
-// HEADER - FIJO EN TODAS LAS RUTAS
+// HEADER - SIEMPRE FIJO ARRIBA
 // ========================================
 
 app-header {
-  // Header fijo que permanece en todas las rutas
+  // Posición fija en la parte superior
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
   right: 0 !important;
   width: 100% !important;
+  
+  // Z-index alto pero no conflictivo
   z-index: 1000 !important;
   
   // Asegurar visibilidad
@@ -110,33 +141,43 @@ app-header {
   visibility: visible !important;
   opacity: 1 !important;
   transform: none !important;
+  
+  // No debe afectar el layout flex
+  flex-shrink: 0;
 }
 
 // ========================================
-// FOOTER - COMPORTAMIENTO NORMAL
+// FOOTER - SIEMPRE ABAJO DEL LAYOUT
 // ========================================
 
 app-footer {
-  // Footer normal que aparece al final del contenido
+  // Flex-shrink: 0 evita que se comprima
+  flex-shrink: 0;
+  
+  // Posición relativa dentro del layout flex
   position: relative;
-  width: 100%;
+  
+  // Z-index menor que header
   z-index: 1;
   
-  // Se coloca automáticamente después del contenido de cada ruta
-  margin-top: 0;
+  // Ancho completo
+  width: 100%;
   
   // Altura automática según contenido
   height: auto;
   
-  // Sin position fixed ni absolute
-  display: block;
+  // Margin-top automático para empujar al final en flex layout
+  margin-top: auto;
+  
+  // Asegurar que se mantenga abajo del contenido
+  order: 999;
 }
 
 // ========================================
-// SECCIONES INDIVIDUALES - ALTURA AUTOMÁTICA
+// SECCIONES INDIVIDUALES - ALTURA COMPLETA Y RESPONSIVA
 // ========================================
 
-// Cada componente de ruta debe manejar su propia altura
+// Cada sección del portafolio debe ocupar el espacio necesario
 app-hero-section,
 app-about-section,
 app-experience-section,
@@ -147,134 +188,213 @@ app-contact-section {
   width: 100%;
   
   // Altura mínima para que cada sección tenga presencia adecuada
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 100px);
+  
+  // Permitir que crezcan según necesidad
+  flex-shrink: 0;
   
   // Posición relativa para animaciones
   position: relative;
   
-  // Sin padding fijo - cada componente maneja el suyo
+  // Padding interno para contenido
+  padding: var(--spacing-xl) 0;
   
   @media (max-width: 768px) {
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 90px);
+    padding: var(--spacing-lg) 0;
   }
   
   @media (max-width: 480px) {
-    min-height: calc(100vh - 65px);
+    min-height: calc(100vh - 85px);
+    padding: var(--spacing-md) 0;
+  }
+  
+  @media (max-width: 320px) {
+    min-height: calc(100vh - 80px);
+    padding: var(--spacing-sm) 0;
   }
 }
 
 // ========================================
-// FIXES PARA ROUTER vs SPA
+// CLASES HELPER PARA SECCIONES RESPONSIVAS
 // ========================================
 
-// Remover estilos que solo aplican para SPA
+// Para secciones que necesitan altura completa de viewport
+.section-fullheight {
+  min-height: calc(100vh - 100px);
+  
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 90px);
+  }
+  
+  @media (max-width: 480px) {
+    min-height: calc(100vh - 85px);
+  }
+  
+  @media (max-width: 320px) {
+    min-height: calc(100vh - 80px);
+  }
+}
+
+// Para secciones que necesitan altura mínima
+.section-minheight {
+  min-height: 60vh;
+  
+  @media (max-width: 768px) {
+    min-height: 50vh;
+  }
+}
+
+// Para secciones de contenido normal
+.section-content {
+  min-height: auto;
+  padding: var(--spacing-3xl) 0;
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  @media (max-width: 480px) {
+    padding: var(--spacing-lg) 0;
+  }
+  
+  @media (max-width: 320px) {
+    padding: var(--spacing-md) 0;
+  }
+}
+
+// ========================================
+// FIXES PARA ANIMACIONES QUE AFECTAN LAYOUT
+// ========================================
+
+// Evitar que las animaciones de entrada afecten el layout
 .hero-section,
 .about-section,
 .experience-section,
 .projects-section,
 .skills-section,
 .contact-section {
-  // Para componentes de router, usar animaciones simples
-  opacity: 0;
-  transition: opacity 0.6s ease-out;
+  // Remover transforms que afectan el layout
+  &:not(.loaded) {
+    opacity: 0;
+    // NO usar transform: translateY() aquí ya que afecta el layout
+  }
   
   &.loaded {
     opacity: 1;
+    // Transición suave sin afectar layout
+    transition: opacity 0.8s ease-out;
   }
 }
 
 // ========================================
-// SCROLL OPTIMIZADO PARA ROUTER
+// SCROLL OPTIMIZADO Y MEJORADO
 // ========================================
 
-// Configuración de scroll para navegación entre rutas
+// Configuración de scroll suave y optimizado
 * {
   box-sizing: border-box;
 }
 
 // Scroll específico para el contenido principal
 .main-content {
-  // Scroll natural
+  // Scroll suave en Y, sin scroll horizontal
   overflow-x: hidden;
-  overflow-y: visible;
+  overflow-y: auto;
   
   // Optimizaciones para scroll en móviles
   -webkit-overflow-scrolling: touch;
   overscroll-behavior: contain;
+  
+  // Mejora la performance del scroll
+  will-change: scroll-position;
+}
+
+// Mejoras para scroll en dispositivos táctiles
+@supports (-webkit-overflow-scrolling: touch) {
+  .main-content,
+  ion-router-outlet {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+// Scroll snap para mejor experiencia en móviles
+@media (max-width: 768px) {
+  .main-content {
+    scroll-snap-type: y proximity;
+  }
+  
+  app-hero-section,
+  app-about-section,
+  app-experience-section,
+  app-projects-section,
+  app-skills-section,
+  app-contact-section {
+    scroll-snap-align: start;
+  }
 }
 
 // ========================================
-// RESPONSIVE PARA ROUTER
+// RESPONSIVE ADJUSTMENTS - MEJORADOS
 // ========================================
 
-// Ajustes específicos para diferentes breakpoints
+// Dispositivos muy pequeños (320px y menos)
 @media (max-width: 320px) {
-  .main-content {
-    padding-top: 60px;
-    min-height: calc(100vh - 60px);
-  }
-}
-
-@media (min-width: 321px) and (max-width: 480px) {
-  .main-content {
-    padding-top: 65px;
-    min-height: calc(100vh - 65px);
-  }
-}
-
-@media (min-width: 481px) and (max-width: 768px) {
-  .main-content {
-    padding-top: 70px;
-    min-height: calc(100vh - 70px);
-  }
-}
-
-@media (min-width: 769px) {
   .main-content {
     padding-top: 80px;
     min-height: calc(100vh - 80px);
   }
-}
-
-// ========================================
-// MODALS - Z-INDEX CORREGIDO
-// ========================================
-
-// Asegurar que los modals aparezcan sobre todo
-ion-modal {
-  z-index: 20000 !important;
   
-  // Backdrop del modal
-  &::part(backdrop) {
-    background: rgba(0, 0, 0, 0.5);
-  }
-  
-  // Contenido del modal
-  &::part(content) {
-    --background: var(--ion-surface-color);
-    --color: var(--ion-text-color);
+  ion-router-outlet {
+    min-height: calc(100vh - 80px);
   }
 }
 
-// Overlay para modals
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 19999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+// Dispositivos pequeños (321px - 480px)
+@media (min-width: 321px) and (max-width: 480px) {
+  .main-content {
+    padding-top: 85px;
+    min-height: calc(100vh - 85px);
+  }
+}
+
+// Tablets y pantallas medianas (481px - 768px)
+@media (min-width: 481px) and (max-width: 768px) {
+  .main-content {
+    padding-top: 90px;
+    min-height: calc(100vh - 90px);
+  }
+}
+
+// Tablets grandes (769px - 1024px)
+@media (min-width: 769px) and (max-width: 1024px) {
+  .main-content {
+    padding-top: 95px;
+    min-height: calc(100vh - 95px);
+  }
+}
+
+// Pantallas grandes (1025px - 1399px)
+@media (min-width: 1025px) and (max-width: 1399px) {
+  .main-content {
+    padding-top: 100px;
+    min-height: calc(100vh - 100px);
+  }
+}
+
+// Pantallas muy grandes (1400px y más)
+@media (min-width: 1400px) {
+  .main-content {
+    padding-top: 105px;
+    min-height: calc(100vh - 105px);
+  }
 }
 
 // ========================================
 // DEBUG HELPERS (REMOVER EN PRODUCCIÓN)
 // ========================================
 
-// Descomentar para debug de layout
+// Uncomment para debugging layout issues
 /*
 .main-content {
   border: 2px solid red;

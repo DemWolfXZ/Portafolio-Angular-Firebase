@@ -1,14 +1,14 @@
 /**
- * ARCHIVO: src/app/components/footer/footer.component.ts - NAVEGACIÓN ROUTER
+ * ARCHIVO: src/app/components/footer/footer.component.ts
  * 
  * DESCRIPCIÓN:
- * Componente Footer con navegación por router de Angular.
+ * Componente Footer del portafolio de Alejandro Villa.
  * Versión compacta con acordeón para información de desarrollo.
- * Navegación entre rutas en lugar de scroll a secciones.
+ * Incluye links de navegación, información de contacto, enlaces sociales,
+ * información de copyright y accesos rápidos.
  */
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { DownloadService } from '../../services/download.service';
 import { ThemeService } from '../../services/theme.service';
 
@@ -29,14 +29,14 @@ export class FooterComponent implements OnInit {
     linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/'
   };
 
-  // Enlaces de navegación - AHORA USAN ROUTER
+  // Enlaces de navegación
   public navigationLinks = [
-    { id: 'home', label: 'Inicio', icon: 'home', route: '/home' },
-    { id: 'about', label: 'Sobre Mí', icon: 'person', route: '/about' },
-    { id: 'experience', label: 'Experiencia', icon: 'briefcase', route: '/experience' },
-    { id: 'projects', label: 'Proyectos', icon: 'folder', route: '/projects' },
-    { id: 'skills', label: 'Skills', icon: 'code-slash', route: '/skills' },
-    { id: 'contact', label: 'Contacto', icon: 'mail', route: '/contact' }
+    { id: 'home', label: 'Inicio', icon: 'home' },
+    { id: 'about', label: 'Sobre Mí', icon: 'person' },
+    { id: 'experience', label: 'Experiencia', icon: 'briefcase' },
+    { id: 'projects', label: 'Proyectos', icon: 'folder' },
+    { id: 'skills', label: 'Skills', icon: 'code-slash' },
+    { id: 'contact', label: 'Contacto', icon: 'mail' }
   ];
 
   // Enlaces rápidos
@@ -80,61 +80,39 @@ export class FooterComponent implements OnInit {
   };
 
   constructor(
-    private router: Router,
     private downloadService: DownloadService,
     private themeService: ThemeService
   ) { }
 
   ngOnInit(): void {
     // El footer se carga al final, no necesita animaciones especiales
-    console.log('👣 [FOOTER] Footer inicializado con navegación por router');
   }
 
   /**
-   * Navega a una ruta específica del portafolio - NUEVA IMPLEMENTACIÓN
-   * @param route - Ruta destino
-   */
-  navigateToRoute(route: string): void {
-    console.log('🚀 [FOOTER-NAV] Navegando a ruta:', route);
-    
-    this.router.navigate([route]).then(success => {
-      if (success) {
-        console.log('✅ [FOOTER-NAV] Navegación exitosa a:', route);
-        // Scroll to top al navegar
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } else {
-        console.error('❌ [FOOTER-NAV] Error navegando a:', route);
-      }
-    }).catch(error => {
-      console.error('❌ [FOOTER-NAV] Error en navegación:', error);
-    });
-  }
-
-  /**
-   * Navega a una sección específica del portafolio - MÉTODO LEGACY
-   * Mantenido para compatibilidad, ahora usa router
-   * @param sectionId - ID de la sección (convertido a ruta)
+   * Navega a una sección específica del portafolio
+   * @param sectionId - ID de la sección destino
    */
   navigateToSection(sectionId: string): void {
-    // Convertir sectionId a ruta
-    const route = sectionId === 'home' ? '/home' : `/${sectionId}`;
-    this.navigateToRoute(route);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const headerHeight = 80;
+      const elementPosition = element.offsetTop - headerHeight;
+      
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
   }
 
   /**
    * Navega al inicio del portafolio
    */
   scrollToTop(): void {
-    // Si ya estamos en home, hacer scroll to top
-    if (this.router.url === '/home' || this.router.url === '/') {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    } else {
-      // Si no, navegar a home
-      this.navigateToRoute('/home');
-    }
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }
 
   /**
@@ -143,9 +121,8 @@ export class FooterComponent implements OnInit {
   async downloadCV(): Promise<void> {
     try {
       await this.downloadService.downloadCV();
-      console.log('📄 [FOOTER] CV descargado desde footer');
     } catch (error) {
-      console.error('❌ [FOOTER] Error al descargar CV:', error);
+      console.error('Error al descargar CV:', error);
     }
   }
 
@@ -155,9 +132,8 @@ export class FooterComponent implements OnInit {
   async downloadWAD(): Promise<void> {
     try {
       await this.downloadService.downloadDoomWAD();
-      console.log('🎮 [FOOTER] WAD descargado desde footer');
     } catch (error) {
-      console.error('❌ [FOOTER] Error al descargar WAD:', error);
+      console.error('Error al descargar WAD:', error);
     }
   }
 
@@ -166,7 +142,6 @@ export class FooterComponent implements OnInit {
    */
   openLinkedIn(): void {
     window.open(this.personalInfo.linkedin, '_blank', 'noopener,noreferrer');
-    console.log('🔗 [FOOTER] LinkedIn abierto desde footer');
   }
 
   /**
@@ -176,7 +151,6 @@ export class FooterComponent implements OnInit {
     const subject = 'Contacto desde Portafolio - Alejandro Villa';
     const mailtoUrl = `mailto:${this.personalInfo.email}?subject=${encodeURIComponent(subject)}`;
     window.open(mailtoUrl, '_self');
-    console.log('📧 [FOOTER] Email iniciado desde footer');
   }
 
   /**
@@ -184,7 +158,6 @@ export class FooterComponent implements OnInit {
    */
   callPhone(): void {
     window.open(`tel:${this.personalInfo.phone}`, '_self');
-    console.log('📞 [FOOTER] Llamada iniciada desde footer');
   }
 
   /**
@@ -195,7 +168,6 @@ export class FooterComponent implements OnInit {
     const phoneNumber = this.personalInfo.phone.replace(/[^\d]/g, '');
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    console.log('💬 [FOOTER] WhatsApp abierto desde footer');
   }
 
   /**
@@ -203,7 +175,6 @@ export class FooterComponent implements OnInit {
    */
   toggleTheme(): void {
     this.themeService.toggleTheme();
-    console.log('🎨 [FOOTER] Tema cambiado desde footer a:', this.themeService.getCurrentTheme());
   }
 
   /**
@@ -220,10 +191,10 @@ export class FooterComponent implements OnInit {
   async copyEmail(): Promise<void> {
     try {
       await navigator.clipboard.writeText(this.personalInfo.email);
-      console.log('📋 [FOOTER] Email copiado al portapapeles desde footer');
       // Aquí podrías mostrar un toast de confirmación
+      console.log('Email copiado al portapapeles');
     } catch (error) {
-      console.warn('⚠️ [FOOTER] No se pudo copiar al portapapeles:', error);
+      console.warn('No se pudo copiar al portapapeles:', error);
     }
   }
 
@@ -273,7 +244,6 @@ export class FooterComponent implements OnInit {
    */
   toggleAccordion(section: keyof typeof this.accordionStates): void {
     this.accordionStates[section] = !this.accordionStates[section];
-    console.log(`📂 [FOOTER] Acordeón '${section}' ${this.accordionStates[section] ? 'abierto' : 'cerrado'}`);
   }
 
   /**
@@ -283,42 +253,5 @@ export class FooterComponent implements OnInit {
    */
   isAccordionExpanded(section: keyof typeof this.accordionStates): boolean {
     return this.accordionStates[section];
-  }
-
-  /**
-   * Verifica si una ruta está activa (para highlighting de navegación)
-   * @param route - Ruta a verificar
-   * @returns true si la ruta está activa
-   */
-  isActiveRoute(route: string): boolean {
-    const currentRoute = this.router.url;
-    
-    // Comparación exacta
-    if (currentRoute === route) {
-      return true;
-    }
-    
-    // Para home, también considerar la ruta raíz
-    if (route === '/home' && (currentRoute === '/' || currentRoute === '/home')) {
-      return true;
-    }
-    
-    return false;
-  }
-
-  /**
-   * Obtiene el estado actual de la ruta para debugging
-   * @returns Información sobre la ruta actual
-   */
-  getCurrentRouteInfo(): { url: string; active: string[] } {
-    const currentUrl = this.router.url;
-    const activeRoutes = this.navigationLinks
-      .filter(link => this.isActiveRoute(link.route))
-      .map(link => link.label);
-    
-    return {
-      url: currentUrl,
-      active: activeRoutes
-    };
   }
 }

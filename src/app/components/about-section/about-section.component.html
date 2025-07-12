@@ -1,5 +1,7 @@
-<!-- Sección Sobre Mí -->
-<div class="about-section" [class.loaded]="animationsLoaded">
+<!-- Contenido principal con scroll personalizado -->
+<ion-content [scrollEvents]="true" class="main-content">
+  <!-- Sección Sobre Mí -->
+  <div class="about-section" [class.loaded]="animationsLoaded">
   <div class="about-container">
     
     <!-- Header de la sección -->
@@ -201,7 +203,7 @@
           expand="block" 
           fill="outline" 
           class="action-button"
-          (click)="scrollToExperience()"
+          routerLink="/experience"
         >
           <ion-icon name="briefcase" slot="start"></ion-icon>
           Ver Experiencia Detallada
@@ -210,7 +212,7 @@
         <ion-button 
           expand="block" 
           class="action-button primary"
-          (click)="scrollToContact()"
+          routerLink="/contact"
         >
           <ion-icon name="mail" slot="start"></ion-icon>
           Contactar
@@ -229,3 +231,7 @@
     </div>
   </div>
 </div>
+
+<!-- Footer independiente -->
+<app-footer></app-footer>
+</ion-content>

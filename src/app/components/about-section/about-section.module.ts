@@ -12,6 +12,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AboutSectionComponent } from './about-section.component';
+import { FooterModule } from '../footer/footer.module';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    FooterModule
   ],
   declarations: [AboutSectionComponent]
 })

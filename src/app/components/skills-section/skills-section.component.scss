@@ -17,10 +17,10 @@
     padding: var(--spacing-lg) 0 var(--spacing-xl) 0;
   }
   
-  // Animación de entrada
+  // Animación de entrada más rápida
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.8s ease-out;
+  transition: all 0.3s ease-out;
   
   &.loaded {
     opacity: 1;
@@ -372,7 +372,7 @@
   height: 100%;
   width: 0%;
   border-radius: 4px;
-  transition: width 1s ease-out 0.5s;
+  transition: width 0.4s ease-out; // Reducido delay y duración
 }
 
 .skill-description {
@@ -547,7 +547,7 @@
   height: 100%;
   width: 0%;
   border-radius: 3px;
-  transition: width 1s ease-out 0.5s;
+  transition: width 0.4s ease-out; // Reducido delay y duración
 }
 
 // ========================================
@@ -884,7 +884,7 @@
 .modal-progress-bar {
   height: 100%;
   border-radius: 6px;
-  transition: width 1s ease-out;
+  transition: width 0.4s ease-out; // Optimizado para respuesta más rápida
 }
 
 .modal-description {

@@ -1,5 +1,6 @@
 // src/app/components/hero-section/hero-section.component.ts
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DownloadService } from '@services/download.service';
 
 /**
  * Componente Hero Section - Sección de presentación principal
@@ -31,7 +32,7 @@ export class HeroSectionComponent implements OnInit {
   // Modal de CV
   public showCVModal: boolean = false;
 
-  constructor() { }
+  constructor(private downloadService: DownloadService) { }
 
   ngOnInit(): void {
     // Componente visible desde el inicio - sin dependencias de animaciones
@@ -40,30 +41,28 @@ export class HeroSectionComponent implements OnInit {
 
   /**
    * Descargar CV en formato PDF
-   * Trigger para descargar el archivo CV almacenado
+   * Utiliza el servicio de descarga centralizado
    */
-  downloadCV(): void {
-    // URL del CV en Firebase Storage o assets
-    const cvUrl = 'assets/cv/CV Alejandro Villa Villavicencio.pdf';
-    
-    // Crear enlace temporal para descarga
-    const link = document.createElement('a');
-    link.href = cvUrl;
-    link.download = 'CV Alejandro Villa Villavicencio.pdf';
-    link.target = '_blank';
-    
-    // Trigger de descarga
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  async downloadCV(): Promise<void> {
+    try {
+      await this.downloadService.downloadCV();
+    } catch (error) {
+      console.error('Error al descargar CV:', error);
+    }
   }
 
   /**
    * Mostrar CV en modal/lightbox
    * Abre una vista previa del CV antes de descargar
    */
-  viewCV(): void {
-    this.showCVModal = true;
+  async viewCV(): Promise<void> {
+    try {
+      await this.downloadService.viewFile('cv-alejandro-villa');
+    } catch (error) {
+      console.error('Error al visualizar CV:', error);
+      // Fallback: abrir en nueva pestaña manualmente
+      window.open('assets/cv/CV Alejandro Villa Villavicencio.pdf', '_blank');
+    }
   }
 
   /**

@@ -78,3 +78,173 @@ ion-app {
     overscroll-behavior: contain;
   }
 }
+
+/**
+ * SCROLL PERSONALIZADO DEL SISTEMA
+ * =====================================
+ * Scroll personalizado que respeta los colores del proyecto
+ * y es compatible con header y footer fijos
+ */
+
+// Scroll personalizado para navegadores webkit
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ion-background-color-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ion-color-primary);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ion-color-primary-shade);
+}
+
+// Para Firefox
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ion-color-primary) var(--ion-background-color-secondary);
+}
+
+/**
+ * LAYOUT PRINCIPAL CON FOOTER INDEPENDIENTE
+ * ==========================================
+ * Configuración para que cada componente tenga su propio footer
+ */
+
+// Contenido principal de cada página
+.main-content {
+  min-height: calc(100vh - 60px); // Altura total menos el header
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  
+  // El footer se posiciona al final del contenido
+  app-footer {
+    margin-top: auto;
+    flex-shrink: 0;
+  }
+  
+  // Padding para no chocar con header fijo
+  padding-top: 60px; // Altura del header
+  
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 56px);
+    padding-top: 56px; // Altura del header en móvil
+  }
+}
+
+// Asegurar que ion-content ocupe todo el espacio
+ion-content.main-content {
+  --padding-top: 0px;
+  --padding-bottom: 40px; // Espacio garantizado para el footer
+  height: 100vh;
+  
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 60px); // Altura mínima para desktop
+    padding-bottom: 60px; // Espacio extra para el footer completo
+    
+    @media (max-width: 768px) {
+      min-height: calc(100vh - 56px);
+      padding-bottom: max(env(safe-area-inset-bottom, 20px), 40px);
+    }
+  }
+}
+
+/**
+ * MEJORAS DE RESPONSIVIDAD
+ * ========================
+ * Optimizaciones adicionales para móvil y desktop
+ */
+
+// Suavizar transiciones globales
+* {
+  transition: all 0.2s ease;
+}
+
+// Mejorar rendimiento en dispositivos móviles
+@media (max-width: 768px) {
+  * {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+  
+  // Permitir selección solo en texto
+  p, span, h1, h2, h3, h4, h5, h6, ion-text {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+}
+
+/**
+ * FOOTER SEMPRE VISIBLE
+ * =====================
+ * Asegurar que el footer siempre sea completamente visible
+ */
+
+// Espaciado adicional para footer en viewport pequeño
+@media (max-height: 600px) {
+  ion-content.main-content .scroll-content {
+    padding-bottom: 40px;
+  }
+}
+
+// Espaciado para dispositivos iOS con safe area
+@supports (padding: max(0px)) {
+  ion-content.main-content .scroll-content {
+    padding-bottom: max(env(safe-area-inset-bottom, 20px), 20px);
+  }
+}
+
+/**
+ * MEJORAS ESPECÍFICAS PARA DESKTOP
+ * ================================
+ * Correcciones para vista de PC donde el footer se corta
+ */
+
+@media (min-width: 769px) {
+  // En desktop, asegurar espacio suficiente para el footer
+  ion-content.main-content {
+    .scroll-content {
+      padding-bottom: 80px !important; // Espacio generoso para footer completo
+      
+      // Asegurar que el contenido principal tenga altura mínima
+      > div:first-child {
+        min-height: calc(100vh - 140px); // 60px header + 80px footer space
+      }
+    }
+    
+    // Footer siempre visible al final
+    app-footer {
+      position: relative;
+      z-index: 10;
+      background: var(--ion-background-color);
+      border-top: 1px solid var(--ion-border-color);
+    }
+  }
+}
+
+// Forzar altura completa en el contenedor principal de cada sección
+.hero-section,
+.about-section,
+.experience-section,
+.projects-section,
+.skills-section,
+.contact-section {
+  min-height: calc(100vh - 140px); // Asegurar altura mínima para empujar el footer
+  
+  @media (max-width: 768px) {
+    min-height: calc(100vh - 120px);
+  }
+}

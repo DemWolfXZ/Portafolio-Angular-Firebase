@@ -50,32 +50,23 @@ export class DownloadService {
   // Archivos disponibles para descarga
   private readonly AVAILABLE_FILES: DownloadableFile[] = [
     {
-      id: 'cv-alejandro-villa-2025',
-      name: 'CV Alejandro Villa 2025',
-      filename: 'CV_Alejandro_Villa_2025.pdf',
-      path: 'assets/cv/CV_Alejandro_Villa_2025.pdf',
+      id: 'cv-alejandro-villa',
+      name: 'CV Alejandro Villa Villavicencio',
+      filename: 'CV Alejandro Villa Villavicencio.pdf',
+      path: 'assets/cv/CV Alejandro Villa Villavicencio.pdf',
       size: '2.1 MB',
       type: 'cv',
-      description: 'Currículum Vitae actualizado de Alejandro Villa - Technical Business Analyst',
+      description: 'Currículum Vitae de Alejandro Villa Villavicencio - Desarrollador Full Stack',
       version: '2025.1'
     },
     {
-      id: 'doom-wad-example',
-      name: 'WAD Doom - Ejemplo Alejandro Villa',
-      filename: 'alejandro-villa-doom-example.wad',
-      path: 'assets/wads/alejandro-villa-doom-example.wad',
+      id: 'doom-wad',
+      name: 'WAD para DOOM II',
+      filename: 'Wad_para_DOOMII.wad',
+      path: 'assets/wads/Wad_para_DOOMII.wad',
       size: '856 KB',
       type: 'wad',
-      description: 'Nivel personalizado de Doom diseñado por Alejandro Villa - Demostración de creatividad técnica'
-    },
-    {
-      id: 'titulo-ingeniero-informatica',
-      name: 'Título Ingeniero Informática',
-      filename: 'Titulo_Ingeniero_Informatica_DuocUC.pdf',
-      path: 'assets/certificates/titulo-duoc.pdf',
-      size: '1.8 MB',
-      type: 'certificate',
-      description: 'Título oficial de Ingeniero en Informática - DuocUC 2025'
+      description: 'Nivel personalizado para DOOM II diseñado por Alejandro Villa'
     }
   ];
 
@@ -149,15 +140,15 @@ export class DownloadService {
    * Método de conveniencia para el archivo más solicitado
    */
   async downloadCV(): Promise<void> {
-    return this.downloadFile('cv-alejandro-villa-2025');
+    return this.downloadFile('cv-alejandro-villa');
   }
 
   /**
-   * Descarga el WAD de ejemplo de Doom
+   * Descarga el WAD de DOOM II
    * Método de conveniencia para mostrar creatividad técnica
    */
   async downloadDoomWAD(): Promise<void> {
-    return this.downloadFile('doom-wad-example');
+    return this.downloadFile('doom-wad');
   }
 
   /**

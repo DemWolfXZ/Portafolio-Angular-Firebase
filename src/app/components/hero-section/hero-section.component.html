@@ -1,5 +1,7 @@
-<!-- Hero Section - Presentación principal -->
-<div class="hero-section" [class.loaded]="animationsLoaded">
+<!-- Contenido principal con scroll personalizado -->
+<ion-content [scrollEvents]="true" class="main-content">
+  <!-- Hero Section - Presentación principal -->
+  <div class="hero-section" [class.loaded]="animationsLoaded">
   <div class="hero-container">
     
     <!-- Contenido principal del hero -->
@@ -80,7 +82,7 @@
             <ion-button 
               fill="clear" 
               class="social-button"
-              (click)="scrollToContact()"
+              routerLink="/contact"
             >
               <ion-icon name="chatbubble-ellipses" slot="start"></ion-icon>
               Contactar
@@ -90,7 +92,7 @@
 
         <!-- Indicador de scroll -->
         <div class="scroll-indicator">
-          <button class="scroll-button" (click)="scrollToAbout()">
+          <button class="scroll-button" routerLink="/about">
             <span class="scroll-text">Conoce más sobre mí</span>
             <ion-icon name="chevron-down" class="scroll-icon"></ion-icon>
           </button>
@@ -193,3 +195,7 @@
     </ion-content>
   </ng-template>
 </ion-modal>
+
+<!-- Footer independiente -->
+<app-footer></app-footer>
+</ion-content>

@@ -1,5 +1,7 @@
-<!-- Sección de Proyectos -->
-<div class="projects-section" [class.loaded]="animationsLoaded">
+<!-- Contenido principal con scroll personalizado -->
+<ion-content [scrollEvents]="true" class="main-content">
+  <!-- Sección de Proyectos -->
+  <div class="projects-section" [class.loaded]="animationsLoaded">
   <div class="projects-container">
     
     <!-- Header de la sección -->
@@ -244,7 +246,7 @@
           <ion-button 
             expand="block" 
             class="cta-button primary"
-            (click)="scrollToContact()"
+            routerLink="/contact"
           >
             <ion-icon name="mail" slot="start"></ion-icon>
             Proponer Proyecto
@@ -254,7 +256,7 @@
             expand="block" 
             fill="outline" 
             class="cta-button"
-            (click)="scrollToSkills()"
+            routerLink="/skills"
           >
             <ion-icon name="code-slash" slot="start"></ion-icon>
             Ver Competencias Técnicas
@@ -401,3 +403,7 @@
     </ion-content>
   </ng-template>
 </ion-modal>
+
+<!-- Footer independiente -->
+<app-footer></app-footer>
+</ion-content>

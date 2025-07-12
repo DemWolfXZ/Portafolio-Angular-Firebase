@@ -1,5 +1,7 @@
-<!-- Sección de Contacto -->
-<div class="contact-section" [class.loaded]="animationsLoaded">
+<!-- Contenido principal con scroll personalizado -->
+<ion-content [scrollEvents]="true" class="main-content">
+  <!-- Sección de Contacto -->
+  <div class="contact-section" [class.loaded]="animationsLoaded">
   <div class="contact-container">
     
     <!-- Header de la sección -->
@@ -345,16 +347,14 @@
         </div>
         
         <div class="footer-actions">
-          <ion-button 
-            fill="clear" 
-            class="footer-button"
-            (click)="scrollToTop()"
-          >
-            <ion-icon name="arrow-up" slot="start"></ion-icon>
-            Volver al Inicio
-          </ion-button>
+    
         </div>
       </div>
     </div>
   </div>
+  <br>
+
 </div>
+<!-- Footer independiente -->
+<app-footer></app-footer>
+</ion-content>
