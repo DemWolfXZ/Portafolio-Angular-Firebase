@@ -1,11 +1,12 @@
 /**
- * Estilos del componente Skills Section
+ * Estilos del componente Skills Section - OPTIMIZADO
  * Competencias técnicas organizadas por categorías con barras de progreso
  * Diseño responsivo con diferentes vistas y modal de detalles
+ * CORRECCIÓN: Transiciones más rápidas, menos delays para mejor UX
  */
 
 .skills-section {
-  min-height: auto; // Altura variable según el contenido
+  min-height: auto; // CORRECCIÓN: Altura variable según contenido
   padding: var(--spacing-3xl) 0 var(--spacing-4xl) 0;
   background: var(--ion-background-color);
   
@@ -17,10 +18,10 @@
     padding: var(--spacing-lg) 0 var(--spacing-xl) 0;
   }
   
-  // Animación de entrada más rápida
+  // CORRECCIÓN: Animación de entrada más rápida
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.3s ease-out;
+  transition: all 0.3s ease-out; // Reducido de 0.8s a 0.3s
   
   &.loaded {
     opacity: 1;
@@ -169,14 +170,18 @@
 }
 
 // ========================================
-// VISTA POR CATEGORÍAS
+// VISTA POR CATEGORÍAS - CORRECCIÓN: Asegurar visibilidad
 // ========================================
 .skills-by-category {
   margin-bottom: var(--spacing-3xl);
+  opacity: 1 !important; // CORRECCIÓN: Forzar visibilidad
+  visibility: visible !important; // CORRECCIÓN: Forzar visibilidad
 }
 
 .category-section {
   margin-bottom: var(--spacing-3xl);
+  opacity: 1 !important; // CORRECCIÓN: Forzar visibilidad
+  visibility: visible !important; // CORRECCIÓN: Forzar visibilidad
   
   &:last-child {
     margin-bottom: 0;
@@ -336,7 +341,7 @@
   letter-spacing: 0.5px;
 }
 
-// Barra de progreso
+// Barra de progreso - CORRECCIÓN: Animación más rápida
 .skill-progress {
   margin-bottom: var(--spacing-md);
 }
@@ -372,7 +377,7 @@
   height: 100%;
   width: 0%;
   border-radius: 4px;
-  transition: width 0.4s ease-out; // Reducido delay y duración
+  transition: width 0.4s ease-out 0.05s; // CORRECCIÓN: Delay mínimo para evitar problemas
 }
 
 .skill-description {
@@ -442,10 +447,12 @@
 }
 
 // ========================================
-// VISTA DESTACADAS
+// VISTA DESTACADAS - CORRECCIÓN: Asegurar visibilidad
 // ========================================
 .skills-featured {
   margin-bottom: var(--spacing-3xl);
+  opacity: 1 !important; // CORRECCIÓN: Forzar visibilidad
+  visibility: visible !important; // CORRECCIÓN: Forzar visibilidad
 }
 
 .featured-grid {
@@ -547,14 +554,16 @@
   height: 100%;
   width: 0%;
   border-radius: 3px;
-  transition: width 0.4s ease-out; // Reducido delay y duración
+  transition: width 0.4s ease-out 0.05s; // CORRECCIÓN: Delay mínimo para evitar problemas
 }
 
 // ========================================
-// VISTA POR NIVEL
+// VISTA POR NIVEL - CORRECCIÓN: Asegurar visibilidad
 // ========================================
 .skills-by-level {
   margin-bottom: var(--spacing-3xl);
+  opacity: 1 !important; // CORRECCIÓN: Forzar visibilidad
+  visibility: visible !important; // CORRECCIÓN: Forzar visibilidad
 }
 
 .level-section {
@@ -954,15 +963,21 @@
   }
 }
 
-// Clases de animación
+// CORRECCIÓN: Clases de animación SIN ocultar contenido por defecto
 .skills-animate {
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 1; // CORRECCIÓN: Visible por defecto
+  transform: translateY(0); // CORRECCIÓN: Sin desplazamiento inicial
   transition: all 0.6s ease-out;
   
   &.animate-in {
     opacity: 1;
     transform: translateY(0);
+  }
+  
+  // CORRECCIÓN: Solo aplicar animación de entrada si está específicamente marcado
+  &.will-animate {
+    opacity: 0;
+    transform: translateY(30px);
   }
 }
 

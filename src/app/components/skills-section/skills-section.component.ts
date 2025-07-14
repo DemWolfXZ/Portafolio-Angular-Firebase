@@ -1,116 +1,164 @@
-// src/app/components/skills-section/skills-section.component.ts
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+/**
+ * ARCHIVO: src/app/components/skills-section/skills-section.component.ts
+ * 
+ * DESCRIPCIÓN:
+ * Componente para la sección de competencias técnicas del portafolio.
+ * CORREGIDO: Eliminados duplicados, agregados datos reales, validaciones mejoradas.
+ * Funciona como página independiente, no como SPA.
+ */
+
+import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AnimationService } from '../../services/animation.service';
 
-/**
- * Componente para la sección de competencias técnicas del portafolio.
- * Versión simplificada para debugging y corrección progresiva.
- */
+// Importación corregida de datos reales desde el modelo
+import { 
+  ALEJANDRO_SKILLS, 
+  SKILL_CATEGORIES, 
+  Skill, 
+  SkillCategory,
+  SkillLevel,
+  getSkillsByCategory,
+  getFeaturedSkills,
+  getTotalYearsInCategory
+} from '../../models/skill.model';
+
 @Component({
   selector: 'app-skills-section',
   templateUrl: './skills-section.component.html',
-  styleUrls: ['./skills-section.component.scss'],
+  styleUrls: ['./skills-section.component.scss']
 })
-export class SkillsSectionComponent implements OnInit {
-  /**
-   * Cambia el modo de vista de skills
-   */
-  setViewMode(mode: 'category' | 'level' | 'featured'): void {
-    this.viewMode = mode;
-    setTimeout(() => {
-      this.animateSkillBars();
-    }, 80);
-  }
+export class SkillsSectionComponent implements OnInit, OnDestroy {
 
-  // Estado del componente
+  // Estado del componente - VALIDACIÓN: Siempre inicializar con valores seguros
   public animationsLoaded = false;
-  public selectedSkill: any = null;
-
-  // Vista de skills
+  public selectedSkill: Skill | null = null;
   public viewMode: 'category' | 'level' | 'featured' = 'category';
 
-  // Datos simplificados para debugging
-  public allSkills = [
-    { name: 'JavaScript', level: 'expert', yearsOfExperience: 15, featured: true },
-    { name: 'Angular', level: 'advanced', yearsOfExperience: 8, featured: true },
-    { name: 'SQL Server', level: 'expert', yearsOfExperience: 18, featured: true }
-  ];
+  // Datos reales importados desde el modelo - CORRECCIÓN: Usar datos completos, no mock
+  public allSkills: Skill[] = [];
+  public skillCategories: any[] = [];
 
-  public skillCategories = [
-    { id: 'frontend', name: 'Frontend', featured: true, icon: 'code', color: '#007bff', description: 'Frontend development skills' },
-    { id: 'backend', name: 'Backend', featured: true, icon: 'server', color: '#28a745', description: 'Backend development skills' }
-  ];
+  // CORRECCIÓN: Arrays de niveles tipados para el template
+  public skillLevels: SkillLevel[] = ['expert', 'advanced', 'intermediate', 'learning'];
 
-  constructor(private animationService: AnimationService) { }
+  // Helper functions disponibles en el template
+  public getSkillsByCategory = getSkillsByCategory;
+  public getFeaturedSkills = getFeaturedSkills;
+  public getTotalYearsInCategory = getTotalYearsInCategory;
+
+  constructor(
+    private animationService: AnimationService,
+    private cdr: ChangeDetectorRef
+  ) {
+    // CORRECCIÓN: Inicializar datos en el constructor para garantizar disponibilidad
+    this.initializeData();
+  }
 
   ngOnInit(): void {
-    // Cargar las animaciones inmediatamente sin delay
-    this.animationsLoaded = true;
-    this.initAnimations();
+    console.log('Skills Section - ngOnInit iniciado');
     
-    // Debug logs
-    console.log('Skills Section - ngOnInit');
-    console.log('Total skills:', this.allSkills.length);
-    console.log('Categories:', this.skillCategories.length);
-    console.log('View mode:', this.viewMode);
+    // CORRECCIÓN: Verificar que los datos estén cargados antes de continuar
+    if (this.allSkills.length === 0) {
+      this.initializeData();
+    }
+
+    // Inicializar animaciones con delay mínimo
+    setTimeout(() => {
+      this.animationsLoaded = true;
+      this.initAnimations();
+      this.cdr.detectChanges(); // CORRECCIÓN: Forzar detección de cambios
+    }, 100);
+
+    // Debug logs para verificar datos
+    console.log('Total skills cargadas:', this.allSkills.length);
+    console.log('Categorías disponibles:', this.skillCategories.length);
+    console.log('View mode actual:', this.viewMode);
+  }
+
+  ngOnDestroy(): void {
+    // CORRECCIÓN: Limpiar recursos para evitar memory leaks
+    this.selectedSkill = null;
   }
 
   /**
-   * Obtiene skills filtradas según la categoría activa
+   * CORRECCIÓN: Inicializar datos de forma segura
    */
-  getDisplayedSkills(): any[] {
-    return this.allSkills;
+  private initializeData(): void {
+    try {
+      this.allSkills = [...ALEJANDRO_SKILLS];
+      this.skillCategories = [...SKILL_CATEGORIES];
+      console.log('Datos inicializados correctamente');
+    } catch (error) {
+      console.error('Error al inicializar datos:', error);
+      // Fallback con datos mínimos para evitar crashes
+      this.allSkills = [];
+      this.skillCategories = [];
+    }
   }
 
   /**
-   * Obtiene skills organizadas por categoría para vista de categorías
+   * CORRECCIÓN: Método funcionando para obtener skills por categorías
    */
-  getSkillsByCategories() {
+  getSkillsByCategories(): { [key: string]: any } {
     const result: { [key: string]: any } = {};
     
+    // VALIDACIÓN: Verificar que existen categorías antes de procesar
+    if (!this.skillCategories || this.skillCategories.length === 0) {
+      return result;
+    }
+    
     this.skillCategories.forEach(category => {
-      result[category.id] = {
-        ...category,
-        skills: this.allSkills.slice(0, 2), // Simplificado
-        totalYears: 15
-      };
+      if (category.featured) {
+        const categorySkills = getSkillsByCategory(category.id);
+        result[category.id] = {
+          ...category,
+          skills: categorySkills,
+          totalYears: getTotalYearsInCategory(category.id)
+        };
+      }
     });
     
     return result;
   }
 
   /**
-   * Obtiene solo skills destacadas
+   * CORRECCIÓN: Método funcionando para skills por nivel - TIPADO FLEXIBLE
    */
-  getFeaturedSkills(): any[] {
-    return this.allSkills.filter(skill => skill.featured);
-  }
-
-  /**
-  // Estado del componente y datos de skills
-   */
-  getSkillsByLevel(level: string): any[] {
+  getSkillsByLevel(level: SkillLevel | string): Skill[] {
+    // VALIDACIÓN: Verificar que existen skills antes de filtrar
+    if (!this.allSkills || this.allSkills.length === 0) {
+      return [];
+    }
+    
     return this.allSkills.filter(skill => skill.level === level);
   }
 
   /**
-  // Datos de skills importados desde el modelo
-  public allSkills = ALEJANDRO_SKILLS;
-  public skillCategories = SKILL_CATEGORIES;
-    // Debug logs
-    console.log('Current view mode:', this.viewMode);
-    console.log('Skills by categories:', this.getSkillsByCategories());
-    console.log('Featured skills:', this.getFeaturedSkills());
+   * CORRECCIÓN: Cambio de vista con validaciones y re-renderizado forzado
+   */
+  setViewMode(mode: 'category' | 'level' | 'featured'): void {
+    console.log('Cambiando view mode de', this.viewMode, 'a', mode);
+    this.viewMode = mode;
     
-    // Re-animar inmediatamente cuando cambia la vista
-    this.animateSkillBars();
+    // CORRECCIÓN: Forzar detección de cambios inmediatamente
+    this.cdr.detectChanges();
+    
+    // CORRECCIÓN: Re-animar después de un delay mínimo
+    setTimeout(() => {
+      this.animateSkillBars();
+      this.cdr.detectChanges();
+    }, 100);
+    
+    // CORRECCIÓN: Debug para verificar cambio
+    console.log('View mode actualizado a:', this.viewMode);
   }
 
   /**
    * Abre modal con detalles de una skill específica
    */
-  openSkillDetail(skill: any): void {
+  openSkillDetail(skill: Skill): void {
     this.selectedSkill = skill;
+    console.log('Abriendo detalle de skill:', skill.name);
   }
 
   /**
@@ -121,18 +169,27 @@ export class SkillsSectionComponent implements OnInit {
   }
 
   /**
-   * Calcula el porcentaje de la barra de progreso
+   * CORRECCIÓN: Cálculo de porcentaje validado
    */
-  getSkillPercentage(skill: any): number {
+  getSkillPercentage(skill: Skill): number {
+    if (!skill || !skill.yearsOfExperience) {
+      return 0;
+    }
+    
     const maxYears = 20;
     return Math.min((skill.yearsOfExperience / maxYears) * 100, 100);
   }
 
   /**
-   * Obtiene el color de la categoría de una skill
+   * CORRECCIÓN: Obtener color de categoría con fallback
    */
-  getCategoryColor(category: string): string {
-    return '#007bff'; // Color por defecto
+  getCategoryColor(category: SkillCategory | string): string {
+    if (!category) {
+      return '#007bff'; // Color por defecto
+    }
+    
+    const categoryData = this.skillCategories.find(cat => cat.id === category);
+    return categoryData?.color || '#007bff';
   }
 
   /**
@@ -162,9 +219,13 @@ export class SkillsSectionComponent implements OnInit {
   }
 
   /**
-   * Formatea años de experiencia
+   * CORRECCIÓN: Formateo de años con validación
    */
   formatYearsOfExperience(years: number): string {
+    if (!years || years <= 0) {
+      return '< 1 año';
+    }
+    
     if (years >= 20) return '20+ años';
     if (years >= 10) return `${years}+ años`;
     if (years === 1) return '1 año';
@@ -172,54 +233,122 @@ export class SkillsSectionComponent implements OnInit {
   }
 
   /**
-   * Obtiene estadísticas generales
+   * CORRECCIÓN: Estadísticas calculadas con validaciones
    */
   getSkillsStats() {
+    // VALIDACIÓN: Verificar que hay datos antes de calcular
+    if (!this.allSkills || this.allSkills.length === 0) {
+      return {
+        totalSkills: 0,
+        expertSkills: 0,
+        maxExperience: 0,
+        categories: 0
+      };
+    }
+    
+    const expertSkills = this.allSkills.filter(s => s.level === 'expert');
+    const maxExp = this.allSkills.length > 0 ? Math.max(...this.allSkills.map(s => s.yearsOfExperience)) : 0;
+    const featuredCategories = this.skillCategories.filter(cat => cat.featured);
+    
     return {
       totalSkills: this.allSkills.length,
-      expertSkills: this.allSkills.filter(s => s.level === 'expert').length,
-      maxExperience: Math.max(...this.allSkills.map(s => s.yearsOfExperience)),
-      categories: this.skillCategories.length
+      expertSkills: expertSkills.length,
+      maxExperience: maxExp,
+      categories: featuredCategories.length
     };
   }
 
   /**
-   * Inicializa animaciones para elementos de la sección
+   * CORRECCIÓN: Navegación a contacto
    */
-  private initAnimations(): void {
-    // Animar elementos principales
-    const animatedElements = document.querySelectorAll('.skills-animate');
-    
-    animatedElements.forEach((element, index) => {
-      this.animationService.observeElement(
-        element,
-        'slideInUp',
-        0.1
-      );
-    });
-
-    this.animateSkillBars();
+  scrollToContact(): void {
+    // Para sistema de rutas (no SPA)
+    window.location.href = '/contact';
   }
 
   /**
-   * Anima las barras de progreso y tarjetas de skills
+   * CORRECCIÓN: Navegación a proyectos  
+   */
+  scrollToProjects(): void {
+    // Para sistema de rutas (no SPA)
+    window.location.href = '/projects';
+  }
+
+  /**
+   * CORRECCIÓN: Inicialización de animaciones optimizada
+   */
+  private initAnimations(): void {
+    try {
+      // Animar elementos principales con verificación de existencia
+      const animatedElements = document.querySelectorAll('.skills-animate');
+      
+      if (animatedElements.length > 0) {
+        animatedElements.forEach((element, index) => {
+          this.animationService.observeElement(
+            element,
+            'slideInUp',
+            0.1
+          );
+        });
+      }
+
+      // Inicializar animación de barras
+      this.animateSkillBars();
+    } catch (error) {
+      console.warn('Error al inicializar animaciones:', error);
+    }
+  }
+
+  /**
+   * CORRECCIÓN: Animación de barras mejorada sin delays que oculten contenido
    */
   private animateSkillBars(): void {
-    // Animar barras de progreso inmediatamente
-    const skillBars = document.querySelectorAll('.skill-progress-bar');
-    skillBars.forEach((bar: any) => {
-      const percentage = bar.getAttribute('data-percentage');
-      if (percentage) {
-        bar.style.width = percentage + '%';
-      }
-    });
+    // CORRECCIÓN: Sin delay inicial - mostrar inmediatamente
+    try {
+      // Animar barras de progreso regulares
+      const skillBars = document.querySelectorAll('.skill-progress-bar');
+      skillBars.forEach((bar: any) => {
+        // CORRECCIÓN: Resetear ancho primero para re-animación
+        bar.style.width = '0%';
+        const percentage = bar.getAttribute('data-percentage');
+        if (percentage && !isNaN(percentage)) {
+          // CORRECCIÓN: Aplicar ancho después de un delay mínimo
+          setTimeout(() => {
+            bar.style.width = percentage + '%';
+          }, 50);
+        }
+      });
 
-    // Animar tarjetas de skills con menos delay
-    const skillCards = document.querySelectorAll('.skill-card');
-    skillCards.forEach((card, index) => {
-      setTimeout(() => {
-        this.animationService.observeElement(card, 'scaleIn', 0.1);
-      }, index * 20);
-    });
+      // Animar barras de progreso destacadas
+      const featuredBars = document.querySelectorAll('.featured-progress-bar');
+      featuredBars.forEach((bar: any) => {
+        // CORRECCIÓN: Resetear ancho primero para re-animación
+        bar.style.width = '0%';
+        const percentage = bar.getAttribute('data-percentage');
+        if (percentage && !isNaN(percentage)) {
+          // CORRECCIÓN: Aplicar ancho después de un delay mínimo
+          setTimeout(() => {
+            bar.style.width = percentage + '%';
+          }, 50);
+        }
+      });
+
+      // CORRECCIÓN: Asegurar que las tarjetas sean visibles
+      const skillCards = document.querySelectorAll('.skill-card, .featured-skill-card, .level-skill-item');
+      skillCards.forEach((card: any, index) => {
+        // CORRECCIÓN: Forzar visibilidad inmediata
+        card.style.opacity = '1';
+        card.style.transform = 'none';
+        
+        // CORRECCIÓN: Animación opcional sin ocultar contenido
+        if (this.animationService && typeof this.animationService.observeElement === 'function') {
+          setTimeout(() => {
+            this.animationService.observeElement(card, 'scaleIn', 0.1);
+          }, index * 10); // Delay muy reducido
+        }
+      });
+    } catch (error) {
+      console.warn('Error al animar barras de skill:', error);
+    }
   }
 }

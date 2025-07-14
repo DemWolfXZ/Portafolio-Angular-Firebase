@@ -8,63 +8,36 @@
 .hero-section {
   // ALTURA COMPLETA AJUSTADA AL NUEVO LAYOUT
   min-height: calc(100vh - 100px);
-  height: auto; // Permitir crecimiento según contenido
-  
-  // Layout flex para centrar contenido
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  
-  // Background gradient
-  background: linear-gradient(135deg, 
-    var(--ion-background-color) 0%, 
-    var(--ion-background-color-secondary) 100%
-  );
-  
-  // Posición relativa para elementos decorativos
+  background: linear-gradient(135deg, var(--ion-background-color) 0%, var(--ion-background-color-secondary) 100%);
   position: relative;
-  
-  // Padding interno optimizado - menos porque ya tenemos padding en el layout principal
   padding: var(--spacing-lg) 0;
-  
-  // Responsive adjustments
-  @media (max-width: 768px) {
-    min-height: calc(100vh - 90px);
-    padding: var(--spacing-md) 0;
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+
+  &.loaded {
+    opacity: 1;
   }
-  
-  @media (max-width: 480px) {
-    min-height: calc(100vh - 85px);
-    padding: var(--spacing-sm) 0;
-  }
-  
-  @media (max-width: 320px) {
-    min-height: calc(100vh - 80px);
-    padding: var(--spacing-xs) 0;
-  }
+
   @media (max-width: 768px) {
     min-height: calc(100vh - 70px);
     padding: var(--spacing-lg) 0;
   }
-  
+
   @media (max-width: 480px) {
     min-height: calc(100vh - 65px);
     padding: var(--spacing-md) 0;
   }
-  
+
   @media (max-width: 320px) {
     min-height: calc(100vh - 60px);
     padding: var(--spacing-sm) 0;
   }
-  
-  // Animación de entrada SIN transform que afecte layout
-  opacity: 0;
-  transition: opacity 0.8s ease-out;
-  
-  &.loaded {
-    opacity: 1;
-  }
 }
+
 
 .hero-container {
   width: 100%;
@@ -380,19 +353,27 @@
 }
 
 .profile-image {
-  width: 100%;
-  height: auto;
-  border-radius: 50%;
-  box-shadow: 0 20px 40px rgba(var(--ion-color-primary-rgb), 0.3);
-  transition: all var(--transition-slow);
-  
+  width: 280px;
+  height: 280px;
+  border-radius: 50%; // Hace el círculo perfecto
+  object-fit: cover;  // Mantiene proporciones dentro del círculo
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 16px 32px rgba(var(--ion-color-primary-rgb), 0.25);
+  transition: transform 0.3s ease-in-out;
+
   &:hover {
     transform: scale(1.05);
-    box-shadow: 0 25px 50px rgba(var(--ion-color-primary-rgb), 0.4);
   }
-  
+
   @media (max-width: 768px) {
-    max-width: 280px;
+    width: 220px;
+    height: 220px;
+  }
+
+  @media (max-width: 480px) {
+    width: 180px;
+    height: 180px;
   }
 }
 
