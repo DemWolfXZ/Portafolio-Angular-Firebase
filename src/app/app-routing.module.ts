@@ -1,10 +1,11 @@
 /**
- * ARCHIVO: src/app/app-routing.module.ts
+ * ARCHIVO: src/app/app-routing.module.ts - ACTUALIZADO CON 404
  * 
  * DESCRIPCIÓN:
  * Configuración de rutas con lazy loading para cada sección.
  * Cada componente tiene su propio módulo que se carga bajo demanda.
  * Rutas limpias y navegación directa por URL.
+ * ACTUALIZADO: Agregado manejo profesional de página 404.
  */
 
 import { NgModule } from '@angular/core';
@@ -40,9 +41,22 @@ const routes: Routes = [
     path: 'contact',
     loadChildren: () => import('./components/contact-section/contact-section.module').then(m => m.ContactSectionModule)
   },
+  
+  // NUEVA RUTA: Página 404 - Page Not Found profesional
+  {
+    path: '404',
+    loadChildren: () => import('./components/page-not-found/page-not-found.module').then(m => m.PageNotFoundModule),
+    data: { 
+      title: 'Página No Encontrada - Alejandro Villa',
+      description: 'La página solicitada no existe. Navega a las secciones disponibles del portafolio.'
+    }
+  },
+  
+  // RUTA WILDCARD: Cualquier ruta no encontrada redirige a 404
+  // IMPORTANTE: Esta debe ser la ÚLTIMA ruta en el array
   {
     path: '**',
-    redirectTo: '/home'
+    redirectTo: '/404'
   }
 ];
 
@@ -51,9 +65,13 @@ const routes: Routes = [
     RouterModule.forRoot(routes, { 
       preloadingStrategy: PreloadAllModules,
       // Opciones para mejor SEO y navegación
-      enableTracing: false, // Solo para debug
+      enableTracing: false, // Solo para debug en desarrollo
       scrollPositionRestoration: 'top', // Scroll al top en navegación
-      anchorScrolling: 'enabled' // Soporte para anchors
+      anchorScrolling: 'enabled', // Soporte para anchors
+      // Configuración adicional para manejo de errores
+      errorHandler: (error: any) => {
+        console.error('Error de navegación:', error);
+      }
     })
   ],
   exports: [RouterModule]

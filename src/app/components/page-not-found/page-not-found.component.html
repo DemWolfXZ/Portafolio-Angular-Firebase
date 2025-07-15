@@ -1,0 +1,135 @@
+<!-- Contenido principal con scroll personalizado -->
+<ion-content [scrollEvents]="true" class="main-content">
+  <!-- Sección 404 Page Not Found -->
+  <div class="page-404-section" [class.loaded]="animationsLoaded">
+    <div class="page-404-container">
+      
+      <!-- Contenido principal del 404 -->
+      <div class="error-content">
+        
+        <!-- Número 404 grande y destacado -->
+        <div class="error-number-container">
+          <div class="error-number">404</div>
+          <div class="error-glitch-effect">404</div>
+        </div>
+
+        <!-- Mensaje principal -->
+        <div class="error-message">
+          <h1 class="error-title">Página No Encontrada</h1>
+          <p class="error-subtitle">
+            Lo siento, la página que buscas no existe o ha sido movida.
+          </p>
+        </div>
+
+        <!-- Información técnica del error -->
+        <div class="error-details">
+          <div class="detail-item">
+            <ion-icon name="alert-circle" class="detail-icon"></ion-icon>
+            <span class="detail-text">URL no válida: <code>{{ getCurrentUrl() }}</code></span>
+          </div>
+          <div class="detail-item">
+            <ion-icon name="time" class="detail-icon"></ion-icon>
+            <span class="detail-text">Detectado: {{ getCurrentTime() }}</span>
+          </div>
+          <div class="detail-item">
+            <ion-icon name="navigate" class="detail-icon"></ion-icon>
+            <span class="detail-text">Redirigiendo automáticamente en {{ countdown }} segundos</span>
+          </div>
+        </div>
+
+        <!-- Sugerencias de navegación -->
+        <div class="navigation-suggestions">
+          <h3 class="suggestions-title">¿Qué puedes hacer?</h3>
+          
+          <div class="suggestions-grid">
+            
+            <!-- Ir al inicio -->
+            <div class="suggestion-card" (click)="navigateToHome()">
+              <div class="suggestion-icon">
+                <ion-icon name="home" class="icon"></ion-icon>
+              </div>
+              <div class="suggestion-content">
+                <h4 class="suggestion-title">Ir al Inicio</h4>
+                <p class="suggestion-description">Volver a la página principal del portafolio</p>
+              </div>
+              <ion-icon name="chevron-forward" class="suggestion-arrow"></ion-icon>
+            </div>
+
+            <!-- Ver proyectos -->
+            <div class="suggestion-card" (click)="navigateToProjects()">
+              <div class="suggestion-icon">
+                <ion-icon name="folder" class="icon"></ion-icon>
+              </div>
+              <div class="suggestion-content">
+                <h4 class="suggestion-title">Ver Proyectos</h4>
+                <p class="suggestion-description">Explora los proyectos y sistemas en producción</p>
+              </div>
+              <ion-icon name="chevron-forward" class="suggestion-arrow"></ion-icon>
+            </div>
+
+            <!-- Contacto -->
+            <div class="suggestion-card" (click)="navigateToContact()">
+              <div class="suggestion-icon">
+                <ion-icon name="mail" class="icon"></ion-icon>
+              </div>
+              <div class="suggestion-content">
+                <h4 class="suggestion-title">Contactar</h4>
+                <p class="suggestion-description">¿Necesitas ayuda? Envíame un mensaje</p>
+              </div>
+              <ion-icon name="chevron-forward" class="suggestion-arrow"></ion-icon>
+            </div>
+
+            <!-- Ver experiencia -->
+            <div class="suggestion-card" (click)="navigateToExperience()">
+              <div class="suggestion-icon">
+                <ion-icon name="briefcase" class="icon"></ion-icon>
+              </div>
+              <div class="suggestion-content">
+                <h4 class="suggestion-title">Mi Experiencia</h4>
+                <p class="suggestion-description">20+ años resolviendo problemas técnicos</p>
+              </div>
+              <ion-icon name="chevron-forward" class="suggestion-arrow"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <!-- Navegación rápida con botones -->
+        <div class="quick-actions">
+          <ion-button 
+            expand="block" 
+            class="action-button primary"
+            (click)="navigateToHome()"
+          >
+            <ion-icon name="home" slot="start"></ion-icon>
+            Volver al Inicio
+          </ion-button>
+          
+          <div class="secondary-actions">
+            <ion-button 
+              fill="outline" 
+              class="action-button secondary"
+              (click)="goBack()"
+            >
+              <ion-icon name="arrow-back" slot="start"></ion-icon>
+              Página Anterior
+            </ion-button>
+            
+ 
+          </div>
+        </div>
+
+
+      </div>
+
+      <!-- Decoración de fondo -->
+      <div class="error-background">
+        <div class="bg-decoration bg-1"></div>
+        <div class="bg-decoration bg-2"></div>
+        <div class="bg-decoration bg-3"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer independiente -->
+  <app-footer></app-footer>
+</ion-content>

@@ -1,16 +1,18 @@
 /**
- * ARCHIVO: src/app/components/header/header.component.ts - PROFESIONAL
+ * ARCHIVO: src/app/components/header/header.component.ts - ACTUALIZADO
  * 
  * DESCRIPCIÓN:
  * Header horizontal fijo profesional como en las imágenes de referencia.
  * Diseño similar al proyecto anterior con colores azul profesional.
  * Navegación horizontal en desktop, hamburguesa en móvil.
+ * ACTUALIZADO: Manejo mejorado de rutas incluyendo 404.
  */
 
 import { Component, OnInit, HostListener, Renderer2, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 import { ThemeService } from '@services/theme.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -48,6 +50,15 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     // Detectar ruta activa al cargar
     this.detectActiveRoute();
+    
+    // Escuchar cambios de ruta para actualizar estado activo
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event) => {
+      const navEvent = event as NavigationEnd;
+      this.activeRoute = navEvent.urlAfterRedirects;
+      this.closeMobileMenu(); // Cerrar menú móvil al navegar
+    });
     
     // Listener para cerrar menú con tecla Escape
     this.renderer.listen('document', 'keydown.escape', () => {
@@ -92,7 +103,7 @@ export class HeaderComponent implements OnInit {
   }
 
   /**
-   * Navegación por router - NUEVA IMPLEMENTACIÓN
+   * Navegación por router - MEJORADA CON MANEJO DE ERRORES
    * @param route - Ruta de destino
    */
   navigateToRoute(route: string): void {
@@ -101,15 +112,28 @@ export class HeaderComponent implements OnInit {
     // Cerrar menú móvil inmediatamente
     this.closeMobileMenu();
 
-    // Navegar usando el router de Angular
-    this.router.navigate([route]).then(success => {
-      if (success) {
-        this.activeRoute = route;
-        console.log('✅ [NAVEGACIÓN] Navegación exitosa a:', route);
-      } else {
-        console.error('❌ [NAVEGACIÓN] Error navegando a:', route);
-      }
-    });
+    // Verificar si la ruta es válida antes de navegar
+    if (this.isValidRoute(route)) {
+      // Navegar usando el router de Angular
+      this.router.navigate([route]).then(success => {
+        if (success) {
+          this.activeRoute = route;
+          console.log('✅ [NAVEGACIÓN] Navegación exitosa a:', route);
+        } else {
+          console.error('❌ [NAVEGACIÓN] Error navegando a:', route);
+          // En caso de error, redirigir a 404
+          this.router.navigate(['/404']);
+        }
+      }).catch(error => {
+        console.error('❌ [NAVEGACIÓN] Error de navegación:', error);
+        // En caso de error de navegación, ir a 404
+        this.router.navigate(['/404']);
+      });
+    } else {
+      console.warn('⚠️ [NAVEGACIÓN] Ruta no válida:', route);
+      // Ruta no válida, ir a 404
+      this.router.navigate(['/404']);
+    }
   }
 
   /**
@@ -159,6 +183,11 @@ export class HeaderComponent implements OnInit {
    */
   private detectActiveRoute(): void {
     this.activeRoute = this.router.url;
+    
+    // Si la ruta actual es 404, no marcar ningún item como activo
+    if (this.activeRoute === '/404') {
+      this.activeRoute = '';
+    }
   }
 
   /**
@@ -167,6 +196,42 @@ export class HeaderComponent implements OnInit {
    * @returns true si la ruta está activa
    */
   isActiveRoute(route: string): boolean {
+    // No marcar como activo si estamos en 404
+    if (this.activeRoute === '/404' || this.activeRoute === '') {
+      return false;
+    }
+    
     return this.activeRoute === route;
+  }
+
+  /**
+   * Verifica si una ruta es válida
+   * @param route - Ruta a verificar
+   * @returns true si la ruta es válida
+   */
+  private isValidRoute(route: string): boolean {
+    const validRoutes = ['/home', '/about', '/experience', '/projects', '/skills', '/contact', '/404'];
+    return validRoutes.includes(route);
+  }
+
+  /**
+   * Navega al inicio desde cualquier lugar
+   * Método de emergencia para casos de navegación problemática
+   */
+  navigateToHome(): void {
+    this.router.navigate(['/home']).catch(error => {
+      console.error('Error navegando al inicio:', error);
+      // Como último recurso, recargar la página
+      window.location.href = '/home';
+    });
+  }
+
+  /**
+   * Obtiene el label amigable de la ruta actual para mostrar en el header
+   * @returns Nombre amigable de la sección actual
+   */
+  getCurrentSectionLabel(): string {
+    const currentItem = this.navItems.find(item => item.route === this.activeRoute);
+    return currentItem?.label || 'Portafolio';
   }
 }
