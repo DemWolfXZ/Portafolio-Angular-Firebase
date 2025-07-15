@@ -5,8 +5,7 @@
  * Modelo de datos para los proyectos del portafolio de Alejandro Villa.
  * Define la estructura de proyectos profesionales, académicos y creativos
  * incluyendo información técnica, enlaces, capturas y descripciones detalladas.
- * Alineado con la información del prompt sobre proyectos reales.
- * ACTUALIZADO: Información completa de WADs de Doom con videos de YouTube.
+ * ACTUALIZADO: Soporte completo para WADs de DOOM con videos y modales personalizados.
  */
 
 /**
@@ -65,28 +64,26 @@ export interface Project {
   /** Orden de visualización */
   displayOrder: number;
   
-  /** Información específica para WADs */
-  wadInfo?: WadInfo;
-}
-
-/**
- * Información específica para proyectos WAD de Doom
- */
-export interface WadInfo {
-  /** Número de niveles del WAD */
-  levelCount: number;
+  /** URL de video de YouTube (para WADs) */
+  videoUrl?: string;
   
-  /** Motor de juego requerido */
-  requiredEngine: string;
+  /** Indica si el WAD está disponible para descarga */
+  wadAvailable?: boolean;
   
-  /** Juego base requerido */
-  requiredGame: string;
+  /** Imagen de fondo para modal personalizado */
+  modalBackgroundImage?: string;
   
-  /** Características especiales del WAD */
-  features: string[];
+  /** Motor de juego requerido (ej: Zandronum) */
+  engineRequired?: string;
+  
+  /** Juego base requerido (ej: DOOM II) */
+  requiredGame?: string;
+  
+  /** Características especiales del proyecto */
+  features?: string[];
   
   /** Instrucciones de instalación */
-  installInstructions?: string;
+  installInstructions?: string[];
 }
 
 /**
@@ -164,9 +161,6 @@ export interface ProjectLinks {
   
   /** Video explicativo */
   video?: string;
-  
-  /** Video de YouTube */
-  youtube?: string;
   
   /** Caso de estudio detallado */
   caseStudy?: string;
@@ -340,32 +334,31 @@ export const ALEJANDRO_PROJECTS: Project[] = [
 
 /**
  * Datos de proyectos creativos (WADs para Doom)
- * ACTUALIZADO: Información completa con videos de YouTube
+ * ACTUALIZADO: Incluye WAD de 11 niveles y proyecto experimental DOOM 3
  */
 export const CREATIVE_PROJECTS: Project[] = [
   {
-    id: 'doom-wad-11-levels',
-    title: 'WAD para DOOM II - 11 Niveles',
-    shortDescription: 'Modificación completa con 11 niveles personalizados para DOOM II',
-    fullDescription: 'Proyecto creativo que demuestra capacidad de diseño espacial y pensamiento sistemático. WAD completo con 11 niveles únicos diseñados para DOOM II, cada uno con mecánicas y desafíos específicos que requieren planificación estratégica y resolución de problemas creativos.',
+    id: 'waterdoom-11-levels',
+    title: 'DOOM - WAD de 11 Niveles Completos',
+    shortDescription: 'WAD completo para DOOM II con 11 niveles originales demostrando creatividad técnica',
+    fullDescription: 'Desarrollo de modificación completa para DOOM II con 11 niveles únicos. Demuestra capacidad de pensamiento espacial, diseño de experiencias y resolución de problemas creativos bajo limitaciones técnicas.',
     category: 'creative',
     type: 'game-mod',
     technologies: [
       { name: 'Doom Builder', category: 'tools', color: '#8b0000' },
       { name: 'SLADE', category: 'tools', color: '#4169e1' },
-      { name: 'Level Design', category: 'game-engine', color: '#ff6347' },
-      { name: 'Zandronum', category: 'game-engine', color: '#228b22' }
+      { name: 'Level Design', category: 'game-engine', color: '#ff6347' }
     ],
     links: {
       download: 'assets/wads/Wad_para_DOOMII.wad',
-      youtube: 'https://youtu.be/VzD9NT5F_Z0',
-      video: 'https://www.youtube.com/embed/VzD9NT5F_Z0'
+      video: 'https://youtu.be/VzD9NT5F_Z0'
     },
     images: {
-      thumbnail: 'assets/wads/Doom-PNG-File.png',
+      thumbnail: 'assets/wads/wad_11niveles.png',
       screenshots: [
-        'assets/projects/doom-level-1.jpg',
-        'assets/projects/doom-level-2.jpg'
+        'assets/projects/waterdoom-level-1.jpg',
+        'assets/projects/waterdoom-level-2.jpg',
+        'assets/projects/waterdoom-level-3.jpg'
       ]
     },
     dates: {
@@ -375,88 +368,90 @@ export const CREATIVE_PROJECTS: Project[] = [
     role: 'Level Designer & Modder',
     status: 'completed',
     achievements: [
-      '11 niveles completamente funcionales y únicos',
-      'Diseño innovador de espacios con progresión de dificultad',
-      'Mecánicas de juego balanceadas y desafiantes',
-      'Demostración práctica de pensamiento sistemático'
+      '11 niveles completamente funcionales',
+      'Diseño innovador de espacios y mecánicas',
+      'Demostración de pensamiento sistemático aplicado',
+      'Optimización para múltiples dificultades'
     ],
     challenges: [
       'Limitaciones técnicas del engine original de DOOM',
       'Optimización de performance en niveles complejos',
-      'Balance entre dificultad progresiva y diversión',
-      'Diseño coherente manteniendo la esencia del juego original'
+      'Balance entre dificultad y diversión',
+      'Coherencia narrativa entre los 11 niveles'
     ],
     featured: true,
     displayOrder: 4,
-    wadInfo: {
-      levelCount: 11,
-      requiredEngine: 'Zandronum',
-      requiredGame: 'DOOM II: Hell on Earth',
-      features: [
-        '11 niveles únicos con progresión de dificultad',
-        'Diseño espacial innovador y desafiante',
-        'Mecánicas de juego balanceadas',
-        'Compatible con multijugador cooperativo'
-      ],
-      installInstructions: 'Requiere DOOM II original y Zandronum engine para ejecutar correctamente'
-    }
+    videoUrl: 'https://youtu.be/VzD9NT5F_Z0',
+    wadAvailable: true,
+    modalBackgroundImage: 'assets/wads/wad_11niveles.png',
+    engineRequired: 'Zandronum',
+    requiredGame: 'DOOM II',
+    features: [
+      '11 niveles completos y únicos',
+      'Diseño original de espacios',
+      'Optimizado para multijugador',
+      'Compatible con diferentes dificultades'
+    ],
+    installInstructions: [
+      'Descargar e instalar Zandronum desde zandronum.com',
+      'Tener una copia legal de DOOM II',
+      'Descargar el archivo Wad_para_DOOMII.wad',
+      'Ejecutar Zandronum y cargar el WAD desde el menú'
+    ]
   },
   {
-    id: 'doom-shadows-lights',
-    title: 'WAD Inspirado en DOOM 3 - Mecánicas de Luces y Sombras',
-    shortDescription: 'Nivel experimental con mecánicas avanzadas de iluminación inspirado en DOOM 3',
-    fullDescription: 'Proyecto experimental que explora las capacidades técnicas del engine clásico de DOOM para recrear mecánicas de luces y sombras inspiradas en DOOM 3. Un nivel único que demuestra innovación técnica y creatividad en el diseño de experiencias atmosféricas.',
+    id: 'doom3-experimental-wad',
+    title: 'Proyecto Experimental DOOM 3 - Luces y Sombras',
+    shortDescription: 'Nivel experimental explorando técnicas avanzadas de iluminación inspiradas en DOOM 3',
+    fullDescription: 'Proyecto experimental que explora las posibilidades de luces y sombras en el engine clásico de DOOM. Inspirado en las técnicas de iluminación de DOOM 3, demuestra capacidad de innovación dentro de limitaciones técnicas.',
     category: 'creative',
     type: 'game-mod',
     technologies: [
       { name: 'Doom Builder', category: 'tools', color: '#8b0000' },
       { name: 'SLADE', category: 'tools', color: '#4169e1' },
-      { name: 'Advanced Level Design', category: 'game-engine', color: '#ff6347' },
-      { name: 'Lighting Systems', category: 'game-engine', color: '#ffd700' }
+      { name: 'Advanced Lighting', category: 'game-engine', color: '#ff6347' }
     ],
     links: {
-      youtube: 'https://youtu.be/5-E392uGTj8',
-      video: 'https://www.youtube.com/embed/5-E392uGTj8'
+      video: 'https://youtu.be/5-E392uGTj8'
     },
     images: {
-      thumbnail: 'assets/wads/Doom-PNG-File.png',
+      thumbnail: 'assets/wads/wad_video.png',
       screenshots: [
-        'assets/projects/doom-shadows-1.jpg',
-        'assets/projects/doom-shadows-2.jpg'
+        'assets/projects/doom3-experimental-1.jpg',
+        'assets/projects/doom3-experimental-2.jpg'
       ]
     },
     dates: {
       startDate: new Date('2012-01-01'),
       endDate: new Date('2013-01-01')
     },
-    role: 'Level Designer & Technical Innovator',
-    status: 'completed',
+    role: 'Level Designer & Lighting Specialist',
+    status: 'archived',
     achievements: [
-      'Implementación exitosa de mecánicas de luces y sombras en engine clásico',
-      'Creación de atmósfera única inspirada en DOOM 3',
-      'Innovación técnica trabajando dentro de limitaciones del engine',
-      'Experiencia de juego atmosférica y envolvente'
+      'Técnicas innovadoras de iluminación',
+      'Simulación de efectos DOOM 3 en engine clásico',
+      'Experimentación con nuevas mecánicas',
+      'Documentación visual completa'
     ],
     challenges: [
-      'Adaptar conceptos modernos de iluminación a engine clásico',
-      'Crear atmósfera convincente con herramientas limitadas',
-      'Mantener performance óptimo con efectos complejos',
-      'Innovar dentro de las restricciones técnicas del motor original'
+      'Limitaciones del engine clásico para efectos modernos',
+      'Simulación de luces dinámicas',
+      'Optimización de efectos visuales',
+      'Mantener jugabilidad fluida'
     ],
     featured: true,
     displayOrder: 5,
-    wadInfo: {
-      levelCount: 1,
-      requiredEngine: 'GZDoom recomendado',
-      requiredGame: 'DOOM II: Hell on Earth',
-      features: [
-        'Mecánicas avanzadas de luces y sombras',
-        'Atmósfera inspirada en DOOM 3',
-        'Innovación técnica en engine clásico',
-        'Experiencia de juego única y atmosférica'
-      ],
-      installInstructions: 'Recomendado usar GZDoom para mejor experiencia con efectos de iluminación'
-    }
+    videoUrl: 'https://youtu.be/5-E392uGTj8',
+    wadAvailable: false,
+    modalBackgroundImage: 'assets/wads/wad_video.png',
+    engineRequired: 'GZDoom',
+    requiredGame: 'DOOM II',
+    features: [
+      'Efectos avanzados de iluminación',
+      'Técnicas experimentales de sombras',
+      'Atmósfera inspirada en DOOM 3',
+      'Innovación en engine clásico'
+    ]
   }
 ];
 
@@ -479,6 +474,13 @@ export function getFeaturedProjects(): Project[] {
 }
 
 /**
+ * Helper function para obtener proyectos creativos (WADs)
+ */
+export function getCreativeProjects(): Project[] {
+  return CREATIVE_PROJECTS.sort((a, b) => a.displayOrder - b.displayOrder);
+}
+
+/**
  * Helper function para obtener tecnologías únicas de todos los proyectos
  */
 export function getAllTechnologies(): Technology[] {
@@ -492,18 +494,4 @@ export function getAllTechnologies(): Technology[] {
   });
   
   return Array.from(techMap.values());
-}
-
-/**
- * Helper function para obtener WADs disponibles para descarga
- */
-export function getDownloadableWADs(): Project[] {
-  return CREATIVE_PROJECTS.filter(project => project.links.download);
-}
-
-/**
- * Helper function para obtener WADs con video disponible
- */
-export function getWADsWithVideo(): Project[] {
-  return CREATIVE_PROJECTS.filter(project => project.links.youtube || project.links.video);
 }

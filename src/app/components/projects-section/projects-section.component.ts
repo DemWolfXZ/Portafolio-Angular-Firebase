@@ -5,21 +5,30 @@
  * Componente para la sección de proyectos del portafolio.
  * Muestra grid de proyectos profesionales, académicos y creativos (WADs).
  * Incluye filtros por categoría, enlaces a proyectos reales funcionando
- * y sección especial para WADs de Doom demostrando creatividad técnica.
- * ACTUALIZADO: Manejo de videos de YouTube embebidos para WADs.
+ * y sección especial para WADs de DOOM con modales personalizados.
+ * CORREGIDO: Bug de filtros y soporte completo para WADs con videos.
  */
-
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, HostListener } from '@angular/core';
+import { Location } from '@angular/common';
 import { AnimationService } from '@services/animation.service';
 import { DownloadService } from '@services/download.service';
-import { Project, ALEJANDRO_PROJECTS, CREATIVE_PROJECTS, ProjectCategory } from '@models/project.model';
+import { 
+  Project, 
+  ALEJANDRO_PROJECTS, 
+  CREATIVE_PROJECTS, 
+  ProjectCategory,
+  getCreativeProjects,
+  getFeaturedProjects 
+} from '@models/project.model';
 
 @Component({
   selector: 'app-projects-section',
   templateUrl: './projects-section.component.html',
   styleUrls: ['./projects-section.component.scss'],
 })
-export class ProjectsSectionComponent implements OnInit {
+export class ProjectsSectionComponent implements OnInit, OnDestroy {
+public window = window;
 
   // Datos de proyectos importados desde el modelo
   public professionalProjects = ALEJANDRO_PROJECTS;
@@ -30,9 +39,9 @@ export class ProjectsSectionComponent implements OnInit {
   public animationsLoaded = false;
   public selectedProject: Project | null = null;
 
-  // Estado para videos embebidos
-  public showMainWADVideo = false;
-  public showDoom3WADVideo = false;
+  // NUEVO: Estado para modales de WADs
+  public selectedWAD: Project | null = null;
+  public showWADModal = false;
 
   // Configuración de filtros
   public filters = [
@@ -66,17 +75,56 @@ export class ProjectsSectionComponent implements OnInit {
     }
   ];
 
-  constructor(
-    private animationService: AnimationService,
-    private downloadService: DownloadService
-  ) { }
+  // Lista de proyectos filtrados - CORRECCIÓN: Para evitar bug de transparencia
+  public filteredProjects: Project[] = [];
 
-  ngOnInit(): void {
-    // Activar animaciones después de un delay
-    setTimeout(() => {
-      this.animationsLoaded = true;
-      this.initAnimations();
-    }, 300);
+constructor(
+  private animationService: AnimationService,
+  private downloadService: DownloadService,
+  private location: Location,
+  private cdr: ChangeDetectorRef,
+  private sanitizer: DomSanitizer // ✅ Agregado aquí
+) { }
+
+
+ // Handler para evento "popstate", declarado como propiedad para poder removerlo luego
+private onPopStateHandler = () => {
+  this.closeAllModals();
+};
+
+
+
+ngOnInit(): void {
+  // Inicializar proyectos filtrados
+  this.updateFilteredProjects();
+
+  // Activar animaciones después de un delay
+  setTimeout(() => {
+    this.animationsLoaded = true;
+    this.initAnimations();
+  }, 300);
+
+  // Listener para botón atrás del navegador (corrige error original con this.location.onPopState)
+  window.addEventListener('popstate', this.onPopStateHandler);
+}
+
+ngOnDestroy(): void {
+  // Limpiar recursos
+  this.selectedProject = null;
+  this.selectedWAD = null;
+
+  // Remover el listener del historial para evitar fugas de memoria
+  window.removeEventListener('popstate', this.onPopStateHandler);
+}
+
+
+
+  /**
+   * Listener para tecla ESC para cerrar modales
+   */
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKey(event: KeyboardEvent): void {
+    this.closeAllModals();
   }
 
   /**
@@ -89,17 +137,12 @@ export class ProjectsSectionComponent implements OnInit {
   }
 
   /**
-   * Obtiene proyectos filtrados según la categoría activa
+   * CORRECCIÓN: Obtiene proyectos filtrados usando array interno
+   * Esto evita el bug de transparencia al cambiar filtros
    * @returns Array de proyectos filtrados
    */
   getFilteredProjects(): Project[] {
-    const allProjects = this.getAllProjects();
-    
-    if (this.activeFilter === 'all') {
-      return allProjects;
-    }
-    
-    return allProjects.filter(project => project.category === this.activeFilter);
+    return this.filteredProjects;
   }
 
   /**
@@ -107,20 +150,44 @@ export class ProjectsSectionComponent implements OnInit {
    * @returns Array de proyectos featured
    */
   getFeaturedProjects(): Project[] {
-    return this.getFilteredProjects().filter(project => project.featured);
+    return getFeaturedProjects();
   }
 
   /**
-   * Cambia el filtro activo y re-anima la grilla
+   * CORRECCIÓN: Cambia el filtro activo y actualiza proyectos de forma segura
    * @param filter - Nuevo filtro a aplicar
    */
   setActiveFilter(filter: ProjectCategory | 'all'): void {
+    console.log('Cambiando filtro a:', filter);
+    
+    // Actualizar filtro activo
     this.activeFilter = filter;
     
-    // Re-animar elementos cuando cambia el filtro
+    // Actualizar proyectos filtrados
+    this.updateFilteredProjects();
+    
+    // Forzar detección de cambios
+    this.cdr.detectChanges();
+    
+    // Re-animar elementos después de actualizar
     setTimeout(() => {
       this.animateProjectCards();
     }, 100);
+  }
+
+  /**
+   * CORRECCIÓN: Actualiza la lista de proyectos filtrados de forma segura
+   */
+  private updateFilteredProjects(): void {
+    const allProjects = this.getAllProjects();
+    
+    if (this.activeFilter === 'all') {
+      this.filteredProjects = [...allProjects];
+    } else {
+      this.filteredProjects = allProjects.filter(project => project.category === this.activeFilter);
+    }
+    
+    console.log('Proyectos filtrados actualizados:', this.filteredProjects.length);
   }
 
   /**
@@ -164,28 +231,55 @@ export class ProjectsSectionComponent implements OnInit {
   }
 
   /**
-   * Abre un video de YouTube en nueva pestaña
-   * @param project - Proyecto cuyo video abrir
-   */
-  openYouTubeVideo(project: Project): void {
-    if (project.links.youtube) {
-      window.open(project.links.youtube, '_blank', 'noopener,noreferrer');
-    }
-  }
-
-  /**
    * Abre modal con detalles completos del proyecto
    * @param project - Proyecto a mostrar en detalle
    */
   openProjectDetail(project: Project): void {
-    this.selectedProject = project;
+    // Si es un WAD, usar modal especializado
+    if (project.category === 'creative' && project.type === 'game-mod') {
+      this.openWADDetail(project);
+    } else {
+      this.selectedProject = project;
+    }
   }
 
   /**
-   * Cierra el modal de detalles
+   * NUEVO: Abre modal especializado para WADs
+   * @param wad - Proyecto WAD a mostrar
+   */
+  openWADDetail(wad: Project): void {
+    console.log('Abriendo modal de WAD:', wad.title);
+    this.selectedWAD = wad;
+    this.showWADModal = true;
+    
+    // Agregar clase al body para prevenir scroll
+    document.body.classList.add('modal-open');
+  }
+
+  /**
+   * Cierra el modal de detalles de proyecto
    */
   closeProjectDetail(): void {
     this.selectedProject = null;
+  }
+
+  /**
+   * NUEVO: Cierra el modal de WAD
+   */
+  closeWADDetail(): void {
+    this.selectedWAD = null;
+    this.showWADModal = false;
+    
+    // Remover clase del body
+    document.body.classList.remove('modal-open');
+  }
+
+  /**
+   * NUEVO: Cierra todos los modales
+   */
+  closeAllModals(): void {
+    this.closeProjectDetail();
+    this.closeWADDetail();
   }
 
   /**
@@ -194,50 +288,59 @@ export class ProjectsSectionComponent implements OnInit {
    */
   async downloadWAD(project: Project): Promise<void> {
     try {
-      if (project.links.download) {
+      if (project.links.download && project.wadAvailable) {
         await this.downloadService.downloadDoomWAD();
+        console.log('Descarga iniciada para:', project.title);
+      } else {
+        console.warn('WAD no disponible para descarga:', project.title);
+        // Mostrar mensaje al usuario
+        this.showWADNotAvailableMessage(project);
       }
     } catch (error) {
       console.error('Error al descargar WAD:', error);
-      // Aquí podrías mostrar un toast de error
     }
   }
 
   /**
-   * Descarga el WAD principal de 11 niveles
-   * Método específico para el WAD principal
+   * NUEVO: Muestra mensaje cuando WAD no está disponible
+   * @param project - Proyecto WAD
    */
-  async downloadMainWAD(): Promise<void> {
-    try {
-      await this.downloadService.downloadFile('doom-wad-11-levels');
-    } catch (error) {
-      console.error('Error al descargar WAD principal:', error);
-      // Mostrar mensaje de error al usuario
-    }
+  private showWADNotAvailableMessage(project: Project): void {
+    // Aquí podrías integrar con un servicio de toast/alert
+    alert(`El archivo WAD de "${project.title}" no está disponible para descarga.`);
   }
 
   /**
-   * Alterna la visualización del video del WAD principal
+   * NUEVO: Obtiene la URL del iframe de YouTube
+   * @param videoUrl - URL original de YouTube
+   * @returns URL para embed
    */
-  toggleMainWADVideo(): void {
-    this.showMainWADVideo = !this.showMainWADVideo;
-    
-    // Si se abre este video, cerrar el otro
-    if (this.showMainWADVideo) {
-      this.showDoom3WADVideo = false;
-    }
+getYouTubeEmbedUrl(videoUrl: string): SafeResourceUrl {
+  if (!videoUrl) return this.sanitizer.bypassSecurityTrustResourceUrl('');
+
+  const videoIdMatch = videoUrl.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/|youtube\.com\/embed\/)([^&\n?#]+)/);
+  const videoId = videoIdMatch ? videoIdMatch[1] : '';
+
+  const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=0&rel=0&modestbranding=1`;
+  return this.sanitizer.bypassSecurityTrustResourceUrl(embedUrl);
+}
+
+  /**
+   * NUEVO: Verifica si un proyecto tiene video disponible
+   * @param project - Proyecto a verificar
+   * @returns true si tiene video
+   */
+  hasVideo(project: Project): boolean {
+    return !!(project.videoUrl || project.links.video);
   }
 
   /**
-   * Alterna la visualización del video del WAD de DOOM 3
+   * NUEVO: Obtiene la URL del video del proyecto
+   * @param project - Proyecto
+   * @returns URL del video
    */
-  toggleDoom3WADVideo(): void {
-    this.showDoom3WADVideo = !this.showDoom3WADVideo;
-    
-    // Si se abre este video, cerrar el otro
-    if (this.showDoom3WADVideo) {
-      this.showMainWADVideo = false;
-    }
+  getVideoUrl(project: Project): string {
+    return project.videoUrl || project.links.video || '';
   }
 
   /**
@@ -291,13 +394,7 @@ export class ProjectsSectionComponent implements OnInit {
    * @returns true si tiene enlaces
    */
   hasAvailableLinks(project: Project): boolean {
-    return !!(
-      project.links.live || 
-      project.links.demo || 
-      project.links.repository || 
-      project.links.download ||
-      project.links.youtube
-    );
+    return !!(project.links.live || project.links.demo || project.links.repository || project.links.download);
   }
 
   /**
@@ -315,61 +412,61 @@ export class ProjectsSectionComponent implements OnInit {
    * Navega a la sección de skills
    */
   scrollToSkills(): void {
-    const skillsSection = document.getElementById('skills');
-    if (skillsSection) {
-      const headerHeight = 80;
-      const elementPosition = skillsSection.offsetTop - headerHeight;
-      
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
-    }
+    window.location.href = '/skills';
   }
 
   /**
    * Navega a la sección de contacto
    */
   scrollToContact(): void {
-    const contactSection = document.getElementById('contact');
-    if (contactSection) {
-      const headerHeight = 80;
-      const elementPosition = contactSection.offsetTop - headerHeight;
+    window.location.href = '/contact';
+  }
+
+  /**
+   * CORRECCIÓN: Inicializa animaciones mejoradas
+   */
+  private initAnimations(): void {
+    try {
+      // Animar elementos principales
+      const animatedElements = document.querySelectorAll('.projects-animate');
       
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
+      animatedElements.forEach((element, index) => {
+        this.animationService.observeElement(
+          element,
+          'slideInUp',
+          0.1
+        );
       });
+
+      // Animar tarjetas de proyecto
+      this.animateProjectCards();
+    } catch (error) {
+      console.warn('Error en animaciones:', error);
     }
   }
 
   /**
-   * Inicializa animaciones para elementos de la sección
-   */
-  private initAnimations(): void {
-    // Animar elementos principales
-    const animatedElements = document.querySelectorAll('.projects-animate');
-    
-    animatedElements.forEach((element, index) => {
-      this.animationService.observeElement(
-        element,
-        'slideInUp',
-        0.1
-      );
-    });
-
-    this.animateProjectCards();
-  }
-
-  /**
-   * Anima las tarjetas de proyectos con delay escalonado
+   * CORRECCIÓN: Anima las tarjetas de proyectos de forma más robusta
    */
   private animateProjectCards(): void {
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach((card, index) => {
+    try {
+      // Esperar a que el DOM se actualice
       setTimeout(() => {
-        this.animationService.observeElement(card, 'scaleIn', 0.2);
-      }, index * 100);
-    });
+        const projectCards = document.querySelectorAll('.project-card');
+        
+        projectCards.forEach((card, index) => {
+          // Resetear estilos para re-animación
+          (card as HTMLElement).style.opacity = '1';
+          (card as HTMLElement).style.transform = 'none';
+          
+          // Aplicar animación con delay escalonado
+          setTimeout(() => {
+            this.animationService.observeElement(card, 'scaleIn', 0.2);
+          }, index * 50);
+        });
+      }, 50);
+    } catch (error) {
+      console.warn('Error al animar tarjetas:', error);
+    }
   }
 }
