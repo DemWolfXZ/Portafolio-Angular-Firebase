@@ -6,6 +6,7 @@
  * Define la estructura de proyectos profesionales, académicos y creativos
  * incluyendo información técnica, enlaces, capturas y descripciones detalladas.
  * Alineado con la información del prompt sobre proyectos reales.
+ * ACTUALIZADO: Información completa de WADs de Doom con videos de YouTube.
  */
 
 /**
@@ -63,6 +64,29 @@ export interface Project {
   
   /** Orden de visualización */
   displayOrder: number;
+  
+  /** Información específica para WADs */
+  wadInfo?: WadInfo;
+}
+
+/**
+ * Información específica para proyectos WAD de Doom
+ */
+export interface WadInfo {
+  /** Número de niveles del WAD */
+  levelCount: number;
+  
+  /** Motor de juego requerido */
+  requiredEngine: string;
+  
+  /** Juego base requerido */
+  requiredGame: string;
+  
+  /** Características especiales del WAD */
+  features: string[];
+  
+  /** Instrucciones de instalación */
+  installInstructions?: string;
 }
 
 /**
@@ -140,6 +164,9 @@ export interface ProjectLinks {
   
   /** Video explicativo */
   video?: string;
+  
+  /** Video de YouTube */
+  youtube?: string;
   
   /** Caso de estudio detallado */
   caseStudy?: string;
@@ -313,25 +340,29 @@ export const ALEJANDRO_PROJECTS: Project[] = [
 
 /**
  * Datos de proyectos creativos (WADs para Doom)
+ * ACTUALIZADO: Información completa con videos de YouTube
  */
 export const CREATIVE_PROJECTS: Project[] = [
   {
-    id: 'doom-wads-collection',
-    title: 'Colección de WADs para Doom',
-    shortDescription: 'Años de experiencia diseñando niveles personalizados que demuestran creatividad técnica',
-    fullDescription: 'Desarrollo de modificaciones personalizadas para Doom demostrando capacidad de pensamiento espacial, diseño de experiencias y resolución de problemas creativos. Relevante para demostrar habilidades de análisis sistemático.',
+    id: 'doom-wad-11-levels',
+    title: 'WAD para DOOM II - 11 Niveles',
+    shortDescription: 'Modificación completa con 11 niveles personalizados para DOOM II',
+    fullDescription: 'Proyecto creativo que demuestra capacidad de diseño espacial y pensamiento sistemático. WAD completo con 11 niveles únicos diseñados para DOOM II, cada uno con mecánicas y desafíos específicos que requieren planificación estratégica y resolución de problemas creativos.',
     category: 'creative',
     type: 'game-mod',
     technologies: [
       { name: 'Doom Builder', category: 'tools', color: '#8b0000' },
       { name: 'SLADE', category: 'tools', color: '#4169e1' },
-      { name: 'Level Design', category: 'game-engine', color: '#ff6347' }
+      { name: 'Level Design', category: 'game-engine', color: '#ff6347' },
+      { name: 'Zandronum', category: 'game-engine', color: '#228b22' }
     ],
     links: {
-      download: 'assets/wads/alejandro-villa-doom-example.wad'
+      download: 'assets/wads/Wad_para_DOOMII.wad',
+      youtube: 'https://youtu.be/VzD9NT5F_Z0',
+      video: 'https://www.youtube.com/embed/VzD9NT5F_Z0'
     },
     images: {
-      thumbnail: 'assets/projects/doom-wads-thumb.jpg',
+      thumbnail: 'assets/wads/Doom-PNG-File.png',
       screenshots: [
         'assets/projects/doom-level-1.jpg',
         'assets/projects/doom-level-2.jpg'
@@ -339,22 +370,93 @@ export const CREATIVE_PROJECTS: Project[] = [
     },
     dates: {
       startDate: new Date('2010-01-01'),
-      endDate: new Date('2020-01-01')
+      endDate: new Date('2015-01-01')
     },
     role: 'Level Designer & Modder',
-    status: 'archived',
+    status: 'completed',
     achievements: [
-      'Múltiples niveles completados y funcionales',
-      'Diseño innovador de espacios y mecánicas',
-      'Demostración de pensamiento sistemático aplicado'
+      '11 niveles completamente funcionales y únicos',
+      'Diseño innovador de espacios con progresión de dificultad',
+      'Mecánicas de juego balanceadas y desafiantes',
+      'Demostración práctica de pensamiento sistemático'
     ],
     challenges: [
-      'Limitaciones técnicas del engine original',
+      'Limitaciones técnicas del engine original de DOOM',
       'Optimización de performance en niveles complejos',
-      'Balance entre dificultad y diversión'
+      'Balance entre dificultad progresiva y diversión',
+      'Diseño coherente manteniendo la esencia del juego original'
     ],
     featured: true,
-    displayOrder: 4
+    displayOrder: 4,
+    wadInfo: {
+      levelCount: 11,
+      requiredEngine: 'Zandronum',
+      requiredGame: 'DOOM II: Hell on Earth',
+      features: [
+        '11 niveles únicos con progresión de dificultad',
+        'Diseño espacial innovador y desafiante',
+        'Mecánicas de juego balanceadas',
+        'Compatible con multijugador cooperativo'
+      ],
+      installInstructions: 'Requiere DOOM II original y Zandronum engine para ejecutar correctamente'
+    }
+  },
+  {
+    id: 'doom-shadows-lights',
+    title: 'WAD Inspirado en DOOM 3 - Mecánicas de Luces y Sombras',
+    shortDescription: 'Nivel experimental con mecánicas avanzadas de iluminación inspirado en DOOM 3',
+    fullDescription: 'Proyecto experimental que explora las capacidades técnicas del engine clásico de DOOM para recrear mecánicas de luces y sombras inspiradas en DOOM 3. Un nivel único que demuestra innovación técnica y creatividad en el diseño de experiencias atmosféricas.',
+    category: 'creative',
+    type: 'game-mod',
+    technologies: [
+      { name: 'Doom Builder', category: 'tools', color: '#8b0000' },
+      { name: 'SLADE', category: 'tools', color: '#4169e1' },
+      { name: 'Advanced Level Design', category: 'game-engine', color: '#ff6347' },
+      { name: 'Lighting Systems', category: 'game-engine', color: '#ffd700' }
+    ],
+    links: {
+      youtube: 'https://youtu.be/5-E392uGTj8',
+      video: 'https://www.youtube.com/embed/5-E392uGTj8'
+    },
+    images: {
+      thumbnail: 'assets/wads/Doom-PNG-File.png',
+      screenshots: [
+        'assets/projects/doom-shadows-1.jpg',
+        'assets/projects/doom-shadows-2.jpg'
+      ]
+    },
+    dates: {
+      startDate: new Date('2012-01-01'),
+      endDate: new Date('2013-01-01')
+    },
+    role: 'Level Designer & Technical Innovator',
+    status: 'completed',
+    achievements: [
+      'Implementación exitosa de mecánicas de luces y sombras en engine clásico',
+      'Creación de atmósfera única inspirada en DOOM 3',
+      'Innovación técnica trabajando dentro de limitaciones del engine',
+      'Experiencia de juego atmosférica y envolvente'
+    ],
+    challenges: [
+      'Adaptar conceptos modernos de iluminación a engine clásico',
+      'Crear atmósfera convincente con herramientas limitadas',
+      'Mantener performance óptimo con efectos complejos',
+      'Innovar dentro de las restricciones técnicas del motor original'
+    ],
+    featured: true,
+    displayOrder: 5,
+    wadInfo: {
+      levelCount: 1,
+      requiredEngine: 'GZDoom recomendado',
+      requiredGame: 'DOOM II: Hell on Earth',
+      features: [
+        'Mecánicas avanzadas de luces y sombras',
+        'Atmósfera inspirada en DOOM 3',
+        'Innovación técnica en engine clásico',
+        'Experiencia de juego única y atmosférica'
+      ],
+      installInstructions: 'Recomendado usar GZDoom para mejor experiencia con efectos de iluminación'
+    }
   }
 ];
 
@@ -390,4 +492,18 @@ export function getAllTechnologies(): Technology[] {
   });
   
   return Array.from(techMap.values());
+}
+
+/**
+ * Helper function para obtener WADs disponibles para descarga
+ */
+export function getDownloadableWADs(): Project[] {
+  return CREATIVE_PROJECTS.filter(project => project.links.download);
+}
+
+/**
+ * Helper function para obtener WADs con video disponible
+ */
+export function getWADsWithVideo(): Project[] {
+  return CREATIVE_PROJECTS.filter(project => project.links.youtube || project.links.video);
 }

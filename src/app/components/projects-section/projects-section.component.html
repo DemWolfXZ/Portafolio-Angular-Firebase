@@ -154,6 +154,16 @@
               Descargar WAD
             </ion-button>
 
+            <ion-button 
+              *ngIf="project.links.youtube && !project.links.live && !project.links.download"
+              expand="block" 
+              class="action-button creative"
+              (click)="openYouTubeVideo(project)"
+            >
+              <ion-icon name="play" slot="start"></ion-icon>
+              Ver Video
+            </ion-button>
+
             <!-- Botones secundarios -->
             <div class="secondary-actions">
               <ion-button 
@@ -164,6 +174,16 @@
               >
                 <ion-icon name="logo-github" slot="start"></ion-icon>
                 Código
+              </ion-button>
+              
+              <ion-button 
+                *ngIf="project.links.youtube"
+                fill="clear" 
+                size="small"
+                (click)="openYouTubeVideo(project)"
+              >
+                <ion-icon name="logo-youtube" slot="start"></ion-icon>
+                Video
               </ion-button>
               
               <ion-button 
@@ -188,47 +208,178 @@
 
     <!-- Sección especial WADs de Doom -->
     <div class="doom-section projects-animate" *ngIf="activeFilter === 'all' || activeFilter === 'creative'">
-      <div class="doom-card">
-        <div class="doom-header">
-          <div class="doom-icon">
-            <ion-icon name="game-controller" class="game-icon"></ion-icon>
+      <div class="doom-header-section">
+        <div class="doom-title-container">
+          <div class="doom-icon-large">
+            <ion-icon name="game-controller" class="game-icon-large"></ion-icon>
           </div>
-          <div class="doom-content">
-            <h4 class="doom-title">WADs para Doom - Creatividad Técnica</h4>
-            <p class="doom-description">
-              Años de experiencia diseñando niveles personalizados que demuestran pensamiento espacial, 
-              diseño de experiencias y resolución de problemas creativos.
+          <div class="doom-title-content">
+            <h3 class="doom-section-title">WADs para DOOM - Creatividad Técnica Aplicada</h3>
+            <p class="doom-section-description">
+              Proyectos que demuestran pensamiento espacial, diseño de experiencias y resolución 
+              de problemas creativos. Relevancia profesional en análisis sistemático y planificación estratégica.
             </p>
           </div>
         </div>
-        
-        <div class="doom-relevance">
-          <h5 class="relevance-title">Relevancia Profesional:</h5>
-          <ul class="relevance-list">
-            <li class="relevance-item">
-              <ion-icon name="checkmark-circle" class="relevance-icon"></ion-icon>
-              Demuestra capacidad de pensamiento sistemático
-            </li>
-            <li class="relevance-item">
-              <ion-icon name="checkmark-circle" class="relevance-icon"></ion-icon>
-              Resolución de problemas creativos bajo limitaciones técnicas
-            </li>
-            <li class="relevance-item">
-              <ion-icon name="checkmark-circle" class="relevance-icon"></ion-icon>
-              Experiencia en diseño de experiencias de usuario
-            </li>
-          </ul>
+      </div>
+
+      <!-- WAD Principal - 11 Niveles -->
+      <div class="doom-project-card main-wad">
+        <div class="doom-project-header">
+          <div class="doom-project-info">
+            <div class="doom-project-icon">
+              <ion-icon name="download" class="doom-icon"></ion-icon>
+            </div>
+            <div class="doom-project-details">
+              <h4 class="doom-project-title">WAD para DOOM II - 11 Niveles Completos</h4>
+              <p class="doom-project-description">
+                Modificación completa con 11 niveles únicos diseñados para DOOM II. 
+                Demuestra capacidad de planificación sistemática y diseño de experiencias complejas.
+              </p>
+              <div class="doom-project-specs">
+                <div class="doom-spec">
+                  <ion-icon name="layers" class="spec-icon"></ion-icon>
+                  <span>11 Niveles</span>
+                </div>
+                <div class="doom-spec">
+                  <ion-icon name="game-controller" class="spec-icon"></ion-icon>
+                  <span>Requiere Zandronum</span>
+                </div>
+                <div class="doom-spec">
+                  <ion-icon name="disc" class="spec-icon"></ion-icon>
+                  <span>DOOM II Original</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="doom-project-actions">
+            <ion-button 
+              class="doom-action-button download"
+              (click)="downloadMainWAD()"
+            >
+              <ion-icon name="download" slot="start"></ion-icon>
+              Descargar WAD
+            </ion-button>
+            <ion-button 
+              fill="outline"
+              class="doom-action-button"
+              (click)="toggleMainWADVideo()"
+            >
+              <ion-icon name="logo-youtube" slot="start"></ion-icon>
+              {{ showMainWADVideo ? 'Ocultar' : 'Ver' }} Gameplay
+            </ion-button>
+          </div>
         </div>
 
-        <div class="doom-actions">
-          <ion-button 
-            expand="block" 
-            class="doom-download-button"
-            (click)="downloadWAD(creativeProjects[0])"
-          >
-            <ion-icon name="download" slot="start"></ion-icon>
-            Descargar WAD de Ejemplo
-          </ion-button>
+        <!-- Video embebido para WAD principal -->
+        <div class="doom-video-container" *ngIf="showMainWADVideo">
+          <div class="video-wrapper">
+            <iframe
+              width="100%"
+              height="315"
+              src="https://www.youtube.com/embed/VzD9NT5F_Z0"
+              title="WAD para DOOM II - 11 Niveles"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- WAD Inspirado en DOOM 3 -->
+      <div class="doom-project-card doom3-wad">
+        <div class="doom-project-header">
+          <div class="doom-project-info">
+            <div class="doom-project-icon">
+              <ion-icon name="bulb" class="doom-icon"></ion-icon>
+            </div>
+            <div class="doom-project-details">
+              <h4 class="doom-project-title">WAD Inspirado en DOOM 3 - Mecánicas de Luces y Sombras</h4>
+              <p class="doom-project-description">
+                Nivel experimental que explora mecánicas avanzadas de iluminación en el engine clásico. 
+                Innovación técnica trabajando dentro de limitaciones del motor original.
+              </p>
+              <div class="doom-project-specs">
+                <div class="doom-spec">
+                  <ion-icon name="eye" class="spec-icon"></ion-icon>
+                  <span>1 Nivel Experimental</span>
+                </div>
+                <div class="doom-spec">
+                  <ion-icon name="flash" class="spec-icon"></ion-icon>
+                  <span>Mecánicas de Luces</span>
+                </div>
+                <div class="doom-spec">
+                  <ion-icon name="settings" class="spec-icon"></ion-icon>
+                  <span>GZDoom Recomendado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="doom-project-actions">
+            <ion-button 
+              class="doom-action-button disabled"
+              disabled="true"
+            >
+              <ion-icon name="close" slot="start"></ion-icon>
+              WAD No Disponible
+            </ion-button>
+            <ion-button 
+              fill="outline"
+              class="doom-action-button"
+              (click)="toggleDoom3WADVideo()"
+            >
+              <ion-icon name="logo-youtube" slot="start"></ion-icon>
+              {{ showDoom3WADVideo ? 'Ocultar' : 'Ver' }} Demo
+            </ion-button>
+          </div>
+        </div>
+
+        <!-- Video embebido para WAD DOOM 3 -->
+        <div class="doom-video-container" *ngIf="showDoom3WADVideo">
+          <div class="video-wrapper">
+            <iframe
+              width="100%"
+              height="315"
+              src="https://www.youtube.com/embed/5-E392uGTj8"
+              title="WAD Inspirado en DOOM 3 - Luces y Sombras"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <!-- Relevancia Profesional -->
+      <div class="doom-relevance">
+        <h4 class="relevance-title">Relevancia Profesional:</h4>
+        <div class="relevance-grid">
+          <div class="relevance-item">
+            <ion-icon name="analytics" class="relevance-icon"></ion-icon>
+            <div class="relevance-content">
+              <h5>Pensamiento Sistemático</h5>
+              <p>Diseño de niveles requiere planificación estructurada y análisis de flujos</p>
+            </div>
+          </div>
+          <div class="relevance-item">
+            <ion-icon name="bulb" class="relevance-icon"></ion-icon>
+            <div class="relevance-content">
+              <h5>Resolución Creativa</h5>
+              <p>Soluciones innovadoras dentro de limitaciones técnicas estrictas</p>
+            </div>
+          </div>
+          <div class="relevance-item">
+            <ion-icon name="people" class="relevance-icon"></ion-icon>
+            <div class="relevance-content">
+              <h5>Diseño de Experiencias</h5>
+              <p>Comprensión de user journey y optimización de experiencias complejas</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -302,6 +453,46 @@
           <p class="modal-description">{{ selectedProject.fullDescription }}</p>
         </div>
 
+        <!-- Información específica de WAD -->
+        <div class="modal-section" *ngIf="selectedProject.wadInfo">
+          <h5 class="modal-section-title">Información del WAD</h5>
+          <div class="wad-info-grid">
+            <div class="wad-info-item">
+              <ion-icon name="layers" class="wad-info-icon"></ion-icon>
+              <div class="wad-info-content">
+                <span class="wad-info-label">Niveles</span>
+                <span class="wad-info-value">{{ selectedProject.wadInfo.levelCount }}</span>
+              </div>
+            </div>
+            <div class="wad-info-item">
+              <ion-icon name="game-controller" class="wad-info-icon"></ion-icon>
+              <div class="wad-info-content">
+                <span class="wad-info-label">Motor Requerido</span>
+                <span class="wad-info-value">{{ selectedProject.wadInfo.requiredEngine }}</span>
+              </div>
+            </div>
+            <div class="wad-info-item">
+              <ion-icon name="disc" class="wad-info-icon"></ion-icon>
+              <div class="wad-info-content">
+                <span class="wad-info-label">Juego Base</span>
+                <span class="wad-info-value">{{ selectedProject.wadInfo.requiredGame }}</span>
+              </div>
+            </div>
+          </div>
+          
+          <div class="wad-features" *ngIf="selectedProject.wadInfo.features">
+            <h6 class="wad-features-title">Características:</h6>
+            <ul class="wad-features-list">
+              <li *ngFor="let feature of selectedProject.wadInfo.features">{{ feature }}</li>
+            </ul>
+          </div>
+          
+          <div class="wad-instructions" *ngIf="selectedProject.wadInfo.installInstructions">
+            <h6 class="wad-instructions-title">Instrucciones:</h6>
+            <p class="wad-instructions-text">{{ selectedProject.wadInfo.installInstructions }}</p>
+          </div>
+        </div>
+
         <!-- Logros y resultados -->
         <div class="modal-section" *ngIf="selectedProject.achievements.length > 0">
           <h5 class="modal-section-title">Logros y Resultados</h5>
@@ -373,7 +564,18 @@
               (click)="downloadWAD(selectedProject)"
             >
               <ion-icon name="download" slot="start"></ion-icon>
-              Descargar Archivo
+              Descargar WAD
+            </ion-button>
+            
+            <ion-button 
+              *ngIf="selectedProject.links.youtube"
+              expand="block" 
+              color="danger"
+              class="link-button"
+              (click)="openYouTubeVideo(selectedProject)"
+            >
+              <ion-icon name="logo-youtube" slot="start"></ion-icon>
+              Ver en YouTube
             </ion-button>
           </div>
         </div>

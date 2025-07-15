@@ -1,15 +1,19 @@
-// src/app/components/projects-section/projects-section.component.ts
+/**
+ * ARCHIVO: src/app/components/projects-section/projects-section.component.ts
+ * 
+ * DESCRIPCIÓN:
+ * Componente para la sección de proyectos del portafolio.
+ * Muestra grid de proyectos profesionales, académicos y creativos (WADs).
+ * Incluye filtros por categoría, enlaces a proyectos reales funcionando
+ * y sección especial para WADs de Doom demostrando creatividad técnica.
+ * ACTUALIZADO: Manejo de videos de YouTube embebidos para WADs.
+ */
+
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AnimationService } from '@services/animation.service';
 import { DownloadService } from '@services/download.service';
 import { Project, ALEJANDRO_PROJECTS, CREATIVE_PROJECTS, ProjectCategory } from '@models/project.model';
 
-/**
- * Componente para la sección de proyectos del portafolio.
- * Muestra grid de proyectos profesionales, académicos y creativos (WADs).
- * Incluye filtros por categoría, enlaces a proyectos reales funcionando
- * y sección especial para WADs de Doom demostrando creatividad técnica.
- */
 @Component({
   selector: 'app-projects-section',
   templateUrl: './projects-section.component.html',
@@ -25,6 +29,10 @@ export class ProjectsSectionComponent implements OnInit {
   public activeFilter: ProjectCategory | 'all' = 'all';
   public animationsLoaded = false;
   public selectedProject: Project | null = null;
+
+  // Estado para videos embebidos
+  public showMainWADVideo = false;
+  public showDoom3WADVideo = false;
 
   // Configuración de filtros
   public filters = [
@@ -156,6 +164,16 @@ export class ProjectsSectionComponent implements OnInit {
   }
 
   /**
+   * Abre un video de YouTube en nueva pestaña
+   * @param project - Proyecto cuyo video abrir
+   */
+  openYouTubeVideo(project: Project): void {
+    if (project.links.youtube) {
+      window.open(project.links.youtube, '_blank', 'noopener,noreferrer');
+    }
+  }
+
+  /**
    * Abre modal con detalles completos del proyecto
    * @param project - Proyecto a mostrar en detalle
    */
@@ -182,6 +200,43 @@ export class ProjectsSectionComponent implements OnInit {
     } catch (error) {
       console.error('Error al descargar WAD:', error);
       // Aquí podrías mostrar un toast de error
+    }
+  }
+
+  /**
+   * Descarga el WAD principal de 11 niveles
+   * Método específico para el WAD principal
+   */
+  async downloadMainWAD(): Promise<void> {
+    try {
+      await this.downloadService.downloadFile('doom-wad-11-levels');
+    } catch (error) {
+      console.error('Error al descargar WAD principal:', error);
+      // Mostrar mensaje de error al usuario
+    }
+  }
+
+  /**
+   * Alterna la visualización del video del WAD principal
+   */
+  toggleMainWADVideo(): void {
+    this.showMainWADVideo = !this.showMainWADVideo;
+    
+    // Si se abre este video, cerrar el otro
+    if (this.showMainWADVideo) {
+      this.showDoom3WADVideo = false;
+    }
+  }
+
+  /**
+   * Alterna la visualización del video del WAD de DOOM 3
+   */
+  toggleDoom3WADVideo(): void {
+    this.showDoom3WADVideo = !this.showDoom3WADVideo;
+    
+    // Si se abre este video, cerrar el otro
+    if (this.showDoom3WADVideo) {
+      this.showMainWADVideo = false;
     }
   }
 
@@ -236,7 +291,13 @@ export class ProjectsSectionComponent implements OnInit {
    * @returns true si tiene enlaces
    */
   hasAvailableLinks(project: Project): boolean {
-    return !!(project.links.live || project.links.demo || project.links.repository || project.links.download);
+    return !!(
+      project.links.live || 
+      project.links.demo || 
+      project.links.repository || 
+      project.links.download ||
+      project.links.youtube
+    );
   }
 
   /**
