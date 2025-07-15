@@ -106,35 +106,39 @@ export class HeaderComponent implements OnInit {
    * Navegación por router - MEJORADA CON MANEJO DE ERRORES
    * @param route - Ruta de destino
    */
-  navigateToRoute(route: string): void {
-    console.log('🚀 [NAVEGACIÓN] Navegando a ruta:', route);
+navigateToRoute(route: string): void {
+  console.log('🚀 [NAVEGACIÓN] Navegando a ruta:', route);
 
-    // Cerrar menú móvil inmediatamente
-    this.closeMobileMenu();
-
-    // Verificar si la ruta es válida antes de navegar
-    if (this.isValidRoute(route)) {
-      // Navegar usando el router de Angular
-      this.router.navigate([route]).then(success => {
-        if (success) {
-          this.activeRoute = route;
-          console.log('✅ [NAVEGACIÓN] Navegación exitosa a:', route);
-        } else {
-          console.error('❌ [NAVEGACIÓN] Error navegando a:', route);
-          // En caso de error, redirigir a 404
-          this.router.navigate(['/404']);
-        }
-      }).catch(error => {
-        console.error('❌ [NAVEGACIÓN] Error de navegación:', error);
-        // En caso de error de navegación, ir a 404
-        this.router.navigate(['/404']);
-      });
-    } else {
-      console.warn('⚠️ [NAVEGACIÓN] Ruta no válida:', route);
-      // Ruta no válida, ir a 404
-      this.router.navigate(['/404']);
-    }
+  // Si ya estás en la ruta actual, no navegues (evita error 404)
+  if (this.router.url === route) {
+    console.log('ℹ️ [NAVEGACIÓN] Ya estás en la ruta:', route);
+    this.closeMobileMenu(); // Aun así cerramos el menú
+    return;
   }
+
+  // Cerrar menú móvil antes de navegar
+  this.closeMobileMenu();
+
+  // Verificar si la ruta es válida antes de navegar
+  if (this.isValidRoute(route)) {
+    this.router.navigate([route]).then(success => {
+      if (success) {
+        this.activeRoute = route;
+        console.log('✅ [NAVEGACIÓN] Navegación exitosa a:', route);
+      } else {
+        console.error('❌ [NAVEGACIÓN] Navegación fallida (no redirige)');
+        this.router.navigate(['/404']);
+      }
+    }).catch(error => {
+      console.error('❌ [NAVEGACIÓN] Error de navegación:', error);
+      this.router.navigate(['/404']);
+    });
+  } else {
+    console.warn('⚠️ [NAVEGACIÓN] Ruta no válida:', route);
+    this.router.navigate(['/404']);
+  }
+}
+
 
   /**
    * Toggle del tema claro/oscuro
