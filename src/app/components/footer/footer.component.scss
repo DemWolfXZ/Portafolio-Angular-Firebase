@@ -1,34 +1,21 @@
 /**
- * FOOTER COMPACTO - footer.component.scss
- * =======================================
- * Footer profesional más compacto con acordeón para información técnica
- * Diseño responsivo optimizado para ocupar menos espacio vertical
+ * FOOTER ULTRA-OPTIMIZADO COMPLETO 100% - footer.component.scss
+ * ============================================================
+ * Footer completamente responsivo para todas las resoluciones
+ * Móvil, Tablet y Desktop - Optimizado para Redmi Pad SE
  */
 
 // ========================================
-// VARIABLES DE ESPACIADO
+// VARIABLES DE ESPACIADO PERFECCIONADAS
 // ========================================
 :host {
-  // Variables de espaciado local
-  --spacing-xs: 0.5rem;    // 8px
-  --spacing-sm: 0.75rem;   // 12px
-  --spacing-md: 1rem;      // 16px
-  --spacing-lg: 1.5rem;    // 24px
-  --spacing-xl: 2rem;      // 32px
-  --spacing-xxl: 3rem;     // 48px
-}
-
-// ========================================
-// CONFIGURACIÓN ESPECÍFICA PARA LAYOUT FLEX
-// ========================================
-:host {
-  // Variables de espaciado local
-  --spacing-xs: 0.5rem;    // 8px
-  --spacing-sm: 0.75rem;   // 12px
-  --spacing-md: 1rem;      // 16px
-  --spacing-lg: 1.5rem;    // 24px
-  --spacing-xl: 2rem;      // 32px
-  --spacing-xxl: 3rem;     // 48px
+  // Variables ultra-adaptativas para máxima compatibilidad
+  --spacing-xs: clamp(0.2rem, 0.6vw, 0.4rem);
+  --spacing-sm: clamp(0.3rem, 1vw, 0.6rem);
+  --spacing-md: clamp(0.5rem, 1.5vw, 0.8rem);
+  --spacing-lg: clamp(0.7rem, 2vw, 1.2rem);
+  --spacing-xl: clamp(1rem, 2.5vw, 1.8rem);
+  --spacing-xxl: clamp(1.5rem, 3vw, 2.5rem);
   
   display: block;
   width: 100%;
@@ -38,6 +25,9 @@
   z-index: 1;
 }
 
+// ========================================
+// CONTENEDOR PRINCIPAL - MÁXIMO ESPACIO
+// ========================================
 .footer {
   background: linear-gradient(
     135deg, 
@@ -48,96 +38,206 @@
   position: relative;
   overflow: hidden;
   width: 100%;
-  
-  // COMPACTO: Menos margin-top
-  margin-top: 0;
-  
-  // Flex-shrink para que nunca se comprima
   flex-shrink: 0;
-  
-  // Asegurar fondo sólido para no confundirse con contenido
   box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+  min-height: auto;
   
-  // En desktop, asegurar que sea claramente visible
   @media (min-width: 769px) {
     border-top: 3px solid var(--ion-color-primary);
     box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) {
+    min-height: 400px; // Altura mínima para tablets
+  }
+  
+  @media (min-width: 768px) and (max-width: 1024px) and (max-height: 700px) {
+    min-height: 350px; // Altura reducida para screens pequeños
   }
 }
 
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
-  
-  // COMPACTO: Padding reducido con bottom seguro
-  padding: var(--spacing-lg) var(--spacing-md) var(--spacing-xl) var(--spacing-md);
   position: relative;
   z-index: 2;
   
-  @media (min-width: 769px) {
-    // En desktop, padding más generoso para asegurar visibilidad completa
-    padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xxl) var(--spacing-lg);
+  // MÓVIL PORTRAIT (≤ 480px) - Padding generoso
+  padding: var(--spacing-sm) var(--spacing-xs) calc(var(--spacing-xxl) + 1.5rem) var(--spacing-xs);
+  
+  // MÓVIL LANDSCAPE (481px - 667px) - Más espacio inferior
+  @media (min-width: 481px) and (max-width: 667px) {
+    padding: var(--spacing-sm) var(--spacing-sm) calc(var(--spacing-xxl) + 2rem) var(--spacing-sm);
   }
   
-  @media (max-width: 768px) {
-    padding: var(--spacing-md) var(--spacing-sm) var(--spacing-lg) var(--spacing-sm);
+  // TABLET PORTRAIT (668px - 768px) - Padding aumentado
+  @media (min-width: 668px) and (max-width: 768px) {
+    padding: var(--spacing-md) var(--spacing-sm) calc(var(--spacing-xxl) + 4rem) var(--spacing-sm);
   }
   
-  @media (max-width: 480px) {
-    padding: var(--spacing-sm) var(--spacing-xs) var(--spacing-md) var(--spacing-xs);
+  // TABLETS MEDIANAS (769px - 900px) - PADDING EXTRA
+  @media (min-width: 769px) and (max-width: 900px) {
+    padding: var(--spacing-lg) var(--spacing-md) calc(var(--spacing-xxl) + 5rem) var(--spacing-md);
+  }
+  
+  // REDMI PAD SE y tablets similares (901px - 1024px) - PADDING MÁXIMO
+  @media (min-width: 901px) and (max-width: 1024px) {
+    padding: var(--spacing-lg) var(--spacing-md) calc(var(--spacing-xxl) + 5.5rem) var(--spacing-md);
+  }
+  
+  // TABLETS LANDSCAPE CON ALTURA LIMITADA - PADDING CRÍTICO
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 768px) {
+    padding: var(--spacing-md) var(--spacing-sm) calc(var(--spacing-xxl) + 6rem) var(--spacing-sm);
+  }
+  
+  // TABLETS con altura muy limitada (≤ 800px)
+  @media (min-width: 769px) and (max-height: 800px) {
+    padding: var(--spacing-md) var(--spacing-sm) calc(var(--spacing-xxl) + 6.5rem) var(--spacing-sm);
+  }
+  
+  // TABLETS con altura extremadamente limitada (≤ 700px)
+  @media (min-width: 769px) and (max-height: 700px) {
+    padding: var(--spacing-sm) var(--spacing-sm) calc(var(--spacing-xxl) + 7rem) var(--spacing-sm);
+  }
+  
+  // REDMI PAD SE específico y tablets grandes landscape
+  @media (min-width: 1200px) and (max-height: 900px) {
+    padding: var(--spacing-lg) var(--spacing-md) calc(var(--spacing-xxl) + 5rem) var(--spacing-md);
+  }
+  
+  // Redmi Pad SE y tablets con resoluciones similares
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    padding: var(--spacing-lg) var(--spacing-md) calc(var(--spacing-xxl) + 6rem) var(--spacing-md);
+  }
+  
+  // DESKTOP PEQUEÑO (1025px - 1199px)
+  @media (min-width: 1025px) and (max-width: 1199px) and (min-height: 801px) {
+    padding: var(--spacing-lg) var(--spacing-md) calc(var(--spacing-xxl) + 2rem) var(--spacing-md);
+  }
+  
+  // DESKTOP GRANDE (≥ 1200px)
+  @media (min-width: 1200px) and (min-height: 901px) {
+    padding: var(--spacing-xl) var(--spacing-lg) calc(var(--spacing-xxl) + 1.5rem) var(--spacing-lg);
   }
 }
 
 // ========================================
-// CONTENIDO PRINCIPAL - MÁS COMPACTO
+// GRID PRINCIPAL - INTELIGENTE
 // ========================================
 .footer-main {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
   gap: var(--spacing-lg);
-  
-  // COMPACTO: Margin reducido
   margin-bottom: var(--spacing-lg);
   
-  @media (max-width: 968px) {
+  // MÓVIL - 1 columna
+  grid-template-columns: 1fr;
+  
+  // MÓVIL LANDSCAPE - 2 columnas compactas
+  @media (min-width: 481px) and (max-width: 667px) and (orientation: landscape) {
     grid-template-columns: 1fr 1fr;
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-md);
+    
+    .personal-info {
+      grid-column: 1 / -1;
+    }
   }
   
-  @media (max-width: 600px) {
-    grid-template-columns: 1fr;
+  // TABLET PORTRAIT - 2 columnas balanceadas
+  @media (min-width: 668px) and (max-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    
+    .personal-info {
+      grid-column: 1 / -1;
+    }
+  }
+  
+  // TABLETS MEDIANAS (769px - 900px) - Layout optimizado
+  @media (min-width: 769px) and (max-width: 900px) {
+    grid-template-columns: 1.5fr 1fr 1fr;
     gap: var(--spacing-sm);
     margin-bottom: var(--spacing-sm);
+    
+    .contact-direct {
+      grid-column: 2 / -1;
+    }
+  }
+  
+  // REDMI PAD SE y tablets grandes (901px - 1024px)
+  @media (min-width: 901px) and (max-width: 1024px) {
+    grid-template-columns: 1.8fr 1fr 1fr 1fr;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  // Grid más compacto para aprovechar el espacio horizontal en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    grid-template-columns: 1.6fr 1fr 1fr 1fr;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+  
+  // TABLETS CON ALTURA LIMITADA - Layout compacto
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+    
+    .personal-info {
+      grid-column: 1 / -1;
+    }
+    
+    .navigation {
+      grid-row: 2;
+      grid-column: 1;
+    }
+    
+    .quick-links {
+      grid-row: 2;
+      grid-column: 2;
+    }
+    
+    .contact-direct {
+      grid-row: 2;
+      grid-column: 1 / -1;
+      margin-top: var(--spacing-xs);
+    }
+  }
+  
+  // DESKTOP - 4 columnas completas
+  @media (min-width: 1025px) {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
   }
 }
 
 .footer-section {
   display: flex;
   flex-direction: column;
+  min-height: fit-content;
 }
 
 // ========================================
-// INFORMACIÓN PERSONAL - SIMPLIFICADA
+// INFORMACIÓN PERSONAL - ESCALABLE
 // ========================================
-.personal-info {
-  @media (max-width: 968px) {
-    grid-column: 1 / -1;
-  }
-}
-
 .section-header {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  
-  // COMPACTO: Margin reducido
   margin-bottom: var(--spacing-sm);
+  
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    margin-bottom: var(--spacing-xs);
+  }
 }
 
 .brand-logo {
-  width: 40px;
-  height: 40px;
+  width: clamp(24px, 3.5vw, 36px);
+  height: clamp(24px, 3.5vw, 36px);
   background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-accent));
   border-radius: var(--border-radius-md);
   display: flex;
@@ -147,33 +247,54 @@
 }
 
 .brand-icon {
-  font-size: 20px;
+  font-size: clamp(12px, 2vw, 18px);
   color: white;
 }
 
 .brand-text {
   flex: 1;
+  min-width: 0;
 }
 
 .brand-name {
-  font-size: var(--font-size-base);
+  font-size: clamp(0.75rem, 2vw, 0.95rem);
   font-weight: 700;
   color: var(--ion-text-color);
-  margin: 0 0 var(--spacing-xs) 0;
+  margin: 0 0 2px 0;
+  line-height: 1.1;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+  }
 }
 
 .brand-title {
-  font-size: var(--font-size-xs);
+  font-size: clamp(0.6rem, 1.6vw, 0.8rem);
   color: var(--ion-color-primary);
   font-weight: 600;
   margin: 0;
+  line-height: 1.1;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+  }
 }
 
 .brand-description {
-  font-size: var(--font-size-sm);
+  font-size: clamp(0.65rem, 1.6vw, 0.8rem);
   color: var(--ion-text-color-secondary);
-  line-height: 1.4;
+  line-height: 1.25;
   margin: 0 0 var(--spacing-sm) 0;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.7rem, 1.4vw, 0.75rem);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    font-size: 0.7rem;
+    margin-bottom: 4px;
+  }
 }
 
 .status-message {
@@ -187,75 +308,48 @@
 }
 
 .status-icon {
-  font-size: 14px;
+  font-size: clamp(9px, 1.5vw, 12px);
   color: var(--ion-color-accent);
   animation: pulse 2s ease-in-out infinite;
 }
 
 .status-text {
-  font-size: var(--font-size-xs);
+  font-size: clamp(0.6rem, 1.4vw, 0.7rem);
   color: var(--ion-text-color);
   font-weight: 500;
+  line-height: 1.2;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.65rem, 1.3vw, 0.7rem);
+  }
 }
 
 // ========================================
-// SECCIONES GENERALES - COMPACTAS
+// TÍTULOS DE SECCIÓN - ESCALABLES
 // ========================================
 .section-title {
-  font-size: var(--font-size-sm);
+  font-size: clamp(0.7rem, 1.6vw, 0.82rem);
   font-weight: 700;
   color: var(--ion-text-color);
   margin: 0 0 var(--spacing-sm) 0;
   border-bottom: 1px solid var(--ion-color-primary);
   padding-bottom: var(--spacing-xs);
-}
-
-// ========================================
-// NAVEGACIÓN COMPACTA
-// ========================================
-.nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
-.nav-link {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-xs);
-  background: transparent;
-  border: none;
-  color: var(--ion-text-color-secondary);
-  cursor: pointer;
-  border-radius: var(--border-radius-sm);
-  transition: all var(--transition-normal);
-  text-align: left;
-  width: 100%;
   
-  &:hover {
-    background: var(--ion-background-color);
-    color: var(--ion-color-primary);
-    transform: translateX(2px);
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.72rem, 1.5vw, 0.8rem);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    font-size: 0.7rem;
+    margin-bottom: 6px;
   }
 }
 
-.nav-icon {
-  font-size: 14px;
-  flex-shrink: 0;
-}
-
-.nav-label {
-  font-size: var(--font-size-xs);
-  font-weight: 500;
-}
-
 // ========================================
-// ENLACES RÁPIDOS COMPACTOS
+// LISTAS DE NAVEGACIÓN - PERFECTAS
 // ========================================
+.nav-list,
 .quick-list {
   list-style: none;
   margin: 0;
@@ -263,8 +357,13 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
+  
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    gap: 3px;
+  }
 }
 
+.nav-link,
 .quick-link {
   display: flex;
   align-items: center;
@@ -278,6 +377,17 @@
   transition: all var(--transition-normal);
   text-align: left;
   width: 100%;
+  font-size: clamp(0.6rem, 1.4vw, 0.72rem);
+  line-height: 1.2;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.65rem, 1.3vw, 0.7rem);
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    padding: 3px var(--spacing-xs);
+    font-size: 0.62rem;
+  }
   
   &:hover {
     background: var(--ion-background-color);
@@ -286,23 +396,32 @@
   }
 }
 
+.nav-icon,
 .quick-icon {
-  font-size: 14px;
+  font-size: clamp(9px, 1.5vw, 12px);
   flex-shrink: 0;
+  
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    font-size: 9px;
+  }
 }
 
+.nav-label,
 .quick-label {
-  font-size: var(--font-size-xs);
   font-weight: 500;
 }
 
 // ========================================
-// CONTACTO DIRECTO COMPACTO
+// CONTACTO DIRECTO - OPTIMIZADO
 // ========================================
 .contact-methods {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-xs);
+  
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    gap: 3px;
+  }
 }
 
 .contact-item {
@@ -313,22 +432,44 @@
   border-radius: var(--border-radius-sm);
   transition: all var(--transition-normal);
   
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    padding: 3px var(--spacing-xs);
+  }
+  
   &:hover {
     background: var(--ion-background-color);
   }
 }
 
 .contact-icon {
-  font-size: 14px;
+  font-size: clamp(9px, 1.5vw, 12px);
   color: var(--ion-color-primary);
   flex-shrink: 0;
+  
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    font-size: 9px;
+  }
 }
 
 .contact-text {
-  font-size: var(--font-size-xs);
+  font-size: clamp(0.6rem, 1.4vw, 0.72rem);
   color: var(--ion-text-color-secondary);
   cursor: pointer;
   transition: color var(--transition-normal);
+  line-height: 1.2;
+  word-break: break-all;
+  
+  @media (min-width: 481px) {
+    word-break: normal;
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.65rem, 1.3vw, 0.7rem);
+  }
+  
+  @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+    font-size: 0.62rem;
+  }
   
   &:hover {
     color: var(--ion-color-primary);
@@ -336,7 +477,7 @@
 }
 
 // ========================================
-// SECCIÓN DESARROLLO - ACORDEÓN COMPACTO
+// ACORDEÓN DE DESARROLLO - COMPACTO
 // ========================================
 .footer-development {
   background: linear-gradient(
@@ -346,10 +487,13 @@
   );
   border: 1px solid var(--ion-border-color-secondary);
   border-radius: var(--border-radius-md);
-  
-  // COMPACTO: Padding y margin reducidos
   padding: var(--spacing-sm);
   margin-bottom: var(--spacing-sm);
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    padding: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+  }
   
   @media (max-width: 768px) {
     padding: var(--spacing-xs);
@@ -369,6 +513,14 @@
   transition: all var(--transition-normal);
   border-radius: var(--border-radius-sm);
   
+  @media (min-width: 769px) and (max-width: 1024px) {
+    padding: var(--spacing-xs);
+  }
+  
+  @media (max-width: 480px) {
+    padding: var(--spacing-xs);
+  }
+  
   &:hover {
     background: var(--ion-background-color);
   }
@@ -382,23 +534,39 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  min-width: 0;
 }
 
 .development-icon {
-  font-size: 18px;
+  font-size: clamp(12px, 2.2vw, 16px);
   color: var(--ion-color-primary);
+  flex-shrink: 0;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(13px, 2vw, 15px);
+  }
 }
 
 .development-title {
-  font-size: var(--font-size-sm);
+  font-size: clamp(0.7rem, 1.6vw, 0.82rem);
   font-weight: 600;
   color: var(--ion-color-primary);
+  line-height: 1.2;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.72rem, 1.5vw, 0.78rem);
+  }
 }
 
 .toggle-icon {
-  font-size: 16px;
+  font-size: clamp(10px, 1.8vw, 14px);
   color: var(--ion-color-primary);
   transition: transform var(--transition-normal);
+  flex-shrink: 0;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(11px, 1.7vw, 13px);
+  }
 }
 
 .development-toggle.expanded .toggle-icon {
@@ -412,8 +580,18 @@
   transition: max-height 0.3s ease-out;
   
   &.expanded {
-    max-height: 500px;
+    max-height: 400px;
     transition: max-height 0.4s ease-in;
+    
+    @media (min-width: 769px) and (max-width: 1024px) and (max-height: 700px) {
+      max-height: 250px;
+    }
+    
+    // Comprimir acordeón en tablets para ahorrar espacio
+    @media (min-width: 769px) and (max-width: 1400px) and (orientation: landscape) {
+      max-height: 200px;
+      overflow-y: auto;
+    }
   }
 }
 
@@ -422,15 +600,31 @@
   
   &.expanded {
     padding: var(--spacing-sm) 0 0 0;
+    
+    @media (min-width: 769px) and (max-width: 1024px) {
+      padding: var(--spacing-xs) 0 0 0;
+    }
   }
 }
 
 .development-description {
-  font-size: var(--font-size-sm);
-  line-height: 1.5;
+  font-size: clamp(0.6rem, 1.4vw, 0.8rem);
+  line-height: 1.3;
   color: var(--ion-text-color-secondary);
   margin: 0 0 var(--spacing-md) 0;
   text-align: justify;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.62rem, 1.3vw, 0.7rem);
+    margin: 0 0 var(--spacing-xs) 0;
+    line-height: 1.25;
+  }
+  
+  // Hacer el texto del acordeón más compacto en tablets
+  @media (min-width: 769px) and (max-width: 1400px) and (orientation: landscape) {
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.2;
+  }
   
   strong {
     color: var(--ion-color-primary);
@@ -442,15 +636,36 @@
   display: grid;
   gap: var(--spacing-sm);
   margin-bottom: var(--spacing-md);
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    gap: 3px;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  // Comprimir puntos en tablets
+  @media (min-width: 769px) and (max-width: 1400px) and (orientation: landscape) {
+    gap: 2px;
+    margin-bottom: var(--spacing-xs);
+  }
 }
 
 .point {
   display: flex;
   align-items: flex-start;
   gap: var(--spacing-xs);
-  font-size: var(--font-size-xs);
-  line-height: 1.4;
+  font-size: clamp(0.58rem, 1.3vw, 0.7rem);
+  line-height: 1.25;
   color: var(--ion-text-color-secondary);
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.6rem, 1.2vw, 0.65rem);
+    line-height: 1.2;
+  }
+  
+  // Comprimir líneas en tablets
+  @media (min-width: 769px) and (max-width: 1400px) and (orientation: landscape) {
+    line-height: 1.1;
+  }
   
   strong {
     color: var(--ion-text-color);
@@ -459,10 +674,15 @@
 }
 
 .point-icon {
-  font-size: 12px;
+  font-size: clamp(7px, 1vw, 10px);
   color: var(--ion-color-success);
   margin-top: 2px;
   flex-shrink: 0;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: 8px;
+    margin-top: 1px;
+  }
 }
 
 .development-conclusion {
@@ -470,9 +690,21 @@
   background: rgba(var(--ion-color-primary-rgb), 0.08);
   border-left: 3px solid var(--ion-color-primary);
   border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0;
-  font-size: var(--font-size-xs);
-  line-height: 1.5;
+  font-size: clamp(0.58rem, 1.3vw, 0.7rem);
+  line-height: 1.3;
   color: var(--ion-text-color-secondary);
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    padding: var(--spacing-xs);
+    font-size: clamp(0.6rem, 1.2vw, 0.65rem);
+    line-height: 1.25;
+  }
+  
+  // Comprimir conclusión en tablets
+  @media (min-width: 769px) and (max-width: 1400px) and (orientation: landscape) {
+    padding: var(--spacing-xs);
+    line-height: 1.2;
+  }
   
   em {
     font-style: italic;
@@ -486,27 +718,49 @@
 }
 
 // ========================================
-// FOOTER INFERIOR - COMPACTO
+// FOOTER INFERIOR - PERFECTO
 // ========================================
 .footer-bottom {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  gap: var(--spacing-sm);
   align-items: center;
-  
-  // COMPACTO: Sin border-top
   padding-top: var(--spacing-sm);
   border-top: 1px solid var(--ion-border-color);
+  gap: var(--spacing-sm);
   
+  // Desktop - 3 columnas
+  grid-template-columns: 1fr auto 1fr;
+  
+  // Tablet - 3 columnas más compactas
+  @media (min-width: 769px) and (max-width: 1024px) {
+    gap: var(--spacing-xs);
+    padding-top: var(--spacing-xs);
+  }
+  
+  // Footer bottom más compacto en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    gap: var(--spacing-xs);
+    padding-top: var(--spacing-xs);
+    padding-bottom: var(--spacing-xl);
+  }
+  
+  // Asegurar que el footer bottom tenga espacio suficiente en tablets
+  @media (min-width: 769px) and (max-width: 1400px) and (orientation: landscape) {
+    padding-bottom: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+  
+// Tablet y móvil - 1 columna centrado
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
-    gap: var(--spacing-xs);
     text-align: center;
+    gap: var(--spacing-xs);
     padding-top: var(--spacing-xs);
   }
 }
 
-// Información técnica
+// ========================================
+// INFORMACIÓN TÉCNICA - VISIBLE
+// ========================================
 .footer-tech {
   display: flex;
   flex-direction: column;
@@ -514,6 +768,7 @@
   
   @media (max-width: 768px) {
     order: 3;
+    align-items: center;
   }
 }
 
@@ -522,50 +777,63 @@
   align-items: center;
   gap: var(--spacing-sm);
   flex-wrap: wrap;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    gap: var(--spacing-xs);
+  }
+  
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
 }
 
 .tech-label {
-  font-size: var(--font-size-xs);
+  font-size: clamp(0.6rem, 1.4vw, 0.72rem);
   color: var(--ion-text-color-secondary);
   font-weight: 500;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.65rem, 1.3vw, 0.7rem);
+  }
+  
+  // Tech info más compacta en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    font-size: 0.68rem;
+  }
 }
 
 .tech-stack {
   display: flex;
   flex-wrap: wrap;
+  gap: 0.15rem;
 }
 
 .tech-item {
-  font-size: var(--font-size-xs);
+  font-size: clamp(0.6rem, 1.4vw, 0.72rem);
   color: var(--ion-color-primary);
   font-weight: 600;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.65rem, 1.3vw, 0.7rem);
+  }
+  
+  // Tech info más compacta en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    font-size: 0.68rem;
+  }
 }
 
-.site-info {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  font-size: var(--font-size-xs);
-  color: var(--ion-text-color-tertiary);
-}
-
-.version {
-  font-weight: 600;
-}
-
-.separator {
-  opacity: 0.5;
-}
-
-.last-update {
-  font-weight: 500;
-}
-
-// Controles compactos
+// ========================================
+// CONTROLES Y REDES SOCIALES - PERFECTOS
+// ========================================
 .footer-controls {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    gap: var(--spacing-xs);
+  }
   
   @media (max-width: 768px) {
     order: 1;
@@ -575,115 +843,21 @@
   
   @media (max-width: 480px) {
     flex-wrap: wrap;
-    gap: var(--spacing-xs);
   }
 }
 
-.theme-toggle-footer,
-.scroll-top {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  
-  // COMPACTO: Padding reducido
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background: var(--ion-background-color);
-  border: 1px solid var(--ion-border-color);
-  border-radius: var(--border-radius-sm);
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  color: var(--ion-text-color-secondary);
-  
-  &:hover {
-    background: var(--ion-background-color-secondary);
-    border-color: var(--ion-color-primary);
-    color: var(--ion-color-primary);
-    transform: translateY(-1px);
-  }
-}
-
-.theme-icon,
-.scroll-icon {
-  font-size: 14px;
-}
-
-.theme-label,
-.scroll-label {
-  font-size: var(--font-size-xs);
-  font-weight: 500;
-  
-  @media (max-width: 480px) {
-    display: none;
-  }
-}
-
-// Copyright compacto
-.footer-copyright {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-  text-align: right;
-  
-  @media (max-width: 768px) {
-    order: 2;
-    text-align: center;
-  }
-}
-
-.copyright-text {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  font-size: var(--font-size-xs);
-  color: var(--ion-text-color);
-  font-weight: 600;
-  
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-}
-
-.copyright-symbol {
-  color: var(--ion-color-primary);
-}
-
-.copyright-year,
-.copyright-name {
-  font-weight: 700;
-}
-
-.copyright-details {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-  font-size: var(--font-size-xs);
-  color: var(--ion-text-color-secondary);
-  
-  @media (max-width: 768px) {
-    justify-content: center;
-  }
-}
-
-.rights,
-.location {
-  font-weight: 500;
-}
-
-// ========================================
-// ENLACES SOCIALES COMPACTOS
-// ========================================
 .social-links {
   display: flex;
   gap: var(--spacing-xs);
   
-  @media (max-width: 768px) {
-    gap: var(--spacing-xs);
+  @media (min-width: 769px) and (max-width: 1024px) {
+    gap: 5px;
   }
 }
 
 .social-link {
-  width: 32px;
-  height: 32px;
+  width: clamp(24px, 3.5vw, 30px);
+  height: clamp(24px, 3.5vw, 30px);
   border-radius: 50%;
   border: none;
   display: flex;
@@ -693,6 +867,17 @@
   transition: all var(--transition-normal);
   background: var(--ion-background-color);
   border: 1px solid var(--ion-border-color);
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    width: clamp(26px, 3vw, 28px);
+    height: clamp(26px, 3vw, 28px);
+  }
+  
+  // Controles sociales más pequeños en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    width: 26px;
+    height: 26px;
+  }
   
   &:hover {
     transform: translateY(-2px);
@@ -725,9 +910,168 @@
 }
 
 .social-icon {
-  font-size: 14px;
+  font-size: clamp(9px, 1.6vw, 12px);
   color: var(--ion-text-color-secondary);
   transition: color var(--transition-normal);
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(10px, 1.5vw, 11px);
+  }
+  
+  // Iconos más pequeños en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    font-size: 10px;
+  }
+}
+
+.theme-toggle-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--ion-background-color);
+  border: 1px solid var(--ion-border-color);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  color: var(--ion-text-color-secondary);
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    padding: 4px var(--spacing-xs);
+  }
+  
+  // Theme toggle más compacto en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    padding: 4px 6px;
+  }
+  
+  &:hover {
+    background: var(--ion-background-color-secondary);
+    border-color: var(--ion-color-primary);
+    color: var(--ion-color-primary);
+    transform: translateY(-1px);
+  }
+}
+
+.theme-icon {
+  font-size: clamp(9px, 1.6vw, 12px);
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(10px, 1.5vw, 11px);
+  }
+  
+  // Icono más pequeño en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    font-size: 10px;
+  }
+}
+
+.theme-label {
+  font-size: clamp(0.6rem, 1.4vw, 0.72rem);
+  font-weight: 500;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.65rem, 1.3vw, 0.7rem);
+  }
+  
+  // Label más pequeño en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    font-size: 0.65rem;
+  }
+  
+  @media (max-width: 480px) {
+    display: none;
+  }
+}
+
+// ========================================
+// COPYRIGHT - SIEMPRE VISIBLE
+// ========================================
+.footer-copyright {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  text-align: right;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    gap: 3px;
+  }
+  
+  @media (max-width: 768px) {
+    order: 2;
+    text-align: center;
+  }
+}
+
+.copyright-text {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: clamp(0.6rem, 1.4vw, 0.72rem);
+  color: var(--ion-text-color);
+  font-weight: 600;
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.65rem, 1.3vw, 0.7rem);
+    gap: 3px;
+  }
+  
+  // Copyright más compacto pero visible en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    font-size: 0.7rem;
+    gap: 4px;
+  }
+  
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+  
+  @media (max-width: 480px) {
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+}
+
+.copyright-symbol {
+  color: var(--ion-color-primary);
+}
+
+.copyright-year,
+.copyright-name {
+  font-weight: 700;
+}
+
+.copyright-details {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: clamp(0.55rem, 1.2vw, 0.65rem);
+  color: var(--ion-text-color-secondary);
+  
+  @media (min-width: 769px) and (max-width: 1024px) {
+    font-size: clamp(0.58rem, 1.1vw, 0.62rem);
+    gap: 3px;
+  }
+  
+  // Copyright details más compacto en Redmi Pad SE
+  @media (min-width: 1200px) and (max-width: 1300px) and (max-height: 850px) {
+    font-size: 0.62rem;
+    gap: 4px;
+  }
+  
+  @media (max-width: 768px) {
+    justify-content: center;
+  }
+  
+  @media (max-width: 480px) {
+    flex-wrap: wrap;
+    gap: 3px;
+  }
+}
+
+.rights,
+.location {
+  font-weight: 500;
 }
 
 // ========================================
@@ -743,23 +1087,472 @@
 }
 
 // ========================================
-// RESPONSIVE BREAKPOINTS
+// OPTIMIZACIONES ADICIONALES PARA TABLETS PROBLEMÁTICAS
 // ========================================
-@media (max-width: 480px) {
-  .footer-main {
-    gap: var(--spacing-sm);
+
+// Cualquier tablet en landscape con problemas de corte
+@media (min-width: 769px) and (max-width: 1400px) and (orientation: landscape) {
+  .footer-container {
+    // Padding inferior mínimo garantizado para tablets
+    padding-bottom: calc(var(--spacing-xxl) + 5rem) !important;
+    
+    // En casos de altura muy limitada, aumentar aún más
+    @media (max-height: 800px) {
+      padding-bottom: calc(var(--spacing-xxl) + 6rem) !important;
+    }
+    
+    @media (max-height: 700px) {
+      padding-bottom: calc(var(--spacing-xxl) + 7rem) !important;
+    }
+    
+    @media (max-height: 600px) {
+      padding-bottom: calc(var(--spacing-xxl) + 8rem) !important;
+    }
+  }
+}
+
+// ========================================
+// OPTIMIZACIONES ESPECÍFICAS REDMI PAD SE
+// ========================================
+
+// Tablets Samsung Galaxy Tab A8 y similares (1280x800)
+@media (min-width: 1280px) and (max-height: 800px) {
+  .footer-container {
+    padding: var(--spacing-lg) var(--spacing-md) calc(var(--spacing-xxl) + 3.5rem) var(--spacing-md) !important;
+  }
+}
+
+// iPad 10.9" y tablets similares (1080x810)
+@media (min-width: 1080px) and (max-height: 810px) {
+  .footer-container {
+    padding: var(--spacing-md) var(--spacing-sm) calc(var(--spacing-xxl) + 4rem) var(--spacing-sm) !important;
+  }
+}
+
+// Tablets Lenovo y Huawei (1920x1200 landscape)
+@media (min-width: 1920px) and (max-height: 1200px) {
+  .footer-container {
+    padding: var(--spacing-xl) var(--spacing-lg) calc(var(--spacing-xxl) + 3rem) var(--spacing-lg) !important;
+  }
+}
+
+// ========================================
+// OPTIMIZACIONES PARA TABLETS PEQUEÑAS
+// ========================================
+
+// Tablets 8-9 pulgadas en landscape (1024x600-768)
+@media (min-width: 1024px) and (max-height: 768px) {
+  .footer-container {
+    padding: var(--spacing-xs) var(--spacing-sm) calc(var(--spacing-xl) + 3.5rem) var(--spacing-sm) !important;
   }
   
-  .social-links {
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
     gap: var(--spacing-xs);
+    margin-bottom: var(--spacing-xs);
+    
+    .personal-info {
+      grid-column: 1 / -1;
+    }
+    
+    .navigation {
+      grid-column: 1;
+    }
+    
+    .quick-links {
+      grid-column: 2;
+    }
+    
+    .contact-direct {
+      grid-column: 1 / -1;
+    }
+  }
+  
+  .brand-name {
+    font-size: 0.78rem;
+  }
+  
+  .brand-title {
+    font-size: 0.65rem;
+  }
+  
+  .brand-description {
+    font-size: 0.68rem;
+    margin-bottom: 6px;
+  }
+  
+  .section-title {
+    font-size: 0.7rem;
+    margin-bottom: 6px;
+  }
+  
+  .nav-link,
+  .quick-link {
+    padding: 2px var(--spacing-xs);
+    font-size: 0.6rem;
+  }
+  
+  .contact-text {
+    font-size: 0.6rem;
+  }
+  
+  .development-description,
+  .development-points,
+  .development-conclusion {
+    font-size: 0.58rem;
+    line-height: 1.2;
+  }
+  
+  .tech-label,
+  .tech-item {
+    font-size: 0.6rem;
+  }
+  
+  .copyright-text {
+    font-size: 0.6rem;
+  }
+  
+  .copyright-details {
+    font-size: 0.55rem;
+  }
+}
+
+// ========================================
+// OPTIMIZACIONES PARA ALTURA MUY LIMITADA
+// ========================================
+
+// Cualquier dispositivo con altura muy limitada (≤ 600px)
+@media (max-height: 600px) {
+  .footer-container {
+    padding-bottom: calc(var(--spacing-xxl) + 3rem) !important;
+  }
+  
+  .footer-development {
+    margin-bottom: 6px;
+  }
+  
+  .footer-bottom {
+    padding-top: 6px;
+    gap: 6px;
+  }
+  
+  .accordion-content.expanded {
+    max-height: 200px;
+  }
+  
+  .development-points {
+    gap: 2px;
+  }
+  
+  .point {
+    font-size: 0.55rem;
+    line-height: 1.1;
+  }
+  
+  .development-conclusion {
+    padding: var(--spacing-xs);
+    font-size: 0.55rem;
+  }
+}
+
+// Altura extremadamente limitada (≤ 500px)
+@media (max-height: 500px) {
+  .footer-container {
+    padding-bottom: calc(var(--spacing-xxl) + 2.5rem) !important;
+  }
+  
+  .footer-main {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 4px;
+    margin-bottom: 4px;
+    
+    .personal-info {
+      grid-column: 1 / -1;
+    }
+  }
+  
+  .section-header {
+    margin-bottom: 4px;
+  }
+  
+  .brand-description {
+    margin-bottom: 4px;
+    font-size: 0.6rem;
+  }
+  
+  .status-message {
+    padding: 2px 4px;
+  }
+  
+  .section-title {
+    font-size: 0.6rem;
+    margin-bottom: 4px;
+  }
+  
+  .nav-link,
+  .quick-link {
+    padding: 1px 4px;
+    font-size: 0.55rem;
+  }
+  
+  .contact-item {
+    padding: 1px 4px;
+  }
+  
+  .contact-text {
+    font-size: 0.55rem;
+  }
+  
+  .development-toggle {
+    padding: 4px;
+  }
+  
+  .development-title {
+    font-size: 0.6rem;
+  }
+  
+  .accordion-content.expanded {
+    max-height: 150px;
+  }
+  
+  .theme-toggle-footer {
+    padding: 2px 4px;
+  }
+  
+  .theme-label {
+    display: none;
   }
   
   .social-link {
-    width: 28px;
-    height: 28px;
+    width: 22px;
+    height: 22px;
   }
   
   .social-icon {
-    font-size: 12px;
+    font-size: 8px;
+  }
+  
+  .theme-icon {
+    font-size: 8px;
+  }
+}
+
+// ========================================
+// SEGURIDAD ADICIONAL - PADDING MÍNIMO GARANTIZADO
+// ========================================
+
+// Para cualquier tablet que aún tenga problemas
+@media (min-width: 768px) and (max-width: 1024px) {
+  .footer {
+    // Asegurar que el footer tenga un margin-bottom mínimo
+    margin-bottom: env(safe-area-inset-bottom, 0px);
+    
+    // Padding adicional para seguridad
+    &::after {
+      content: "";
+      display: block;
+      height: 2rem;
+      width: 100%;
+    }
+  }
+}
+
+// ========================================
+// FALLBACK PARA CASOS EXTREMOS
+// ========================================
+
+// Si todo lo demás falla, aplicar padding extra universal para tablets
+@media (min-device-width: 768px) and (max-device-width: 1024px) {
+  .footer-container {
+    // Fallback universal para tablets
+    min-height: calc(100vh - 200px);
+    padding-bottom: 8rem !important;
+  }
+  
+  // Asegurar que el contenido se vea completo
+  .footer-bottom {
+    position: relative;
+    margin-bottom: 3rem;
+  }
+  
+  // Último recurso: forzar scroll si es necesario
+  .footer {
+    overflow-y: auto;
+    max-height: calc(100vh - 60px); // 60px para el header
+  }
+}
+
+// ========================================
+// OPTIMIZACIÓN PARA VIEWPORT ESPECÍFICO
+// ========================================
+
+// Para viewports específicos donde se detecta el problema
+@media (min-width: 1024px) and (min-height: 768px) and (max-height: 820px) {
+  .footer-container {
+    padding-bottom: calc(var(--spacing-xxl) + 7rem) !important;
+  }
+}
+
+@media (min-width: 768px) and (min-height: 1024px) and (max-height: 1100px) {
+  .footer-container {
+    padding-bottom: calc(var(--spacing-xxl) + 4.5rem) !important;
+  }
+}
+
+// ========================================
+// FALLBACKS Y COMPATIBILIDAD
+// ========================================
+
+// Fallback para navegadores que no soportan clamp()
+@supports not (font-size: clamp(1rem, 2vw, 1.5rem)) {
+  .brand-name {
+    font-size: 0.85rem;
+  }
+  
+  .brand-title {
+    font-size: 0.7rem;
+  }
+  
+  .brand-description {
+    font-size: 0.75rem;
+  }
+  
+  .section-title {
+    font-size: 0.75rem;
+  }
+  
+  .nav-link,
+  .quick-link,
+  .contact-text {
+    font-size: 0.65rem;
+  }
+  
+  .development-title {
+    font-size: 0.75rem;
+  }
+  
+  .tech-label,
+  .tech-item {
+    font-size: 0.65rem;
+  }
+  
+  .copyright-text {
+    font-size: 0.65rem;
+  }
+  
+  .copyright-details {
+    font-size: 0.6rem;
+  }
+  
+  .social-link {
+    width: 26px;
+    height: 26px;
+  }
+  
+  .social-icon {
+    font-size: 10px;
+  }
+}
+
+// ========================================
+// ACCESIBILIDAD AVANZADA
+// ========================================
+
+// Movimiento reducido
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .status-icon {
+    animation: none !important;
+  }
+  
+  .toggle-icon {
+    transition: none !important;
+  }
+  
+  .nav-link:hover,
+  .quick-link:hover,
+  .social-link:hover,
+  .theme-toggle-footer:hover {
+    transform: none !important;
+  }
+}
+
+// Alto contraste
+@media (prefers-contrast: high) {
+  .footer {
+    border-top: 4px solid var(--ion-color-primary) !important;
+  }
+  
+  .brand-logo {
+    border: 2px solid var(--ion-color-primary) !important;
+  }
+  
+  .social-link {
+    border: 2px solid var(--ion-border-color) !important;
+  }
+  
+  .theme-toggle-footer {
+    border: 2px solid var(--ion-border-color) !important;
+  }
+  
+  .development-toggle {
+    border: 1px solid var(--ion-border-color) !important;
+  }
+  
+  .status-message {
+    border-left: 4px solid var(--ion-color-accent) !important;
+  }
+}
+
+// ========================================
+// ESTILOS DE IMPRESIÓN
+// ========================================
+@media print {
+  .footer {
+    background: white !important;
+    border-top: 2px solid #000 !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+  
+  .social-links,
+  .theme-toggle-footer {
+    display: none !important;
+  }
+  
+  .footer-main {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+  }
+  
+  .development-content {
+    max-height: none !important;
+    
+    &.expanded {
+      display: block !important;
+    }
+  }
+  
+  .accordion-content {
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  
+  * {
+    color: #000 !important;
+    background: transparent !important;
+  }
+  
+  .brand-logo {
+    background: #000 !important;
+  }
+  
+  .brand-icon {
+    color: white !important;
   }
 }

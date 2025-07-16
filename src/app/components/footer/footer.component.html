@@ -1,11 +1,11 @@
-<!-- Footer Compacto del Portafolio -->
+<!-- Footer Responsivo Optimizado -->
 <footer class="footer">
   <div class="footer-container">
     
-    <!-- Contenido principal del footer - MÁS COMPACTO -->
+    <!-- Contenido principal del footer - GRID RESPONSIVO -->
     <div class="footer-main">
       
-      <!-- Información personal - SIMPLIFICADA -->
+      <!-- Información personal - ADAPTATIVA -->
       <div class="footer-section personal-info">
         <div class="section-header">
           <div class="brand-logo">
@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <!-- Navegación rápida - COMPACTA -->
+      <!-- Navegación rápida - RESPONSIVA -->
       <div class="footer-section navigation">
         <h5 class="section-title">Navegación</h5>
         <ul class="nav-list">
@@ -38,6 +38,7 @@
             <button 
               class="nav-link"
               (click)="navigateToSection(link.id)"
+              [attr.aria-label]="'Ir a ' + link.label"
             >
               <ion-icon [name]="link.icon" class="nav-icon"></ion-icon>
               <span class="nav-label">{{ link.label }}</span>
@@ -46,7 +47,7 @@
         </ul>
       </div>
 
-      <!-- Enlaces rápidos - COMPACTOS -->
+      <!-- Enlaces rápidos - RESPONSIVOS -->
       <div class="footer-section quick-links">
         <h5 class="section-title">Enlaces Rápidos</h5>
         <ul class="quick-list">
@@ -57,6 +58,7 @@
             <button 
               class="quick-link"
               (click)="link.action()"
+              [attr.aria-label]="link.label"
             >
               <ion-icon [name]="link.icon" class="quick-icon"></ion-icon>
               <span class="quick-label">{{ link.label }}</span>
@@ -65,32 +67,51 @@
         </ul>
       </div>
 
-      <!-- Contacto directo - COMPACTO -->
+      <!-- Contacto directo - RESPONSIVO -->
       <div class="footer-section contact-direct">
         <h5 class="section-title">Contacto</h5>
         <div class="contact-methods">
           <div class="contact-item">
             <ion-icon name="mail" class="contact-icon"></ion-icon>
-            <span class="contact-text" (click)="copyEmail()">{{ personalInfo.email }}</span>
+            <span 
+              class="contact-text" 
+              (click)="copyEmail()"
+              [attr.aria-label]="'Email: ' + personalInfo.email"
+            >
+              {{ personalInfo.email }}
+            </span>
           </div>
           <div class="contact-item">
             <ion-icon name="call" class="contact-icon"></ion-icon>
-            <span class="contact-text">{{ personalInfo.phone }}</span>
+            <span 
+              class="contact-text"
+              [attr.aria-label]="'Teléfono: ' + personalInfo.phone"
+            >
+              {{ personalInfo.phone }}
+            </span>
           </div>
           <div class="contact-item">
             <ion-icon name="location" class="contact-icon"></ion-icon>
-            <span class="contact-text">{{ personalInfo.location }}</span>
+            <span 
+              class="contact-text"
+              [attr.aria-label]="'Ubicación: ' + personalInfo.location"
+            >
+              {{ personalInfo.location }}
+            </span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Sección: Sobre el desarrollo - ACORDEÓN COMPACTO -->
+    <!-- Sección: Sobre el desarrollo - ACORDEÓN RESPONSIVO -->
     <div class="footer-development">
       <button 
         class="development-toggle" 
         (click)="toggleAccordion('development')"
         [class.expanded]="isAccordionExpanded('development')"
+        [attr.aria-expanded]="isAccordionExpanded('development')"
+        aria-controls="development-content"
+        aria-label="Mostrar información sobre el desarrollo del sitio"
       >
         <div class="toggle-content">
           <ion-icon name="construct" class="development-icon"></ion-icon>
@@ -99,12 +120,15 @@
         <ion-icon 
           [name]="isAccordionExpanded('development') ? 'chevron-up' : 'chevron-down'" 
           class="toggle-icon"
+          aria-hidden="true"
         ></ion-icon>
       </button>
       
       <div 
+        id="development-content"
         class="accordion-content development-content"
         [class.expanded]="isAccordionExpanded('development')"
+        [attr.aria-hidden]="!isAccordionExpanded('development')"
       >
         <div class="development-text">
           <p class="development-description">
@@ -114,23 +138,23 @@
           
           <div class="development-points">
             <div class="point">
-              <ion-icon name="checkmark-circle" class="point-icon"></ion-icon>
+              <ion-icon name="checkmark-circle" class="point-icon" aria-hidden="true"></ion-icon>
               <span>Se requiere <strong>experiencia técnica sólida</strong> para saber qué tecnologías usar y por qué</span>
             </div>
             <div class="point">
-              <ion-icon name="checkmark-circle" class="point-icon"></ion-icon>
+              <ion-icon name="checkmark-circle" class="point-icon" aria-hidden="true"></ion-icon>
               <span>Es fundamental entender las <strong>versiones de frameworks</strong> y sus compatibilidades</span>
             </div>
             <div class="point">
-              <ion-icon name="checkmark-circle" class="point-icon"></ion-icon>
+              <ion-icon name="checkmark-circle" class="point-icon" aria-hidden="true"></ion-icon>
               <span><strong>Angular, Ionic, TypeScript</strong>: saber qué versiones usar o el código jamás compilará</span>
             </div>
             <div class="point">
-              <ion-icon name="checkmark-circle" class="point-icon"></ion-icon>
+              <ion-icon name="checkmark-circle" class="point-icon" aria-hidden="true"></ion-icon>
               <span>Se necesita <strong>arquitectura de software</strong> y mejores prácticas</span>
             </div>
             <div class="point">
-              <ion-icon name="checkmark-circle" class="point-icon"></ion-icon>
+              <ion-icon name="checkmark-circle" class="point-icon" aria-hidden="true"></ion-icon>
               <span>La IA es una <strong>herramienta extraordinaria</strong>, pero requiere dirección experta para resultados profesionales</span>
             </div>
           </div>
@@ -145,7 +169,7 @@
       </div>
     </div>
 
-    <!-- Footer inferior - COMPACTO -->
+    <!-- Footer inferior - GRID RESPONSIVO -->
     <div class="footer-bottom">
       
       <!-- Información técnica -->
@@ -161,8 +185,6 @@
             </span>
           </div>
         </div>
-        
-      
       </div>
 
       <!-- Controles y redes sociales -->
@@ -173,33 +195,33 @@
           <button 
             class="social-link linkedin"
             (click)="openLinkedIn()"
-            aria-label="LinkedIn"
+            aria-label="Abrir perfil de LinkedIn"
           >
-            <ion-icon name="logo-linkedin" class="social-icon"></ion-icon>
+            <ion-icon name="logo-linkedin" class="social-icon" aria-hidden="true"></ion-icon>
           </button>
           
           <button 
             class="social-link email"
             (click)="sendEmail()"
-            aria-label="Email"
+            aria-label="Enviar email"
           >
-            <ion-icon name="mail" class="social-icon"></ion-icon>
+            <ion-icon name="mail" class="social-icon" aria-hidden="true"></ion-icon>
           </button>
           
           <button 
             class="social-link whatsapp"
             (click)="openWhatsApp()"
-            aria-label="WhatsApp"
+            aria-label="Abrir WhatsApp"
           >
-            <ion-icon name="logo-whatsapp" class="social-icon"></ion-icon>
+            <ion-icon name="logo-whatsapp" class="social-icon" aria-hidden="true"></ion-icon>
           </button>
           
           <button 
             class="social-link phone"
             (click)="callPhone()"
-            aria-label="Teléfono"
+            aria-label="Llamar por teléfono"
           >
-            <ion-icon name="call" class="social-icon"></ion-icon>
+            <ion-icon name="call" class="social-icon" aria-hidden="true"></ion-icon>
           </button>
         </div>
         
@@ -212,24 +234,22 @@
           <ion-icon 
             [name]="isDarkMode() ? 'sunny' : 'moon'" 
             class="theme-icon"
+            aria-hidden="true"
           ></ion-icon>
           <span class="theme-label">{{ isDarkMode() ? 'Claro' : 'Oscuro' }}</span>
         </button>
-
-        <!-- Botón volver arriba -->
-
       </div>
 
       <!-- Copyright -->
       <div class="footer-copyright">
         <div class="copyright-text">
-          <span class="copyright-symbol">©</span>
+          <span class="copyright-symbol" aria-hidden="true">©</span>
           <span class="copyright-year">{{ currentYear }}</span>
           <span class="copyright-name">{{ personalInfo.name }}</span>
         </div>
         <div class="copyright-details">
           <span class="rights">Todos los derechos reservados</span>
-          <span class="separator">•</span>
+          <span class="separator" aria-hidden="true">•</span>
           <span class="location">{{ personalInfo.location }}</span>
         </div>
       </div>
