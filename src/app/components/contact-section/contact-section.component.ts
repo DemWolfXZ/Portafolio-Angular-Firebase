@@ -3,9 +3,8 @@
  * 
  * DESCRIPCIÓN:
  * Componente para la sección de contacto del portafolio.
- * Incluye formulario funcional con Firebase, información de contacto,
- * validaciones robustas y manejo de estados de envío.
- * Integrado con ContactService para envío a Firestore.
+ * ACTUALIZADO: Información de contacto alineada con el nuevo posicionamiento
+ * como ingeniero informático buscando crecimiento profesional.
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -42,15 +41,15 @@ export class ContactSectionComponent implements OnInit {
   public errorMessage = '';
   public animationsLoaded = false;
 
-  // Información de contacto de Alejandro
+  // Información de contacto ACTUALIZADA según el prompt
   public contactInfo = {
     name: 'Alejandro Villa Villavicencio',
-    title: 'Technical Business Analyst & IT Specialist',
+    title: 'Ingeniero Informático • Buscando Oportunidades de Crecimiento', // ACTUALIZADO
     email: 'alejandro.villa91@gmail.com',
     phone: '+56 920913551',
     location: 'San Bernardo, Santiago, Chile',
     linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/',
-    availability: 'Disponible para nuevos proyectos y oportunidades',
+    availability: 'Disponible para roles junior/intermedio en desarrollo y análisis', // ACTUALIZADO
     responseTime: 'Respuesta típica: 24-48 horas'
   };
 

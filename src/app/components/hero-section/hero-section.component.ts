@@ -1,11 +1,11 @@
 // src/app/components/hero-section/hero-section.component.ts
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { DownloadService } from '@services/download.service';
+import { DownloadService } from '../../services/download.service';
 
 /**
  * Componente Hero Section - Sección de presentación principal
- * Muestra la información básica de Alejandro Villa con llamadas a la acción
- * Incluye descarga de CV, enlaces a LinkedIn y información de contacto
+ * ACTUALIZADO: Posicionamiento como ingeniero informático con experiencia sólida
+ * buscando crecimiento profesional en desarrollo y análisis de sistemas
  */
 @Component({
   selector: 'app-hero-section',
@@ -14,12 +14,12 @@ import { DownloadService } from '@services/download.service';
 })
 export class HeroSectionComponent implements OnInit {
 
-  // Información personal principal
+  // Información personal actualizada según el prompt
   public personalInfo = {
     name: 'Alejandro Villa Villavicencio',
-    title: 'Technical Business Analyst & IT Specialist',
-    tagline: '20+ años resolviendo problemas técnicos complejos',
-    description: 'Ingeniero Informático especializado en coordinación técnica y análisis de sistemas. Mi valor está en entender tanto la tecnología como el negocio.',
+    title: 'Ingeniero Informático • Desarrollo & Análisis de Sistemas',
+    tagline: 'Combinando 20+ años de experiencia práctica con formación académica para crear soluciones efectivas',
+    description: 'Ingeniero Informático con sólida base en soporte técnico, buscando crecimiento en desarrollo, análisis de datos y coordinación de proyectos donde pueda aplicar mi perspectiva única de resolución de problemas.',
     location: 'San Bernardo, Santiago, Chile',
     email: 'alejandro.villa91@gmail.com',
     phone: '+56 920913551',

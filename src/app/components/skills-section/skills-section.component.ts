@@ -3,8 +3,8 @@
  * 
  * DESCRIPCIÓN:
  * Componente para la sección de competencias técnicas del portafolio.
- * CORREGIDO: Eliminados duplicados, agregados datos reales, validaciones mejoradas.
- * Funciona como página independiente, no como SPA.
+ * ACTUALIZADO: Ajustes en estadísticas y mensajes para reflejar posicionamiento
+ * como candidato con experiencia sólida buscando crecimiento profesional.
  */
 
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
@@ -38,8 +38,8 @@ export class SkillsSectionComponent implements OnInit, OnDestroy {
   public allSkills: Skill[] = [];
   public skillCategories: any[] = [];
 
-  // CORRECCIÓN: Arrays de niveles tipados para el template
-  public skillLevels: SkillLevel[] = ['expert', 'advanced', 'intermediate', 'learning'];
+  // CORRECCIÓN: Arrays de niveles tipados para el template - ACTUALIZADO sin "expert"
+  public skillLevels: SkillLevel[] = ['advanced', 'intermediate', 'learning'];
 
   // Helper functions disponibles en el template
   public getSkillsByCategory = getSkillsByCategory;
@@ -193,12 +193,11 @@ export class SkillsSectionComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Obtiene el label del nivel de competencia
+   * Obtiene el label del nivel de competencia - ACTUALIZADO sin "expert"
    */
   getLevelLabel(level: string): string {
     const labels = {
-      'expert': 'EXPERTO',
-      'advanced': 'AVANZADO', 
+      'advanced': 'AVANZADO',  // Cambiado de "EXPERTO" a "AVANZADO"
       'intermediate': 'INTERMEDIO',
       'learning': 'APRENDIENDO'
     };
@@ -206,12 +205,11 @@ export class SkillsSectionComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Obtiene el color del nivel de competencia
+   * Obtiene el color del nivel de competencia - ACTUALIZADO sin "expert"
    */
   getLevelColor(level: string): string {
     const colors = {
-      'expert': '#00CEC9',
-      'advanced': '#007bff',
+      'advanced': '#007bff',    // Cambiado de color "expert" a "advanced"
       'intermediate': '#FDCB6E',
       'learning': '#FD79A8'
     };
@@ -233,26 +231,27 @@ export class SkillsSectionComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * CORRECCIÓN: Estadísticas calculadas con validaciones
+   * CORRECCIÓN: Estadísticas calculadas con validaciones - ACTUALIZADO
    */
   getSkillsStats() {
     // VALIDACIÓN: Verificar que hay datos antes de calcular
     if (!this.allSkills || this.allSkills.length === 0) {
       return {
         totalSkills: 0,
-        expertSkills: 0,
+        expertSkills: 0,  // Mantenido para compatibilidad pero será 0
         maxExperience: 0,
         categories: 0
       };
     }
     
-    const expertSkills = this.allSkills.filter(s => s.level === 'expert');
+    // ACTUALIZADO: Usar "advanced" en lugar de "expert"
+    const advancedSkills = this.allSkills.filter(s => s.level === 'advanced');
     const maxExp = this.allSkills.length > 0 ? Math.max(...this.allSkills.map(s => s.yearsOfExperience)) : 0;
     const featuredCategories = this.skillCategories.filter(cat => cat.featured);
     
     return {
       totalSkills: this.allSkills.length,
-      expertSkills: expertSkills.length,
+      expertSkills: advancedSkills.length, // Ahora cuenta skills "advanced"
       maxExperience: maxExp,
       categories: featuredCategories.length
     };

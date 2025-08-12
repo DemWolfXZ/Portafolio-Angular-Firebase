@@ -2,6 +2,7 @@
  * Experience Section - COMPLETAMENTE RESPONSIVE PARA MÓVIL
  * Timeline de experiencia laboral con separación formal/independiente
  * Diseño responsivo con modal de detalles
+ * CORREGIDO: Animaciones profesionales sin conflictos de transparencia
  */
 
 .experience-section {
@@ -21,10 +22,11 @@
     padding: var(--spacing-sm) 0 var(--spacing-md) 0;
   }
   
-  // Animación de entrada
+  // CORREGIDO: Animación de entrada inicial sin interferencias
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s ease-out;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+              transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
   
   &.loaded {
     opacity: 1;
@@ -122,7 +124,8 @@
   background: var(--ion-surface-color);
   border-radius: var(--border-radius-md);
   border: 1px solid var(--ion-border-color);
-  transition: all var(--transition-normal);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   &:hover {
     transform: translateY(-2px);
@@ -160,7 +163,7 @@
 }
 
 // ========================================
-// TABS DE NAVEGACIÓN - RESPONSIVE
+// TABS DE NAVEGACIÓN - RESPONSIVE Y CORREGIDO
 // ========================================
 .experience-tabs {
   margin-bottom: var(--spacing-xl);
@@ -199,10 +202,11 @@
   border: 2px solid var(--ion-border-color);
   border-radius: var(--border-radius-md);
   cursor: pointer;
-  transition: all var(--transition-normal);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: left;
   
-  &:hover {
+  // CORREGIDO: Estados bien definidos sin interferencias
+  &:hover:not(.active) {
     border-color: var(--ion-color-primary);
     transform: translateY(-1px);
   }
@@ -210,6 +214,7 @@
   &.active {
     border-color: var(--ion-color-primary);
     background: var(--ion-background-color-secondary);
+    transform: none; // CORREGIDO: No transform en estado activo
     
     .tab-icon {
       color: var(--ion-color-primary);
@@ -237,7 +242,7 @@
 .tab-icon {
   font-size: 20px;
   color: var(--ion-text-color-secondary);
-  transition: color var(--transition-normal);
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   @media (max-width: 480px) {
     font-size: 18px;
@@ -254,7 +259,7 @@
   font-weight: 600;
   color: var(--ion-text-color);
   margin-bottom: var(--spacing-xs);
-  transition: color var(--transition-normal);
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tab-description {
@@ -265,7 +270,7 @@
 }
 
 // ========================================
-// TIMELINE DE EXPERIENCIA - RESPONSIVE
+// TIMELINE DE EXPERIENCIA - RESPONSIVE Y CORREGIDO
 // ========================================
 .experience-timeline {
   margin-bottom: var(--spacing-xl);
@@ -316,6 +321,8 @@
   position: relative;
   margin-bottom: var(--spacing-xl);
   cursor: pointer;
+  // CORREGIDO: Opacity siempre 1, no afectada por animaciones
+  opacity: 1 !important;
   
   &:last-child {
     margin-bottom: 0;
@@ -364,7 +371,7 @@
   align-items: center;
   justify-content: center;
   z-index: 2;
-  transition: all var(--transition-normal);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   @media (max-width: 768px) {
     left: calc(-1 * var(--spacing-lg) - 5px);
@@ -400,8 +407,11 @@
   padding: var(--spacing-lg);
   border-radius: var(--border-radius-md);
   border: 1px solid var(--ion-border-color);
-  transition: all var(--transition-normal);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
+  // CORREGIDO: Opacity siempre 1, no afectada por animaciones
+  opacity: 1 !important;
   
   @media (max-width: 768px) {
     padding: var(--spacing-md);
@@ -566,6 +576,7 @@
   color: var(--ion-color-primary);
   font-style: italic;
   cursor: pointer;
+  transition: text-decoration 0.2s ease;
   
   &:hover {
     text-decoration: underline;
@@ -648,17 +659,25 @@
   font-size: clamp(0.75rem, 2vw, 0.85rem);
   font-weight: 600;
   cursor: pointer;
-  transition: all var(--transition-normal);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   
   &:hover {
     background: var(--ion-color-primary);
     color: white;
     transform: translateY(-1px);
+    
+    .details-icon {
+      transform: translateX(2px);
+    }
   }
   
   @media (max-width: 768px) {
     &:hover {
       transform: none;
+      
+      .details-icon {
+        transform: none;
+      }
     }
   }
   
@@ -669,11 +688,7 @@
 
 .details-icon {
   font-size: 14px;
-  transition: transform var(--transition-normal);
-}
-
-.details-button:hover .details-icon {
-  transform: translateX(2px);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 // ========================================
@@ -780,7 +795,7 @@
   min-height: 48px;
   font-weight: 600;
   border-radius: var(--border-radius-md);
-  transition: all var(--transition-normal);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: clamp(0.8rem, 2.5vw, 0.95rem);
   
   &.primary {
@@ -872,6 +887,17 @@
   color: var(--ion-text-color-secondary);
   margin: 0;
   line-height: 1.3;
+  
+  .duration-text {
+    font-weight: 700;
+    color: var(--ion-text-color);
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .date-range {
+    font-size: 0.9em;
+    color: var(--ion-text-color-secondary);
+  }
 }
 
 .modal-section {
@@ -985,7 +1011,7 @@
 }
 
 // ========================================
-// ANIMACIONES
+// ANIMACIONES PROFESIONALES Y OPTIMIZADAS
 // ========================================
 @keyframes pulse {
   0%, 100% {
@@ -996,16 +1022,63 @@
   }
 }
 
-// Clases de animación
-.experience-animate {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.6s ease-out;
-  
-  &.animate-in {
+// CORREGIDO: Animaciones que solo se ejecutan una vez y no interfieren
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+// CORREGIDO: Clases de animación que mantienen estado final
+.experience-animate {
+  // Estado inicial: invisible pero preparado
+  opacity: 0;
+  transform: translateY(20px);
+  
+  // CORREGIDO: Solo se anima cuando tiene la clase animate-in
+  &.animate-in {
+    animation: slideInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    opacity: 1 !important; // Asegura que quede visible
+    transform: translateY(0) !important; // Asegura posición final
+  }
+}
+
+// CORREGIDO: Timeline items con animación controlada
+.timeline-item.animate-in {
+  animation: slideInLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 1 !important;
+  transform: translateX(0) !important;
+}
+
+// CORREGIDO: Fade in para elementos que aparecen dinámicamente
+.fade-in-element {
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 1 !important;
 }
 
 // ========================================
@@ -1145,7 +1218,7 @@
   }
 }
 
-// Mejoras de táctil para móvil
+// CORREGIDO: Mejoras de táctil para móvil sin interferir animaciones
 @media (hover: none) and (pointer: coarse) {
   .timeline-item {
     &:hover {
@@ -1175,6 +1248,10 @@
   .details-button {
     &:hover {
       transform: none;
+      
+      .details-icon {
+        transform: none;
+      }
     }
   }
   
@@ -1184,6 +1261,10 @@
     }
   }
 }
+
+// ========================================
+// MODAL RESPONSIVE COMPLETO
+// ========================================
 
 // Asegurar que el modal sea completamente responsive
 ion-modal {
@@ -1223,4 +1304,91 @@ ion-modal {
   @media (max-width: 480px) {
     max-height: calc(100vh - 100px);
   }
+}
+
+// ========================================
+// CLASES UTILITARIAS PARA ANIMACIONES CONTROLADAS
+// ========================================
+
+// CORREGIDO: Prevenir múltiples animaciones en los mismos elementos
+.no-animation {
+  animation: none !important;
+  transition: none !important;
+}
+
+// Clase para elementos que ya fueron animados
+.animation-complete {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+// Clase para forzar visibilidad (usar en casos de emergencia)
+.force-visible {
+  opacity: 1 !important;
+  visibility: visible !important;
+  transform: none !important;
+}
+
+// ========================================
+// MEJORAS DE RENDIMIENTO
+// ========================================
+
+// Optimización de GPU para animaciones suaves
+.timeline-item,
+.tab-button,
+.timeline-content,
+.timeline-marker {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+// Optimización de scroll
+.experience-timeline {
+  contain: layout style paint;
+}
+
+// Optimización para dispositivos de baja potencia
+@media (prefers-reduced-motion: reduce) {
+  .experience-animate,
+  .timeline-item,
+  .tab-button {
+    animation: none !important;
+    transition: none !important;
+  }
+  
+  .timeline-content,
+  .timeline-marker,
+  .tab-button,
+  .details-button,
+  .action-button {
+    transform: none !important;
+    transition: opacity 0.2s ease-out, background-color 0.2s ease-out;
+  }
+}
+
+// ========================================
+// DEBUG Y DESARROLLO (eliminar en producción)
+// ========================================
+
+// Clase para debugging de animaciones (eliminar en producción)
+.debug-animation {
+  border: 2px solid red !important;
+  background: rgba(255, 0, 0, 0.1) !important;
+}
+
+// Indicador visual de estado de animación (eliminar en producción)
+.experience-animate::after {
+  // content: '🎬'; // Descomentar solo para debug
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  background: red;
+  color: white;
+  padding: 2px;
+  border-radius: 2px;
+  z-index: 9999;
+  display: none; // Mantener oculto en producción
 }

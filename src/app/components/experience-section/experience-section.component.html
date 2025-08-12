@@ -77,11 +77,9 @@
               </div>
               
               <div class="experience-duration">
-                <div class="duration-text">{{ calculateDuration(experience) }}</div>
-                <div class="date-range">
-                  {{ formatDate(experience.dates.startDate) }} - 
-                  {{ experience.dates.endDate ? formatDate(experience.dates.endDate) : 'Presente' }}
-                </div>
+                <!-- CORREGIDO: Usar directamente el campo duration -->
+                <div class="duration-text">{{ experience.dates.duration }}</div>
+          
                 <div class="experience-type">{{ experience.type === 'formal' ? 'Formal' : 'Independiente' }}</div>
               </div>
             </div>
@@ -153,8 +151,8 @@
           <h4 class="highlight-title">Mi Diferencial Único</h4>
           <p class="highlight-description">
             No soy un recién graduado típico. Soy un profesional con 20+ años de experiencia práctica 
-            que formalizó su expertise con un título universitario. Mi valor está en entender tanto 
-            la tecnología como el negocio.
+            que formalizó su conocimiento con un título universitario. Mi valor está en entender tanto 
+            la tecnología como el negocio, buscando aplicar esta experiencia en roles de crecimiento profesional.
           </p>
         </div>
       </div>
@@ -206,9 +204,8 @@
           <h3 class="modal-position">{{ selectedExperience.position }}</h3>
           <h4 class="modal-company">{{ selectedExperience.company }}</h4>
           <div class="modal-duration">
-            {{ formatDate(selectedExperience.dates.startDate) }} - 
-            {{ selectedExperience.dates.endDate ? formatDate(selectedExperience.dates.endDate) : 'Presente' }}
-            ({{ calculateDuration(selectedExperience) }})
+            <!-- CORREGIDO: También usar duration directamente en modal -->
+            {{ selectedExperience.dates.duration }}
           </div>
         </div>
 

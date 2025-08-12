@@ -3,9 +3,7 @@
  * 
  * DESCRIPCIÓN:
  * Modelo de datos para la experiencia laboral de Alejandro Villa.
- * Define la estructura tanto para experiencia formal como independiente,
- * enfocado en destacar 20+ años de experiencia práctica combinada con
- * roles formales de coordinación técnica y análisis de sistemas.
+ * CORREGIDO: Fechas exactas según CV real, enfoque en crecimiento profesional.
  */
 
 /**
@@ -77,7 +75,7 @@ export interface ExperienceDates {
 
 /**
  * Experiencia formal de Alejandro Villa
- * Basada en la información detallada del prompt
+ * CORREGIDO: Fechas exactas según CV real (2024-2025, 2023-2024, 2018-2020)
  */
 export const FORMAL_EXPERIENCE: WorkExperience[] = [
   {
@@ -87,65 +85,78 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
     type: 'formal',
     location: 'Santiago, Chile',
     dates: {
-      startDate: new Date('2024-01-01'),
-      endDate: new Date('2025-01-01'),
-      duration: '1 año'
+      startDate: new Date('2024-01-01'), // CORREGIDO: 2024
+      endDate: new Date('2025-01-01'),   // CORREGIDO: 2025 (no diciembre)
+      duration: '2024-2025'              // CORREGIDO: Exacto según CV
     },
-    description: 'Liderazgo en modernización de sistema crítico legacy, coordinación de stakeholders y análisis de procesos empresariales para implementación de solución cloud moderna.',
+    description: 'Proyecto de modernización integral: **Desarrollo del módulo de tesistas del sistema SRM** desde cero usando Angular/Ionic/Firebase para reemplazar sistema legacy on-premise con caídas constantes. Implementación de la primera fase funcional del proyecto con arquitectura escalable para futuros módulos. **Desarrollo con apoyo de IA**: Uso de Claude para optimización del backend y arquitectura de datos.',
     responsibilities: [
-      'Análisis completo de sistema legacy on-premise con fallas constantes',
-      'Coordinación semanal con diferentes áreas organizacionales',
-      'Levantamiento de requerimientos y traducción de necesidades de negocio',
-      'Mapeo de flujos de trabajo existentes e identificación de mejoras',
-      'Coordinación técnica con desarrolladores para implementación Angular/Ionic/Firebase'
+      'Coordinación técnica: Levantamiento de requerimientos con stakeholders aplicando metodologías aprendidas',
+      '**Desarrollo del módulo de tesistas**: Programación desde cero con Angular/Ionic/Firebase',
+      '**Desarrollo backend con IA**: Uso de Claude (IA) para optimización de arquitectura y lógica de backend',
+      'Diseño de arquitectura escalable: Base técnica preparada para futuros módulos del sistema',
+      'Migración de funcionalidad crítica: Reemplazo de sistema legacy con caídas constantes',
+      'Implementación multiplataforma: Sistema funcional en web, tablet y móvil',
+      'Análisis de procesos: Mapeo de flujos de trabajo existentes e identificación de mejoras (BPM)',
+      'Soporte IT integral: Administración de infraestructura, reparación hardware, configuración redes',
+      'Gestión de impresoras: Configuración HP/Ricoh/Brother con sistemas centralizados e IPs'
     ],
     achievements: [
-      'Sistema funcionando en producción sin caídas',
-      'Eliminación completa de fallas del sistema legacy',
-      'Modernización exitosa de infraestructura crítica',
-      'Coordinación efectiva entre múltiples stakeholders'
+      '**Módulo de tesistas completamente funcional**: Primera fase del SRM eliminando caídas constantes',
+      'Portal en producción: portal-superacionpobreza.web.app/tesis-pais',
+      '**Arquitectura escalable**: Base técnica preparada para expansión de módulos adicionales',
+      'Implementación multiplataforma: Acceso desde web, tablet y dispositivos móviles',
+      '**Desarrollo acelerado con IA**: Uso efectivo de Claude para optimización de backend',
+      'Gestión profesional de alcance: Entrega de fase funcional dentro de limitaciones presupuestarias'
     ],
     technologies: [
-      'Angular 18', 'Ionic 8', 'Firebase 11', 'TypeScript 5.4'
+      'Angular 18', 'Ionic 8', 'Firebase 11', 'TypeScript 5.4', 'HTML5', 'CSS3',
+      'Herramientas especializadas: Ventoy, Acronis, Rufus', 'Office 365', 'Excel avanzado',
+      '**IA para desarrollo**: Claude (asistente IA para backend y arquitectura)'
     ],
     skills: [
-      'Coordinación Técnica', 'Análisis de Sistemas', 'Gestión de Proyectos',
-      'Levantamiento de Requerimientos', 'Modernización de Sistemas Legacy'
+      '**Desarrollo Full-Stack (Angular/Ionic/Firebase)**', '**Desarrollo con IA (Claude)**', 'Coordinación Técnica', 
+      'Levantamiento de Requerimientos', 'Análisis de Procesos BPM', 'Gestión de Alcance de Proyectos',
+      'Arquitectura de Sistemas Escalables', 'Administración de Infraestructura TI', 'Implementación Multiplataforma'
     ],
-    current: false,
+    current: false, // CORREGIDO: Ya terminó
     displayOrder: 1,
     featured: true
   },
   {
     id: 'viaschile',
-    position: 'Especialista en Soporte Técnico',
+    position: 'Especialista en Soporte Técnico (Mesa de Ayuda Nivel 1-2)',
     company: 'ViasChile',
     type: 'formal',
     location: 'Santiago, Chile',
     dates: {
-      startDate: new Date('2023-01-01'),
-      endDate: new Date('2024-01-01'),
-      duration: '1 año'
+      startDate: new Date('2023-01-01'), // CORREGIDO: 2023
+      endDate: new Date('2024-01-01'),   // CORREGIDO: 2024 (no diciembre)
+      duration: '2023-2024'              // CORREGIDO: Exacto según CV
     },
-    description: 'Soporte técnico especializado con enfoque en análisis de datos operacionales y gestión de infraestructura tecnológica a nivel nacional.',
+    description: 'Soporte técnico especializado con gestión de tickets bajo SLA estrictos. **Procesamiento de datos**: Limpieza y transformación de archivos CSV utilizando Python (con apoyo de IA) para eliminación de datos innecesarios y creación de archivos optimizados para análisis posterior.',
     responsibilities: [
-      'Gestión de tickets de soporte bajo SLA estrictos',
-      'Resolución de incidencias nivel 1 y 2',
-      'Procesamiento y análisis de datos operacionales de usuarios',
-      'Configuración de redes corporativas y dispositivos móviles',
-      'Gestión de inventarios tecnológicos'
+      'Soporte técnico especializado: Gestión de tickets bajo SLA estrictos, resolución nivel 1-2',
+      'Administración de sistemas: Active Directory, creación de perfiles, instalación de software',
+      '**Procesamiento de datos CSV**: Limpieza y transformación usando Python con Machine Learning',
+      'Eliminación de datos innecesarios y modificación de tablas para optimización',
+      'Preparación de archivos CSV optimizados para generación de gráficos y análisis',
+      'Infraestructura TI: Configuración de redes, dispositivos móviles corporativos, inventarios',
+      'Soporte integral: Reparación hardware, formateo/clonación, soporte remoto nacional'
     ],
     achievements: [
-      'Cumplimiento consistente de métricas SLA',
-      'Optimización de procesos de análisis de datos',
-      'Mejora en la gestión de inventarios tecnológicos'
+      'Cumplimiento consistente de métricas SLA y tiempo de respuesta',
+      '**Optimización de datos**: Limpieza exitosa de archivos CSV complejos usando Python/ML',
+      'Preparación de datos que facilitó la generación de gráficos y análisis para decisiones',
+      'Gestión efectiva de inventarios tecnológicos a nivel nacional'
     ],
     technologies: [
-      'Sistemas de Ticketing', 'Análisis de Datos', 'Configuración de Redes'
+      'ServiceNow', 'Active Directory', 'Excel Avanzado', 'Python (Machine Learning)',
+      'Procesamiento de archivos CSV', 'Sistemas de Ticketing', 'Configuración de Redes'
     ],
     skills: [
-      'Análisis de Datos Operacionales', 'Soporte Técnico Avanzado',
-      'Gestión de SLA', 'Infraestructura Empresarial'
+      'Soporte Técnico Avanzado', 'Gestión de SLA', 'Administración de Sistemas',
+      '**Limpieza y Procesamiento de Datos (Python/ML)**', 'Infraestructura Empresarial', 'Gestión de Inventarios TI'
     ],
     current: false,
     displayOrder: 2,
@@ -158,29 +169,34 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
     type: 'formal',
     location: 'Santiago, Chile',
     dates: {
-      startDate: new Date('2018-01-01'),
-      endDate: new Date('2020-01-01'),
-      duration: '2 años'
+      startDate: new Date('2018-01-01'), // CORREGIDO: 2018
+      endDate: new Date('2020-01-01'),   // CORREGIDO: 2020 (no diciembre)
+      duration: '2018-2020'              // CORREGIDO: Exacto según CV
     },
-    description: 'Doble rol de soporte técnico nacional y capacitador de nuevos trabajadores, demostrando habilidades técnicas y de desarrollo de personas.',
+    description: 'Soporte técnico telefónico nacional para servicios VTR de internet, telefonía y TV cable. Diagnóstico remoto y resolución de problemas de conectividad. **Rol adicional como capacitador**: entrenamiento de nuevos trabajadores técnicos con desarrollo de material educativo especializado.',
     responsibilities: [
-      'Atención técnica telefónica a clientes de internet, telefonía y TV cable',
-      'Diagnóstico remoto de problemas de conectividad',
-      'Configuración de routers y optimización de servicios',
-      'Capacitación de nuevos trabajadores en procedimientos técnicos',
-      'Desarrollo de material de entrenamiento'
+      'Soporte técnico nacional: Atención telefónica a clientes VTR de internet, telefonía y TV cable',
+      'Diagnóstico remoto: Resolución de problemas de conectividad y configuración de routers',
+      'Optimización de servicios: Ajuste de parámetros de red para mejorar rendimiento',
+      '**CAPACITADOR**: Entrenamiento de nuevos trabajadores técnicos (rol destacado)',
+      'Desarrollo de material educativo: Creación de contenido especializado para capacitaciones',
+      'Formación de técnicos: Múltiples generaciones de personal entrenado exitosamente'
     ],
     achievements: [
-      'Reconocimiento como capacitador especializado',
-      'Alto índice de satisfacción en atención al cliente',
-      'Desarrollo exitoso de múltiples generaciones de técnicos'
+      'Reconocimiento formal como **CAPACITADOR especializado** en VTR',
+      'Alto índice de satisfacción en atención al cliente a nivel nacional',
+      'Desarrollo exitoso de múltiples generaciones de técnicos',
+      'Especialización en diagnóstico técnico remoto y configuración de equipos',
+      'Creación de material educativo que mejoró la formación técnica'
     ],
     technologies: [
-      'Sistemas VTR', 'Configuración de Routers', 'Plataformas de Capacitación'
+      'Sistemas VTR', 'Configuración de Routers', 'Diagnóstico de Redes',
+      'Plataformas de Capacitación', 'Herramientas de Soporte Remoto'
     ],
     skills: [
-      'Capacitación y Desarrollo de Personal', 'Diagnóstico Técnico Remoto',
-      'Configuración de Redes', 'Atención al Cliente'
+      'Soporte Técnico Telefónico Nacional', 'Diagnóstico Remoto de Redes',
+      '**Capacitación y Desarrollo de Personal**', 'Configuración de Equipos',
+      'Creación de Material Educativo', 'Atención al Cliente', 'Resolución de Problemas Técnicos'
     ],
     current: false,
     displayOrder: 3,
@@ -201,33 +217,36 @@ export const INDEPENDENT_EXPERIENCE: WorkExperience[] = [
     location: 'Santiago, Chile',
     dates: {
       startDate: new Date('2007-01-01'),
-      duration: '20+ años'
+      duration: '2007-presente (20+ años)' // CORREGIDO: Formato consistente
     },
-    description: 'Más de 20 años siendo "el que arregla computadores" - experiencia práctica profunda desde Windows XP hasta sistemas actuales, desarrollando expertise real en hardware, software y resolución de problemas complejos.',
+    description: 'Más de 20 años siendo "el que arregla computadores" - experiencia práctica sólida desde Windows XP hasta sistemas actuales, desarrollando competencia real en hardware, software y resolución de problemas complejos.',
     responsibilities: [
-      'Reparación hardware avanzada desde componentes básicos hasta sistemas complejos',
-      'Formateo, clonación y migración de sistemas operativos',
-      'Modificación avanzada de sistemas (edición de registro de Windows)',
-      'Configuración de redes domiciliarias y empresariales',
+      'Reparación hardware avanzada: cambio de componentes (RAM, teclados, touchpad, pantallas, baterías internas, placas base)',
+      'Formateo, clonación y migración de sistemas operativos (Windows XP-11, Ubuntu)',
+      'Configuración de redes domiciliarias y empresariales (TCP/IP, routers, DNS)',
       'Diagnóstico y solución de fallas complejas de software y hardware',
-      'Investigación técnica constante para entender funcionamiento interno'
+      'Instalación de periféricos, antivirus, Office 365, drivers y programas esenciales',
+      'Investigación técnica constante para entender funcionamiento interno de sistemas',
+      'Uso de herramientas especializadas: Ventoy, Acronis, Rufus para optimización de trabajo'
     ],
     achievements: [
       'Referente técnico en círculo personal y profesional durante 20+ años',
-      'Experiencia práctica desde Windows XP hasta sistemas actuales',
+      'Base sólida de experiencia práctica desde Windows XP hasta tecnologías actuales',
       'Capacidad probada para resolver problemas que otros no pueden',
       'Conocimiento profundo del funcionamiento interno de sistemas',
-      'Experiencia única combinando práctica y teoría'
+      'Experiencia única combinando práctica autodidacta con formación universitaria'
     ],
     technologies: [
-      'Windows (XP hasta actual)', 'Ubuntu Linux', 'Hardware PC',
-      'Redes TCP/IP', 'Registro de Windows', 'Clonación de Discos',
-      'Diagnóstico de Hardware', 'Configuración BIOS/UEFI'
+      'Windows (XP hasta 11)', 'Ubuntu Linux', 'Hardware PC Avanzado',
+      'Redes TCP/IP', 'Configuración de Routers', 'Clonación de Discos',
+      'Herramientas: Ventoy, Acronis, Rufus', 'Diagnóstico Hardware',
+      'Office 365', 'Configuración BIOS/UEFI'
     ],
     skills: [
       'Diagnóstico Avanzado de Hardware', 'Resolución de Problemas Complejos',
-      'Modificación de Sistemas', 'Investigación Técnica Autodidacta',
-      'Adaptabilidad Tecnológica', 'Pensamiento Sistemático'
+      'Reparación de Componentes PC', 'Investigación Técnica Autodidacta',
+      'Adaptabilidad Tecnológica', 'Pensamiento Sistemático',
+      'Configuración de Sistemas', 'Soporte Técnico Integral'
     ],
     current: true,
     displayOrder: 4,

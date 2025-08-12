@@ -1,20 +1,19 @@
 // src/app/components/experience-section/experience-section.component.ts
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA, OnDestroy } from '@angular/core';
 import { AnimationService } from '@services/animation.service';
 import { FORMAL_EXPERIENCE, INDEPENDENT_EXPERIENCE, WorkExperience } from '@models/experience.model';
 
 /**
  * Componente para la sección de experiencia laboral del portafolio.
- * Muestra timeline separado entre experiencia formal e independiente,
- * destacando los 20+ años de experiencia práctica de Alejandro Villa
- * y sus roles de coordinación técnica y análisis de sistemas.
+ * CORREGIDO: Animaciones optimizadas sin conflictos de transparencia.
+ * Enfoque en experiencia sólida buscando crecimiento profesional.
  */
 @Component({
   selector: 'app-experience-section',
   templateUrl: './experience-section.component.html',
   styleUrls: ['./experience-section.component.scss'],
 })
-export class ExperienceSectionComponent implements OnInit {
+export class ExperienceSectionComponent implements OnInit, OnDestroy {
 
   // Datos de experiencia importados desde el modelo
   public formalExperience = FORMAL_EXPERIENCE;
@@ -24,6 +23,11 @@ export class ExperienceSectionComponent implements OnInit {
   public activeTab: 'formal' | 'independent' | 'all' = 'all';
   public animationsLoaded = false;
   public selectedExperience: WorkExperience | null = null;
+
+  // CORREGIDO: Control de animaciones para evitar conflictos
+  private animationTimeouts: ReturnType<typeof setTimeout>[] = [];
+  private animatedElements = new Set<Element>();
+  private isAnimating = false;
 
   // Configuración de tabs
   public tabs = [
@@ -50,24 +54,35 @@ export class ExperienceSectionComponent implements OnInit {
   constructor(private animationService: AnimationService) { }
 
   ngOnInit(): void {
-    // Activar animaciones después de un delay
-    setTimeout(() => {
-      this.animationsLoaded = true;
-      this.initAnimations();
-    }, 300);
+    // CORREGIDO: Activar animaciones después de un delay controlado
+    this.initializeAnimations();
+  }
+
+  ngOnDestroy(): void {
+    // CORREGIDO: Limpiar timeouts al destruir componente
+    this.clearAllTimeouts();
   }
 
   /**
-   * Cambia entre diferentes vistas de experiencia
+   * CORREGIDO: Cambia entre diferentes vistas de experiencia sin conflictos
    * @param tabId - ID del tab a activar
    */
   setActiveTab(tabId: 'formal' | 'independent' | 'all'): void {
+    // CORREGIDO: No hacer nada si ya está activo el mismo tab
+    if (this.activeTab === tabId || this.isAnimating) {
+      return;
+    }
+
+    this.isAnimating = true;
     this.activeTab = tabId;
     
-    // Re-animar elementos cuando cambia el tab
-    setTimeout(() => {
-      this.initAnimations();
-    }, 100);
+    // CORREGIDO: Re-animar solo elementos nuevos después de cambio de tab
+    const timeout = setTimeout(() => {
+      this.animateTimelineItems();
+      this.isAnimating = false;
+    }, 150);
+    
+    this.animationTimeouts.push(timeout);
   }
 
   /**
@@ -103,48 +118,38 @@ export class ExperienceSectionComponent implements OnInit {
   }
 
   /**
-   * Calcula la duración de una experiencia en texto legible
+   * CORREGIDO: Calcula duración usando el campo duration del modelo
    * @param experience - Experiencia para calcular duración
    * @returns String con duración formateada
    */
   calculateDuration(experience: WorkExperience): string {
+    // CORRECCIÓN: Usar el campo duration del modelo directamente
     if (experience.dates.duration) {
       return experience.dates.duration;
     }
 
+    // Fallback solo si no existe duration
     const startDate = experience.dates.startDate;
     const endDate = experience.dates.endDate || new Date();
     
     const diffTime = Math.abs(endDate.getTime() - startDate.getTime());
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    const diffMonths = Math.floor(diffDays / 30);
-    const diffYears = Math.floor(diffMonths / 12);
+    const diffYears = Math.floor(diffTime / (1000 * 60 * 60 * 24 * 365));
 
-    if (diffYears > 0) {
-      const remainingMonths = diffMonths % 12;
-      if (remainingMonths > 0) {
-        return `${diffYears} año${diffYears > 1 ? 's' : ''} ${remainingMonths} mes${remainingMonths > 1 ? 'es' : ''}`;
-      }
+    if (diffYears >= 1) {
       return `${diffYears} año${diffYears > 1 ? 's' : ''}`;
-    } else if (diffMonths > 0) {
-      return `${diffMonths} mes${diffMonths > 1 ? 'es' : ''}`;
     } else {
-      return 'Menos de 1 mes';
+      return 'Menos de 1 año';
     }
   }
 
   /**
-   * Formatea fechas para mostrar en el timeline
+   * CORREGIDO: Formatea fechas mostrando solo años según CV
    * @param date - Fecha a formatear
-   * @returns String con fecha formateada
+   * @returns String con solo el año
    */
   formatDate(date: Date): string {
-    const months = [
-      'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-      'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'
-    ];
-    
-    return `${months[date.getMonth()]} ${date.getFullYear()}`;
+    // CORRECCIÓN: Solo mostrar el año, no meses
+    return date.getFullYear().toString();
   }
 
   /**
@@ -229,26 +234,123 @@ export class ExperienceSectionComponent implements OnInit {
   }
 
   /**
-   * Inicializa animaciones para elementos de la sección
+   * CORREGIDO: Inicializa animaciones de forma controlada
    */
-  private initAnimations(): void {
-    // Animar elementos principales
-    const animatedElements = document.querySelectorAll('.experience-animate');
-    
-    animatedElements.forEach((element, index) => {
-      this.animationService.observeElement(
-        element,
-        'slideInUp',
-        0.1
-      );
-    });
+  private initializeAnimations(): void {
+    // Activar el estado loaded primero
+    const timeout1 = setTimeout(() => {
+      this.animationsLoaded = true;
+    }, 300);
 
-    // Animar items del timeline con delay escalonado
+    // Animar elementos principales después
+    const timeout2 = setTimeout(() => {
+      this.animateMainElements();
+    }, 500);
+
+    // Animar timeline items al final
+    const timeout3 = setTimeout(() => {
+      this.animateTimelineItems();
+    }, 800);
+
+    this.animationTimeouts.push(timeout1, timeout2, timeout3);
+  }
+
+  /**
+   * CORREGIDO: Anima elementos principales sin conflictos
+   */
+  private animateMainElements(): void {
+    const mainElements = document.querySelectorAll('.experience-animate:not(.timeline-item)');
+    
+    mainElements.forEach((element, index) => {
+      // Solo animar si no ha sido animado antes
+      if (!this.animatedElements.has(element)) {
+        const timeout = setTimeout(() => {
+          element.classList.add('animate-in');
+          this.animatedElements.add(element);
+          
+          // Asegurar visibilidad después de la animación
+          const visibilityTimeout = setTimeout(() => {
+            element.classList.add('animation-complete');
+          }, 600);
+          
+          this.animationTimeouts.push(visibilityTimeout);
+        }, index * 100);
+
+        this.animationTimeouts.push(timeout);
+      }
+    });
+  }
+
+  /**
+   * CORREGIDO: Anima items del timeline de forma controlada
+   */
+  private animateTimelineItems(): void {
     const timelineItems = document.querySelectorAll('.timeline-item');
+    
     timelineItems.forEach((item, index) => {
-      setTimeout(() => {
-        this.animationService.observeElement(item, 'slideInLeft', 0.2);
-      }, index * 100);
+      // CORREGIDO: Asegurar que el elemento esté visible desde el inicio
+      (item as HTMLElement).style.opacity = '1';
+      
+      // Solo animar si no ha sido animado antes
+      if (!this.animatedElements.has(item)) {
+        const timeout = setTimeout(() => {
+          item.classList.add('animate-in');
+          this.animatedElements.add(item);
+          
+          // Asegurar visibilidad después de la animación
+          const visibilityTimeout = setTimeout(() => {
+            item.classList.add('animation-complete');
+          }, 600);
+          
+          this.animationTimeouts.push(visibilityTimeout);
+        }, index * 150);
+
+        this.animationTimeouts.push(timeout);
+      }
+    });
+  }
+
+  /**
+   * CORREGIDO: Limpia todos los timeouts para evitar memory leaks
+   */
+  private clearAllTimeouts(): void {
+    this.animationTimeouts.forEach(timeout => clearTimeout(timeout));
+    this.animationTimeouts = [];
+  }
+
+  /**
+   * CORREGIDO: Método para resetear animaciones si es necesario (debug)
+   */
+  public resetAnimations(): void {
+    this.clearAllTimeouts();
+    this.animatedElements.clear();
+    this.isAnimating = false;
+    
+    // Remover todas las clases de animación
+    const allAnimatedElements = document.querySelectorAll('.animate-in, .animation-complete');
+    allAnimatedElements.forEach(element => {
+      element.classList.remove('animate-in', 'animation-complete');
+      (element as HTMLElement).style.opacity = '1'; // Asegurar visibilidad
+    });
+    
+    // Reinicializar después de un breve delay
+    const timeout = setTimeout(() => {
+      this.initializeAnimations();
+    }, 100);
+    
+    this.animationTimeouts.push(timeout);
+  }
+
+  /**
+   * CORREGIDO: Método para forzar visibilidad de elementos problemáticos
+   */
+  public forceElementVisibility(): void {
+    const problematicElements = document.querySelectorAll('.timeline-item, .timeline-content, .experience-animate');
+    problematicElements.forEach(element => {
+      (element as HTMLElement).style.opacity = '1';
+      (element as HTMLElement).style.visibility = 'visible';
+      (element as HTMLElement).style.transform = 'none';
+      element.classList.add('force-visible');
     });
   }
 }

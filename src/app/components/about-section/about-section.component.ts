@@ -4,9 +4,8 @@ import { AnimationService } from '@services/animation.service';
 
 /**
  * Componente para la sección "Sobre Mí" del portafolio.
- * Muestra la biografía detallada de Alejandro Villa desde los 15 años,
- * su filosofía profesional, intereses personales y diferenciadores únicos.
- * Enfoca en los 20+ años de experiencia práctica + formación académica formal.
+ * ACTUALIZADO: Enfoque en experiencia práctica + formación académica,
+ * posicionamiento para roles junior/intermedio en desarrollo y análisis.
  */
 @Component({
   selector: 'app-about-section',
@@ -15,7 +14,7 @@ import { AnimationService } from '@services/animation.service';
 })
 export class AboutSectionComponent implements OnInit {
 
-  // Información personal detallada de Alejandro Villa
+  // Información personal detallada de Alejandro Villa - ACTUALIZADA
   public personalInfo = {
     name: 'Alejandro Villa Villavicencio',
     age: 32,
@@ -29,7 +28,7 @@ export class AboutSectionComponent implements OnInit {
     linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/'
   };
 
-  // Biografía completa según el prompt
+  // Biografía actualizada según el prompt
   public biography = {
     earlyStart: {
       title: 'Los Inicios (2007-2008)',
@@ -41,8 +40,8 @@ export class AboutSectionComponent implements OnInit {
       ]
     },
     practicalExperience: {
-      title: 'Experiencia Práctica Profunda (20+ años)',
-      description: 'Esta curiosidad natural me llevó a desarrollar una experiencia práctica profunda: formateos, cambios de hardware, clonación de discos, configuración de redes, reparación de componentes. Durante más de 20 años, he sido el solucionador técnico de confianza.',
+      title: 'Experiencia Práctica Sólida (20+ años)',
+      description: 'Esta curiosidad natural me llevó a desarrollar una experiencia práctica sólida: formateos, cambios de hardware, clonación de discos, configuración de redes, reparación de componentes. Durante más de 20 años, he sido el solucionador técnico de confianza.',
       highlights: [
         'Formateos y migración de sistemas',
         'Reparación de hardware avanzada',
@@ -61,33 +60,33 @@ export class AboutSectionComponent implements OnInit {
     },
     academicFormation: {
       title: 'Formación Académica Formal',
-      description: 'Recientemente me titulé como Ingeniero en Informática, no para aprender a usar computadores (eso ya lo sabía), sino para formalizar mi expertise y agregar herramientas de análisis de negocio, gestión de proyectos y metodologías estructuradas a mi experiencia práctica.',
+      description: 'Recientemente me titulé como Ingeniero en Informática, no para aprender a usar computadores (eso ya lo sabía), sino para formalizar mi experiencia práctica y agregar herramientas de análisis de negocio, gestión de proyectos y metodologías estructuradas.',
       highlights: [
         'Título de Ingeniero en Informática',
         'Análisis de negocio estructurado',
         'Metodologías de gestión de proyectos',
-        'Formalización de expertise práctica'
+        'Formalización de experiencia práctica'
       ]
     }
   };
 
-  // Diferencial único según el prompt
+  // Diferencial único ACTUALIZADO según el prompt
   public uniqueValue = {
     title: 'Mi Diferencial',
-    description: 'Entiendo la tecnología desde las entrañas y puedo analizar procesos empresariales desde una perspectiva técnica real. Sé qué funciona, qué no, y por qué.',
+    description: 'Combino experiencia práctica sólida con formación académica reciente, buscando aplicar mis conocimientos en roles de crecimiento profesional.',
     points: [
-      '20+ años de experiencia práctica combinada con formación académica formal',
-      'Coordinador técnico-negocio que entiende limitaciones técnicas reales',
-      'Solucionador de problemas complejos desde hardware hasta procesos organizacionales',
-      'Capacitador natural con experiencia desarrollando personas',
-      'Analista práctico que entiende qué funciona en la realidad empresarial'
+      '20+ años de experiencia práctica + título universitario reciente',
+      'Coordinador técnico-negocio que entiende limitaciones reales',
+      'Solucionador de problemas con enfoque práctico y estructurado',
+      'Experiencia probada en capacitación y desarrollo de equipos',
+      'Busco oportunidades de crecimiento en desarrollo y análisis'
     ]
   };
 
   // Filosofía profesional
   public philosophy = {
     quote: 'No basta con saber usar la tecnología - hay que entender por qué funciona, cómo falla, y cómo puede servir realmente al negocio.',
-    context: 'Esta filosofía guía mi trabajo diario como Technical Business Analyst'
+    context: 'Esta filosofía guía mi búsqueda de oportunidades donde pueda aplicar mi experiencia en nuevos contextos'
   };
 
   // Intereses personales
