@@ -224,7 +224,7 @@ export class SkillsSectionComponent implements OnInit, OnDestroy {
       return '< 1 año';
     }
     
-    if (years >= 20) return '20+ años';
+    if (years >= 20) return '10+ años';
     if (years >= 10) return `${years}+ años`;
     if (years === 1) return '1 año';
     return `${years} años`;

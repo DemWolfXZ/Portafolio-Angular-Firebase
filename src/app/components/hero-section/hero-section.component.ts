@@ -18,8 +18,8 @@ export class HeroSectionComponent implements OnInit {
   public personalInfo = {
     name: 'Alejandro Villa Villavicencio',
     title: 'Ingeniero Informático • Desarrollo & Análisis de Sistemas',
-    tagline: 'Combinando 20+ años de experiencia práctica con formación académica para crear soluciones efectivas',
-    description: 'Ingeniero Informático con sólida base en soporte técnico, buscando crecimiento en desarrollo, análisis de datos y coordinación de proyectos donde pueda aplicar mi perspectiva única de resolución de problemas.',
+    tagline: 'Combinando mis años de experiencia práctica con formación académica para crear soluciones efectivas',
+    description: 'Ingeniero Informático con sólida base en soporte técnico, buscando crecimiento en desarrollo, análisis de datos y coordinación de proyectos donde pueda aplicar mi perspectiva en resolución de problemas.',
     location: 'San Bernardo, Santiago, Chile',
     email: 'alejandro.villa91@gmail.com',
     phone: '+56 920913551',

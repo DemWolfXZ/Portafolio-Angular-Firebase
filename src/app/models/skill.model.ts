@@ -87,7 +87,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     name: 'Configuración de Redes',
     category: 'infrastructure',
     level: 'advanced', // Cambiado de "expert" a "advanced"
-    yearsOfExperience: 18,
+    yearsOfExperience: 5,
     description: 'Experiencia práctica en configuración de redes empresariales y domiciliarias, TCP/IP, routers',
     projectsUsed: ['VTR', 'ViasChile', 'Proyectos Independientes'],
     icon: 'wifi',
@@ -100,7 +100,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     name: 'Administración de Sistemas',
     category: 'infrastructure',
     level: 'advanced', // Cambiado de "expert" a "advanced"
-    yearsOfExperience: 20,
+    yearsOfExperience: 10,
     description: 'Conocimiento avanzado en Windows (XP-11), Ubuntu, formateo, clonación, migración de sistemas',
     projectsUsed: ['Todos los proyectos'],
     icon: 'desktop',
@@ -113,7 +113,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     name: 'Soporte Técnico Especializado',
     category: 'infrastructure',
     level: 'advanced', // Cambiado de "expert" a "advanced"
-    yearsOfExperience: 15,
+    yearsOfExperience: 3,
     description: 'Competencia avanzada en gestión de tickets, SLA, diagnóstico remoto, resolución nivel 1-2',
     projectsUsed: ['VTR', 'ViasChile'],
     icon: 'help-circle',
@@ -143,7 +143,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     name: 'Levantamiento de Requerimientos',
     category: 'analysis',
     level: 'intermediate', // Cambiado de "advanced" a "intermediate"
-    yearsOfExperience: 3,
+    yearsOfExperience: 2,
     description: 'Coordinación con stakeholders, traducción de necesidades de negocio con enfoque de aprendizaje continuo',
     projectsUsed: ['Fundación Superación de la Pobreza'],
     icon: 'document-text',

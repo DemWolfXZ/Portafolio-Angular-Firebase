@@ -40,7 +40,7 @@ export class AboutSectionComponent implements OnInit {
       ]
     },
     practicalExperience: {
-      title: 'Experiencia Práctica Sólida (20+ años)',
+      title: 'Experiencia Práctica Sólida',
       description: 'Esta curiosidad natural me llevó a desarrollar una experiencia práctica sólida: formateos, cambios de hardware, clonación de discos, configuración de redes, reparación de componentes. Durante más de 20 años, he sido el solucionador técnico de confianza.',
       highlights: [
         'Formateos y migración de sistemas',
@@ -75,7 +75,7 @@ export class AboutSectionComponent implements OnInit {
     title: 'Mi Diferencial',
     description: 'Combino experiencia práctica sólida con formación académica reciente, buscando aplicar mis conocimientos en roles de crecimiento profesional.',
     points: [
-      '20+ años de experiencia práctica + título universitario reciente',
+      'Años de experiencia práctica + título universitario reciente',
       'Coordinador técnico-negocio que entiende limitaciones reales',
       'Solucionador de problemas con enfoque práctico y estructurado',
       'Experiencia probada en capacitación y desarrollo de equipos',
