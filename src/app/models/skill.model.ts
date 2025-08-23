@@ -68,11 +68,11 @@ export const ALEJANDRO_SKILLS: Skill[] = [
   // ========================================
   {
     id: 'hardware-repair',
-    name: 'Reparación Hardware Avanzada',
+    name: 'Reparación y mantención de equipos',
     category: 'infrastructure',
     level: 'advanced',
-    yearsOfExperience: 20,
-    description: 'Sólida experiencia en diagnóstico y reparación de componentes PC desde nivel básico hasta sistemas complejos',
+    yearsOfExperience: 10,
+    description: 'Sólida experiencia en diagnóstico y reparación de PC / Notebook desde nivel básico hasta sistemas más complejos',
     projectsUsed: [],
     icon: 'hardware-chip',
     color: '#FF6B35',
@@ -84,7 +84,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     name: 'Configuración de Redes',
     category: 'infrastructure',
     level: 'advanced',
-    yearsOfExperience: 5,
+    yearsOfExperience: 3,
     description: 'Experiencia práctica en configuración de redes empresariales y domiciliarias, TCP/IP, routers',
     projectsUsed: [],
     icon: 'wifi',
@@ -469,7 +469,7 @@ export const SKILL_CATEGORIES = [
   {
     id: 'infrastructure' as SkillCategory,
     name: 'Infraestructura y Soporte',
-    description: 'AVANZADO - 20+ años de experiencia práctica',
+    description: 'AVANZADO - 5+ años de experiencia práctica',
     icon: 'hardware-chip',
     color: '#FF6B35',
     featured: true
