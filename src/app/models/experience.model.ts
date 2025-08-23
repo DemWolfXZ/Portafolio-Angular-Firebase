@@ -3,7 +3,7 @@
  * 
  * DESCRIPCIÓN:
  * Modelo de datos para la experiencia laboral de Alejandro Villa.
- * CORREGIDO: Fechas exactas según CV real, enfoque en crecimiento profesional.
+ * CORREGIDO: Valor Único prestando servicios a ViasChile, fechas exactas según CV real.
  */
 
 /**
@@ -75,7 +75,7 @@ export interface ExperienceDates {
 
 /**
  * Experiencia formal de Alejandro Villa
- * CORREGIDO: Fechas exactas según CV real (2024-2025, 2023-2024, 2018-2020)
+ * CORREGIDO: Valor Único prestando servicios a ViasChile
  */
 export const FORMAL_EXPERIENCE: WorkExperience[] = [
   {
@@ -85,9 +85,9 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
     type: 'formal',
     location: 'Santiago, Chile',
     dates: {
-      startDate: new Date('2024-01-01'), // CORREGIDO: 2024
-      endDate: new Date('2025-01-01'),   // CORREGIDO: 2025 (no diciembre)
-      duration: '2024-2025'              // CORREGIDO: Exacto según CV
+      startDate: new Date('2024-01-01'),
+      endDate: new Date('2025-01-01'),
+      duration: '2024-2025'
     },
     description: 'Proyecto de modernización integral: **Desarrollo del módulo de tesistas del sistema SRM** desde cero usando Angular/Ionic/Firebase para reemplazar sistema legacy on-premise con caídas constantes. Implementación de la primera fase funcional del proyecto con arquitectura escalable para futuros módulos. **Desarrollo con apoyo de IA**: Uso de Claude para optimización del backend y arquitectura de datos.',
     responsibilities: [
@@ -119,24 +119,24 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
       'Levantamiento de Requerimientos', 'Análisis de Procesos BPM', 'Gestión de Alcance de Proyectos',
       'Arquitectura de Sistemas Escalables', 'Administración de Infraestructura TI', 'Implementación Multiplataforma'
     ],
-    current: false, // CORREGIDO: Ya terminó
+    current: false,
     displayOrder: 1,
     featured: true
   },
   {
-    id: 'viaschile',
+    id: 'valor-unico-viaschile',
     position: 'Especialista en Soporte Técnico (Mesa de Ayuda Nivel 1-2)',
-    company: 'ViasChile',
+    company: 'Valor Único (prestando servicios a ViasChile)',
     type: 'formal',
     location: 'Santiago, Chile',
     dates: {
-      startDate: new Date('2023-01-01'), // CORREGIDO: 2023
-      endDate: new Date('2024-01-01'),   // CORREGIDO: 2024 (no diciembre)
-      duration: '2023-2024'              // CORREGIDO: Exacto según CV
+      startDate: new Date('2023-01-01'),
+      endDate: new Date('2024-01-01'),
+      duration: '2023-2024'
     },
-    description: 'Soporte técnico especializado con gestión de tickets bajo SLA estrictos. **Procesamiento de datos**: Limpieza y transformación de archivos CSV utilizando Python (con apoyo de IA) para eliminación de datos innecesarios y creación de archivos optimizados para análisis posterior.',
+    description: 'Soporte técnico especializado con gestión de tickets bajo SLA estrictos para ViasChile a través de Valor Único. **Procesamiento de datos**: Limpieza y transformación de archivos CSV utilizando Python (con apoyo de IA) para eliminación de datos innecesarios y creación de archivos optimizados para análisis posterior.',
     responsibilities: [
-      'Soporte técnico especializado: Gestión de tickets bajo SLA estrictos, resolución nivel 1-2',
+      'Soporte técnico especializado: Gestión de tickets bajo SLA estrictos, resolución nivel 1-2 para ViasChile',
       'Administración de sistemas: Active Directory, creación de perfiles, instalación de software',
       '**Procesamiento de datos CSV**: Limpieza y transformación usando Python con Machine Learning',
       'Eliminación de datos innecesarios y modificación de tablas para optimización',
@@ -145,10 +145,11 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
       'Soporte integral: Reparación hardware, formateo/clonación, soporte remoto nacional'
     ],
     achievements: [
-      'Cumplimiento consistente de métricas SLA y tiempo de respuesta',
+      'Cumplimiento consistente de métricas SLA y tiempo de respuesta para ViasChile',
       '**Optimización de datos**: Limpieza exitosa de archivos CSV complejos usando Python/ML',
       'Preparación de datos que facilitó la generación de gráficos y análisis para decisiones',
-      'Gestión efectiva de inventarios tecnológicos a nivel nacional'
+      'Gestión efectiva de inventarios tecnológicos a nivel nacional',
+      'Reconocimiento por calidad de servicio técnico especializado'
     ],
     technologies: [
       'ServiceNow', 'Active Directory', 'Excel Avanzado', 'Python (Machine Learning)',
@@ -162,16 +163,16 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
     displayOrder: 2,
     featured: true
   },
-  {
+{
     id: 'vtr-iline',
     position: 'Soporte Técnico Telefónico + Capacitador',
     company: 'VTR (I-Line Contact Center)',
     type: 'formal',
     location: 'Santiago, Chile',
     dates: {
-      startDate: new Date('2018-01-01'), // CORREGIDO: 2018
-      endDate: new Date('2020-01-01'),   // CORREGIDO: 2020 (no diciembre)
-      duration: '2018-2020'              // CORREGIDO: Exacto según CV
+      startDate: new Date('2018-01-01'),
+      endDate: new Date('2020-01-01'),
+      duration: '2018-2020'
     },
     description: 'Soporte técnico telefónico nacional para servicios VTR de internet, telefonía y TV cable. Diagnóstico remoto y resolución de problemas de conectividad. **Rol adicional como capacitador**: entrenamiento de nuevos trabajadores técnicos con desarrollo de material educativo especializado.',
     responsibilities: [
@@ -217,7 +218,7 @@ export const INDEPENDENT_EXPERIENCE: WorkExperience[] = [
     location: 'Santiago, Chile',
     dates: {
       startDate: new Date('2007-01-01'),
-      duration: '2007-presente (20+ años)' // CORREGIDO: Formato consistente
+      duration: '2007-presente (20+ años)'
     },
     description: 'Más de 20 años siendo "el que arregla computadores" - experiencia práctica sólida desde Windows XP hasta sistemas actuales, desarrollando competencia real en hardware, software y resolución de problemas complejos.',
     responsibilities: [

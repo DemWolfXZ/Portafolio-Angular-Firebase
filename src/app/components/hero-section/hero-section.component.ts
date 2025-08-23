@@ -1,11 +1,11 @@
 // src/app/components/hero-section/hero-section.component.ts
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { DownloadService } from '../../services/download.service';
+import { getHomeDisplaySkills, Skill } from '../../models/skill.model';
 
 /**
  * Componente Hero Section - Sección de presentación principal
- * ACTUALIZADO: Posicionamiento como ingeniero informático con experiencia sólida
- * buscando crecimiento profesional en desarrollo y análisis de sistemas
+ * ACTUALIZADO: Incluye skills destacadas con iconos para mostrar competencias principales
  */
 @Component({
   selector: 'app-hero-section',
@@ -37,6 +37,14 @@ export class HeroSectionComponent implements OnInit {
   ngOnInit(): void {
     // Componente visible desde el inicio - sin dependencias de animaciones
     this.animationsLoaded = true;
+  }
+
+  /**
+   * NUEVO: Obtiene skills destacadas para mostrar en home
+   * @returns Array de skills principales con iconos
+   */
+  getHomeDisplaySkills(): Skill[] {
+    return getHomeDisplaySkills();
   }
 
   /**

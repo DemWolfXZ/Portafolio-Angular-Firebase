@@ -39,7 +39,7 @@ export class SkillsSectionComponent implements OnInit, OnDestroy {
   public skillCategories: any[] = [];
 
   // CORRECCIÓN: Arrays de niveles tipados para el template - ACTUALIZADO sin "expert"
-  public skillLevels: SkillLevel[] = ['advanced', 'intermediate', 'learning'];
+  public skillLevels: SkillLevel[] = ['advanced', 'intermediate'];
 
   // Helper functions disponibles en el template
   public getSkillsByCategory = getSkillsByCategory;

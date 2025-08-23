@@ -3,6 +3,7 @@
  * ==========================================
  * Sección hero que ocupa la altura completa del viewport
  * menos el header, con contenido centrado y responsivo
+ * ACTUALIZADO: Añadida sección de skills destacadas manteniendo diseño original
  */
 
 .hero-section {
@@ -186,6 +187,145 @@
   color: var(--ion-text-color-secondary);
   line-height: 1.6;
   margin: 0;
+}
+
+// ========================================
+// NUEVO: SKILLS DESTACADAS PARA HOME
+// ========================================
+.hero-skills {
+  margin-bottom: var(--spacing-2xl);
+  padding: var(--spacing-lg);
+  background: var(--ion-surface-color);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--ion-border-color);
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  @media (max-width: 480px) {
+    padding: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+  }
+}
+
+.skills-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--ion-text-color);
+  margin: 0 0 var(--spacing-md) 0;
+  text-align: left;
+  
+  @media (max-width: 968px) {
+    text-align: center;
+  }
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: var(--spacing-sm);
+  
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: var(--spacing-xs);
+  }
+  
+  @media (max-width: 480px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-xs);
+  }
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  background: var(--ion-background-color-secondary);
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--ion-border-color);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ion-box-shadow);
+    border-color: var(--ion-color-primary);
+  }
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-xs);
+    gap: var(--spacing-xs);
+    
+    &:hover {
+      transform: none;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--spacing-xs);
+  }
+}
+
+.skill-icon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--ion-color-primary-rgb), 0.1);
+  border-radius: var(--border-radius-sm);
+  flex-shrink: 0;
+  
+  @media (max-width: 480px) {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.skill-icon-svg {
+  font-size: 16px;
+  
+  @media (max-width: 480px) {
+    font-size: 14px;
+  }
+}
+
+.skill-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  
+  @media (max-width: 480px) {
+    align-items: center;
+  }
+}
+
+.skill-name {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--ion-text-color);
+  line-height: 1.2;
+  margin-bottom: 2px;
+  
+  @media (max-width: 480px) {
+    font-size: var(--font-size-xs);
+  }
+}
+
+.skill-years {
+  font-size: var(--font-size-xs);
+  color: var(--ion-color-primary);
+  font-weight: 500;
+  line-height: 1;
+  
+  @media (max-width: 480px) {
+    font-size: 10px;
+  }
 }
 
 // ========================================
