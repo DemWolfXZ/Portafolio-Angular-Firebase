@@ -233,7 +233,7 @@ export const ALEJANDRO_PROJECTS: Project[] = [
       endDate: new Date('2025-01-01'),
       launchDate: new Date('2024-12-01')
     },
-    role: 'Coordinador Técnico y Analista de Sistemas',
+    role: 'Analista Desarrollador y Especialista en Infraestructura TI',
     client: 'Fundación Superación de la Pobreza',
     status: 'in-production',
     achievements: [
