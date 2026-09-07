@@ -3,14 +3,14 @@
   <!-- Sección de Experiencia Laboral -->
   <div class="experience-section" [class.loaded]="animationsLoaded">
   <div class="experience-container">
-    
+
     <!-- Header de la sección -->
     <div class="experience-header experience-animate">
       <h2 class="section-title">Experiencia Laboral</h2>
       <p class="section-subtitle">
         {{ getTotalYearsOfExperience() }}+ años combinando experiencia práctica con roles formales
       </p>
-      
+
       <!-- Estadísticas rápidas -->
       <div class="experience-stats">
         <div class="stat-item">
@@ -31,7 +31,7 @@
     <!-- Navegación por tabs -->
     <div class="experience-tabs experience-animate">
       <div class="tabs-container">
-        <button 
+        <button
           *ngFor="let tab of tabs"
           class="tab-button"
           [class.active]="activeTab === tab.id"
@@ -49,37 +49,37 @@
     <!-- Timeline de experiencia -->
     <div class="experience-timeline experience-animate">
       <div class="timeline">
-        
+
         <!-- Item del timeline por cada experiencia -->
-        <div 
+        <div
           *ngFor="let experience of getDisplayedExperience(); let i = index"
           class="timeline-item"
           [class]="'timeline-' + experience.type"
           (click)="openExperienceDetail(experience)"
         >
-          
+
           <!-- Marcador del timeline -->
           <div class="timeline-marker" [style.background-color]="getExperienceTypeColor(experience.type)">
-            <ion-icon 
-              [name]="experience.type === 'formal' ? 'briefcase' : 'construct'" 
+            <ion-icon
+              [name]="experience.type === 'formal' ? 'briefcase' : 'construct'"
               class="marker-icon"
             ></ion-icon>
           </div>
-          
+
           <!-- Contenido de la experiencia -->
           <div class="timeline-content">
-            
+
             <!-- Header de la experiencia -->
             <div class="experience-header-item">
               <div class="experience-title-group">
                 <h4 class="experience-position">{{ experience.position }}</h4>
                 <h5 class="experience-company">{{ experience.company }}</h5>
               </div>
-              
+
               <div class="experience-duration">
                 <!-- CORREGIDO: Usar directamente el campo duration -->
                 <div class="duration-text">{{ experience.dates.duration }}</div>
-          
+
                 <div class="experience-type">{{ experience.type === 'formal' ? 'Formal' : 'Independiente' }}</div>
               </div>
             </div>
@@ -91,16 +91,16 @@
             <div class="experience-achievements" *ngIf="experience.achievements.length > 0">
               <h6 class="achievements-title">Logros Principales:</h6>
               <ul class="achievements-list">
-                <li 
-                  *ngFor="let achievement of experience.achievements.slice(0, 2)" 
+                <li
+                  *ngFor="let achievement of experience.achievements.slice(0, 2)"
                   class="achievement-item"
                 >
                   <ion-icon name="trophy" class="achievement-icon"></ion-icon>
                   {{ achievement }}
                 </li>
               </ul>
-              <span 
-                *ngIf="experience.achievements.length > 2" 
+              <span
+                *ngIf="experience.achievements.length > 2"
                 class="more-details"
               >
                 +{{ experience.achievements.length - 2 }} logros más...
@@ -110,14 +110,14 @@
             <!-- Tecnologías utilizadas -->
             <div class="experience-technologies" *ngIf="experience.technologies.length > 0">
               <div class="tech-tags">
-                <span 
-                  *ngFor="let tech of experience.technologies.slice(0, 4)" 
+                <span
+                  *ngFor="let tech of experience.technologies.slice(0, 4)"
                   class="tech-tag"
                 >
                   {{ tech }}
                 </span>
-                <span 
-                  *ngIf="experience.technologies.length > 4" 
+                <span
+                  *ngIf="experience.technologies.length > 4"
                   class="more-tech"
                 >
                   +{{ experience.technologies.length - 4 }}
@@ -150,8 +150,8 @@
         <div class="highlight-content">
           <h4 class="highlight-title">Mi Diferencial Único</h4>
           <p class="highlight-description">
-            No soy un recién graduado típico. Soy un profesional con 3+ años de experiencia práctica tecnica,
-            que formalizó su conocimiento con un título universitario. Mi valor está en entender tanto 
+            No soy un recién graduado típico. Soy un profesional con 3+ años de experiencia profesional en TI y QA,
+            que formalizó su conocimiento con un título universitario. Mi valor está en entender tanto
             la tecnología como el negocio, buscando aplicar esta experiencia en roles de crecimiento profesional.
           </p>
         </div>
@@ -160,18 +160,18 @@
 
     <!-- Acciones -->
     <div class="experience-actions experience-animate">
-      <ion-button 
-        expand="block" 
-        fill="outline" 
+      <ion-button
+        expand="block"
+        fill="outline"
         class="action-button"
         routerLink="/projects"
       >
         <ion-icon name="folder" slot="start"></ion-icon>
         Ver Proyectos Realizados
       </ion-button>
-      
-      <ion-button 
-        expand="block" 
+
+      <ion-button
+        expand="block"
         class="action-button primary"
         routerLink="/contact"
       >
@@ -195,10 +195,10 @@
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
-    
+
     <ion-content class="experience-modal-content" *ngIf="selectedExperience">
       <div class="modal-body">
-        
+
         <!-- Header del modal -->
         <div class="modal-header">
           <h3 class="modal-position">{{ selectedExperience.position }}</h3>

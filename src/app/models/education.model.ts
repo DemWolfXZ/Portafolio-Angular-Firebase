@@ -1,11 +1,11 @@
 /**
  * ARCHIVO: src/app/models/education.model.ts
- * 
+ *
  * DESCRIPCIÓN:
  * Modelo de datos para la formación académica de Alejandro Villa.
- * Incluye educación formal, certificaciones y formación continua.
- * Enfatiza el título de Ingeniero Informática (2025) que formaliza
- * 20+ años de experiencia práctica previa.
+ * Incluye educación formal, cursos reales y formación continua.
+ * Enfatiza el título de Ingeniero Informático (2025) que formaliza
+ * años de experiencia práctica previa, sin inflar cifras.
  */
 
 /**
@@ -14,55 +14,55 @@
 export interface Education {
   /** ID único de la formación */
   id: string;
-  
-  /** Tipo de formación */
+
+  /** Tipo de formación (universitaria, curso, certificación, etc.) */
   type: EducationType;
-  
+
   /** Título o certificación obtenida */
   title: string;
-  
+
   /** Institución educativa */
   institution: string;
-  
-  /** Fechas de la formación */
+
+  /** Fechas de la formación (inicio, fin, duración) */
   dates: EducationDates;
-  
-  /** Estado de la formación */
+
+  /** Estado de la formación (completado, en progreso, planificado) */
   status: EducationStatus;
-  
-  /** Descripción de la formación */
+
+  /** Descripción breve de la formación */
   description: string;
-  
-  /** Competencias desarrolladas */
+
+  /** Competencias o habilidades desarrolladas en esta formación */
   skills: string[];
-  
-  /** Proyectos destacados durante la formación */
+
+  /** Proyectos destacados durante la formación (opcional) */
   projects?: string[];
-  
-  /** Calificación o distinción obtenida */
+
+  /** Calificación o distinción obtenida (opcional) */
   grade?: string;
-  
-  /** Si es formación destacada */
+
+  /** Si esta formación debe destacarse en la UI */
   featured: boolean;
-  
-  /** Orden de visualización */
+
+  /** Orden de visualización en la interfaz */
   displayOrder: number;
-  
-  /** Logo de la institución */
+
+  /** Ruta del logo de la institución (opcional) */
   logo?: string;
-  
-  /** Credencial o certificado URL */
+
+  /** URL de credencial o certificado (opcional) */
   credentialUrl?: string;
 }
 
 /**
- * Tipos de formación educativa
+ * Tipos de formación educativa posibles
  */
-export type EducationType = 
-  | 'university' 
-  | 'technical' 
-  | 'certification' 
-  | 'course' 
+export type EducationType =
+  | 'university'
+  | 'technical'
+  | 'certification'
+  | 'course'
   | 'self-learning';
 
 /**
@@ -74,19 +74,19 @@ export type EducationStatus = 'completed' | 'in-progress' | 'planned';
  * Fechas de la formación
  */
 export interface EducationDates {
-  /** Fecha de inicio */
+  /** Fecha de inicio de la formación */
   startDate: Date;
-  
-  /** Fecha de finalización */
+
+  /** Fecha de finalización de la formación (si aplica) */
   endDate?: Date;
-  
-  /** Duración en texto */
+
+  /** Duración en formato texto (ej: "5 años", "En progreso") */
   duration?: string;
 }
 
 /**
- * Formación académica de Alejandro Villa
- * Basada en la información del prompt
+ * Formación académica principal de Alejandro Villa
+ * Basada en información real (título y cursos en curso).
  */
 export const ALEJANDRO_EDUCATION: Education[] = [
   {
@@ -100,7 +100,7 @@ export const ALEJANDRO_EDUCATION: Education[] = [
       duration: '5 años'
     },
     status: 'completed',
-    description: 'Título universitario que formaliza más de 20 años de experiencia práctica. No para aprender a usar computadores (eso ya lo sabía), sino para agregar herramientas de análisis de negocio, gestión de proyectos y metodologías estructuradas.',
+    description: 'Título universitario que formaliza años de experiencia práctica previa en soporte TI, hardware y desarrollo. Más que aprender a usar computadores, consolidó herramientas de análisis de negocio, gestión de proyectos y metodologías estructuradas.',
     skills: [
       'Análisis de Sistemas',
       'Gestión de Proyectos',
@@ -108,47 +108,69 @@ export const ALEJANDRO_EDUCATION: Education[] = [
       'Business Process Management',
       'Arquitectura de Software',
       'Base de Datos',
-      'Ingeniería de Requerimientos'
+      'Ingeniería de Requerimientos',
+      'Calidad de Software'
     ],
     projects: [
       'Sistema Unidad Territorial (Proyecto de Título)',
-      'Múltiples proyectos académicos de alta complejidad'
+      'Proyectos académicos de análisis, diseño y desarrollo de sistemas'
     ],
     featured: true,
     displayOrder: 1,
     logo: 'assets/education/duoc-logo.png'
   },
   {
-    id: 'python-course',
+    id: 'python-fullstack-ecas',
     type: 'course',
-    title: 'Curso Python',
-    institution: 'Plataforma Online',
+    title: 'Python Full Stack Trainee',
+    institution: 'ECAS OTEC – SENCE',
     dates: {
       startDate: new Date('2024-01-01'),
       duration: 'En progreso'
     },
     status: 'in-progress',
-    description: 'Formación continua en Python para expandir competencias de desarrollo y automatización de procesos.',
+    description: 'Programa de formación en Python orientado a desarrollo full stack, con foco en fundamentos de programación, lógica, manejo de datos y construcción de aplicaciones web básicas.',
     skills: [
-      'Python Programming',
-      'Django Framework',
-      'Automatización de Procesos',
-      'Scripts de Administración'
+      'Fundamentos de Python',
+      'Lógica de Programación',
+      'Manejo de Datos',
+      'Desarrollo Web Básico',
+      'Buenas Prácticas de Código'
     ],
     featured: false,
     displayOrder: 2
   },
   {
+    id: '.net-softserve',
+    type: 'course',
+    title: 'Formación en .NET',
+    institution: 'Softserve (Programa de Capacitación)',
+    dates: {
+      startDate: new Date('2024-01-01'),
+      duration: 'En progreso'
+    },
+    status: 'in-progress',
+    description: 'Formación enfocada en fundamentos de .NET y desarrollo de aplicaciones, reforzando la base en programación orientada a objetos y ecosistema Microsoft.',
+    skills: [
+      'Fundamentos de .NET',
+      'Programación Orientada a Objetos',
+      'Ecosistema Microsoft',
+      'Buenas Prácticas en Desarrollo'
+    ],
+    featured: false,
+    displayOrder: 3
+  },
+  {
     id: 'autoformacion-continua',
     type: 'self-learning',
-    title: 'Autoformación Continua',
+    title: 'Autoformación Continua en TI',
     institution: 'Investigación Autodidacta',
     dates: {
       startDate: new Date('2007-01-01'),
-      duration: '20+ años'
+      duration: 'Más de 10 años'
     },
     status: 'in-progress',
-    description: 'Formación autodidacta constante desde los 15-16 años. Investigación técnica continua, experimentación con nuevas tecnologías y mantenimiento actualizado con tendencias tecnológicas.',
+    description: 'Formación autodidacta constante desde la adolescencia. Investigación técnica, experimentación con hardware, redes, sistemas operativos y herramientas de desarrollo, manteniéndose actualizado con tendencias tecnológicas.',
     skills: [
       'Investigación Técnica',
       'Resolución Autodidacta de Problemas',
@@ -158,113 +180,94 @@ export const ALEJANDRO_EDUCATION: Education[] = [
       'Troubleshooting Avanzado'
     ],
     featured: true,
-    displayOrder: 3
+    displayOrder: 4
   }
 ];
 
 /**
  * Certificaciones y formación complementaria
+ * En este momento no se declaran certificaciones formales completadas
+ * para evitar información no verificable o inflada.
+ *
+ * Cuando tengas un certificado real (ej: cloud, ISTQB, etc.), se agrega aquí.
  */
 export const CERTIFICATIONS: Education[] = [
-  {
-    id: 'firebase-fundamentals',
-    type: 'certification',
-    title: 'Firebase Fundamentals',
-    institution: 'Google',
-    dates: {
-      startDate: new Date('2024-01-01'),
-      endDate: new Date('2024-02-01'),
-      duration: '1 mes'
-    },
-    status: 'completed',
-    description: 'Certificación en fundamentos de Firebase para desarrollo de aplicaciones web y móviles.',
-    skills: [
-      'Firebase Authentication',
-      'Firestore Database',
-      'Firebase Storage',
-      'Firebase Hosting'
-    ],
-    featured: false,
-    displayOrder: 1
-  },
-  {
-    id: 'angular-fundamentals',
-    type: 'certification',
-    title: 'Angular Fundamentals',
-    institution: 'Plataforma Online',
-    dates: {
-      startDate: new Date('2023-06-01'),
-      endDate: new Date('2023-08-01'),
-      duration: '2 meses'
-    },
-    status: 'completed',
-    description: 'Formación estructurada en Angular para desarrollo de aplicaciones empresariales.',
-    skills: [
-      'Angular Framework',
-      'TypeScript',
-      'RxJS',
-      'Angular CLI',
-      'Component Architecture'
-    ],
-    featured: false,
-    displayOrder: 2
-  }
+  // Por ahora vacío, hasta tener certificaciones formales completadas.
 ];
 
 /**
  * Formación planificada futura
+ * Se deja vacío para no inventar formaciones específicas que aún no has definido.
+ * Si decides un objetivo concreto (ej: AWS Cloud Practitioner), se puede agregar acá.
  */
 export const PLANNED_EDUCATION: Education[] = [
-  {
-    id: 'cloud-architecture',
-    type: 'certification',
-    title: 'Cloud Architecture Certification',
-    institution: 'Por definir',
-    dates: {
-      startDate: new Date('2025-06-01'),
-      duration: 'Planificado 2025'
-    },
-    status: 'planned',
-    description: 'Certificación en arquitectura de nube para ampliar competencias en infraestructura moderna.',
-    skills: [
-      'Cloud Architecture',
-      'Microservices',
-      'Container Technologies',
-      'Cloud Security'
-    ],
-    featured: false,
-    displayOrder: 1
-  }
+  // Ejemplo a futuro (cuando sea real):
+  // {
+  //   id: 'cloud-architecture',
+  //   type: 'certification',
+  //   title: 'Certificación en Arquitectura Cloud',
+  //   institution: 'Por definir',
+  //   dates: {
+  //     startDate: new Date('2025-06-01'),
+  //     duration: 'Planificado'
+  //   },
+  //   status: 'planned',
+  //   description: 'Objetivo de especialización en arquitectura de nube para ampliar competencias en infraestructura moderna.',
+  //   skills: [
+  //     'Cloud Architecture',
+  //     'Microservices',
+  //     'Container Technologies',
+  //     'Cloud Security'
+  //   ],
+  //   featured: false,
+  //   displayOrder: 1
+  // }
 ];
 
 /**
- * Helper functions para gestión de educación
+ * Helper functions para gestionar la educación en la aplicación
  */
 
+/**
+ * Retorna toda la formación (universitaria, cursos, certificaciones y planificada)
+ * ordenada por displayOrder.
+ */
 export function getAllEducation(): Education[] {
   return [...ALEJANDRO_EDUCATION, ...CERTIFICATIONS, ...PLANNED_EDUCATION]
     .sort((a, b) => a.displayOrder - b.displayOrder);
 }
 
+/**
+ * Retorna la formación filtrada por tipo (university, course, certification, etc.)
+ */
 export function getEducationByType(type: EducationType): Education[] {
   const allEducation = getAllEducation();
   return allEducation.filter(edu => edu.type === type);
 }
 
+/**
+ * Retorna solo la formación marcada como destacada
+ */
 export function getFeaturedEducation(): Education[] {
   return getAllEducation().filter(edu => edu.featured);
 }
 
+/**
+ * Retorna la formación completada
+ */
 export function getCompletedEducation(): Education[] {
   return getAllEducation().filter(edu => edu.status === 'completed');
 }
 
+/**
+ * Retorna la formación que está actualmente en curso
+ */
 export function getCurrentEducation(): Education[] {
   return getAllEducation().filter(edu => edu.status === 'in-progress');
 }
 
 /**
- * Configuración de tipos de educación para UI
+ * Configuración de tipos de educación para la UI (etiquetas, íconos y colores)
  */
 export const EDUCATION_TYPES = [
   {
@@ -294,11 +297,15 @@ export const EDUCATION_TYPES = [
 ];
 
 /**
- * Resumen de formación para sección About
+ * Resumen de formación para mostrar en la sección "About"
  */
 export const EDUCATION_SUMMARY = {
+  /** Resumen corto de formación universitaria */
   university: 'Ingeniero en Informática (DuocUC, 2025)',
-  practicalExperience: '20+ años de experiencia práctica',
+  /** Resumen de experiencia práctica sin inflar cifras */
+  practicalExperience: 'Más de 10 años de experiencia práctica en TI',
+  /** Resumen de autoformación */
   selfLearning: 'Investigación técnica continua desde 2007',
-  currentFocus: 'Python y tecnologías cloud modernas'
+  /** Foco actual de aprendizaje */
+  currentFocus: 'Python y ecosistema .NET como base para proyectos futuros'
 };

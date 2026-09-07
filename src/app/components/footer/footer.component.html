@@ -1,10 +1,10 @@
 <!-- Footer Responsivo Optimizado -->
 <footer class="footer">
   <div class="footer-container">
-    
+
     <!-- Contenido principal del footer - GRID RESPONSIVO -->
     <div class="footer-main">
-      
+
       <!-- Información personal - ADAPTATIVA -->
       <div class="footer-section personal-info">
         <div class="section-header">
@@ -16,11 +16,11 @@
             <p class="brand-title">{{ personalInfo.title }}</p>
           </div>
         </div>
-        
+
         <p class="brand-description">
-          Technical Business Analyst con 3+ años de experiencia práctica.
+          QA Técnico &amp; Soporte TI N2 con 3+ años de experiencia profesional.
         </p>
-        
+
         <div class="status-message">
           <ion-icon name="radio-button-on" class="status-icon"></ion-icon>
           <span class="status-text">{{ getStatusMessage() }}</span>
@@ -31,11 +31,11 @@
       <div class="footer-section navigation">
         <h5 class="section-title">Navegación</h5>
         <ul class="nav-list">
-          <li 
-            *ngFor="let link of navigationLinks" 
+          <li
+            *ngFor="let link of navigationLinks"
             class="nav-item"
           >
-            <button 
+            <button
               class="nav-link"
               (click)="navigateToSection(link.id)"
               [attr.aria-label]="'Ir a ' + link.label"
@@ -51,11 +51,11 @@
       <div class="footer-section quick-links">
         <h5 class="section-title">Enlaces Rápidos</h5>
         <ul class="quick-list">
-          <li 
-            *ngFor="let link of quickLinks" 
+          <li
+            *ngFor="let link of quickLinks"
             class="quick-item"
           >
-            <button 
+            <button
               class="quick-link"
               (click)="link.action()"
               [attr.aria-label]="link.label"
@@ -73,8 +73,8 @@
         <div class="contact-methods">
           <div class="contact-item">
             <ion-icon name="mail" class="contact-icon"></ion-icon>
-            <span 
-              class="contact-text" 
+            <span
+              class="contact-text"
               (click)="copyEmail()"
               [attr.aria-label]="'Email: ' + personalInfo.email"
             >
@@ -83,7 +83,7 @@
           </div>
           <div class="contact-item">
             <ion-icon name="call" class="contact-icon"></ion-icon>
-            <span 
+            <span
               class="contact-text"
               [attr.aria-label]="'Teléfono: ' + personalInfo.phone"
             >
@@ -92,7 +92,7 @@
           </div>
           <div class="contact-item">
             <ion-icon name="location" class="contact-icon"></ion-icon>
-            <span 
+            <span
               class="contact-text"
               [attr.aria-label]="'Ubicación: ' + personalInfo.location"
             >
@@ -105,8 +105,8 @@
 
     <!-- Sección: Sobre el desarrollo - ACORDEÓN RESPONSIVO -->
     <div class="footer-development">
-      <button 
-        class="development-toggle" 
+      <button
+        class="development-toggle"
         (click)="toggleAccordion('development')"
         [class.expanded]="isAccordionExpanded('development')"
         [attr.aria-expanded]="isAccordionExpanded('development')"
@@ -117,14 +117,14 @@
           <ion-icon name="construct" class="development-icon"></ion-icon>
           <span class="development-title">Sobre el desarrollo de este sitio</span>
         </div>
-        <ion-icon 
-          [name]="isAccordionExpanded('development') ? 'chevron-up' : 'chevron-down'" 
+        <ion-icon
+          [name]="isAccordionExpanded('development') ? 'chevron-up' : 'chevron-down'"
           class="toggle-icon"
           aria-hidden="true"
         ></ion-icon>
       </button>
-      
-      <div 
+
+      <div
         id="development-content"
         class="accordion-content development-content"
         [class.expanded]="isAccordionExpanded('development')"
@@ -132,10 +132,10 @@
       >
         <div class="development-text">
           <p class="development-description">
-            Si bien este portafolio fue desarrollado con la asistencia de <strong>IA (Claude)</strong>, 
+            Si bien este portafolio fue desarrollado con la asistencia de <strong>IA (Claude)</strong>,
             es fundamental aclarar que la inteligencia artificial por sí sola <strong>no puede desarrollar software profesional</strong>.
           </p>
-          
+
           <div class="development-points">
             <div class="point">
               <ion-icon name="checkmark-circle" class="point-icon" aria-hidden="true"></ion-icon>
@@ -158,10 +158,10 @@
               <span>La IA es una <strong>herramienta extraordinaria</strong>, pero requiere dirección experta para resultados profesionales</span>
             </div>
           </div>
-          
+
           <div class="development-conclusion">
             <em>
-              La combinación de <strong>experiencia técnica de 3+ años + herramientas de IA</strong> permite acelerar 
+              La combinación de <strong>experiencia profesional en TI + herramientas de IA</strong> permite acelerar
               significativamente el desarrollo manteniendo los estándares profesionales y las mejores prácticas del software.
             </em>
           </div>
@@ -171,14 +171,14 @@
 
     <!-- Footer inferior - GRID RESPONSIVO -->
     <div class="footer-bottom">
-      
+
       <!-- Información técnica -->
       <div class="footer-tech">
         <div class="tech-info">
           <span class="tech-label">Desarrollado con:</span>
           <div class="tech-stack">
-            <span 
-              *ngFor="let tech of siteInfo.builtWith; let last = last" 
+            <span
+              *ngFor="let tech of siteInfo.builtWith; let last = last"
               class="tech-item"
             >
               {{ tech }}<span *ngIf="!last">, </span>
@@ -189,34 +189,34 @@
 
       <!-- Controles y redes sociales -->
       <div class="footer-controls">
-        
+
         <!-- Enlaces sociales -->
         <div class="social-links">
-          <button 
+          <button
             class="social-link linkedin"
             (click)="openLinkedIn()"
             aria-label="Abrir perfil de LinkedIn"
           >
             <ion-icon name="logo-linkedin" class="social-icon" aria-hidden="true"></ion-icon>
           </button>
-          
-          <button 
+
+          <button
             class="social-link email"
             (click)="sendEmail()"
             aria-label="Enviar email"
           >
             <ion-icon name="mail" class="social-icon" aria-hidden="true"></ion-icon>
           </button>
-          
-          <button 
+
+          <button
             class="social-link whatsapp"
             (click)="openWhatsApp()"
             aria-label="Abrir WhatsApp"
           >
             <ion-icon name="logo-whatsapp" class="social-icon" aria-hidden="true"></ion-icon>
           </button>
-          
-          <button 
+
+          <button
             class="social-link phone"
             (click)="callPhone()"
             aria-label="Llamar por teléfono"
@@ -224,15 +224,15 @@
             <ion-icon name="call" class="social-icon" aria-hidden="true"></ion-icon>
           </button>
         </div>
-        
+
         <!-- Toggle de tema -->
-        <button 
+        <button
           class="theme-toggle-footer"
           (click)="toggleTheme()"
           [attr.aria-label]="isDarkMode() ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
         >
-          <ion-icon 
-            [name]="isDarkMode() ? 'sunny' : 'moon'" 
+          <ion-icon
+            [name]="isDarkMode() ? 'sunny' : 'moon'"
             class="theme-icon"
             aria-hidden="true"
           ></ion-icon>

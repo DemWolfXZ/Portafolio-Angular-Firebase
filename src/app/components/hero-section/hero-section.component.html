@@ -2,220 +2,220 @@
 <ion-content [scrollEvents]="true" class="main-content">
   <!-- Hero Section - Presentación principal -->
   <div class="hero-section" [class.loaded]="animationsLoaded">
-  <div class="hero-container">
-    
-    <!-- Contenido principal del hero -->
-    <div class="hero-content">
-      
-      <!-- Columna izquierda - Información -->
-      <div class="hero-info">
-        
-        <!-- Saludo y título -->
-        <div class="hero-greeting">
-          <span class="greeting-text">¡Hola! Soy</span>
-          <h1 class="hero-name">{{ personalInfo.name }}</h1>
-          <h2 class="hero-title">{{ personalInfo.title }}</h2>
-        </div>
+    <div class="hero-container">
 
-        <!-- Tagline principal -->
-        <div class="hero-tagline">
-          <p class="tagline-text">{{ personalInfo.tagline }}</p>
-        </div>
+      <!-- Contenido principal del hero -->
+      <div class="hero-content">
 
-        <!-- Descripción -->
-        <div class="hero-description">
-          <p class="description-text">{{ personalInfo.description }}</p>
-        </div>
+        <!-- Columna izquierda - Información -->
+        <div class="hero-info">
 
-        <!-- NUEVO: Skills destacadas para home -->
-        <div class="hero-skills">
-          <h4 class="skills-title">Competencias Destacadas:</h4>
-          <div class="skills-grid">
-            <div 
-              *ngFor="let skill of getHomeDisplaySkills()" 
-              class="skill-item"
-              [title]="skill.name + ' - ' + skill.yearsOfExperience + ' años'"
-            >
-              <div class="skill-icon" [style.color]="skill.color">
-                <ion-icon [name]="skill.icon" class="skill-icon-svg"></ion-icon>
+          <!-- Saludo y título -->
+          <div class="hero-greeting">
+            <span class="greeting-text">¡Hola! Soy</span>
+            <h1 class="hero-name">{{ personalInfo.name }}</h1>
+            <h2 class="hero-title">{{ personalInfo.title }}</h2>
+          </div>
+
+          <!-- Tagline principal -->
+          <div class="hero-tagline">
+            <p class="tagline-text">{{ personalInfo.tagline }}</p>
+          </div>
+
+          <!-- Descripción -->
+          <div class="hero-description">
+            <p class="description-text">{{ personalInfo.description }}</p>
+          </div>
+
+          <!-- Skills destacadas para home -->
+          <div class="hero-skills">
+            <h4 class="skills-title">Competencias Destacadas:</h4>
+            <div class="skills-grid">
+              <div
+                *ngFor="let skill of getHomeDisplaySkills()"
+                class="skill-item"
+                [title]="skill.name + ' - ' + skill.yearsOfExperience + ' años'"
+              >
+                <div class="skill-icon" [style.color]="skill.color">
+                  <ion-icon [name]="skill.icon" class="skill-icon-svg"></ion-icon>
+                </div>
+                <div class="skill-info">
+                  <span class="skill-name">{{ skill.name }}</span>
+                  <span class="skill-years">{{ skill.yearsOfExperience }}+ años</span>
+                </div>
               </div>
-              <div class="skill-info">
-                <span class="skill-name">{{ skill.name }}</span>
-                <span class="skill-years">{{ skill.yearsOfExperience }}+ años</span>
+            </div>
+          </div>
+
+          <!-- Información de contacto rápida -->
+          <div class="hero-contact-info">
+            <div class="contact-item">
+              <ion-icon name="location" class="contact-icon"></ion-icon>
+              <span class="contact-text">{{ personalInfo.location }}</span>
+            </div>
+            <div class="contact-item">
+              <ion-icon name="mail" class="contact-icon"></ion-icon>
+              <span class="contact-text">{{ personalInfo.email }}</span>
+            </div>
+            <div class="contact-item">
+              <ion-icon name="call" class="contact-icon"></ion-icon>
+              <span class="contact-text">{{ personalInfo.phone }}</span>
+            </div>
+          </div>
+
+          <!-- Botones de acción principales -->
+          <div class="hero-actions">
+
+            <!-- Acciones principales -->
+            <div class="primary-actions">
+              <ion-button
+                expand="block"
+                class="action-button primary"
+                (click)="downloadCV()"
+              >
+                <ion-icon name="download" slot="start"></ion-icon>
+                Descargar CV
+              </ion-button>
+
+              <ion-button
+                expand="block"
+                fill="outline"
+                class="action-button secondary"
+                (click)="viewCV()"
+              >
+                <ion-icon name="eye" slot="start"></ion-icon>
+                Ver CV
+              </ion-button>
+            </div>
+
+            <!-- Acciones secundarias -->
+            <div class="secondary-actions">
+              <ion-button
+                fill="clear"
+                class="social-button"
+                (click)="openLinkedIn()"
+              >
+                <ion-icon name="logo-linkedin" slot="start"></ion-icon>
+                LinkedIn
+              </ion-button>
+
+              <ion-button
+                fill="clear"
+                class="social-button"
+                routerLink="/contact"
+              >
+                <ion-icon name="chatbubble-ellipses" slot="start"></ion-icon>
+                Contactar
+              </ion-button>
+            </div>
+          </div>
+
+          <!-- Indicador de scroll -->
+          <div class="scroll-indicator">
+            <button class="scroll-button" routerLink="/about">
+              <span class="scroll-text">Conoce más sobre mí</span>
+              <ion-icon name="chevron-down" class="scroll-icon"></ion-icon>
+            </button>
+          </div>
+        </div>
+
+        <!-- Columna derecha - Foto profesional -->
+        <div class="hero-image">
+          <div class="image-container">
+            <!-- Foto profesional -->
+            <img
+              src="assets/images/placeholder.jpeg"
+              alt="Alejandro Villa Villavicencio - QA Técnico &amp; Soporte TI N2 - Desarrollo Frontend Jr"
+              class="profile-image"
+              loading="eager"
+            />
+
+            <!-- Elementos decorativos -->
+            <div class="image-decoration">
+              <div class="decoration-element element-1"></div>
+              <div class="decoration-element element-2"></div>
+              <div class="decoration-element element-3"></div>
+            </div>
+
+            <!-- Badge de experiencia -->
+            <div class="experience-badge">
+              <div class="badge-content">
+                <span class="badge-number">3+</span>
+                <span class="badge-text">años de experiencia profesional</span>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Información de contacto rápida -->
-        <div class="hero-contact-info">
-          <div class="contact-item">
-            <ion-icon name="location" class="contact-icon"></ion-icon>
-            <span class="contact-text">{{ personalInfo.location }}</span>
-          </div>
-          <div class="contact-item">
-            <ion-icon name="mail" class="contact-icon"></ion-icon>
-            <span class="contact-text">{{ personalInfo.email }}</span>
-          </div>
-          <div class="contact-item">
-            <ion-icon name="call" class="contact-icon"></ion-icon>
-            <span class="contact-text">{{ personalInfo.phone }}</span>
-          </div>
-        </div>
-
-        <!-- Botones de acción principales -->
-        <div class="hero-actions">
-          
-          <!-- Acciones principales -->
-          <div class="primary-actions">
-            <ion-button 
-              expand="block" 
-              class="action-button primary"
-              (click)="downloadCV()"
-            >
-              <ion-icon name="download" slot="start"></ion-icon>
-              Descargar CV
-            </ion-button>
-            
-            <ion-button 
-              expand="block" 
-              fill="outline" 
-              class="action-button secondary"
-              (click)="viewCV()"
-            >
-              <ion-icon name="eye" slot="start"></ion-icon>
-              Ver CV
-            </ion-button>
-          </div>
-
-          <!-- Acciones secundarias -->
-          <div class="secondary-actions">
-            <ion-button 
-              fill="clear" 
-              class="social-button"
-              (click)="openLinkedIn()"
-            >
-              <ion-icon name="logo-linkedin" slot="start"></ion-icon>
-              LinkedIn
-            </ion-button>
-            
-            <ion-button 
-              fill="clear" 
-              class="social-button"
-              routerLink="/contact"
-            >
-              <ion-icon name="chatbubble-ellipses" slot="start"></ion-icon>
-              Contactar
-            </ion-button>
-          </div>
-        </div>
-
-        <!-- Indicador de scroll -->
-        <div class="scroll-indicator">
-          <button class="scroll-button" routerLink="/about">
-            <span class="scroll-text">Conoce más sobre mí</span>
-            <ion-icon name="chevron-down" class="scroll-icon"></ion-icon>
-          </button>
-        </div>
       </div>
 
-      <!-- Columna derecha - Foto profesional -->
-      <div class="hero-image">
-        <div class="image-container">
-          <!-- Foto profesional -->
-          <img 
-            src="assets/images/placeholder.jpeg" 
-            alt="Alejandro Villa Villavicencio - Technical Business Analyst"
-            class="profile-image"
-            loading="eager"
-          />
-          
-          <!-- Elementos decorativos -->
-          <div class="image-decoration">
-            <div class="decoration-element element-1"></div>
-            <div class="decoration-element element-2"></div>
-            <div class="decoration-element element-3"></div>
-          </div>
-          
-          <!-- Badge de experiencia -->
-          <div class="experience-badge">
-            <div class="badge-content">
-              <span class="badge-number">5+</span>
-              <span class="badge-text">años de experiencia</span>
-            </div>
-          </div>
+      <!-- Estadísticas rápidas -->
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-number">3+</div>
+          <div class="stat-label">Años de experiencia profesional</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Proyectos en Producción</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Sistemas Configurados</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">2025</div>
+          <div class="stat-label">Título Universitario</div>
         </div>
       </div>
     </div>
 
-    <!-- Estadísticas rápidas -->
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-number">5+</div>
-        <div class="stat-label">Años de Experiencia</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">3</div>
-        <div class="stat-label">Proyectos en Producción</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">50+</div>
-        <div class="stat-label">Sistemas Configurados</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-number">2025</div>
-        <div class="stat-label">Título Universitario</div>
-      </div>
+    <!-- Background decorativo -->
+    <div class="hero-background">
+      <div class="bg-decoration bg-1"></div>
+      <div class="bg-decoration bg-2"></div>
+      <div class="bg-decoration bg-3"></div>
     </div>
   </div>
 
-  <!-- Background decorativo -->
-  <div class="hero-background">
-    <div class="bg-decoration bg-1"></div>
-    <div class="bg-decoration bg-2"></div>
-    <div class="bg-decoration bg-3"></div>
-  </div>
-</div>
+  <!-- Modal de CV -->
+  <ion-modal [isOpen]="showCVModal" (willDismiss)="closeCVModal()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Currículum Vitae - Alejandro Villa</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeCVModal()">
+              <ion-icon name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
 
-<!-- Modal de CV -->
-<ion-modal [isOpen]="showCVModal" (willDismiss)="closeCVModal()">
-  <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Currículum Vitae - Alejandro Villa</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="closeCVModal()">
-            <ion-icon name="close"></ion-icon>
+      <ion-content class="cv-modal-content">
+        <!-- Vista previa del CV -->
+        <div class="cv-preview">
+          <iframe
+            src="assets/cv/CV Alejandro Villa Villavicencio.pdf"
+            class="cv-iframe"
+            title="CV Alejandro Villa"
+          ></iframe>
+        </div>
+
+        <!-- Acciones del modal -->
+        <div class="cv-modal-actions">
+          <ion-button
+            expand="block"
+            (click)="downloadCV()"
+            class="download-button"
+          >
+            <ion-icon name="download" slot="start"></ion-icon>
+            Descargar PDF
           </ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    
-    <ion-content class="cv-modal-content">
-      <!-- Vista previa del CV -->
-      <div class="cv-preview">
-        <iframe 
-          src="assets/cv/CV Alejandro Villa Villavicencio.pdf"
-          class="cv-iframe"
-          title="CV Alejandro Villa"
-        ></iframe>
-      </div>
-      
-      <!-- Acciones del modal -->
-      <div class="cv-modal-actions">
-        <ion-button 
-          expand="block" 
-          (click)="downloadCV()"
-          class="download-button"
-        >
-          <ion-icon name="download" slot="start"></ion-icon>
-          Descargar PDF
-        </ion-button>
-      </div>
-    </ion-content>
-  </ng-template>
-</ion-modal>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
-<!-- Footer independiente -->
-<app-footer></app-footer>
+  <!-- Footer independiente -->
+  <app-footer></app-footer>
 </ion-content>

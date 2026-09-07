@@ -1,6 +1,6 @@
 /**
  * ARCHIVO: src/app/components/footer/footer.component.ts
- * 
+ *
  * DESCRIPCIÓN:
  * Componente Footer del portafolio de Alejandro Villa.
  * Versión compacta con acordeón para información de desarrollo.
@@ -9,6 +9,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DownloadService } from '../../services/download.service';
 import { ThemeService } from '../../services/theme.service';
 
@@ -19,27 +20,28 @@ import { ThemeService } from '../../services/theme.service';
 })
 export class FooterComponent implements OnInit {
 
-  // Información personal básica
+  // Información personal básica mostrada en el footer
   public personalInfo = {
     name: 'Alejandro Villa Villavicencio',
-    title: 'Technical Business Analyst & IT Specialist',
+    // Alineado con el hero y el CV
+    title: 'QA Técnico & Soporte TI N2 · Desarrollo Frontend Jr',
     email: 'alejandro.villa91@gmail.com',
     phone: '+56 920913551',
-    location: 'San Bernardo, Santiago, Chile',
+    location: 'Macul, Santiago, Chile',
     linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/'
   };
 
-  // Enlaces de navegación
+  // Enlaces de navegación del sitio
   public navigationLinks = [
-    { id: 'home', label: 'Inicio', icon: 'home' },
-    { id: 'about', label: 'Sobre Mí', icon: 'person' },
-    { id: 'experience', label: 'Experiencia', icon: 'briefcase' },
-    { id: 'projects', label: 'Proyectos', icon: 'folder' },
-    { id: 'skills', label: 'Skills', icon: 'code-slash' },
-    { id: 'contact', label: 'Contacto', icon: 'mail' }
+    { id: 'home',      label: 'Inicio',      icon: 'home' },
+    { id: 'about',     label: 'Sobre Mí',   icon: 'person' },
+    { id: 'experience',label: 'Experiencia',icon: 'briefcase' },
+    { id: 'projects',  label: 'Proyectos',  icon: 'folder' },
+    { id: 'skills',    label: 'Skills',     icon: 'code-slash' },
+    { id: 'contact',   label: 'Contacto',   icon: 'mail' }
   ];
 
-  // Enlaces rápidos
+  // Enlaces rápidos (acciones directas desde el footer)
   public quickLinks = [
     {
       label: 'Descargar CV',
@@ -63,7 +65,7 @@ export class FooterComponent implements OnInit {
     }
   ];
 
-  // Información técnica del sitio
+  // Información técnica del sitio (stack, versión, etc.)
   public siteInfo = {
     builtWith: ['Angular 20', 'Ionic 8', 'Firebase 11', 'TypeScript 5.4'],
     version: '1.0.0',
@@ -74,39 +76,35 @@ export class FooterComponent implements OnInit {
   // Año actual para copyright
   public currentYear = new Date().getFullYear();
 
-  // Estado del acordeón - SOLO PARA LA SECCIÓN DE DESARROLLO
+  // Estado del acordeón - por ahora solo se usa para la sección "development"
   public accordionStates = {
     development: false
   };
 
   constructor(
     private downloadService: DownloadService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    // El footer se carga al final, no necesita animaciones especiales
+    // El footer se carga al final, no necesita lógica extra al iniciar
   }
 
   /**
-   * Navega a una sección específica del portafolio
-   * @param sectionId - ID de la sección destino
+   * Navega a una sección específica del portafolio.
+   * @param sectionId - ID de la sección destino (home, about, projects, etc.)
    */
   navigateToSection(sectionId: string): void {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      const headerHeight = 80;
-      const elementPosition = element.offsetTop - headerHeight;
-      
-      window.scrollTo({
-        top: elementPosition,
-        behavior: 'smooth'
-      });
-    }
+    if (!sectionId) { return; }
+
+    // Mapeo sencillo: 'home' -> '/home', 'about' -> '/about', etc.
+    const path = sectionId === 'home' ? 'home' : sectionId;
+    this.router.navigate([`/${path}`]).catch(err => console.error('Error navegando a la sección:', err));
   }
 
   /**
-   * Navega al inicio del portafolio
+   * Navega al inicio de la página (scroll suave).
    */
   scrollToTop(): void {
     window.scrollTo({
@@ -116,7 +114,7 @@ export class FooterComponent implements OnInit {
   }
 
   /**
-   * Descarga el CV de Alejandro
+   * Descarga el CV de Alejandro usando el servicio centralizado.
    */
   async downloadCV(): Promise<void> {
     try {
@@ -127,7 +125,7 @@ export class FooterComponent implements OnInit {
   }
 
   /**
-   * Descarga WAD de ejemplo de Doom
+   * Descarga WAD de ejemplo de Doom (material extra del portafolio).
    */
   async downloadWAD(): Promise<void> {
     try {
@@ -138,14 +136,14 @@ export class FooterComponent implements OnInit {
   }
 
   /**
-   * Abre LinkedIn en nueva pestaña
+   * Abre LinkedIn en una nueva pestaña.
    */
   openLinkedIn(): void {
     window.open(this.personalInfo.linkedin, '_blank', 'noopener,noreferrer');
   }
 
   /**
-   * Abre cliente de email
+   * Abre el cliente de email del usuario con asunto predefinido.
    */
   sendEmail(): void {
     const subject = 'Contacto desde Portafolio - Alejandro Villa';
@@ -154,14 +152,14 @@ export class FooterComponent implements OnInit {
   }
 
   /**
-   * Inicia llamada telefónica
+   * Inicia una llamada telefónica (en dispositivos que lo soporten).
    */
   callPhone(): void {
     window.open(`tel:${this.personalInfo.phone}`, '_self');
   }
 
   /**
-   * Abre WhatsApp con mensaje predefinido
+   * Abre WhatsApp con un mensaje predefinido.
    */
   openWhatsApp(): void {
     const message = 'Hola Alejandro, te contacto desde tu portafolio web para...';
@@ -171,27 +169,27 @@ export class FooterComponent implements OnInit {
   }
 
   /**
-   * Toggle del tema desde el footer
+   * Cambia el tema (oscuro/claro) usando el ThemeService.
    */
   toggleTheme(): void {
     this.themeService.toggleTheme();
   }
 
   /**
-   * Verifica si está en modo oscuro
-   * @returns true si está en modo oscuro
+   * Indica si el sitio está en modo oscuro.
+   * @returns true si el tema actual es oscuro.
    */
   isDarkMode(): boolean {
     return this.themeService.isDarkMode();
   }
 
   /**
-   * Copia el email al portapapeles
+   * Copia el email al portapapeles.
    */
   async copyEmail(): Promise<void> {
     try {
       await navigator.clipboard.writeText(this.personalInfo.email);
-      // Aquí podrías mostrar un toast de confirmación
+      // Podrías disparar un toast o snackbar acá
       console.log('Email copiado al portapapeles');
     } catch (error) {
       console.warn('No se pudo copiar al portapapeles:', error);
@@ -199,14 +197,14 @@ export class FooterComponent implements OnInit {
   }
 
   /**
-   * Obtiene el tiempo transcurrido desde la última actualización
-   * @returns String con tiempo transcurrido
+   * Obtiene el tiempo transcurrido desde la última actualización del sitio.
+   * @returns String con tiempo transcurrido (ej: "hace 3 días", "hace 2 meses").
    */
   getTimeSinceUpdate(): string {
     const now = new Date();
     const diffTime = Math.abs(now.getTime() - this.siteInfo.lastUpdate.getTime());
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays === 1) {
       return 'hace 1 día';
     } else if (diffDays < 30) {
@@ -221,35 +219,37 @@ export class FooterComponent implements OnInit {
   }
 
   /**
-   * Genera un mensaje de estado aleatorio para el footer
-   * @returns String con mensaje de estado
+   * Genera un mensaje de estado para el footer.
+   * Se basa en el día del año para que cambie una vez al día.
    */
   getStatusMessage(): string {
     const messages = [
-      '🚀 Disponible para nuevos proyectos',
-      '💻 Desarrollando soluciones técnicas',
-      '🔧 Coordinando implementaciones',
-      '📚 Siempre aprendiendo nuevas tecnologías',
-      '⚡ 20+ años resolviendo problemas técnicos'
+      '🚀 Disponible para nuevos proyectos en QA y TI',
+      '💻 Asegurando calidad y estabilidad en sistemas',
+      '🔧 Soporte TI N2 y resolución de incidentes',
+      '📚 Siempre aprendiendo y mejorando mis skills',
+      '⚡ 10+ años resolviendo problemas técnicos en la práctica'
     ];
-    
+
     // Usar el día del año para obtener siempre el mismo mensaje por día
-    const dayOfYear = Math.floor((Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000);
+    const dayOfYear = Math.floor(
+      (Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) / 86400000
+    );
     return messages[dayOfYear % messages.length];
   }
 
   /**
-   * Toggle del estado de acordeón SOLO para desarrollo
-   * @param section - Sección del acordeón a toggle
+   * Cambia el estado del acordeón (solo para la sección "development").
+   * @param section - clave de la sección en accordionStates.
    */
   toggleAccordion(section: keyof typeof this.accordionStates): void {
     this.accordionStates[section] = !this.accordionStates[section];
   }
 
   /**
-   * Verifica si un acordeón está expandido
-   * @param section - Sección del acordeón
-   * @returns true si está expandido
+   * Indica si una sección del acordeón está expandida.
+   * @param section - clave de la sección en accordionStates.
+   * @returns true si está expandida, false si está colapsada.
    */
   isAccordionExpanded(section: keyof typeof this.accordionStates): boolean {
     return this.accordionStates[section];

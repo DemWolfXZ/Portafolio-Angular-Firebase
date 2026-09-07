@@ -1,15 +1,19 @@
-<!-- Header fijo horizontal profesional - COMO EN LAS IMÁGENES DE REFERENCIA -->
+<!-- Header fijo horizontal profesional -->
 <header class="header" [class.scrolled]="isScrolled">
   <div class="header-container">
-    
+
     <!-- Logo y nombre - Lado izquierdo -->
     <div class="header-brand" (click)="navigateToRoute('/home')">
       <div class="brand-logo">
         <ion-icon name="code-slash" class="brand-icon"></ion-icon>
       </div>
       <div class="brand-text">
-        <span class="brand-name">Alejandro Villa</span>
-        <span class="brand-title">TECHNICAL BUSINESS ANALYST</span>
+        <!-- NOMBRE igual que en el CV -->
+        <span class="brand-name">Alejandro Villa Villavicencio</span>
+        <!-- TITULAR ALINEADO CON EL CV QA -->
+        <span class="brand-title">
+          QA Técnico · Especialista TI N2 · Frontend Junior (Angular/Firebase)
+        </span>
       </div>
     </div>
 
@@ -17,7 +21,7 @@
     <nav class="header-nav desktop-nav" aria-label="Navegación principal">
       <ul class="nav-list">
         <li class="nav-item" *ngFor="let item of navItems">
-          <button 
+          <button
             class="nav-link"
             [class.active]="isActiveRoute(item.route)"
             (click)="navigateToRoute(item.route)"
@@ -32,22 +36,22 @@
 
     <!-- Controles de header - Lado derecho -->
     <div class="header-controls">
-      
+
       <!-- Toggle de tema -->
-      <button 
+      <button
         class="theme-toggle"
         (click)="toggleTheme()"
         type="button"
         [attr.aria-label]="isDarkMode() ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
       >
-        <ion-icon 
-          [name]="isDarkMode() ? 'sunny' : 'moon'" 
+        <ion-icon
+          [name]="isDarkMode() ? 'sunny' : 'moon'"
           class="theme-icon"
         ></ion-icon>
       </button>
 
       <!-- Botón menú móvil -->
-      <button 
+      <button
         class="mobile-menu-toggle"
         (click)="toggleMobileMenu()"
         [class.active]="mobileMenuOpen"
@@ -62,15 +66,15 @@
   </div>
 
   <!-- Menú móvil - DROPDOWN DESDE ARRIBA -->
-  <div 
-    class="mobile-nav-dropdown" 
+  <div
+    class="mobile-nav-dropdown"
     [class.open]="mobileMenuOpen"
     [attr.aria-hidden]="!mobileMenuOpen"
   >
     <!-- Lista de navegación móvil -->
     <ul class="mobile-nav-list">
       <li class="mobile-nav-item" *ngFor="let item of navItems">
-        <button 
+        <button
           class="mobile-nav-link"
           [class.active]="isActiveRoute(item.route)"
           (click)="navigateToRoute(item.route)"
@@ -84,13 +88,13 @@
 
     <!-- Toggle de tema en el menú -->
     <div class="mobile-theme-section">
-      <button 
+      <button
         class="mobile-theme-toggle"
         (click)="toggleTheme()"
         type="button"
       >
-        <ion-icon 
-          [name]="isDarkMode() ? 'sunny' : 'moon'" 
+        <ion-icon
+          [name]="isDarkMode() ? 'sunny' : 'moon'"
           class="mobile-theme-icon"
         ></ion-icon>
         <span class="mobile-theme-label">

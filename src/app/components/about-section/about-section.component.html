@@ -2,236 +2,237 @@
 <ion-content [scrollEvents]="true" class="main-content">
   <!-- Sección Sobre Mí -->
   <div class="about-section" [class.loaded]="animationsLoaded">
-  <div class="about-container">
-    
-    <!-- Header de la sección -->
-    <div class="about-header about-animate">
-      <h2 class="section-title">Sobre Mí</h2>
-      <p class="section-subtitle">
-        La historia detrás de 20+ años resolviendo problemas técnicos complejos
-      </p>
-    </div>
+    <div class="about-container">
 
-    <!-- Contenido principal -->
-    <div class="about-content">
-      
-      <!-- Introducción personal -->
-      <div class="about-intro about-animate">
-        <div class="intro-text">
-          <h3 class="intro-title">{{ personalInfo.name }}</h3>
-          <p class="intro-description">
-            {{ getCurrentAge() }} años, {{ personalInfo.title }} ({{ personalInfo.university }}, {{ personalInfo.graduationYear }})
-          </p>
-          <p class="intro-location">
-            <ion-icon name="location" class="location-icon"></ion-icon>
-            {{ personalInfo.location }}
-          </p>
-        </div>
-        
-        <!-- Estadística destacada -->
-        <div class="experience-highlight">
-          <div class="highlight-number">{{ getYearsOfExperience() }}+</div>
-          <div class="highlight-text">años de experiencia técnica</div>
-        </div>
+      <!-- Header de la sección -->
+      <div class="about-header about-animate">
+        <h2 class="section-title">Sobre Mí</h2>
+        <p class="section-subtitle">
+          La historia detrás de más de 10 años de experiencia práctica en TI, soporte y sistemas.
+        </p>
       </div>
 
-      <!-- Historia cronológica -->
-      <div class="biography-section">
-        
-        <!-- Los inicios -->
-        <div class="biography-block about-animate">
-          <div class="bio-header">
-            <ion-icon name="bulb" class="bio-icon"></ion-icon>
-            <h4 class="bio-title">{{ biography.earlyStart.title }}</h4>
-          </div>
-          <p class="bio-description">{{ biography.earlyStart.description }}</p>
-          <ul class="bio-highlights">
-            <li *ngFor="let highlight of biography.earlyStart.highlights" class="bio-highlight">
-              <ion-icon name="checkmark-circle" class="highlight-icon"></ion-icon>
-              {{ highlight }}
-            </li>
-          </ul>
-        </div>
+      <!-- Contenido principal -->
+      <div class="about-content">
 
-        <!-- Experiencia práctica -->
-        <div class="biography-block about-animate">
-          <div class="bio-header">
-            <ion-icon name="construct" class="bio-icon"></ion-icon>
-            <h4 class="bio-title">{{ biography.practicalExperience.title }}</h4>
-          </div>
-          <p class="bio-description">{{ biography.practicalExperience.description }}</p>
-          <ul class="bio-highlights">
-            <li *ngFor="let highlight of biography.practicalExperience.highlights" class="bio-highlight">
-              <ion-icon name="checkmark-circle" class="highlight-icon"></ion-icon>
-              {{ highlight }}
-            </li>
-          </ul>
-        </div>
-
-        <!-- Experiencia formal -->
-        <div class="biography-block about-animate">
-          <div class="bio-header">
-            <ion-icon name="briefcase" class="bio-icon"></ion-icon>
-            <h4 class="bio-title">{{ biography.formalExperience.title }}</h4>
-          </div>
-          <p class="bio-description">{{ biography.formalExperience.description }}</p>
-          <ul class="bio-highlights">
-            <li *ngFor="let highlight of biography.formalExperience.highlights" class="bio-highlight">
-              <ion-icon name="checkmark-circle" class="highlight-icon"></ion-icon>
-              {{ highlight }}
-            </li>
-          </ul>
-        </div>
-
-        <!-- Formación académica -->
-        <div class="biography-block about-animate">
-          <div class="bio-header">
-            <ion-icon name="school" class="bio-icon"></ion-icon>
-            <h4 class="bio-title">{{ biography.academicFormation.title }}</h4>
-          </div>
-          <p class="bio-description">{{ biography.academicFormation.description }}</p>
-          <ul class="bio-highlights">
-            <li *ngFor="let highlight of biography.academicFormation.highlights" class="bio-highlight">
-              <ion-icon name="checkmark-circle" class="highlight-icon"></ion-icon>
-              {{ highlight }}
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Diferencial único -->
-      <div class="unique-value-section about-animate">
-        <div class="value-card">
-          <div class="value-header">
-            <ion-icon name="star" class="value-icon"></ion-icon>
-            <h4 class="value-title">{{ uniqueValue.title }}</h4>
-          </div>
-          <p class="value-description">{{ uniqueValue.description }}</p>
-          <div class="value-points">
-            <div *ngFor="let point of uniqueValue.points" class="value-point">
-              <ion-icon name="arrow-forward" class="point-icon"></ion-icon>
-              <span class="point-text">{{ point }}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Filosofía profesional -->
-      <div class="philosophy-section about-animate">
-        <div class="philosophy-card">
-          <div class="quote-mark">"</div>
-          <blockquote class="philosophy-quote">
-            {{ philosophy.quote }}
-          </blockquote>
-          <p class="philosophy-context">{{ philosophy.context }}</p>
-        </div>
-      </div>
-
-      <!-- Enfoque con Inteligencia Artificial -->
-      <div class="ai-approach-section about-animate">
-        <div class="ai-approach-card">
-          <div class="ai-header">
-            <ion-icon name="hardware-chip" class="ai-icon"></ion-icon>
-            <h4 class="ai-title">Enfoque con Inteligencia Artificial</h4>
-          </div>
-          <div class="ai-content">
-            <p class="ai-description">
-              En la era de la IA, mi enfoque profesional se basa en combinar <strong>20+ años de experiencia técnica</strong> 
-              con herramientas inteligentes para acelerar el desarrollo manteniendo los más altos estándares de calidad.
+        <!-- Introducción personal -->
+        <div class="about-intro about-animate">
+          <div class="intro-text">
+            <h3 class="intro-title">{{ personalInfo.name }}</h3>
+            <p class="intro-description">
+              {{ getCurrentAge() }} años, {{ personalInfo.title }} ({{ personalInfo.university }}, {{ personalInfo.graduationYear }})
             </p>
-            <div class="ai-principles">
-              <div class="ai-principle">
-                <ion-icon name="cog" class="principle-icon"></ion-icon>
-                <span><strong>La IA es una herramienta extraordinaria</strong>, no un sustituto del conocimiento técnico profundo</span>
-              </div>
-              <div class="ai-principle">
-                <ion-icon name="school" class="principle-icon"></ion-icon>
-                <span><strong>Se requiere experiencia sólida</strong> para dirigir efectivamente la IA hacia resultados profesionales</span>
-              </div>
-              <div class="ai-principle">
-                <ion-icon name="build" class="principle-icon"></ion-icon>
-                <span><strong>Arquitectura sólida + IA dirigida</strong> = Desarrollo acelerado con calidad empresarial</span>
-              </div>
-              <div class="ai-principle">
-                <ion-icon name="lightbulb" class="principle-icon"></ion-icon>
-                <span><strong>No es solo "haz esto"</strong> - hay que saber el QUÉ, POR QUÉ y CUÁNDO implementar</span>
+            <p class="intro-location">
+              <ion-icon name="location" class="location-icon"></ion-icon>
+              {{ personalInfo.location }}
+            </p>
+          </div>
+
+          <!-- Estadística destacada -->
+          <div class="experience-highlight">
+            <div class="highlight-number">{{ getYearsOfExperience() }}+</div>
+            <div class="highlight-text">años de experiencia técnica</div>
+          </div>
+        </div>
+
+        <!-- Historia cronológica -->
+        <div class="biography-section">
+
+          <!-- Los inicios -->
+          <div class="biography-block about-animate">
+            <div class="bio-header">
+              <ion-icon name="bulb" class="bio-icon"></ion-icon>
+              <h4 class="bio-title">{{ biography.earlyStart.title }}</h4>
+            </div>
+            <p class="bio-description">{{ biography.earlyStart.description }}</p>
+            <ul class="bio-highlights">
+              <li *ngFor="let highlight of biography.earlyStart.highlights" class="bio-highlight">
+                <ion-icon name="checkmark-circle" class="highlight-icon"></ion-icon>
+                {{ highlight }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Experiencia práctica -->
+          <div class="biography-block about-animate">
+            <div class="bio-header">
+              <ion-icon name="construct" class="bio-icon"></ion-icon>
+              <h4 class="bio-title">{{ biography.practicalExperience.title }}</h4>
+            </div>
+            <p class="bio-description">{{ biography.practicalExperience.description }}</p>
+            <ul class="bio-highlights">
+              <li *ngFor="let highlight of biography.practicalExperience.highlights" class="bio-highlight">
+                <ion-icon name="checkmark-circle" class="highlight-icon"></ion-icon>
+                {{ highlight }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Experiencia formal -->
+          <div class="biography-block about-animate">
+            <div class="bio-header">
+              <ion-icon name="briefcase" class="bio-icon"></ion-icon>
+              <h4 class="bio-title">{{ biography.formalExperience.title }}</h4>
+            </div>
+            <p class="bio-description">{{ biography.formalExperience.description }}</p>
+            <ul class="bio-highlights">
+              <li *ngFor="let highlight of biography.formalExperience.highlights" class="bio-highlight">
+                <ion-icon name="checkmark-circle" class="highlight-icon"></ion-icon>
+                {{ highlight }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- Formación académica -->
+          <div class="biography-block about-animate">
+            <div class="bio-header">
+              <ion-icon name="school" class="bio-icon"></ion-icon>
+              <h4 class="bio-title">{{ biography.academicFormation.title }}</h4>
+            </div>
+            <p class="bio-description">{{ biography.academicFormation.description }}</p>
+            <ul class="bio-highlights">
+              <li *ngFor="let highlight of biography.academicFormation.highlights" class="bio-highlight">
+                <ion-icon name="checkmark-circle" class="highlight-icon"></ion-icon>
+                {{ highlight }}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Diferencial único -->
+        <div class="unique-value-section about-animate">
+          <div class="value-card">
+            <div class="value-header">
+              <ion-icon name="star" class="value-icon"></ion-icon>
+              <h4 class="value-title">{{ uniqueValue.title }}</h4>
+            </div>
+            <p class="value-description">{{ uniqueValue.description }}</p>
+            <div class="value-points">
+              <div *ngFor="let point of uniqueValue.points" class="value-point">
+                <ion-icon name="arrow-forward" class="point-icon"></ion-icon>
+                <span class="point-text">{{ point }}</span>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Intereses personales -->
-      <div class="interests-section about-animate">
-        <h4 class="interests-title">Intereses Personales</h4>
-        <div class="interests-grid">
-          <div 
-            *ngFor="let interest of interests" 
-            class="interest-card"
+        <!-- Filosofía profesional -->
+        <div class="philosophy-section about-animate">
+          <div class="philosophy-card">
+            <div class="quote-mark">"</div>
+            <blockquote class="philosophy-quote">
+              {{ philosophy.quote }}
+            </blockquote>
+            <p class="philosophy-context">{{ philosophy.context }}</p>
+          </div>
+        </div>
+
+        <!-- Enfoque con Inteligencia Artificial -->
+        <div class="ai-approach-section about-animate">
+          <div class="ai-approach-card">
+            <div class="ai-header">
+              <ion-icon name="hardware-chip" class="ai-icon"></ion-icon>
+              <h4 class="ai-title">Enfoque con Inteligencia Artificial</h4>
+            </div>
+            <div class="ai-content">
+              <p class="ai-description">
+                En la era de la IA, mi enfoque profesional combina
+                <strong>mis más de 10 años de experiencia práctica en TI</strong>
+                con herramientas inteligentes para optimizar tareas, mejorar procesos y aumentar la eficiencia en QA y desarrollo frontend.
+              </p>
+              <div class="ai-principles">
+                <div class="ai-principle">
+                  <ion-icon name="cog" class="principle-icon"></ion-icon>
+                  <span><strong>La IA es una herramienta poderosa</strong> para acelerar tareas repetitivas y análisis.</span>
+                </div>
+                <div class="ai-principle">
+                  <ion-icon name="school" class="principle-icon"></ion-icon>
+                  <span><strong>La experiencia práctica importa</strong> para usar IA de forma responsable y eficaz.</span>
+                </div>
+                <div class="ai-principle">
+                  <ion-icon name="build" class="principle-icon"></ion-icon>
+                  <span><strong>IA bien utilizada</strong> = procesos más rápidos, mejor QA y menos errores.</span>
+                </div>
+                <div class="ai-principle">
+                  <ion-icon name="lightbulb" class="principle-icon"></ion-icon>
+                  <span><strong>No es solo pedir cosas a la IA</strong> – hay que saber qué, por qué y cuándo aplicarla.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Intereses personales -->
+        <div class="interests-section about-animate">
+          <h4 class="interests-title">Intereses Personales</h4>
+          <div class="interests-grid">
+            <div
+              *ngFor="let interest of interests"
+              class="interest-card"
+            >
+              <div class="interest-icon-wrapper">
+                <ion-icon [name]="interest.icon" class="interest-icon"></ion-icon>
+              </div>
+              <h5 class="interest-name">{{ interest.name }}</h5>
+              <p class="interest-description">{{ interest.description }}</p>
+              <p class="interest-relevance">{{ interest.relevance }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Timeline simplificado -->
+        <div class="timeline-section about-animate">
+          <h4 class="timeline-title">Cronología Clave</h4>
+          <div class="timeline">
+            <div
+              *ngFor="let item of timeline; let i = index"
+              class="timeline-item"
+              [class]="'timeline-' + item.type"
+            >
+              <div class="timeline-marker"></div>
+              <div class="timeline-content">
+                <div class="timeline-year">{{ item.year }}</div>
+                <div class="timeline-event">{{ item.event }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Llamadas a la acción -->
+        <div class="about-actions about-animate">
+          <ion-button
+            expand="block"
+            fill="outline"
+            class="action-button"
+            routerLink="/experience"
           >
-            <div class="interest-icon-wrapper">
-              <ion-icon [name]="interest.icon" class="interest-icon"></ion-icon>
-            </div>
-            <h5 class="interest-name">{{ interest.name }}</h5>
-            <p class="interest-description">{{ interest.description }}</p>
-            <p class="interest-relevance">{{ interest.relevance }}</p>
-          </div>
-        </div>
-      </div>
+            <ion-icon name="briefcase" slot="start"></ion-icon>
+            Ver Experiencia Detallada
+          </ion-button>
 
-      <!-- Timeline simplificado -->
-      <div class="timeline-section about-animate">
-        <h4 class="timeline-title">Cronología Clave</h4>
-        <div class="timeline">
-          <div 
-            *ngFor="let item of timeline; let i = index" 
-            class="timeline-item"
-            [class]="'timeline-' + item.type"
+          <ion-button
+            expand="block"
+            class="action-button primary"
+            routerLink="/contact"
           >
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <div class="timeline-year">{{ item.year }}</div>
-              <div class="timeline-event">{{ item.event }}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+            <ion-icon name="mail" slot="start"></ion-icon>
+            Contactar
+          </ion-button>
 
-      <!-- Llamadas a la acción -->
-      <div class="about-actions about-animate">
-        <ion-button 
-          expand="block" 
-          fill="outline" 
-          class="action-button"
-          routerLink="/experience"
-        >
-          <ion-icon name="briefcase" slot="start"></ion-icon>
-          Ver Experiencia Detallada
-        </ion-button>
-        
-        <ion-button 
-          expand="block" 
-          class="action-button primary"
-          routerLink="/contact"
-        >
-          <ion-icon name="mail" slot="start"></ion-icon>
-          Contactar
-        </ion-button>
-        
-        <ion-button 
-          expand="block" 
-          fill="clear" 
-          class="action-button social"
-          (click)="openLinkedIn()"
-        >
-          <ion-icon name="logo-linkedin" slot="start"></ion-icon>
-          Ver Perfil Completo
-        </ion-button>
+          <ion-button
+            expand="block"
+            fill="clear"
+            class="action-button social"
+            (click)="openLinkedIn()"
+          >
+            <ion-icon name="logo-linkedin" slot="start"></ion-icon>
+            Ver Perfil Completo
+          </ion-button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- Footer independiente -->
-<app-footer></app-footer>
+  <!-- Footer independiente -->
+  <app-footer></app-footer>
 </ion-content>

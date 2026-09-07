@@ -1,10 +1,11 @@
 /**
  * ARCHIVO: src/app/components/contact-section/contact-section.component.ts
- * 
+ *
  * DESCRIPCIÓN:
  * Componente para la sección de contacto del portafolio.
- * ACTUALIZADO: Información de contacto alineada con el nuevo posicionamiento
- * como ingeniero informático buscando crecimiento profesional.
+ * ACTUALIZADO: Información de contacto alineada con el posicionamiento actual:
+ * QA Técnico & Soporte TI N2 · Desarrollo Frontend Jr, buscando oportunidades
+ * remotas en QA, soporte y desarrollo frontend.
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -12,12 +13,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
 import { DownloadService } from '../../services/download.service';
 import { AnimationService } from '../../services/animation.service';
-import { 
-  ContactMessage, 
-  SUBJECT_OPTIONS, 
+import {
+  ContactMessage,
+  SUBJECT_OPTIONS,
   CONTACT_METHODS,
   ContactMethod,
-  createEmptyContactMessage 
+  createEmptyContactMessage
 } from '../../models/contact-message.model';
 
 @Component({
@@ -29,11 +30,11 @@ export class ContactSectionComponent implements OnInit {
 
   // Formulario reactivo
   public contactForm!: FormGroup;
-  
-  // Datos del formulario
+
+  // Datos del formulario (selects, radios, etc.)
   public subjectOptions = SUBJECT_OPTIONS;
   public contactMethods = CONTACT_METHODS;
-  
+
   // Estados del componente
   public isSubmitting = false;
   public submitSuccess = false;
@@ -41,15 +42,21 @@ export class ContactSectionComponent implements OnInit {
   public errorMessage = '';
   public animationsLoaded = false;
 
-  // Información de contacto ACTUALIZADA según el prompt
+  /**
+   * Información de contacto mostrada en la sección.
+   * IMPORTANTE: Debe estar alineada con el hero, footer y el CV.
+   */
   public contactInfo = {
     name: 'Alejandro Villa Villavicencio',
-    title: 'Ingeniero Informático • Buscando Oportunidades de Crecimiento', // ACTUALIZADO
+    // Alineado con el título principal del portafolio
+    title: 'QA Técnico & Soporte TI N2 · Desarrollo Frontend Jr',
     email: 'alejandro.villa91@gmail.com',
     phone: '+56 920913551',
-    location: 'San Bernardo, Santiago, Chile',
+    // Unificamos ubicación con el resto del sitio
+    location: 'Macul, Santiago, Chile',
     linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/',
-    availability: 'Disponible para roles junior/intermedio en desarrollo y análisis', // ACTUALIZADO
+    // Enfoque realista según tu perfil actual
+    availability: 'Disponible para roles en QA, Soporte TI N2 y desarrollo frontend junior (idealmente remoto).',
     responseTime: 'Respuesta típica: 24-48 horas'
   };
 
@@ -75,11 +82,12 @@ export class ContactSectionComponent implements OnInit {
     private downloadService: DownloadService,
     private animationService: AnimationService
   ) {
+    // Inicializamos el formulario reactivo en el constructor
     this.initializeForm();
   }
 
   ngOnInit(): void {
-    // Activar animaciones después de un delay
+    // Activar animaciones después de un pequeño delay para efecto de entrada
     setTimeout(() => {
       this.animationsLoaded = true;
       this.initAnimations();
@@ -87,7 +95,7 @@ export class ContactSectionComponent implements OnInit {
   }
 
   /**
-   * Maneja el error de carga de avatar reemplazando con icono
+   * Maneja el error de carga de avatar reemplazando con un icono
    * @param event - Evento de error de imagen
    */
   onAvatarError(event: Event): void {
@@ -98,7 +106,7 @@ export class ContactSectionComponent implements OnInit {
       iconElement.name = 'person-circle';
       iconElement.className = 'avatar-icon-fallback';
       iconElement.style.cssText = 'font-size: 80px; color: var(--ion-color-medium);';
-      
+
       // Reemplazar img con ion-icon
       target.parentElement.replaceChild(iconElement, target);
     }
@@ -146,14 +154,14 @@ export class ContactSectionComponent implements OnInit {
 
       // Validar mensaje con el servicio
       const validationErrors = this.contactService.validateMessage(contactMessage);
-      
+
       if (validationErrors.length > 0) {
         this.errorMessage = validationErrors.join(', ');
         this.submitError = true;
         return;
       }
 
-      // Enviar mensaje a Firestore
+      // Enviar mensaje a Firestore (o destino configurado en el servicio)
       await this.contactService.sendContactMessage(contactMessage).toPromise();
 
       // Mostrar éxito y resetear formulario
@@ -204,22 +212,22 @@ export class ContactSectionComponent implements OnInit {
    */
   getFieldError(fieldName: string): string {
     const field = this.contactForm.get(fieldName);
-    
+
     if (!field || !field.errors) return '';
 
     if (field.errors['required']) {
       return `${this.getFieldLabel(fieldName)} es requerido`;
     }
-    
+
     if (field.errors['email']) {
       return 'El email no tiene un formato válido';
     }
-    
+
     if (field.errors['minlength']) {
       const min = field.errors['minlength'].requiredLength;
       return `${this.getFieldLabel(fieldName)} debe tener al menos ${min} caracteres`;
     }
-    
+
     if (field.errors['maxlength']) {
       const max = field.errors['maxlength'].requiredLength;
       return `${this.getFieldLabel(fieldName)} no puede exceder ${max} caracteres`;
@@ -252,7 +260,7 @@ export class ContactSectionComponent implements OnInit {
   onPreferredContactChange(): void {
     const preferredContact = this.contactForm.get('preferredContact')?.value;
     const phoneControl = this.contactForm.get('phone');
-    
+
     if (preferredContact === 'phone' || preferredContact === 'whatsapp') {
       // Hacer teléfono requerido si se prefiere contacto telefónico
       phoneControl?.setValidators([Validators.required, Validators.maxLength(20)]);
@@ -260,12 +268,12 @@ export class ContactSectionComponent implements OnInit {
       // Teléfono opcional para otros métodos
       phoneControl?.setValidators([Validators.maxLength(20)]);
     }
-    
+
     phoneControl?.updateValueAndValidity();
   }
 
   /**
-   * Descarga el CV desde el formulario de contacto
+   * Descarga el CV desde la sección de contacto
    */
   async downloadCV(): Promise<void> {
     try {
@@ -290,7 +298,7 @@ export class ContactSectionComponent implements OnInit {
   }
 
   /**
-   * Abre cliente de email
+   * Abre cliente de email con asunto predefinido
    */
   sendDirectEmail(): void {
     const subject = 'Contacto desde Portafolio - Alejandro Villa';
@@ -357,9 +365,9 @@ export class ContactSectionComponent implements OnInit {
    * Inicializa animaciones para elementos de la sección
    */
   private initAnimations(): void {
-    // Animar elementos principales
+    // Animar elementos principales (títulos, tarjetas, etc.)
     const animatedElements = document.querySelectorAll('.contact-animate');
-    
+
     animatedElements.forEach((element, index) => {
       this.animationService.observeElement(
         element,

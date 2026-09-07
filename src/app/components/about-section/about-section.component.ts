@@ -22,7 +22,7 @@ export class AboutSectionComponent implements OnInit {
     title: 'Ingeniero en Informática',
     university: 'DuocUC',
     graduationYear: 2025,
-    location: 'San Bernardo, Santiago, Chile',
+    location: 'Macul, Santiago, Chile',
     email: 'alejandro.villa91@gmail.com',
     phone: '+56 920913551',
     linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/'
@@ -31,8 +31,8 @@ export class AboutSectionComponent implements OnInit {
   // Biografía actualizada según el prompt
   public biography = {
     earlyStart: {
-      title: 'Los Inicios (2007-2008)',
-      description: 'Mi historia comenzó a los 15-16 años cuando me convertí en "el que arregla computadores" en mi círculo. Desde Windows XP, siempre fui la persona a la que llegaban cuando los equipos fallaban. No solo reparaba - investigaba, experimentaba y modificaba.',
+      title: 'Los Inicios (2007)',
+      description: 'Mi historia comenzó a los 15 años cuando me convertí en "el que arregla computadores" en mi círculo. Desde Windows XP, siempre fui la persona a la que llegaban cuando los equipos fallaban. No solo reparaba - investigaba, experimentaba y modificaba.',
       highlights: [
         'Editaba el registro de Windows',
         'Desarmaba todo lo que podía',
@@ -51,11 +51,11 @@ export class AboutSectionComponent implements OnInit {
     },
     formalExperience: {
       title: 'Experiencia Formal',
-      description: 'Mi experiencia formal incluye VTR (donde además capacitaba a nuevos trabajadores), ViasChile (análisis de datos y soporte especializado), y la Fundación Superación de la Pobreza (coordinación de modernización de sistemas críticos).',
+      description: 'Mi experiencia formal incluye VTR (donde además capacitaba a nuevos trabajadores), Valor Único (Vias Chile) (análisis de datos y soporte especializado), y la Fundación Superación de la Pobreza (coordinación de modernización de sistemas críticos).',
       highlights: [
         'VTR: Soporte técnico + Capacitador',
-        'ViasChile: Análisis de datos operacionales',
-        'Fundación: Coordinación técnica y modernización'
+        'Valor Único:(Vias Chile) MDA, soporte técnico avanzado + Análisis de datos operacionales',
+        'Fundación: Coordinación técnica y analista de sistemas + modernización'
       ]
     },
     academicFormation: {
@@ -122,8 +122,8 @@ export class AboutSectionComponent implements OnInit {
     { year: '2007', event: 'Inicio como "el que arregla computadores"', type: 'personal' },
     { year: '2018', event: 'VTR - Soporte técnico + Capacitador', type: 'professional' },
     { year: '2020', event: 'Inicio Ingeniería Informática DuocUC', type: 'education' },
-    { year: '2023', event: 'ViasChile - Especialista soporte técnico', type: 'professional' },
-    { year: '2024', event: 'Fundación - Coordinador técnico', type: 'professional' },
+    { year: '2023', event: 'Valor Único (Vias Chile) - Especialista soporte técnico', type: 'professional' },
+    { year: '2024', event: 'Fundación - Coordinador técnico, Analista en sistema, Modernización', type: 'professional' },
     { year: '2025', event: 'Titulación Ingeniero Informática', type: 'education' }
   ];
 

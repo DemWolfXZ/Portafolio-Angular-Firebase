@@ -1,11 +1,11 @@
 /**
  * ARCHIVO: src/app/services/seo.service.ts
- * 
+ *
  * DESCRIPCIÓN:
  * Servicio para optimización SEO del portafolio de Alejandro Villa.
  * Maneja meta tags, títulos, descripciones y structured data para
  * mejorar la visibilidad en motores de búsqueda y redes sociales.
- * Optimizado para búsquedas relacionadas con "Technical Business Analyst Chile".
+ * Optimizado para búsquedas relacionadas con "QA Técnico Chile" y "Soporte TI N2".
  */
 
 import { Injectable } from '@angular/core';
@@ -30,25 +30,30 @@ export class SeoService {
 
   // Configuración base del sitio
   private readonly SITE_CONFIG = {
-    siteName: 'Alejandro Villa - Technical Business Analyst',
+    siteName: 'Alejandro Villa - QA Técnico & Soporte TI N2',
     baseUrl: 'https://portafolio-alejandro-villa.web.app',
     defaultImage: 'assets/images/placeholder.svg',
     author: 'Alejandro Villa Villavicencio',
     locale: 'es_CL'
   };
 
-  // Keywords principales para SEO
+  // Keywords principales para SEO (orientado a QA + Soporte + Dev Jr)
   private readonly PRIMARY_KEYWORDS = [
-    'Technical Business Analyst',
-    'Coordinador Técnico',
-    'Analista de Sistemas',
-    'Ingeniero Informática Chile',
-    'Angular Developer',
-    'Firebase Specialist',
-    'Ionic Developer',
+    'QA Técnico',
+    'QA Manual',
+    'Quality Assurance',
+    'Soporte TI N2',
+    'Ingeniero Informático Chile',
+    'Soporte técnico e infraestructura',
+    'Testing funcional',
+    'Pruebas de software',
+    'Postman básico',
+    'Jira básico',
+    'Angular Junior',
+    'Firebase',
     'Alejandro Villa',
     'Santiago Chile',
-    'Soporte Técnico Especializado'
+    'Trabajo remoto TI'
   ];
 
   constructor(
@@ -87,7 +92,7 @@ export class SeoService {
     this.meta.updateTag({ name: 'twitter:description', content: config.description });
     this.meta.updateTag({ name: 'twitter:image', content: config.image || this.SITE_CONFIG.defaultImage });
 
-    // Meta tags adicionales para profesionales
+    // Meta tags adicionales
     this.meta.updateTag({ name: 'robots', content: 'index, follow' });
     this.meta.updateTag({ name: 'language', content: 'Spanish' });
     this.meta.updateTag({ name: 'geo.region', content: 'CL-RM' });
@@ -99,8 +104,9 @@ export class SeoService {
    */
   setHomeMeta(): void {
     this.setMetaTags({
-      title: 'Alejandro Villa - Technical Business Analyst & IT Specialist | 20+ años experiencia',
-      description: 'Ingeniero Informático especializado en coordinación técnica y análisis de sistemas. 20+ años resolviendo problemas técnicos complejos. Angular, Ionic, Firebase. Santiago, Chile.',
+      title: 'Alejandro Villa - QA Técnico & Soporte TI N2 | Ingeniero Informático',
+      description:
+        'QA Técnico & Soporte TI N2 con más de 5 años de experiencia en soporte e infraestructura y formación en desarrollo web (Angular, Firebase, Python). Enfocado en testing funcional, documentación clara y mejora continua.',
       keywords: this.getDefaultKeywords(),
       type: 'profile'
     });
@@ -111,9 +117,11 @@ export class SeoService {
    */
   setAboutMeta(): void {
     this.setMetaTags({
-      title: 'Sobre Mí - Alejandro Villa | Ingeniero Informático DuocUC 2025',
-      description: 'Conoce la historia de Alejandro Villa: desde los 15 años reparando computadores hasta Ingeniero Informático. 20+ años de experiencia práctica + formación académica.',
-      keywords: 'Historia profesional, Experiencia técnica, Ingeniero Informática DuocUC, Carrera tecnológica'
+      title: 'Sobre Mí - Alejandro Villa | QA Técnico & Soporte TI N2',
+      description:
+        'Ingeniero Informático que comenzó en soporte técnico y hoy se orienta a QA Manual y soporte TI N2. Experiencia real con usuarios, documentación, análisis de incidencias y formación constante en testing y desarrollo.',
+      keywords:
+        'Sobre mí QA, Perfil QA técnico, Ingeniero Informático soporte TI, transición a QA manual'
     });
   }
 
@@ -122,9 +130,11 @@ export class SeoService {
    */
   setExperienceMeta(): void {
     this.setMetaTags({
-      title: 'Experiencia Laboral - Alejandro Villa | Coordinador Técnico & Analista Sistemas',
-      description: 'Experiencia profesional: Fundación Superación Pobreza, ViasChile, VTR. Coordinación técnica, análisis de sistemas, modernización legacy. 20+ años experiencia.',
-      keywords: 'Experiencia laboral, Coordinador técnico, Analista sistemas, Modernización sistemas, Soporte técnico'
+      title: 'Experiencia Laboral - Alejandro Villa | QA Técnico & Soporte TI N2',
+      description:
+        'Experiencia en mesa de ayuda N1/N2, soporte técnico nacional, capacitación de usuarios, documentación en herramientas como ServiceNow y trabajo con metodologías ágiles. Enfoque actual: roles de QA técnico y soporte TI.',
+      keywords:
+        'Experiencia QA técnico, Soporte TI N2, ServiceNow, documentación técnica, capacitación usuarios'
     });
   }
 
@@ -133,9 +143,11 @@ export class SeoService {
    */
   setProjectsMeta(): void {
     this.setMetaTags({
-      title: 'Proyectos - Alejandro Villa | Angular, Ionic, Firebase | Sistemas en Producción',
-      description: 'Proyectos destacados: Sistema SRM Portal Superación Pobreza, Sistema Unidad Territorial, AST Digital. Angular 18, Ionic 8, Firebase 11. Sistemas funcionando en producción.',
-      keywords: 'Proyectos Angular, Ionic Firebase, Sistemas producción, Portfolio desarrollador, Modernización sistemas'
+      title: 'Proyectos - Alejandro Villa | Portafolio QA & Desarrollo Junior',
+      description:
+        'Proyectos personales y académicos con Angular, Ionic y Firebase, orientados a aprender buenas prácticas, flujos de autenticación y manejo de datos. Uso del portafolio como apoyo para roles QA y desarrollo junior.',
+      keywords:
+        'Proyectos Angular junior, Portafolio QA, Firebase, aplicaciones web de práctica'
     });
   }
 
@@ -144,9 +156,11 @@ export class SeoService {
    */
   setSkillsMeta(): void {
     this.setMetaTags({
-      title: 'Competencias Técnicas - Alejandro Villa | Angular, Firebase, Análisis Sistemas',
-      description: 'Competencias: 20+ años infraestructura/soporte, Angular/Ionic/Firebase, análisis sistemas, coordinación técnica. Experto en resolución problemas complejos.',
-      keywords: 'Competencias técnicas, Skills Angular, Firebase developer, Análisis sistemas, Soporte técnico experto'
+      title: 'Competencias Técnicas - Alejandro Villa | QA Manual, Soporte TI y Dev Junior',
+      description:
+        'Competencias en QA manual básico, pruebas funcionales, documentación de incidencias, soporte TI N1/N2, además de desarrollo web junior con Angular, Ionic, Firebase y bases de datos SQL.',
+      keywords:
+        'Skills QA manual, testing funcional, Soporte TI N2, Angular junior, Firebase, SQL'
     });
   }
 
@@ -155,9 +169,11 @@ export class SeoService {
    */
   setContactMeta(): void {
     this.setMetaTags({
-      title: 'Contacto - Alejandro Villa | Technical Business Analyst Santiago Chile',
-      description: 'Contacta con Alejandro Villa para oportunidades laborales, proyectos y consultorías técnicas. Technical Business Analyst en Santiago, Chile. alejandro.villa91@gmail.com',
-      keywords: 'Contacto Alejandro Villa, Technical Business Analyst Santiago, Consultoría técnica, Coordinador técnico disponible'
+      title: 'Contacto - Alejandro Villa | QA Técnico & Soporte TI N2 (Remoto/Chile)',
+      description:
+        'Contacta a Alejandro Villa para oportunidades de QA Manual, Soporte TI N1/N2 o Desarrollo Junior. Disponible para trabajo remoto o híbrido desde Santiago, Chile.',
+      keywords:
+        'Contacto QA técnico, Soporte TI remoto, QA junior Chile, Alejandro Villa contacto'
     });
   }
 
@@ -166,45 +182,48 @@ export class SeoService {
    */
   addStructuredData(): void {
     const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Alejandro Villa Villavicencio",
-      "jobTitle": "Technical Business Analyst & IT Specialist",
-      "description": "Ingeniero Informático con 20+ años de experiencia en coordinación técnica y análisis de sistemas",
-      "url": this.SITE_CONFIG.baseUrl,
-      "image": this.SITE_CONFIG.defaultImage,
-      "email": "alejandro.villa91@gmail.com",
-      "telephone": "+56920913551",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "San Bernardo",
-        "addressRegion": "Región Metropolitana",
-        "addressCountry": "Chile"
+      '@context': 'https://schema.org',
+      '@type': 'Person',
+      name: 'Alejandro Villa Villavicencio',
+      jobTitle: 'QA Técnico & Soporte TI N2',
+      description:
+        'Ingeniero Informático con experiencia en soporte TI N1/N2 y orientación a QA Manual y desarrollo web junior.',
+      url: this.SITE_CONFIG.baseUrl,
+      image: this.SITE_CONFIG.defaultImage,
+      email: 'alejandro.villa91@gmail.com',
+      telephone: '+56920913551',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'San Bernardo',
+        addressRegion: 'Región Metropolitana',
+        addressCountry: 'Chile'
       },
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "DuocUC",
-        "url": "https://www.duoc.cl"
+      alumniOf: {
+        '@type': 'EducationalOrganization',
+        name: 'DuocUC',
+        url: 'https://www.duoc.cl'
       },
-      "hasOccupation": {
-        "@type": "Occupation",
-        "name": "Technical Business Analyst",
-        "occupationLocation": {
-          "@type": "City",
-          "name": "Santiago, Chile"
+      hasOccupation: {
+        '@type': 'Occupation',
+        name: 'QA Manual & Soporte TI N2',
+        occupationLocation: {
+          '@type': 'City',
+          name: 'Santiago, Chile'
         }
       },
-      "knowsAbout": [
-        "Angular",
-        "Ionic",
-        "Firebase",
-        "Technical Analysis",
-        "System Coordination",
-        "Infrastructure Support",
-        "Business Process Analysis"
+      knowsAbout: [
+        'QA Manual',
+        'Testing funcional',
+        'Soporte TI N1/N2',
+        'Mesa de ayuda',
+        'Angular básico',
+        'Firebase básico',
+        'Postman básico',
+        'Jira básico',
+        'Documentación técnica'
       ],
-      "sameAs": [
-        "https://www.linkedin.com/in/alejandro-villa-villavicencio/"
+      sameAs: [
+        'https://www.linkedin.com/in/alejandro-villa-villavicencio/'
       ]
     };
 
@@ -222,11 +241,14 @@ export class SeoService {
     this.meta.addTag({ name: 'msapplication-TileColor', content: '#1a73e8' });
     this.meta.addTag({ name: 'apple-mobile-web-app-capable', content: 'yes' });
     this.meta.addTag({ name: 'apple-mobile-web-app-status-bar-style', content: 'default' });
-    
+
     // Meta tags para motores de búsqueda
-    this.meta.addTag({ name: 'robots', content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1' });
+    this.meta.addTag({
+      name: 'robots',
+      content: 'index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1'
+    });
     this.meta.addTag({ name: 'googlebot', content: 'index, follow' });
-    
+
     // Meta tags para performance
     this.meta.addTag({ 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' });
   }

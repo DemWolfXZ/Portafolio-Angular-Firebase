@@ -1,9 +1,10 @@
 /**
  * ARCHIVO: src/app/models/skill.model.ts
- * 
+ *
  * DESCRIPCIÓN:
  * Modelo de datos para las competencias técnicas de Alejandro Villa.
- * ACTUALIZADO FINAL: Removido "APRENDIENDO", ajustes en años y experiencia
+ * Alineado con su perfil real: Infraestructura / Soporte, QA Técnico y Desarrollo Frontend Jr.
+ * Sin inflar años ni agregar tecnologías que no usa de verdad.
  */
 
 /**
@@ -12,55 +13,56 @@
 export interface Skill {
   /** ID único de la competencia */
   id: string;
-  
+
   /** Nombre de la tecnología/habilidad */
   name: string;
-  
+
   /** Categoría de la competencia */
   category: SkillCategory;
-  
-  /** Nivel basado en años de experiencia */
+
+  /** Nivel basado en experiencia práctica */
   level: SkillLevel;
-  
+
   /** Años de experiencia práctica */
   yearsOfExperience: number;
-  
-  /** Descripción de la experiencia */
+
+  /** Descripción de la experiencia en esta competencia */
   description: string;
-  
-  /** Proyectos donde se aplicó */
+
+  /** Proyectos donde se aplicó esta competencia */
   projectsUsed: string[];
-  
-  /** Icono para la UI */
+
+  /** Icono para la UI (Ionicon) */
   icon?: string;
-  
-  /** Color para visualización */
+
+  /** Color para visualización en la UI */
   color?: string;
-  
-  /** Si es una competencia destacada */
+
+  /** Si es una competencia destacada en el perfil */
   featured: boolean;
-  
-  /** Orden de visualización en su categoría */
+
+  /** Orden de visualización dentro de su categoría */
   displayOrder: number;
 }
 
 /**
  * Categorías de competencias técnicas
  */
-export type SkillCategory = 
-  | 'infrastructure' 
-  | 'analysis' 
-  | 'development' 
-  | 'management' 
+export type SkillCategory =
+  | 'infrastructure'
+  | 'analysis'
+  | 'development'
+  | 'management'
   | 'tools';
 
 /**
- * Niveles de competencia - ACTUALIZADOS sin "learning"
+ * Niveles de competencia (sin "learning" para no inflar)
  */
 export type SkillLevel = 'advanced' | 'intermediate';
 
 /**
- * Competencias de Alejandro Villa ACTUALIZADAS FINALES
+ * Competencias de Alejandro Villa
+ * Alineadas con experiencia real (TI, QA, Frontend Jr).
  */
 export const ALEJANDRO_SKILLS: Skill[] = [
   // ========================================
@@ -72,7 +74,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'infrastructure',
     level: 'advanced',
     yearsOfExperience: 10,
-    description: 'Sólida experiencia en diagnóstico y reparación de PC / Notebook desde nivel básico hasta sistemas más complejos',
+    description: 'Experiencia sólida en diagnóstico, reparación y mantención de PC y notebooks, desde fallas básicas hasta problemas más complejos.',
     projectsUsed: [],
     icon: 'hardware-chip',
     color: '#FF6B35',
@@ -85,7 +87,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'infrastructure',
     level: 'advanced',
     yearsOfExperience: 3,
-    description: 'Experiencia práctica en configuración de redes empresariales y domiciliarias, TCP/IP, routers',
+    description: 'Configuración práctica de redes domiciliarias y pequeñas redes empresariales: TCP/IP, routers, Wi-Fi, segmentación básica.',
     projectsUsed: [],
     icon: 'wifi',
     color: '#4ECDC4',
@@ -98,7 +100,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'infrastructure',
     level: 'advanced',
     yearsOfExperience: 10,
-    description: 'Conocimiento avanzado en Windows (XP-11), Ubuntu, formateo, clonación, migración de sistemas',
+    description: 'Experiencia avanzada en Windows (XP a 11) y Ubuntu: instalación, formateo, clonación, migración de sistemas y resolución de incidencias.',
     projectsUsed: [],
     icon: 'desktop-outline',
     color: '#45B7D1',
@@ -111,7 +113,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'infrastructure',
     level: 'advanced',
     yearsOfExperience: 3,
-    description: 'Competencia avanzada en gestión de tickets, SLA, diagnóstico remoto, resolución nivel 1-2',
+    description: 'Gestión de tickets, atención a usuarios, diagnóstico remoto y resolución de incidentes N1–N2, cumpliendo SLA y estándares de servicio.',
     projectsUsed: [],
     icon: 'help-circle-outline',
     color: '#96CEB4',
@@ -120,7 +122,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
   },
 
   // ========================================
-  // ANÁLISIS DE SISTEMAS Y PROCESOS (INTERMEDIATE)
+  // ANÁLISIS DE SISTEMAS / QA (INTERMEDIATE)
   // ========================================
   {
     id: 'business-analysis',
@@ -128,7 +130,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'analysis',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Traducción de requerimientos de negocio a soluciones técnicas, coordinación con stakeholders',
+    description: 'Traducción de requerimientos de negocio a necesidades técnicas, entendiendo impacto en procesos y usuarios.',
     projectsUsed: [],
     icon: 'business-outline',
     color: '#6C5CE7',
@@ -141,7 +143,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'analysis',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Coordinación con stakeholders, traducción de necesidades de negocio',
+    description: 'Reuniones con usuarios, documentación de requerimientos y aclaración de dudas funcionales en proyectos de sistemas.',
     projectsUsed: [],
     icon: 'document-text-outline',
     color: '#FFEAA7',
@@ -154,7 +156,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'analysis',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Análisis de flujos de trabajo, identificación de mejoras',
+    description: 'Análisis de flujos de trabajo, diagramas de procesos y detección de puntos de mejora en operaciones.',
     projectsUsed: [],
     icon: 'git-network-outline',
     color: '#DDA0DD',
@@ -167,12 +169,25 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'analysis',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Experiencia en procesamiento de datos operacionales',
+    description: 'Procesamiento básico de datos operacionales para apoyar decisiones, reportes y revisión de indicadores.',
     projectsUsed: [],
     icon: 'analytics-outline',
     color: '#74B9FF',
     featured: true,
     displayOrder: 4
+  },
+  {
+    id: 'qa-functional-testing',
+    name: 'Pruebas de Software (QA funcional y regresión)',
+    category: 'analysis',
+    level: 'intermediate',
+    yearsOfExperience: 2,
+    description: 'Diseño y ejecución de pruebas funcionales y de regresión sobre aplicaciones internas, validando flujos completos, datos y reglas de negocio.',
+    projectsUsed: [],
+    icon: 'bug-outline',
+    color: '#FF7675',
+    featured: true,
+    displayOrder: 5
   },
 
   // ========================================
@@ -184,7 +199,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Desarrollo con Angular 18, aplicando buenas prácticas aprendidas',
+    description: 'Desarrollo de aplicaciones SPA con Angular 18: componentes, servicios, routing y consumo de APIs REST.',
     projectsUsed: [],
     icon: 'logo-angular',
     color: '#DD0031',
@@ -197,7 +212,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Desarrollo móvil híbrido con Ionic 8, aplicando experiencia práctica en proyectos académicos',
+    description: 'Desarrollo de apps móviles híbridas con Ionic 8, usando componentes UI modernos y navegación en múltiples pantallas.',
     projectsUsed: [],
     icon: 'phone-portrait-outline',
     color: '#3880FF',
@@ -210,7 +225,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Implementación de backend con Firebase 11, Firestore, Authentication',
+    description: 'Uso de Firebase (Auth, Firestore, Hosting) como backend para aplicaciones Angular/Ionic y proyectos personales.',
     projectsUsed: [],
     icon: 'flame-outline',
     color: '#FFCA28',
@@ -223,7 +238,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'TypeScript 5.4 con tipado estricto, aplicando conocimientos para desarrollo profesional',
+    description: 'Uso de TypeScript 5.x con tipado fuerte, interfaces y clases en proyectos Angular e Ionic.',
     projectsUsed: [],
     icon: 'code-slash-outline',
     color: '#3178C6',
@@ -236,7 +251,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Backend con Node.js para proyectos Angular/Ionic, integración con Firebase',
+    description: 'Uso de Node.js para scripts, herramientas de desarrollo y soporte en proyectos frontend.',
     projectsUsed: [],
     icon: 'logo-nodejs',
     color: '#68A063',
@@ -249,7 +264,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Machine Learning universitario, Django básico, scripts de automatización. Realizando certificación para complementar conocimientos',
+    description: 'Fundamentos de Python aplicados a scripts de automatización y ejercicios de análisis de datos en contexto académico y de capacitación.',
     projectsUsed: [],
     icon: 'logo-python',
     color: '#3776AB',
@@ -262,7 +277,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 1,
-    description: 'Desarrollo web universitario con PHP, creación de aplicaciones web básicas y conexión a bases de datos',
+    description: 'Desarrollo web básico con PHP en contexto universitario, conexión a bases de datos y formularios.',
     projectsUsed: [],
     icon: 'logo-php',
     color: '#777BB4',
@@ -275,7 +290,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Maquetación moderna con HTML5 semántico y CSS3 avanzado, Flexbox, Grid, animaciones',
+    description: 'Maquetación con HTML5 semántico y CSS3, uso de Flexbox, Grid y estilos responsivos.',
     projectsUsed: [],
     icon: 'logo-html5',
     color: '#E34F26',
@@ -288,7 +303,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 1,
-    description: 'JavaScript moderno ES6+, DOM manipulation, async/await',
+    description: 'JavaScript moderno (ES6+), manipulación del DOM y uso de async/await para llamadas asíncronas.',
     projectsUsed: [],
     icon: 'logo-javascript',
     color: '#F7DF1E',
@@ -297,7 +312,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
   },
 
   // ========================================
-  // BASES DE DATOS
+  // BASES DE DATOS (INTERMEDIATE)
   // ========================================
   {
     id: 'sql',
@@ -305,7 +320,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Modelamiento de bases de datos hasta 3era forma normal, consultas complejas',
+    description: 'Modelado básico de datos, consultas SQL, joins y normalización hasta tercera forma normal.',
     projectsUsed: [],
     icon: 'server-outline',
     color: '#336791',
@@ -318,7 +333,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'development',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Administración de MySQL, creación de esquemas, triggers, procedimientos almacenados básicos',
+    description: 'Creación de esquemas, tablas y consultas en MySQL para proyectos académicos y personales.',
     projectsUsed: [],
     icon: 'logo-mysql',
     color: '#4479A1',
@@ -335,7 +350,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'management',
     level: 'intermediate',
     yearsOfExperience: 3,
-    description: 'Coordinación entre equipos técnicos y de negocio',
+    description: 'Coordinación entre equipos técnicos y usuarios, seguimiento de tareas y comunicación de estado.',
     projectsUsed: [],
     icon: 'people-outline',
     color: '#6C5CE7',
@@ -348,7 +363,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'management',
     level: 'intermediate',
     yearsOfExperience: 5,
-    description: 'Experiencia práctica en entrenamiento de personal técnico',
+    description: 'Capacitación a nuevos integrantes de equipo, documentación de procesos y apoyo en la curva de aprendizaje.',
     projectsUsed: [],
     icon: 'school-outline',
     color: '#00CEC9',
@@ -361,7 +376,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'management',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Scrum básico, seguimiento de KPIs aplicados académicamente',
+    description: 'Uso de Scrum a nivel básico: dailies, seguimiento de tareas y participación en ciclos iterativos.',
     projectsUsed: [],
     icon: 'refresh-outline',
     color: '#FD79A8',
@@ -370,7 +385,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
   },
 
   // ========================================
-  // HERRAMIENTAS (VARIADO)
+  // HERRAMIENTas (TOOLS)
   // ========================================
   {
     id: 'git',
@@ -378,7 +393,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'tools',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Control de versiones con GitHub, GitLab, aplicando buenas prácticas',
+    description: 'Uso de Git para control de versiones en proyectos personales y académicos (GitHub, GitLab).',
     projectsUsed: [],
     icon: 'git-branch-outline',
     color: '#F1502F',
@@ -386,17 +401,43 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     displayOrder: 1
   },
   {
-    id: 'ai-tools',
-    name: 'Herramientas IA',
+    id: 'postman',
+    name: 'Postman',
     category: 'tools',
     level: 'intermediate',
     yearsOfExperience: 2,
-    description: 'Uso eficiente de Claude, ChatGPT, Copilot para acelerar desarrollo manteniendo calidad',
+    description: 'Pruebas de APIs REST, creación de colecciones, validación de respuestas y soporte a QA técnico.',
+    projectsUsed: [],
+    icon: 'cloud-outline',
+    color: '#FF9F43',
+    featured: true,
+    displayOrder: 2
+  },
+  {
+    id: 'jira',
+    name: 'Jira',
+    category: 'tools',
+    level: 'intermediate',
+    yearsOfExperience: 2,
+    description: 'Uso de Jira para gestión de incidencias, seguimiento de bugs y coordinación con equipos de desarrollo.',
+    projectsUsed: [],
+    icon: 'checkbox-outline',
+    color: '#0984E3',
+    featured: true,
+    displayOrder: 3
+  },
+  {
+    id: 'ai-tools',
+    name: 'Herramientas de IA',
+    category: 'tools',
+    level: 'intermediate',
+    yearsOfExperience: 2,
+    description: 'Uso de herramientas como ChatGPT, Copilot y similares para apoyar análisis, documentación y desarrollo.',
     projectsUsed: [],
     icon: 'bulb-outline',
     color: '#A29BFE',
     featured: true,
-    displayOrder: 2
+    displayOrder: 4
   },
   {
     id: 'office-365',
@@ -404,12 +445,12 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'tools',
     level: 'advanced',
     yearsOfExperience: 10,
-    description: 'Dominio avanzado de Excel, Word, PowerPoint, Teams para documentación profesional',
+    description: 'Uso avanzado de Excel, Word, PowerPoint y Teams para documentación, reportes y colaboración.',
     projectsUsed: [],
     icon: 'document-outline',
     color: '#D83B01',
     featured: false,
-    displayOrder: 3
+    displayOrder: 5
   },
   {
     id: 'photoshop',
@@ -417,12 +458,12 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     category: 'tools',
     level: 'intermediate',
     yearsOfExperience: 5,
-    description: 'Edición de imágenes, diseño básico de interfaces, optimización de assets para web',
+    description: 'Edición básica de imágenes, optimización de gráficos para web y apoyo en diseño visual simple.',
     projectsUsed: [],
     icon: 'image-outline',
     color: '#31A8FF',
     featured: false,
-    displayOrder: 4
+    displayOrder: 6
   }
 ];
 
@@ -430,54 +471,71 @@ export const ALEJANDRO_SKILLS: Skill[] = [
  * Helper functions para organizar y filtrar skills
  */
 
+/** Retorna las skills de una categoría, ordenadas por displayOrder */
 export function getSkillsByCategory(category: SkillCategory): Skill[] {
   return ALEJANDRO_SKILLS
     .filter(skill => skill.category === category)
     .sort((a, b) => a.displayOrder - b.displayOrder);
 }
 
+/** Retorna las skills marcadas como destacadas, ordenadas por años de experiencia */
 export function getFeaturedSkills(): Skill[] {
   return ALEJANDRO_SKILLS
     .filter(skill => skill.featured)
     .sort((a, b) => b.yearsOfExperience - a.yearsOfExperience);
 }
 
+/** Retorna las skills según nivel (advanced / intermediate) */
 export function getSkillsByLevel(level: SkillLevel): Skill[] {
   return ALEJANDRO_SKILLS.filter(skill => skill.level === level);
 }
 
+/** Retorna el máximo de años de experiencia dentro de una categoría */
 export function getTotalYearsInCategory(category: SkillCategory): number {
   const categorySkills = getSkillsByCategory(category);
   return Math.max(...categorySkills.map(skill => skill.yearsOfExperience));
 }
 
 /**
- * Helper para obtener skills más destacadas para el HOME
+ * Helper para obtener skills más importantes para el HOME
  */
 export function getHomeDisplaySkills(): Skill[] {
-  // Retorna las skills más importantes para mostrar en home
+  // Retorna las skills más relevantes para mostrar en el home
   return ALEJANDRO_SKILLS
-    .filter(skill => skill.featured && ['angular', 'firebase', 'python', 'sql', 'nodejs', 'hardware-repair', 'network-config', 'business-analysis'].includes(skill.id))
+    .filter(skill =>
+      skill.featured &&
+      [
+        'angular',
+        'firebase',
+        'python',
+        'sql',
+        'nodejs',
+        'hardware-repair',
+        'network-config',
+        'business-analysis',
+        'qa-functional-testing'
+      ].includes(skill.id)
+    )
     .sort((a, b) => b.yearsOfExperience - a.yearsOfExperience)
     .slice(0, 8); // Máximo 8 para home
 }
 
 /**
- * Configuración de categorías para UI - ACTUALIZADA
+ * Configuración de categorías para la UI
  */
 export const SKILL_CATEGORIES = [
   {
     id: 'infrastructure' as SkillCategory,
     name: 'Infraestructura y Soporte',
-    description: 'AVANZADO - 5+ años de experiencia práctica',
+    description: 'AVANZADO - más de 5 años de experiencia práctica.',
     icon: 'hardware-chip',
     color: '#FF6B35',
     featured: true
   },
   {
     id: 'analysis' as SkillCategory,
-    name: 'Análisis de Sistemas',
-    description: 'INTERMEDIO - Buscando crecimiento profesional',
+    name: 'Análisis de Sistemas y QA',
+    description: 'INTERMEDIO - análisis funcional, procesos y pruebas de software.',
     icon: 'analytics-outline',
     color: '#74B9FF',
     featured: true
@@ -485,7 +543,7 @@ export const SKILL_CATEGORIES = [
   {
     id: 'development' as SkillCategory,
     name: 'Desarrollo',
-    description: 'INTERMEDIO - Aplicando conocimientos académicos',
+    description: 'INTERMEDIO - desarrollo web y móvil con enfoque frontend.',
     icon: 'code-slash-outline',
     color: '#00B894',
     featured: true
@@ -493,7 +551,7 @@ export const SKILL_CATEGORIES = [
   {
     id: 'management' as SkillCategory,
     name: 'Gestión de Proyectos',
-    description: 'INTERMEDIO - Coordinación técnica',
+    description: 'INTERMEDIO - coordinación técnica y trabajo en equipo.',
     icon: 'people-outline',
     color: '#6C5CE7',
     featured: true
@@ -501,7 +559,7 @@ export const SKILL_CATEGORIES = [
   {
     id: 'tools' as SkillCategory,
     name: 'Herramientas',
-    description: 'VARIADO - Adaptabilidad tecnológica',
+    description: 'VARIADO - herramientas de soporte, QA y productividad.',
     icon: 'construct-outline',
     color: '#A29BFE',
     featured: false

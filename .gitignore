@@ -68,3 +68,55 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# ============================================================================
+# SEGURIDAD: variables de entorno y credenciales
+# Nunca deben subirse a un repositorio, ni siquiera uno privado, porque
+# el historial de Git conserva todo aunque borres el archivo después.
+# ============================================================================
+
+# Archivos .env genéricos (usados por dotenv, Vite, scripts de build, etc.)
+# El .example SÍ se sube: sirve de plantilla para que cualquiera sepa qué
+# variables debe definir, pero sin los valores reales.
+.env
+.env.*
+!.env.example
+
+# Credenciales de administrador de Firebase (Admin SDK / Cloud Functions).
+# Este JSON da acceso TOTAL al proyecto (lectura/escritura sin reglas de
+# seguridad de por medio) — es lo más crítico de todo este archivo.
+firebase-adminsdk*.json
+serviceAccountKey.json
+*-firebase-adminsdk-*.json
+
+# Configuración local de la CLI de Firebase (puede guardar tokens de sesión).
+.firebase/
+.firebaserc.local
+firebase-debug.log
+firestore-debug.log
+ui-debug.log
+
+# Entornos de Angular/Ionic con datos sensibles.
+# IMPORTANTE (ver nota más abajo): el firebaseConfig del SDK web
+# (apiKey, authDomain, projectId, etc.) NO es secreto por diseño — viaja
+# igual dentro del bundle JS que descarga el navegador. Ignora estos
+# archivos solo si además guardas ahí OTRAS claves que sí sean sensibles
+# (API keys de terceros sin restricción de dominio, tokens propios, etc.).
+# Si decides ignorarlos, deja siempre un *.example con valores ficticios.
+src/environments/environment.ts
+src/environments/environment.*.ts
+!src/environments/environment.example.ts
+
+# Configuración nativa de apps móviles (Android/iOS) generada por Firebase.
+# Igual que el firebaseConfig web, no son secretos "fuertes", pero es buena
+# práctica no versionarlos porque cambian por entorno (dev/prod) y por
+# desarrollador.
+google-services.json
+GoogleService-Info.plist
+
+# Certificados y llaves privadas locales (firma de builds, SSH, etc.)
+*.pem
+*.key
+*.p12
+*.jks
+*.keystore

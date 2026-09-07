@@ -95,24 +95,23 @@
 }
 
 // ========================================
-// CONTENIDO PRINCIPAL - CENTRADO
+// CONTENIDO PRINCIPAL - GRID COMPLETAMENTE RESPONSIVE
 // ========================================
 .contact-content {
-  // Antes era grid 2 columnas. Ahora:
-  // - Usamos flex en columna
-  // - Centramos todo con max-width + margin auto
-  // Esto deja la tarjeta de contacto bien centrada en escritorio y móvil.
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
   gap: var(--spacing-xl);
-  max-width: 720px;
-  margin: 0 auto var(--spacing-xl);
-  align-items: stretch;
+  margin-bottom: var(--spacing-xl);
+
+  // CAMBIO CRUCIAL: En móvil cambiar a 1 columna
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
 
   @media (max-width: 768px) {
     gap: var(--spacing-md);
     margin-bottom: var(--spacing-lg);
-    max-width: 100%;
   }
 
   @media (max-width: 480px) {
@@ -125,12 +124,12 @@
 // INFORMACIÓN DE CONTACTO - RESPONSIVE
 // ========================================
 .contact-info {
-  // Antes tenía sticky en desktop. Lo dejo comentado por si lo quieres luego.
-  // @media (min-width: 969px) {
-  //   position: sticky;
-  //   top: 100px;
-  //   height: fit-content;
-  // }
+  // Quitar sticky en móvil
+  @media (min-width: 969px) {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+  }
 }
 
 .info-card {
@@ -469,7 +468,6 @@
 
 // ========================================
 // FORMULARIO DE CONTACTO - COMPLETAMENTE RESPONSIVE
-// (aunque ahora esté oculto, lo dejamos listo)
 // ========================================
 
 .form-card {
@@ -586,7 +584,7 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-md);
 
-  // En móvil una sola columna
+  // CRUCIAL: Cambiar a 1 columna en móvil
   @media (max-width: 600px) {
     grid-template-columns: 1fr;
     gap: var(--spacing-sm);

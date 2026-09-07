@@ -3,14 +3,14 @@
   <!-- Sección de Competencias Técnicas -->
   <div class="skills-section" [class.loaded]="animationsLoaded">
     <div class="skills-container">
-      
+
       <!-- Header de la sección -->
       <div class="skills-header skills-animate">
         <h2 class="section-title">Competencias Técnicas</h2>
         <p class="section-subtitle">
           Años de experiencia real, no solo conocimiento teórico
         </p>
-        
+
         <!-- Estadísticas rápidas - CORRECCIÓN: Usando método validado -->
         <div class="skills-stats">
           <div class="stat-item">
@@ -35,7 +35,7 @@
       <!-- Filtros de vista -->
       <div class="skills-view-controls skills-animate">
         <div class="view-modes">
-          <button 
+          <button
             class="view-mode-button"
             [class.active]="viewMode === 'category'"
             (click)="setViewMode('category')"
@@ -43,7 +43,7 @@
             <ion-icon name="apps" class="view-icon"></ion-icon>
             <span>Por Categoría</span>
           </button>
-          <button 
+          <button
             class="view-mode-button"
             [class.active]="viewMode === 'featured'"
             (click)="setViewMode('featured')"
@@ -51,7 +51,7 @@
             <ion-icon name="star" class="view-icon"></ion-icon>
             <span>Destacadas</span>
           </button>
-          <button 
+          <button
             class="view-mode-button"
             [class.active]="viewMode === 'level'"
             (click)="setViewMode('level')"
@@ -66,8 +66,8 @@
       <div *ngIf="viewMode === 'category'" class="skills-by-category skills-animate">
         <!-- CORRECCIÓN: Usar ng-container para separar *ngFor y *ngIf -->
         <ng-container *ngFor="let category of skillCategories">
-          <div 
-            *ngIf="category.featured" 
+          <div
+            *ngIf="category.featured"
             class="category-section"
           >
             <div class="category-header">
@@ -88,8 +88,8 @@
 
             <!-- CORRECCIÓN: Validar que existen skills antes de mostrar -->
             <div class="category-skills" *ngIf="getSkillsByCategory(category.id).length > 0">
-              <div 
-                *ngFor="let skill of getSkillsByCategory(category.id)" 
+              <div
+                *ngFor="let skill of getSkillsByCategory(category.id)"
                 class="skill-card"
                 [class.featured]="skill.featured"
                 (click)="openSkillDetail(skill)"
@@ -110,7 +110,7 @@
                     <span class="progress-percentage">{{ getSkillPercentage(skill) }}%</span>
                   </div>
                   <div class="progress-bar">
-                    <div 
+                    <div
                       class="skill-progress-bar"
                       [attr.data-percentage]="getSkillPercentage(skill)"
                       [style.background-color]="getCategoryColor(skill.category)"
@@ -124,14 +124,14 @@
                 <div class="skill-projects" *ngIf="skill.projectsUsed && skill.projectsUsed.length > 0">
                   <span class="projects-label">Usado en:</span>
                   <div class="projects-tags">
-                    <span 
-                      *ngFor="let project of skill.projectsUsed.slice(0, 2)" 
+                    <span
+                      *ngFor="let project of skill.projectsUsed.slice(0, 2)"
                       class="project-tag"
                     >
                       {{ project }}
                     </span>
-                    <span 
-                      *ngIf="skill.projectsUsed.length > 2" 
+                    <span
+                      *ngIf="skill.projectsUsed.length > 2"
                       class="more-projects"
                     >
                       +{{ skill.projectsUsed.length - 2 }}
@@ -151,8 +151,8 @@
       <!-- CORRECCIÓN: Vista de skills destacadas usando helper function -->
       <div *ngIf="viewMode === 'featured'" class="skills-featured skills-animate">
         <div class="featured-grid">
-          <div 
-            *ngFor="let skill of getFeaturedSkills()" 
+          <div
+            *ngFor="let skill of getFeaturedSkills()"
             class="featured-skill-card"
             (click)="openSkillDetail(skill)"
           >
@@ -171,7 +171,7 @@
             </div>
 
             <div class="featured-progress">
-              <div 
+              <div
                 class="featured-progress-bar"
                 [attr.data-percentage]="getSkillPercentage(skill)"
                 [style.background-color]="getCategoryColor(skill.category)"
@@ -196,8 +196,8 @@
             </div>
 
             <div class="level-skills">
-              <div 
-                *ngFor="let skill of getSkillsByLevel(level)" 
+              <div
+                *ngFor="let skill of getSkillsByLevel(level)"
                 class="level-skill-item"
                 (click)="openSkillDetail(skill)"
               >
@@ -223,14 +223,14 @@
           <div class="highlight-content">
             <h4 class="highlight-title">Experiencia Práctica Real</h4>
             <p class="highlight-description">
-              Mis competencias no son solo certificados o cursos completados. Son años de experiencia 
-              práctica resolviendo problemas reales, desde reparar hardware hasta coordinar 
+              Mis competencias no son solo certificados o cursos completados. Son años de experiencia
+              práctica resolviendo problemas reales, desde reparar hardware hasta coordinar
               implementaciones empresariales complejas.
             </p>
             <div class="highlight-points">
               <div class="highlight-point">
                 <ion-icon name="checkmark-circle" class="point-icon"></ion-icon>
-                <span>10+ años de experiencia práctica desde adolescencia</span>
+                <span>Más de 10 años de experiencia práctica en TI</span>
               </div>
               <div class="highlight-point">
                 <ion-icon name="checkmark-circle" class="point-icon"></ion-icon>
@@ -252,20 +252,20 @@
           <p class="actions-description">
             Estas competencias las aplico diariamente en proyectos reales y coordinación técnica.
           </p>
-          
+
           <div class="actions-buttons">
-            <ion-button 
-              expand="block" 
+            <ion-button
+              expand="block"
               class="action-button primary"
               (click)="scrollToContact()"
             >
               <ion-icon name="mail" slot="start"></ion-icon>
               Proponer Colaboración
             </ion-button>
-            
-            <ion-button 
-              expand="block" 
-              fill="outline" 
+
+            <ion-button
+              expand="block"
+              fill="outline"
               class="action-button"
               (click)="scrollToProjects()"
             >
@@ -291,10 +291,10 @@
           </ion-buttons>
         </ion-toolbar>
       </ion-header>
-      
+
       <ion-content class="skill-modal-content" *ngIf="selectedSkill">
         <div class="modal-body">
-          
+
           <!-- Header del modal -->
           <div class="modal-header">
             <div class="modal-skill-icon" [style.background-color]="getCategoryColor(selectedSkill.category)">
@@ -321,7 +321,7 @@
                 <span class="modal-progress-percentage">{{ getSkillPercentage(selectedSkill) }}%</span>
               </div>
               <div class="modal-progress-bar-container">
-                <div 
+                <div
                   class="modal-progress-bar"
                   [style.width.%]="getSkillPercentage(selectedSkill)"
                   [style.background-color]="getCategoryColor(selectedSkill.category)"
@@ -340,8 +340,8 @@
           <div class="modal-section" *ngIf="selectedSkill.projectsUsed && selectedSkill.projectsUsed.length > 0">
             <h5 class="modal-section-title">Proyectos Donde la Apliqué</h5>
             <div class="modal-projects">
-              <div 
-                *ngFor="let project of selectedSkill.projectsUsed" 
+              <div
+                *ngFor="let project of selectedSkill.projectsUsed"
                 class="modal-project-tag"
               >
                 <ion-icon name="folder" class="project-icon"></ion-icon>
@@ -356,14 +356,14 @@
             <div class="modal-featured-info">
               <ion-icon name="star" class="featured-star"></ion-icon>
               <p class="featured-explanation">
-                Esta competencia es fundamental en mi perfil profesional debido a mi extensiva 
-                experiencia práctica y su aplicación constante en proyectos reales.
+                Esta competencia es fundamental en mi perfil profesional debido a mi experiencia
+                práctica y su aplicación constante en proyectos reales.
               </p>
             </div>
           </div>
-          
+
         </div>
-        
+
       </ion-content>
     </ng-template>
   </ion-modal>
