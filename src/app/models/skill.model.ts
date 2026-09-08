@@ -96,11 +96,11 @@ export const ALEJANDRO_SKILLS: Skill[] = [
   },
   {
     id: 'system-administration',
-    name: 'Administración de Sistemas',
+    name: 'Administración de Sistemas (Windows)',
     category: 'infrastructure',
     level: 'advanced',
     yearsOfExperience: 10,
-    description: 'Experiencia avanzada en Windows (XP a 11) y Ubuntu: instalación, formateo, clonación, migración de sistemas y resolución de incidencias.',
+    description: 'Experiencia avanzada en Windows de escritorio (XP a 11): instalación, formateo, clonación, migración de sistemas y resolución de incidencias. Exposición mínima/básica a Windows Server.',
     projectsUsed: [],
     icon: 'desktop-outline',
     color: '#45B7D1',
@@ -132,6 +132,19 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     color: '#0078D4',
     featured: true,
     displayOrder: 5
+  },
+  {
+    id: 'linux-ubuntu',
+    name: 'Ubuntu / Linux (nivel básico)',
+    category: 'infrastructure',
+    level: 'intermediate',
+    yearsOfExperience: 1,
+    description: 'Uso básico de terminal en Ubuntu/Linux (navegación, comandos esenciales), sin experiencia formal de administración de servidores. Nivel junior, en contraste con su experiencia avanzada en Windows.',
+    projectsUsed: [],
+    icon: 'terminal-outline',
+    color: '#E95420',
+    featured: false,
+    displayOrder: 6
   },
 
   // ========================================
@@ -250,8 +263,8 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     name: 'TypeScript',
     category: 'development',
     level: 'intermediate',
-    yearsOfExperience: 2,
-    description: 'Uso de TypeScript 5.x con tipado fuerte, interfaces y clases en proyectos Angular e Ionic.',
+    yearsOfExperience: 1,
+    description: 'Tipado fuerte, interfaces y clases en proyectos Angular e Ionic, reforzado con apoyo de herramientas de IA para acelerar el aprendizaje y resolver dudas puntuales.',
     projectsUsed: [],
     icon: 'code-slash-outline',
     color: '#3178C6',
@@ -263,8 +276,8 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     name: 'Node.js',
     category: 'development',
     level: 'intermediate',
-    yearsOfExperience: 2,
-    description: 'Uso de Node.js para scripts, herramientas de desarrollo y soporte en proyectos frontend.',
+    yearsOfExperience: 1,
+    description: 'Uso de Node.js para scripts y backend básico en proyectos frontend, apoyado en herramientas de IA para acelerar el aprendizaje y resolver dudas puntuales.',
     projectsUsed: [],
     icon: 'logo-nodejs',
     color: '#68A063',
@@ -479,6 +492,19 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     displayOrder: 5
   },
   {
+    id: 'remote-support-tools',
+    name: 'Herramientas de Soporte Remoto',
+    category: 'tools',
+    level: 'advanced',
+    yearsOfExperience: 4,
+    description: 'Toma de control remoto de equipos para diagnóstico y resolución de incidentes con AnyDesk, TeamViewer y Dameware Mini Remote Control.',
+    projectsUsed: [],
+    icon: 'desktop-outline',
+    color: '#00A1E0',
+    featured: true,
+    displayOrder: 6
+  },
+  {
     id: 'ai-tools',
     name: 'Herramientas de IA',
     category: 'tools',
@@ -489,7 +515,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'bulb-outline',
     color: '#A29BFE',
     featured: true,
-    displayOrder: 6
+    displayOrder: 7
   },
   {
     id: 'office-365',
@@ -502,7 +528,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'document-outline',
     color: '#D83B01',
     featured: false,
-    displayOrder: 7
+    displayOrder: 8
   },
   {
     id: 'photoshop',
@@ -515,7 +541,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'image-outline',
     color: '#31A8FF',
     featured: false,
-    displayOrder: 8
+    displayOrder: 9
   }
 ];
 

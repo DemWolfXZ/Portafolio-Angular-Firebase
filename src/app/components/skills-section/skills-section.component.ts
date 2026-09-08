@@ -32,7 +32,7 @@ export class SkillsSectionComponent implements OnInit, OnDestroy {
   // Estado del componente - VALIDACIÓN: Siempre inicializar con valores seguros
   public animationsLoaded = false;
   public selectedSkill: Skill | null = null;
-  public viewMode: 'category' | 'level' | 'featured' = 'category';
+  public viewMode: 'all' | 'category' | 'level' | 'featured' = 'category';
 
   // Datos reales importados desde el modelo - CORRECCIÓN: Usar datos completos, no mock
   public allSkills: Skill[] = [];
@@ -136,19 +136,26 @@ export class SkillsSectionComponent implements OnInit, OnDestroy {
   /**
    * CORRECCIÓN: Cambio de vista con validaciones y re-renderizado forzado
    */
-  setViewMode(mode: 'category' | 'level' | 'featured'): void {
+  setViewMode(mode: 'all' | 'category' | 'level' | 'featured'): void {
+    // Si ya está en ese filtro (ej. doble clic sobre el mismo botón), no hacer nada.
+    // Volver a disparar todo el ciclo de animación sin necesidad era la causa de que,
+    // con doble clic, las tarjetas quedaran invisibles (ver animateSkillBars()).
+    if (this.viewMode === mode) {
+      return;
+    }
+
     console.log('Cambiando view mode de', this.viewMode, 'a', mode);
     this.viewMode = mode;
-    
+
     // CORRECCIÓN: Forzar detección de cambios inmediatamente
     this.cdr.detectChanges();
-    
+
     // CORRECCIÓN: Re-animar después de un delay mínimo
     setTimeout(() => {
       this.animateSkillBars();
       this.cdr.detectChanges();
     }, 100);
-    
+
     // CORRECCIÓN: Debug para verificar cambio
     console.log('View mode actualizado a:', this.viewMode);
   }
@@ -332,19 +339,17 @@ export class SkillsSectionComponent implements OnInit, OnDestroy {
         }
       });
 
-      // CORRECCIÓN: Asegurar que las tarjetas sean visibles
+      // Asegurar que las tarjetas sean visibles de forma directa e inmediata.
+      // NOTA: antes esto además volvía a llamar a `animationService.observeElement()`
+      // (pensado para animaciones de scroll con IntersectionObserver) en cada cambio
+      // de filtro. Si se hacía doble clic rápido, dos observaciones se pisaban entre
+      // sí y una tarjeta podía quedar con opacity:0 para siempre (el observer nunca
+      // volvía a disparar el callback final). Se retiró: las tarjetas ahora solo
+      // aparecen de forma directa, sin esa animación de reingreso.
       const skillCards = document.querySelectorAll('.skill-card, .featured-skill-card, .level-skill-item');
-      skillCards.forEach((card: any, index) => {
-        // CORRECCIÓN: Forzar visibilidad inmediata
+      skillCards.forEach((card: any) => {
         card.style.opacity = '1';
         card.style.transform = 'none';
-        
-        // CORRECCIÓN: Animación opcional sin ocultar contenido
-        if (this.animationService && typeof this.animationService.observeElement === 'function') {
-          setTimeout(() => {
-            this.animationService.observeElement(card, 'scaleIn', 0.1);
-          }, index * 10); // Delay muy reducido
-        }
       });
     } catch (error) {
       console.warn('Error al animar barras de skill:', error);

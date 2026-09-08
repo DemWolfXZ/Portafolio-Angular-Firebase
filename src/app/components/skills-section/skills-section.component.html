@@ -37,6 +37,14 @@
         <div class="view-modes">
           <button
             class="view-mode-button"
+            [class.active]="viewMode === 'all'"
+            (click)="setViewMode('all')"
+          >
+            <ion-icon name="grid" class="view-icon"></ion-icon>
+            <span>Todo</span>
+          </button>
+          <button
+            class="view-mode-button"
             [class.active]="viewMode === 'category'"
             (click)="setViewMode('category')"
           >
@@ -59,6 +67,74 @@
             <ion-icon name="bar-chart" class="view-icon"></ion-icon>
             <span>Por Nivel</span>
           </button>
+        </div>
+      </div>
+
+      <!-- Tarjeta de skill reutilizable: la usan tanto "Todo" como "Por Categoría" -->
+      <!-- para que no queden dos copias del mismo markup desincronizándose con el tiempo -->
+      <ng-template #skillCardTpl let-skill="skill">
+        <div
+          class="skill-card"
+          [class.featured]="skill.featured"
+          (click)="openSkillDetail(skill)"
+        >
+          <div class="skill-header">
+            <div class="skill-info">
+              <h5 class="skill-name">{{ skill.name }}</h5>
+              <p class="skill-years">{{ formatYearsOfExperience(skill.yearsOfExperience) }}</p>
+            </div>
+            <div class="skill-level" [style.background-color]="getLevelColor(skill.level)">
+              {{ getLevelLabel(skill.level) }}
+            </div>
+          </div>
+
+          <div class="skill-progress">
+            <div class="progress-info">
+              <span class="progress-label">Experiencia</span>
+              <span class="progress-percentage">{{ getSkillPercentage(skill) }}%</span>
+            </div>
+            <div class="progress-bar">
+              <div
+                class="skill-progress-bar"
+                [attr.data-percentage]="getSkillPercentage(skill)"
+                [style.background-color]="getCategoryColor(skill.category)"
+              ></div>
+            </div>
+          </div>
+
+          <p class="skill-description">{{ skill.description }}</p>
+
+          <!-- CORRECCIÓN: Validar que projectsUsed existe y no está vacío -->
+          <div class="skill-projects" *ngIf="skill.projectsUsed && skill.projectsUsed.length > 0">
+            <span class="projects-label">Usado en:</span>
+            <div class="projects-tags">
+              <span
+                *ngFor="let project of skill.projectsUsed.slice(0, 2)"
+                class="project-tag"
+              >
+                {{ project }}
+              </span>
+              <span
+                *ngIf="skill.projectsUsed.length > 2"
+                class="more-projects"
+              >
+                +{{ skill.projectsUsed.length - 2 }}
+              </span>
+            </div>
+          </div>
+
+          <div *ngIf="skill.featured" class="featured-badge">
+            <ion-icon name="star" class="featured-icon"></ion-icon>
+          </div>
+        </div>
+      </ng-template>
+
+      <!-- Vista "Todo": las 35 competencias en una sola grilla, sin agrupar -->
+      <div *ngIf="viewMode === 'all'" class="skills-by-category skills-animate">
+        <div class="category-skills">
+          <ng-container *ngFor="let skill of allSkills">
+            <ng-container *ngTemplateOutlet="skillCardTpl; context: { skill: skill }"></ng-container>
+          </ng-container>
         </div>
       </div>
 
@@ -88,61 +164,9 @@
 
             <!-- CORRECCIÓN: Validar que existen skills antes de mostrar -->
             <div class="category-skills" *ngIf="getSkillsByCategory(category.id).length > 0">
-              <div
-                *ngFor="let skill of getSkillsByCategory(category.id)"
-                class="skill-card"
-                [class.featured]="skill.featured"
-                (click)="openSkillDetail(skill)"
-              >
-                <div class="skill-header">
-                  <div class="skill-info">
-                    <h5 class="skill-name">{{ skill.name }}</h5>
-                    <p class="skill-years">{{ formatYearsOfExperience(skill.yearsOfExperience) }}</p>
-                  </div>
-                  <div class="skill-level" [style.background-color]="getLevelColor(skill.level)">
-                    {{ getLevelLabel(skill.level) }}
-                  </div>
-                </div>
-
-                <div class="skill-progress">
-                  <div class="progress-info">
-                    <span class="progress-label">Experiencia</span>
-                    <span class="progress-percentage">{{ getSkillPercentage(skill) }}%</span>
-                  </div>
-                  <div class="progress-bar">
-                    <div
-                      class="skill-progress-bar"
-                      [attr.data-percentage]="getSkillPercentage(skill)"
-                      [style.background-color]="getCategoryColor(skill.category)"
-                    ></div>
-                  </div>
-                </div>
-
-                <p class="skill-description">{{ skill.description }}</p>
-
-                <!-- CORRECCIÓN: Validar que projectsUsed existe y no está vacío -->
-                <div class="skill-projects" *ngIf="skill.projectsUsed && skill.projectsUsed.length > 0">
-                  <span class="projects-label">Usado en:</span>
-                  <div class="projects-tags">
-                    <span
-                      *ngFor="let project of skill.projectsUsed.slice(0, 2)"
-                      class="project-tag"
-                    >
-                      {{ project }}
-                    </span>
-                    <span
-                      *ngIf="skill.projectsUsed.length > 2"
-                      class="more-projects"
-                    >
-                      +{{ skill.projectsUsed.length - 2 }}
-                    </span>
-                  </div>
-                </div>
-
-                <div *ngIf="skill.featured" class="featured-badge">
-                  <ion-icon name="star" class="featured-icon"></ion-icon>
-                </div>
-              </div>
+              <ng-container *ngFor="let skill of getSkillsByCategory(category.id)">
+                <ng-container *ngTemplateOutlet="skillCardTpl; context: { skill: skill }"></ng-container>
+              </ng-container>
             </div>
           </div>
         </ng-container>

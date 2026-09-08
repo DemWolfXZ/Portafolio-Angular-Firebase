@@ -97,6 +97,7 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
       'Administración básica/intermedia de usuarios, permisos, grupos, accesos y reseteo de contraseñas en Active Directory',
       'Diagnóstico y resolución de incidencias en Windows, redes, impresoras, estaciones de trabajo y equipamiento corporativo',
       'Configuración y soporte de dispositivos móviles Android e iPhone corporativos, incluyendo enrolamiento de cuentas y sincronización de correo',
+      'Soporte remoto a usuarios internos mediante Dameware Mini Remote Control y AnyDesk, tomando control de equipos para diagnóstico y resolución directa de incidentes',
       'Escalamiento de incidentes a áreas especializadas cuando correspondía, documentando contexto técnico, evidencias y hallazgos'
     ],
     achievements: [
@@ -106,7 +107,7 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
     ],
     technologies: [
       'GLPI', 'Active Directory', 'Windows', 'Redes TCP/IP', 'Impresoras corporativas',
-      'Configuración de dispositivos móviles Android/iPhone corporativos'
+      'Configuración de dispositivos móviles Android/iPhone corporativos', 'Dameware Mini Remote Control', 'AnyDesk'
     ],
     skills: [
       'Soporte Técnico N1/N2', 'Gestión de Tickets (GLPI)', 'Administración de Active Directory',
@@ -137,6 +138,7 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
       'Implementación multiplataforma: Sistema funcional en web, tablet y móvil',
       'Análisis de procesos: Mapeo de flujos de trabajo existentes e identificación de mejoras (BPM)',
       'Soporte IT integral: Administración de infraestructura, reparación hardware, configuración redes',
+      'Soporte remoto a usuarios internos mediante AnyDesk y TeamViewer',
       'Gestión de impresoras: Configuración HP/Ricoh/Brother con sistemas centralizados e IPs'
     ],
     achievements: [
@@ -150,6 +152,7 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
     technologies: [
       'Angular 18', 'Ionic 8', 'Firebase 11', 'TypeScript 5.4', 'HTML5', 'CSS3',
       'Herramientas especializadas: Ventoy, Acronis, Rufus', 'Office 365', 'Excel avanzado',
+      'AnyDesk', 'TeamViewer',
       '**IA para desarrollo**: Claude (asistente IA para backend y arquitectura)'
     ],
     skills: [
@@ -175,6 +178,7 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
     description: 'Soporte técnico especializado con gestión de tickets bajo SLA estrictos para ViasChile a través de Valor Único. **Procesamiento de datos**: Limpieza y transformación de archivos CSV utilizando Python (con apoyo de IA) para eliminación de datos innecesarios y creación de archivos optimizados para análisis posterior.',
     responsibilities: [
       'Soporte técnico especializado: Gestión de tickets bajo SLA estrictos, resolución nivel 1-2 para ViasChile',
+      'Soporte presencial y remoto mediante TeamViewer, troubleshooting de sistemas, conectividad y estaciones de trabajo',
       'Administración de sistemas: Active Directory, creación de perfiles, instalación de software',
       '**Procesamiento de datos CSV**: Limpieza y transformación usando Python con Machine Learning',
       'Eliminación de datos innecesarios y modificación de tablas para optimización',
@@ -191,7 +195,7 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
     ],
     technologies: [
       'ServiceNow', 'Active Directory', 'Excel Avanzado', 'Python (Machine Learning)',
-      'Procesamiento de archivos CSV', 'Sistemas de Ticketing', 'Configuración de Redes'
+      'Procesamiento de archivos CSV', 'Sistemas de Ticketing', 'Configuración de Redes', 'TeamViewer'
     ],
     skills: [
       'Soporte Técnico Avanzado', 'Gestión de SLA', 'Administración de Sistemas',
@@ -296,7 +300,7 @@ export const INDEPENDENT_EXPERIENCE: WorkExperience[] = [
     description: 'Cerca de 19 años siendo "el que arregla computadores" - experiencia práctica sólida desde Windows XP hasta sistemas actuales, desarrollando competencia real en hardware, software y resolución de problemas complejos.',
     responsibilities: [
       'Reparación hardware avanzada: cambio de componentes (RAM, teclados, touchpad, pantallas, baterías internas, placas base)',
-      'Formateo, clonación y migración de sistemas operativos (Windows XP-11, Ubuntu)',
+      'Formateo, clonación y migración de sistemas operativos Windows (XP-11)',
       'Configuración de redes domiciliarias y empresariales (TCP/IP, routers, DNS)',
       'Diagnóstico y solución de fallas complejas de software y hardware',
       'Instalación de periféricos, antivirus, Office 365, drivers y programas esenciales',
@@ -311,7 +315,7 @@ export const INDEPENDENT_EXPERIENCE: WorkExperience[] = [
       'Experiencia única combinando práctica autodidacta con formación universitaria'
     ],
     technologies: [
-      'Windows (XP hasta 11)', 'Ubuntu Linux', 'Hardware PC Avanzado',
+      'Windows (XP hasta 11)', 'Ubuntu/Linux (uso básico)', 'Hardware PC Avanzado',
       'Redes TCP/IP', 'Configuración de Routers', 'Clonación de Discos',
       'Herramientas: Ventoy, Acronis, Rufus', 'Diagnóstico Hardware',
       'Office 365', 'Configuración BIOS/UEFI'

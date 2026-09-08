@@ -71,7 +71,7 @@
 
 .skills-stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: var(--spacing-lg);
   max-width: 700px;
   margin: 0 auto;
@@ -105,6 +105,9 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  // Evita que palabras como "COMPETENCIAS" se corten a la mitad en tarjetas angostas
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 // ========================================
@@ -427,17 +430,23 @@
 }
 
 // Badge featured
+// Posicionado como "ribbon" asomando en la esquina de la tarjeta (no encima
+// de la etiqueta de nivel, que también vive en la esquina superior derecha
+// del header) para que no se corten/superpongan entre sí.
 .featured-badge {
   position: absolute;
-  top: var(--spacing-md);
-  right: var(--spacing-md);
+  top: -8px;
+  right: -8px;
   width: 24px;
   height: 24px;
   background: var(--ion-color-accent);
+  border: 2px solid var(--ion-surface-color);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
+  box-shadow: var(--ion-box-shadow);
 }
 
 .featured-icon {
@@ -625,6 +634,9 @@
 }
 
 .level-skill-name {
+  // Es un <span>, por defecto inline: sin "block" queda pegado al span de
+  // años en la misma línea (ej. "equipos10+ años") en vez de apilarse.
+  display: block;
   font-size: var(--font-size-base);
   font-weight: 600;
   color: var(--ion-text-color);
