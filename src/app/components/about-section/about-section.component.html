@@ -20,11 +20,11 @@
           <div class="intro-text">
             <h3 class="intro-title">{{ personalInfo.name }}</h3>
             <p class="intro-description">
-              {{ getCurrentAge() }} años, {{ personalInfo.title }} ({{ personalInfo.university }}, {{ personalInfo.graduationYear }})
+              {{ personalInfo.title }} ({{ personalInfo.university }}, {{ personalInfo.graduationYear }})
             </p>
             <p class="intro-location">
-              <ion-icon name="location" class="location-icon"></ion-icon>
-              {{ personalInfo.location }}
+              <ion-icon name="globe-outline" class="location-icon"></ion-icon>
+              {{ personalInfo.availability }}
             </p>
           </div>
 
@@ -96,6 +96,26 @@
                 {{ highlight }}
               </li>
             </ul>
+          </div>
+        </div>
+
+        <!-- Verificación de credenciales (título DuocUC y certificado Python, obtenidos en Chile) -->
+        <div class="certifications-section about-animate">
+          <h4 class="certifications-title">Verificación de Credenciales</h4>
+          <div class="certifications-list">
+            <div *ngFor="let cert of certifications" class="certification-item">
+              <img [src]="cert.image" [alt]="cert.name" class="certification-image" />
+              <span class="certification-name">{{ cert.name }}</span>
+              <ion-button
+                fill="outline"
+                size="small"
+                class="certification-verify-button"
+                (click)="openVerification(cert.url)"
+              >
+                <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+                {{ cert.verificationLabel }}
+              </ion-button>
+            </div>
           </div>
         </div>
 

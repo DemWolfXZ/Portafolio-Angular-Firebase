@@ -39,14 +39,14 @@
           *ngFor="let project of getFilteredProjects()" 
           class="project-card"
           [class.featured]="project.featured"
-          [class.wad-project]="project.category === 'creative'"
+          [class.wad-project]="project.type === 'game-mod'"
         >
           
           <!-- Header de la tarjeta -->
           <div class="project-header">
             <div class="project-category" [style.background-color]="getCategoryColor(project.category)">
               <ion-icon [name]="getCategoryIcon(project.category)" class="category-icon"></ion-icon>
-              <span class="category-label">{{ project.category === 'creative' ? 'Creativo' : project.category }}</span>
+              <span class="category-label">{{ getCategoryLabel(project.category) }}</span>
             </div>
             
             <div class="project-status" [class]="'status-' + project.status">
@@ -75,17 +75,17 @@
                 </button>
                 
                 <!-- NUEVO: Botón para WADs -->
-                <button 
-                  *ngIf="project.category === 'creative'"
+                <button
+                  *ngIf="project.type === 'game-mod'"
                   class="overlay-button wad-special"
                   (click)="openProjectDetail(project)"
                 >
                   <ion-icon name="game-controller" class="overlay-icon"></ion-icon>
                   <span>Ver WAD</span>
                 </button>
-                
-                <button 
-                  *ngIf="project.category !== 'creative'"
+
+                <button
+                  *ngIf="project.type !== 'game-mod'"
                   class="overlay-button secondary"
                   (click)="openProjectDetail(project)"
                 >
@@ -142,7 +142,7 @@
               </div>
 
               <!-- NUEVO: Info especial para WADs -->
-              <div class="meta-item" *ngIf="project.category === 'creative' && project.engineRequired">
+              <div class="meta-item" *ngIf="project.type === 'game-mod' && project.engineRequired">
                 <ion-icon name="build" class="meta-icon"></ion-icon>
                 <span class="meta-text">{{ project.engineRequired }}</span>
               </div>
@@ -172,9 +172,9 @@
                 Descargar WAD
               </ion-button>
 
-              <ion-button 
-                *ngIf="project.category === 'creative' && hasVideo(project)"
-                expand="block" 
+              <ion-button
+                *ngIf="hasVideo(project)"
+                expand="block"
                 class="action-button video"
                 (click)="openProjectDetail(project)"
               >
@@ -213,7 +213,7 @@
           </div>
 
           <!-- NUEVO: Badge especial para WADs -->
-          <div *ngIf="project.category === 'creative'" class="wad-badge">
+          <div *ngIf="project.type === 'game-mod'" class="wad-badge">
             <ion-icon name="game-controller" class="wad-icon"></ion-icon>
             <span class="wad-text">WAD</span>
           </div>
@@ -326,7 +326,7 @@
             <h3 class="modal-title">{{ selectedProject.title }}</h3>
             <div class="modal-meta">
               <span class="modal-category" [style.background-color]="getCategoryColor(selectedProject.category)">
-                {{ selectedProject.category === 'creative' ? 'Creativo' : selectedProject.category }}
+                {{ getCategoryLabel(selectedProject.category) }}
               </span>
               <span class="modal-status">{{ getStatusLabel(selectedProject.status) }}</span>
               <span class="modal-role">{{ selectedProject.role }}</span>

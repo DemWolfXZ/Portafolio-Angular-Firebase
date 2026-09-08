@@ -291,13 +291,60 @@ export const ALEJANDRO_PROJECTS: Project[] = [
     ],
     featured: true,
     displayOrder: 2
+  }
+];
+
+/**
+ * Proyectos personales de Alejandro Villa, desarrollados por cuenta propia
+ * (fuera de un contexto laboral o académico) y publicados en su GitHub.
+ * Datos técnicos verificados directamente desde los repositorios reales.
+ */
+export const PERSONAL_PROJECTS: Project[] = [
+  {
+    id: 'carrito-control',
+    title: 'CarritoControl - App de Compras y Presupuesto',
+    shortDescription: 'App Android nativa para organizar compras y controlar el presupuesto, 100% offline y sin cuentas de usuario',
+    fullDescription: 'Aplicación móvil desarrollada con Angular, Ionic y Capacitor para gestionar listas de compras, controlar el presupuesto en tiempo real y llevar un registro de gastos. Funciona completamente offline, sin necesidad de crear una cuenta, con almacenamiento local y un enfoque centrado en la privacidad del usuario.',
+    category: 'personal',
+    type: 'mobile-app',
+    technologies: [
+      { name: 'Angular', version: '18', category: 'frontend', color: '#dd0031' },
+      { name: 'Ionic', version: '8', category: 'mobile', color: '#3880ff' },
+      { name: 'Capacitor', version: '7.4', category: 'mobile', color: '#119eff' },
+      { name: 'TypeScript', version: '5.4', category: 'frontend', color: '#3178c6' },
+      { name: 'Android (Java)', category: 'mobile', color: '#3ddc84' }
+    ],
+    links: {
+      repository: 'https://github.com/DemWolfXZ/carrito'
+    },
+    images: {
+      thumbnail: 'assets/images/carrito control.jpeg',
+      screenshots: []
+    },
+    dates: {
+      startDate: new Date('2025-06-20')
+    },
+    role: 'Desarrollador Full Stack (App Android)',
+    status: 'maintenance',
+    achievements: [
+      'App funcional 100% offline, sin dependencia de backend ni cuentas de usuario',
+      'Construcción y empaquetado de APK para instalación directa en Android',
+      'Múltiples temas visuales, incluyendo opciones de accesibilidad para daltonismo'
+    ],
+    challenges: [
+      'Integración de Capacitor con la capa nativa de Android (Java) para el build de producción',
+      'Diseño de persistencia local robusta sin backend ni base de datos remota',
+      'Definición de un modelo freemium simple (límite de listas y productos) sin sistema de cuentas'
+    ],
+    featured: true,
+    displayOrder: 6
   },
   {
     id: 'ast-digital-formulario',
-    title: 'AST Digital - Formulario Profesional',
-    shortDescription: 'Interface profesional y funcional para gestión de formularios empresariales',
-    fullDescription: 'Desarrollo de formulario profesional con validaciones avanzadas y diseño centrado en la experiencia de usuario. Implementación de patrones de diseño modernos.',
-    category: 'professional',
+    title: 'AST Digital - Formulario Web',
+    shortDescription: 'Formulario web desarrollado de forma independiente como favor a un conocido',
+    fullDescription: 'Formulario web con validaciones e interfaz simple, desarrollado por cuenta propia (fuera de un contexto laboral o académico) a pedido de un conocido. Quedó alojado y disponible desde entonces.',
+    category: 'personal',
     type: 'web-application',
     technologies: [
       { name: 'Angular', category: 'frontend', color: '#dd0031' },
@@ -316,25 +363,25 @@ export const ALEJANDRO_PROJECTS: Project[] = [
       startDate: new Date('2024-06-01'),
       endDate: new Date('2024-08-01')
     },
-    role: 'Frontend Developer',
+    role: 'Desarrollador',
     status: 'completed',
     achievements: [
-      'Interface limpia y profesional',
-      'Validaciones robustas en tiempo real',
-      'Experiencia de usuario optimizada'
+      'Formulario funcional con validaciones en tiempo real',
+      'Interfaz simple y clara entregada en un plazo corto'
     ],
     challenges: [
-      'Optimización de formularios complejos',
-      'Implementación de validaciones cross-field'
+      'Balancear simplicidad de uso con validaciones robustas en poco tiempo'
     ],
     featured: false,
-    displayOrder: 3
+    displayOrder: 7
   }
 ];
 
 /**
- * Datos de proyectos creativos (WADs para Doom)
- * ACTUALIZADO: Incluye WAD de 11 niveles y proyecto experimental DOOM 3
+ * Datos de proyectos creativos: WADs para Doom + proyecto musical personal.
+ * ACTUALIZADO: Incluye WAD de 11 niveles, proyecto experimental DOOM 3 y el sitio
+ * web de DemWolf IA Music (proyecto musical personal, agrupado aquí por su naturaleza
+ * creativa, no técnica/laboral).
  */
 export const CREATIVE_PROJECTS: Project[] = [
   {
@@ -452,6 +499,45 @@ export const CREATIVE_PROJECTS: Project[] = [
       'Atmósfera inspirada en DOOM 3',
       'Innovación en engine clásico'
     ]
+  },
+  {
+    id: 'demwolf-ia-music',
+    title: 'DemWolf IA Music - Sitio Web Personal',
+    shortDescription: 'Sitio web para presentar mi proyecto musical personal, desplegado en GitHub Pages',
+    fullDescription: 'Sitio web desarrollado con HTML, CSS y JavaScript puro (sin frameworks) para presentar DemWolf, mi proyecto musical personal, con reproductores de Spotify embebidos y acceso centralizado a distintas plataformas de streaming. Usado aquí también como demostración de desarrollo web puro y despliegue con GitHub Pages, más allá del contenido musical en sí.',
+    category: 'creative',
+    type: 'web-application',
+    technologies: [
+      { name: 'HTML5', category: 'frontend', color: '#e34f26' },
+      { name: 'CSS3', category: 'frontend', color: '#264de4' },
+      { name: 'JavaScript', category: 'frontend', color: '#f7df1e' },
+      { name: 'Bootstrap', version: '5.3', category: 'frontend', color: '#7952b3' }
+    ],
+    links: {
+      live: 'https://demwolfxz.github.io/DemWolfIAMusic/',
+      repository: 'https://github.com/DemWolfXZ/DemWolfIAMusic'
+    },
+    images: {
+      thumbnail: 'assets/images/DemWolf.jpg',
+      screenshots: []
+    },
+    dates: {
+      startDate: new Date('2026-04-09')
+    },
+    role: 'Desarrollador Web Frontend',
+    status: 'in-production',
+    achievements: [
+      'Sitio 100% responsive (móvil, tablet y escritorio) publicado en GitHub Pages',
+      'Integración de reproductores embebidos de Spotify para dos proyectos musicales distintos',
+      'Centralización de accesos a plataformas de streaming (Spotify, Apple Music, Deezer, YouTube, TikTok)'
+    ],
+    challenges: [
+      'Maquetación y diseño visual completo con HTML/CSS/JS puro, sin frameworks de frontend',
+      'Organización de contenido para dos identidades musicales distintas dentro de un mismo sitio',
+      'Configuración y despliegue del sitio con GitHub Pages'
+    ],
+    featured: true,
+    displayOrder: 7
   }
 ];
 
@@ -459,7 +545,7 @@ export const CREATIVE_PROJECTS: Project[] = [
  * Helper function para obtener proyectos por categoría
  */
 export function getProjectsByCategory(category: ProjectCategory): Project[] {
-  const allProjects = [...ALEJANDRO_PROJECTS, ...CREATIVE_PROJECTS];
+  const allProjects = [...ALEJANDRO_PROJECTS, ...PERSONAL_PROJECTS, ...CREATIVE_PROJECTS];
   return allProjects.filter(project => project.category === category);
 }
 
@@ -467,7 +553,7 @@ export function getProjectsByCategory(category: ProjectCategory): Project[] {
  * Helper function para obtener proyectos destacados
  */
 export function getFeaturedProjects(): Project[] {
-  const allProjects = [...ALEJANDRO_PROJECTS, ...CREATIVE_PROJECTS];
+  const allProjects = [...ALEJANDRO_PROJECTS, ...PERSONAL_PROJECTS, ...CREATIVE_PROJECTS];
   return allProjects
     .filter(project => project.featured)
     .sort((a, b) => a.displayOrder - b.displayOrder);
@@ -484,7 +570,7 @@ export function getCreativeProjects(): Project[] {
  * Helper function para obtener tecnologías únicas de todos los proyectos
  */
 export function getAllTechnologies(): Technology[] {
-  const allProjects = [...ALEJANDRO_PROJECTS, ...CREATIVE_PROJECTS];
+  const allProjects = [...ALEJANDRO_PROJECTS, ...PERSONAL_PROJECTS, ...CREATIVE_PROJECTS];
   const techMap = new Map<string, Technology>();
   
   allProjects.forEach(project => {

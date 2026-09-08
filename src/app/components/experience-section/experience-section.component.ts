@@ -46,7 +46,7 @@ export class ExperienceSectionComponent implements OnInit, OnDestroy {
     {
       id: 'independent' as const,
       label: 'Experiencia Independiente',
-      description: '20+ años como técnico independiente',
+      description: '19+ años como técnico independiente',
       icon: 'construct'
     }
   ];

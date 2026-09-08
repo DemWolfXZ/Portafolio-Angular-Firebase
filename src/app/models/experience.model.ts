@@ -4,6 +4,7 @@
  * DESCRIPCIÓN:
  * Modelo de datos para la experiencia laboral de Alejandro Villa.
  * CORREGIDO: Valor Único prestando servicios a ViasChile, fechas exactas según CV real.
+ * ACTUALIZADO: Se agrega Axity Chile (servicios a CAPREDENA), 2025-2026, como experiencia más reciente.
  */
 
 /**
@@ -79,6 +80,43 @@ export interface ExperienceDates {
  */
 export const FORMAL_EXPERIENCE: WorkExperience[] = [
   {
+    id: 'axity-chile-capredena',
+    position: 'Analista de Operaciones / Soporte Técnico N2',
+    company: 'Axity Chile (servicios a CAPREDENA)',
+    type: 'formal',
+    location: 'Santiago, Chile',
+    dates: {
+      startDate: new Date('2025-01-01'),
+      endDate: new Date('2026-08-01'),
+      duration: '2025-2026'
+    },
+    description: 'Soporte técnico N1/N2 a usuarios internos de CAPREDENA, presencial y remoto, con diagnóstico técnico, documentación, seguimiento y cierre de incidentes en GLPI bajo SLA. Administración de accesos y usuarios en Active Directory, soporte a Windows, redes, impresoras y aplicaciones corporativas, incluyendo configuración de dispositivos móviles corporativos.',
+    responsibilities: [
+      'Soporte técnico N1/N2 a usuarios internos, presencial y remoto, resolviendo incidentes de hardware, software, accesos, conectividad e impresoras',
+      'Gestión, seguimiento y cierre de tickets en GLPI, manteniendo trazabilidad y cumplimiento sostenido de SLA superiores al 90%',
+      'Administración básica/intermedia de usuarios, permisos, grupos, accesos y reseteo de contraseñas en Active Directory',
+      'Diagnóstico y resolución de incidencias en Windows, redes, impresoras, estaciones de trabajo y equipamiento corporativo',
+      'Configuración y soporte de dispositivos móviles Android e iPhone corporativos, incluyendo enrolamiento de cuentas y sincronización de correo',
+      'Escalamiento de incidentes a áreas especializadas cuando correspondía, documentando contexto técnico, evidencias y hallazgos'
+    ],
+    achievements: [
+      'Cumplimiento sostenido de SLA superiores al 90% en la gestión de tickets GLPI',
+      'Validación de soluciones aplicadas antes del cierre, identificando patrones de error recurrentes',
+      'Apoyo a la continuidad operacional de CAPREDENA mediante soporte N1/N2 estable'
+    ],
+    technologies: [
+      'GLPI', 'Active Directory', 'Windows', 'Redes TCP/IP', 'Impresoras corporativas',
+      'Configuración de dispositivos móviles Android/iPhone corporativos'
+    ],
+    skills: [
+      'Soporte Técnico N1/N2', 'Gestión de Tickets (GLPI)', 'Administración de Active Directory',
+      'Soporte a Dispositivos Móviles Corporativos', 'Documentación Técnica'
+    ],
+    current: false,
+    displayOrder: 1,
+    featured: true
+  },
+  {
     id: 'fundacion-superacion-pobreza',
     position: 'Coordinador Técnico y Analista de Sistemas',
     company: 'Fundación Superación de la Pobreza',
@@ -120,7 +158,7 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
       'Arquitectura de Sistemas Escalables', 'Administración de Infraestructura TI', 'Implementación Multiplataforma'
     ],
     current: false,
-    displayOrder: 1,
+    displayOrder: 2,
     featured: true
   },
   {
@@ -160,8 +198,43 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
       '**Limpieza y Procesamiento de Datos (Python/ML)**', 'Infraestructura Empresarial', 'Gestión de Inventarios TI'
     ],
     current: false,
-    displayOrder: 2,
+    displayOrder: 3,
     featured: true
+  },
+  {
+    id: 'escuela-jose-san-martin',
+    position: 'Asistente de Computación y Soporte TI Educativo',
+    company: 'Escuela José de San Martín',
+    type: 'formal',
+    location: 'Santiago, Chile',
+    dates: {
+      startDate: new Date('2020-01-01'),
+      endDate: new Date('2023-12-01'),
+      duration: '2020-2023'
+    },
+    description: 'Soporte técnico y administración del laboratorio computacional (45 PCs) de la escuela, incluyendo soporte remoto vía AnyDesk, instalación de software educativo y apoyo a docentes en clases de TIC y alfabetización digital de estudiantes.',
+    responsibilities: [
+      'Administración y mantenimiento del laboratorio computacional (45 PCs), incluyendo soporte remoto vía AnyDesk',
+      'Instalación de software educativo, drivers, Office 365 e impresoras de red',
+      'Configuración de carpetas compartidas y permisos de red',
+      'Apoyo al docente en clases TIC y actividades digitales, incluyendo reemplazos por licencias o días administrativos',
+      'Enseñanza guiada de herramientas digitales (Word, PowerPoint, correo escolar, navegación segura) a estudiantes',
+      'Mantenimiento preventivo y diagnóstico técnico para mejora de equipos'
+    ],
+    achievements: [
+      'Administración estable de un laboratorio de 45 PCs durante 3 años',
+      'Apoyo directo a la alfabetización digital de estudiantes y docentes',
+      'Refuerzo de habilidades de comunicación técnica con público no especializado, en línea con su experiencia como capacitador'
+    ],
+    technologies: [
+      'AnyDesk', 'Office 365', 'Redes TCP/IP', 'Impresoras de red', 'Windows'
+    ],
+    skills: [
+      'Soporte Técnico', 'Administración de Laboratorios TI', 'Capacitación y Alfabetización Digital', 'Soporte Remoto'
+    ],
+    current: false,
+    displayOrder: 4,
+    featured: false
   },
 {
     id: 'vtr-iline',
@@ -200,14 +273,14 @@ export const FORMAL_EXPERIENCE: WorkExperience[] = [
       'Creación de Material Educativo', 'Atención al Cliente', 'Resolución de Problemas Técnicos'
     ],
     current: false,
-    displayOrder: 3,
+    displayOrder: 5,
     featured: true
   }
 ];
 
 /**
  * Experiencia independiente de Alejandro Villa
- * Los famosos 20+ años de experiencia práctica
+ * Casi 19 años de experiencia práctica desde 2007 (número calculado, no redondear hacia arriba)
  */
 export const INDEPENDENT_EXPERIENCE: WorkExperience[] = [
   {
@@ -218,9 +291,9 @@ export const INDEPENDENT_EXPERIENCE: WorkExperience[] = [
     location: 'Santiago, Chile',
     dates: {
       startDate: new Date('2007-01-01'),
-      duration: '2007-presente (20+ años)'
+      duration: '2007-presente (19+ años)'
     },
-    description: 'Más de 20 años siendo "el que arregla computadores" - experiencia práctica sólida desde Windows XP hasta sistemas actuales, desarrollando competencia real en hardware, software y resolución de problemas complejos.',
+    description: 'Cerca de 19 años siendo "el que arregla computadores" - experiencia práctica sólida desde Windows XP hasta sistemas actuales, desarrollando competencia real en hardware, software y resolución de problemas complejos.',
     responsibilities: [
       'Reparación hardware avanzada: cambio de componentes (RAM, teclados, touchpad, pantallas, baterías internas, placas base)',
       'Formateo, clonación y migración de sistemas operativos (Windows XP-11, Ubuntu)',
@@ -231,7 +304,7 @@ export const INDEPENDENT_EXPERIENCE: WorkExperience[] = [
       'Uso de herramientas especializadas: Ventoy, Acronis, Rufus para optimización de trabajo'
     ],
     achievements: [
-      'Referente técnico en círculo personal y profesional durante 20+ años',
+      'Referente técnico en círculo personal y profesional durante casi 19 años',
       'Base sólida de experiencia práctica desde Windows XP hasta tecnologías actuales',
       'Capacidad probada para resolver problemas que otros no pueden',
       'Conocimiento profundo del funcionamiento interno de sistemas',
@@ -250,7 +323,7 @@ export const INDEPENDENT_EXPERIENCE: WorkExperience[] = [
       'Configuración de Sistemas', 'Soporte Técnico Integral'
     ],
     current: true,
-    displayOrder: 4,
+    displayOrder: 6,
     featured: true
   }
 ];

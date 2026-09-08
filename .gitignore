@@ -120,3 +120,8 @@ GoogleService-Info.plist
 *.p12
 *.jks
 *.keystore
+
+# Documentos personales de referencia (CVs con RUT/datos personales, título
+# original en PDF, docx, etc.) que Alejandro guarda junto al repo para que
+# Claude tenga contexto, pero que NUNCA deben terminar en un repo indexable.
+/claude md/

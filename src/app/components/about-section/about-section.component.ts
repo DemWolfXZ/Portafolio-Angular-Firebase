@@ -1,6 +1,7 @@
 // src/app/components/about-section/about-section.component.ts
 import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AnimationService } from '@services/animation.service';
+import { CERTIFICATIONS } from '@models/certification.model';
 
 /**
  * Componente para la sección "Sobre Mí" del portafolio.
@@ -15,16 +16,15 @@ import { AnimationService } from '@services/animation.service';
 export class AboutSectionComponent implements OnInit {
 
   // Información personal detallada de Alejandro Villa - ACTUALIZADA
+  // NOTA: sin edad/ubicación expuestas a propósito (búsqueda de trabajo 100% remoto).
   public personalInfo = {
     name: 'Alejandro Villa Villavicencio',
-    age: 32,
-    birthYear: 1992,
     title: 'Ingeniero en Informática',
     university: 'DuocUC',
     graduationYear: 2025,
-    location: 'Macul, Santiago, Chile',
+    availability: 'Modalidad 100% remota · Zona horaria LATAM',
     email: 'alejandro.villa91@gmail.com',
-    phone: '+56 920913551',
+    phone: '+52 4925599064',
     linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/'
   };
 
@@ -41,7 +41,7 @@ export class AboutSectionComponent implements OnInit {
     },
     practicalExperience: {
       title: 'Experiencia Práctica Sólida',
-      description: 'Esta curiosidad natural me llevó a desarrollar una experiencia práctica sólida: formateos, cambios de hardware, clonación de discos, configuración de redes, reparación de componentes. Durante más de 20 años, he sido el solucionador técnico de confianza.',
+      description: 'Esta curiosidad natural me llevó a desarrollar una experiencia práctica sólida: formateos, cambios de hardware, clonación de discos, configuración de redes, reparación de componentes. Desde hace cerca de 20 años, he sido el solucionador técnico de confianza.',
       highlights: [
         'Formateos y migración de sistemas',
         'Reparación de hardware avanzada',
@@ -51,11 +51,13 @@ export class AboutSectionComponent implements OnInit {
     },
     formalExperience: {
       title: 'Experiencia Formal',
-      description: 'Mi experiencia formal incluye VTR (donde además capacitaba a nuevos trabajadores), Valor Único (Vias Chile) (análisis de datos y soporte especializado), y la Fundación Superación de la Pobreza (coordinación de modernización de sistemas críticos).',
+      description: 'Mi experiencia formal incluye VTR (donde además capacitaba a nuevos trabajadores), la Escuela José de San Martín (soporte TI y administración de un laboratorio de 45 PCs), Valor Único (Vias Chile) (gestión de tickets en ServiceNow, soporte técnico avanzado y análisis de datos operacionales), la Fundación Superación de la Pobreza (coordinación de modernización de sistemas críticos) y Axity Chile prestando servicios a CAPREDENA (soporte N1/N2, gestión de tickets en GLPI e infraestructura bajo SLA).',
       highlights: [
         'VTR: Soporte técnico + Capacitador',
-        'Valor Único:(Vias Chile) MDA, soporte técnico avanzado + Análisis de datos operacionales',
-        'Fundación: Coordinación técnica y analista de sistemas + modernización'
+        'Escuela José de San Martín: Soporte TI y administración de laboratorio computacional (45 PCs)',
+        'Valor Único (Vias Chile): Gestión de tickets en ServiceNow, soporte técnico avanzado + Análisis de datos operacionales',
+        'Fundación: Coordinación técnica y analista de sistemas + modernización',
+        'Axity Chile (CAPREDENA): Soporte técnico N1/N2, gestión de tickets en GLPI y Active Directory bajo SLA'
       ]
     },
     academicFormation: {
@@ -69,6 +71,12 @@ export class AboutSectionComponent implements OnInit {
       ]
     }
   };
+
+  // Certificaciones con verificación oficial (título DuocUC y certificado Python),
+  // ambas obtenidas en Chile. Se muestran con su imagen y link de verificación real
+  // (QR/credencial). Centralizadas en certification.model.ts para reutilizarlas
+  // también en el hero (home).
+  public certifications = CERTIFICATIONS;
 
   // Diferencial único ACTUALIZADO según el prompt
   public uniqueValue = {
@@ -122,9 +130,11 @@ export class AboutSectionComponent implements OnInit {
     { year: '2007', event: 'Inicio como "el que arregla computadores"', type: 'personal' },
     { year: '2018', event: 'VTR - Soporte técnico + Capacitador', type: 'professional' },
     { year: '2020', event: 'Inicio Ingeniería Informática DuocUC', type: 'education' },
+    { year: '2020', event: 'Escuela José de San Martín - Soporte TI y laboratorio de 45 PCs (2020-2023)', type: 'professional' },
     { year: '2023', event: 'Valor Único (Vias Chile) - Especialista soporte técnico', type: 'professional' },
     { year: '2024', event: 'Fundación - Coordinador técnico, Analista en sistema, Modernización', type: 'professional' },
-    { year: '2025', event: 'Titulación Ingeniero Informática', type: 'education' }
+    { year: '2025', event: 'Titulación Ingeniero Informática', type: 'education' },
+    { year: '2025', event: 'Axity Chile (CAPREDENA) - Analista de Operaciones / Soporte N2', type: 'professional' }
   ];
 
   // Estado de animaciones
@@ -204,19 +214,19 @@ export class AboutSectionComponent implements OnInit {
   }
 
   /**
+   * Abre el link de verificación oficial de una certificación (QR/credencial digital)
+   * @param url - URL de verificación
+   */
+  openVerification(url: string): void {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  }
+
+  /**
    * Calcula años de experiencia práctica
    */
   getYearsOfExperience(): number {
     const startYear = 2007;
     const currentYear = new Date().getFullYear();
     return currentYear - startYear;
-  }
-
-  /**
-   * Calcula edad actual
-   */
-  getCurrentAge(): number {
-    const currentYear = new Date().getFullYear();
-    return currentYear - this.personalInfo.birthYear;
   }
 }

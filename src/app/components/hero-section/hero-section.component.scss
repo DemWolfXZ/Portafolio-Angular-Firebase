@@ -367,46 +367,101 @@
   margin-bottom: var(--spacing-2xl);
 }
 
-.primary-actions {
+// ========================================
+// TARJETAS DE CV (dos perfiles vigentes, mismo nivel de visibilidad)
+// ========================================
+.cv-cards {
   display: flex;
-  gap: var(--spacing-md);
+  flex-direction: column;
+  gap: var(--spacing-sm);
   margin-bottom: var(--spacing-lg);
-  
+}
+
+.cv-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--ion-surface-color);
+  border: 1px solid var(--ion-border-color);
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ion-box-shadow);
+    border-color: var(--ion-color-primary);
+  }
+
   @media (max-width: 480px) {
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
   }
 }
 
-.action-button {
-  min-height: 56px;
-  font-weight: 600;
+.cv-card-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--ion-color-primary-rgb), 0.1);
+  border-radius: var(--border-radius-md);
+  color: var(--ion-color-primary);
+  font-size: 20px;
+}
+
+.cv-card-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.cv-card-name {
   font-size: var(--font-size-base);
-  border-radius: var(--border-radius-lg);
-  transition: all var(--transition-normal);
-  
+  font-weight: 700;
+  color: var(--ion-text-color);
+  line-height: 1.3;
+}
+
+.cv-card-desc {
+  font-size: var(--font-size-xs);
+  color: var(--ion-text-color-secondary);
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    white-space: normal;
+  }
+}
+
+.cv-card-actions {
+  display: flex;
+  gap: var(--spacing-xs);
+  flex-shrink: 0;
+}
+
+.cv-card-button {
+  margin: 0;
+  --border-radius: var(--border-radius-md);
+
   &.primary {
     --background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-accent) 100%);
     --color: white;
-    box-shadow: var(--ion-box-shadow);
-    
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--ion-box-shadow-hover);
-    }
-    
-    &:active {
-      transform: translateY(0);
-    }
   }
-  
+
   &.secondary {
     --border-color: var(--ion-color-primary);
     --color: var(--ion-color-primary);
-    
+
     &:hover {
       --background: var(--ion-color-primary);
       --color: white;
-      transform: translateY(-2px);
     }
   }
 }
@@ -647,6 +702,112 @@
 }
 
 // ========================================
+// CERTIFICACIONES VERIFICADAS
+// ========================================
+.hero-certifications {
+  margin-top: var(--spacing-2xl);
+  padding-top: var(--spacing-xl);
+  border-top: 1px solid var(--ion-border-color);
+}
+
+.hero-certifications-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--ion-text-color);
+  margin: 0 0 var(--spacing-md) 0;
+  text-align: left;
+
+  @media (max-width: 968px) {
+    text-align: center;
+  }
+}
+
+.certifications-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.cert-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: var(--ion-surface-color);
+  border: 1px solid var(--ion-border-color);
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-normal);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--ion-box-shadow);
+    border-color: var(--ion-color-primary);
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+.cert-badge-image {
+  // Rectangular en vez de cuadrado: el badge de Python es una imagen ancha
+  // (nombre + badge circular) y se ve ilegible forzada a un cuadro pequeño.
+  width: 96px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: var(--ion-background-color-secondary);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-xs);
+
+  @media (max-width: 480px) {
+    width: 84px;
+    height: 52px;
+  }
+}
+
+.cert-badge-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  min-width: 0;
+}
+
+.cert-badge-name {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--ion-text-color);
+  line-height: 1.3;
+}
+
+.cert-badge-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  width: fit-content;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--ion-color-primary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 14px;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 480px) {
+    margin: 0 auto;
+  }
+}
+
+// ========================================
 // BACKGROUND DECORATIVO
 // ========================================
 .hero-background {
@@ -692,43 +853,6 @@
     transform: translate(-50%, -50%);
     animation-duration: 40s;
   }
-}
-
-// ========================================
-// MODAL DE CV
-// ========================================
-ion-modal {
-  z-index: 50000 !important;
-}
-
-.cv-modal-content {
-  padding: 0;
-}
-
-.cv-preview {
-  height: 70vh;
-  margin: var(--spacing-md);
-}
-
-.cv-iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--ion-box-shadow);
-}
-
-.cv-modal-actions {
-  padding: var(--spacing-lg);
-  border-top: 1px solid var(--ion-border-color);
-  background: var(--ion-background-color-secondary);
-}
-
-.download-button {
-  --background: linear-gradient(135deg, var(--ion-color-primary), var(--ion-color-accent));
-  --color: white;
-  min-height: 56px;
-  font-weight: 600;
 }
 
 // ========================================

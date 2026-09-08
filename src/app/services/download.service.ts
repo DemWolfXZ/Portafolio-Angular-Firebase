@@ -48,16 +48,29 @@ interface DownloadTrack {
 export class DownloadService {
 
   // Archivos disponibles para descarga
+  // NOTA: hay dos CVs vigentes (uno por perfil/postulación), ambos 100% remotos y sin
+  // datos personales sensibles (sin RUT, edad ni ubicación). Los componentes que ofrecen
+  // "Descargar CV" deben dejar elegir entre ambos en vez de asumir uno solo.
   private readonly AVAILABLE_FILES: DownloadableFile[] = [
     {
-      id: 'cv-alejandro-villa',
-      name: 'CV Alejandro Villa Villavicencio',
-      filename: 'CV Alejandro Villa Villavicencio.pdf',
-      path: 'assets/cv/CV Alejandro Villa Villavicencio.pdf',
-      size: '2.1 MB',
+      id: 'cv-analista-ti',
+      name: 'CV Analista TI & Soporte N1/N2',
+      filename: 'Alejandro Villa CV Analista TI Remoto.pdf',
+      path: 'assets/cv/Alejandro Villa CV Analista TI Remoto.pdf',
+      size: '190 KB',
       type: 'cv',
-      description: 'Currículum Vitae de Alejandro Villa Villavicencio - Desarrollador Full Stack',
-      version: '2025.1'
+      description: 'Currículum orientado a roles de Analista TI / Soporte N1-N2: ITSM (GLPI/ServiceNow), Active Directory e infraestructura.',
+      version: '2026.1'
+    },
+    {
+      id: 'cv-desarrollador-jr',
+      name: 'CV Desarrollador Junior',
+      filename: 'Alejandro Villa CV Desarrollador JR Remoto.pdf',
+      path: 'assets/cv/Alejandro Villa CV Desarrollador JR Remoto.pdf',
+      size: '191 KB',
+      type: 'cv',
+      description: 'Currículum orientado a roles de Desarrollador Web Junior / Full Stack Junior: Angular, Ionic, Firebase, Python/Django.',
+      version: '2026.1'
     },
     {
       id: 'doom-wad',
@@ -136,11 +149,20 @@ export class DownloadService {
   }
 
   /**
-   * Descarga el CV actual
-   * Método de conveniencia para el archivo más solicitado
+   * Obtiene los CVs disponibles (hay más de uno según el perfil de postulación).
+   * Los componentes con botón "Descargar CV" usan esto para ofrecer a elegir.
+   * @returns Array de CVs disponibles
    */
-  async downloadCV(): Promise<void> {
-    return this.downloadFile('cv-alejandro-villa');
+  getCvFiles(): DownloadableFile[] {
+    return this.getAvailableFiles('cv');
+  }
+
+  /**
+   * Descarga un CV específico por su ID.
+   * @param fileId - ID del CV a descargar (ver getCvFiles())
+   */
+  async downloadCV(fileId: string): Promise<void> {
+    return this.downloadFile(fileId);
   }
 
   /**

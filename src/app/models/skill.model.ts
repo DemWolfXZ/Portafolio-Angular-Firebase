@@ -3,7 +3,7 @@
  *
  * DESCRIPCIÓN:
  * Modelo de datos para las competencias técnicas de Alejandro Villa.
- * Alineado con su perfil real: Infraestructura / Soporte, QA Técnico y Desarrollo Frontend Jr.
+ * Alineado con su perfil real: Analista TI / Soporte N1-N2 y Desarrollo Frontend Jr.
  * Sin inflar años ni agregar tecnologías que no usa de verdad.
  */
 
@@ -86,8 +86,8 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     name: 'Configuración de Redes',
     category: 'infrastructure',
     level: 'advanced',
-    yearsOfExperience: 3,
-    description: 'Configuración práctica de redes domiciliarias y pequeñas redes empresariales: TCP/IP, routers, Wi-Fi, segmentación básica.',
+    yearsOfExperience: 5,
+    description: 'Más de 5 años configurando redes domiciliarias (TCP/IP, routers, Wi-Fi) y 3 años en contexto empresarial/corporativo: segmentación básica, conectividad IP y diagnóstico.',
     projectsUsed: [],
     icon: 'wifi',
     color: '#4ECDC4',
@@ -112,13 +112,26 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     name: 'Soporte Técnico',
     category: 'infrastructure',
     level: 'advanced',
-    yearsOfExperience: 3,
+    yearsOfExperience: 4,
     description: 'Gestión de tickets, atención a usuarios, diagnóstico remoto y resolución de incidentes N1–N2, cumpliendo SLA y estándares de servicio.',
     projectsUsed: [],
     icon: 'help-circle-outline',
     color: '#96CEB4',
     featured: true,
     displayOrder: 4
+  },
+  {
+    id: 'active-directory',
+    name: 'Active Directory',
+    category: 'infrastructure',
+    level: 'advanced',
+    yearsOfExperience: 3,
+    description: 'Administración de usuarios, permisos, grupos y accesos en Active Directory, incluyendo resolución de problemas de autenticación.',
+    projectsUsed: [],
+    icon: 'people-circle-outline',
+    color: '#0078D4',
+    featured: true,
+    displayOrder: 5
   },
 
   // ========================================
@@ -272,6 +285,19 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     displayOrder: 6
   },
   {
+    id: 'django',
+    name: 'Django',
+    category: 'development',
+    level: 'intermediate',
+    yearsOfExperience: 1,
+    description: 'Fundamentos de Django a nivel junior para desarrollo backend, reforzados en la formación Python Full Stack (ECAS Otec/SENCE).',
+    projectsUsed: [],
+    icon: 'code-slash-outline',
+    color: '#092E20',
+    featured: true,
+    displayOrder: 7
+  },
+  {
     id: 'php',
     name: 'PHP',
     category: 'development',
@@ -282,7 +308,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'logo-php',
     color: '#777BB4',
     featured: false,
-    displayOrder: 7
+    displayOrder: 8
   },
   {
     id: 'html-css',
@@ -295,7 +321,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'logo-html5',
     color: '#E34F26',
     featured: false,
-    displayOrder: 8
+    displayOrder: 9
   },
   {
     id: 'javascript',
@@ -308,7 +334,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'logo-javascript',
     color: '#F7DF1E',
     featured: false,
-    displayOrder: 9
+    displayOrder: 10
   },
 
   // ========================================
@@ -325,7 +351,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'server-outline',
     color: '#336791',
     featured: true,
-    displayOrder: 10
+    displayOrder: 11
   },
   {
     id: 'mysql',
@@ -338,7 +364,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'logo-mysql',
     color: '#4479A1',
     featured: false,
-    displayOrder: 11
+    displayOrder: 12
   },
 
   // ========================================
@@ -427,6 +453,32 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     displayOrder: 3
   },
   {
+    id: 'glpi',
+    name: 'GLPI',
+    category: 'tools',
+    level: 'advanced',
+    yearsOfExperience: 1,
+    description: 'Gestión de tickets, incidencias y activos TI en GLPI bajo SLA, en soporte técnico N1/N2 corporativo.',
+    projectsUsed: [],
+    icon: 'ticket-outline',
+    color: '#89AC76',
+    featured: true,
+    displayOrder: 4
+  },
+  {
+    id: 'servicenow',
+    name: 'ServiceNow',
+    category: 'tools',
+    level: 'intermediate',
+    yearsOfExperience: 1,
+    description: 'Gestión avanzada de tickets e incidencias en ServiceNow: seguimiento, priorización, escalamiento y cierre bajo SLA.',
+    projectsUsed: [],
+    icon: 'construct-outline',
+    color: '#62D84E',
+    featured: true,
+    displayOrder: 5
+  },
+  {
     id: 'ai-tools',
     name: 'Herramientas de IA',
     category: 'tools',
@@ -437,7 +489,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'bulb-outline',
     color: '#A29BFE',
     featured: true,
-    displayOrder: 4
+    displayOrder: 6
   },
   {
     id: 'office-365',
@@ -450,7 +502,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'document-outline',
     color: '#D83B01',
     featured: false,
-    displayOrder: 5
+    displayOrder: 7
   },
   {
     id: 'photoshop',
@@ -463,7 +515,7 @@ export const ALEJANDRO_SKILLS: Skill[] = [
     icon: 'image-outline',
     color: '#31A8FF',
     featured: false,
-    displayOrder: 6
+    displayOrder: 8
   }
 ];
 
@@ -506,14 +558,13 @@ export function getHomeDisplaySkills(): Skill[] {
       skill.featured &&
       [
         'angular',
+        'ionic',
         'firebase',
         'python',
         'sql',
-        'nodejs',
-        'hardware-repair',
-        'network-config',
-        'business-analysis',
-        'qa-functional-testing'
+        'active-directory',
+        'glpi',
+        'hardware-repair'
       ].includes(skill.id)
     )
     .sort((a, b) => b.yearsOfExperience - a.yearsOfExperience)

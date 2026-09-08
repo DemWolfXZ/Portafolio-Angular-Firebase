@@ -3,6 +3,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DownloadService } from '../../services/download.service';
 import { getHomeDisplaySkills, Skill } from '../../models/skill.model';
+import { CERTIFICATIONS } from '../../models/certification.model';
 
 /**
  * Componente Hero Section - Sección de presentación principal
@@ -24,34 +25,50 @@ export class HeroSectionComponent implements OnInit {
     name: 'Alejandro Villa Villavicencio',
 
     // Título principal que verá el reclutador
-    // Alineado con el perfil: QA + Soporte TI + Frontend Jr
-    title: 'QA Técnico & Soporte TI N2 · Desarrollo Frontend Jr',
+    // Alineado con el CV: Analista TI/Soporte N1-N2 + Desarrollo Frontend Jr (perfil híbrido real)
+    title: 'Analista TI & Soporte N1/N2 · Desarrollador Frontend Jr',
 
     // Frase corta que resume tu propuesta de valor
-    tagline: 'Calidad de software, soporte TI y desarrollo frontend para soluciones estables y usables.',
+    tagline: 'Soporte TI N1/N2, ITSM y desarrollo frontend con Angular e Ionic para sistemas estables y funcionales.',
 
     // Descripción un poco más larga (2–3 líneas)
     description:
-      'Profesional de TI con 3+ años de experiencia en soporte técnico N2 y QA funcional, ' +
-      'complementado con desarrollo frontend en Angular/Ionic. Busco aportar en equipos donde ' +
-      'pueda asegurar calidad, estabilidad y buena experiencia de usuario.',
+      'Ingeniero Informático con experiencia real en soporte técnico N1/N2, Active Directory e ITSM ' +
+      '(GLPI/ServiceNow), combinada con desarrollo frontend en Angular/Ionic y bases de Python/Django. ' +
+      'Busco una oportunidad 100% remota donde pueda aportar en soporte, calidad y desarrollo de software.',
 
-    // Datos de contacto
-    location: 'Macul, Santiago, Chile',
+    // Datos de contacto (sin ubicación específica: búsqueda de trabajo 100% remoto)
+    location: 'Remoto · LATAM',
     email: 'alejandro.villa91@gmail.com',
-    phone: '+56 920913551',
+    // Número mexicano: es el que usa para llamadas (el chileno lo reserva para WhatsApp)
+    phone: '+52 4925599064',
 
     // Perfil de LinkedIn
-    linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/'
+    linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/',
+
+    // Perfil de GitHub
+    github: 'https://github.com/DemWolfXZ'
   };
 
   /** Controla si las animaciones iniciales se consideran cargadas */
   public animationsLoaded: boolean = false;
 
-  /** Control de visibilidad del modal de CV (si lo usas con ion-modal) */
-  public showCVModal: boolean = false;
+  /**
+   * CVs disponibles (hay más de un perfil de postulación: Analista TI y Desarrollador Jr).
+   * Se muestran ambos como tarjetas independientes en vez de un único botón genérico,
+   * para que cada uno sea igual de accesible desde el hero.
+   */
+  public cvFiles: ReturnType<DownloadService['getCvFiles']>;
 
-  constructor(private downloadService: DownloadService) {}
+  /**
+   * Certificaciones verificables (título DuocUC y certificado Python), mostradas
+   * también en el home para que un reclutador las vea sin tener que entrar a "Sobre mí".
+   */
+  public certifications = CERTIFICATIONS;
+
+  constructor(private downloadService: DownloadService) {
+    this.cvFiles = this.downloadService.getCvFiles();
+  }
 
   ngOnInit(): void {
     // Dejamos las animaciones como cargadas cuando el componente se inicializa
@@ -67,36 +84,27 @@ export class HeroSectionComponent implements OnInit {
   }
 
   /**
-   * Descargar CV en formato PDF.
-   * Utiliza el servicio de descarga centralizado para mantener la lógica en un solo lugar.
+   * Descarga un CV específico (elegido directamente desde su tarjeta en el hero).
+   * @param fileId - ID del CV a descargar (ver cvFiles)
    */
-  async downloadCV(): Promise<void> {
+  async downloadCvFile(fileId: string): Promise<void> {
     try {
-      await this.downloadService.downloadCV();
+      await this.downloadService.downloadCV(fileId);
     } catch (error) {
       console.error('Error al descargar CV:', error);
     }
   }
 
   /**
-   * Mostrar CV en una vista previa (modal / nueva pestaña).
-   * Primero intenta usar el servicio centralizado; si falla, abre el PDF directamente.
+   * Abre en una pestaña nueva un CV específico (elegido directamente desde su tarjeta).
+   * @param fileId - ID del CV a visualizar (ver cvFiles)
    */
-  async viewCV(): Promise<void> {
+  async viewCvFile(fileId: string): Promise<void> {
     try {
-      await this.downloadService.viewFile('cv-alejandro-villa');
+      await this.downloadService.viewFile(fileId);
     } catch (error) {
       console.error('Error al visualizar CV:', error);
-      // Fallback: abrir en nueva pestaña manualmente
-      window.open('assets/cv/CV Alejandro Villa Villavicencio.pdf', '_blank');
     }
-  }
-
-  /**
-   * Cerrar modal de CV (si estás usando ion-modal con showCVModal).
-   */
-  closeCVModal(): void {
-    this.showCVModal = false;
   }
 
   /**
@@ -104,6 +112,21 @@ export class HeroSectionComponent implements OnInit {
    */
   openLinkedIn(): void {
     window.open(this.personalInfo.linkedin, '_blank', 'noopener,noreferrer');
+  }
+
+  /**
+   * Abrir perfil de GitHub en una nueva pestaña.
+   */
+  openGitHub(): void {
+    window.open(this.personalInfo.github, '_blank', 'noopener,noreferrer');
+  }
+
+  /**
+   * Abre el link oficial de verificación de una certificación (QR/credencial digital).
+   * @param url - URL de verificación
+   */
+  openVerification(url: string): void {
+    window.open(url, '_blank', 'noopener,noreferrer');
   }
 
   /**

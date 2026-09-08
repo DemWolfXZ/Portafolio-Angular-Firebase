@@ -889,7 +889,13 @@
     border-color: #0077B5;
     .social-icon { color: white; }
   }
-  
+
+  &.github:hover {
+    background: #333333;
+    border-color: #333333;
+    .social-icon { color: white; }
+  }
+
   &.email:hover {
     background: var(--ion-color-primary);
     border-color: var(--ion-color-primary);

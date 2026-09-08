@@ -236,6 +236,62 @@
 }
 
 // ========================================
+// VERIFICACIÓN DE CREDENCIALES
+// ========================================
+.certifications-section {
+  margin-bottom: var(--spacing-3xl);
+}
+
+.certifications-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  margin: 0 0 var(--spacing-lg) 0;
+}
+
+.certifications-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.certification-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: var(--ion-surface-color);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--ion-border-color);
+  flex-wrap: wrap;
+}
+
+.certification-image {
+  // Rectangular en vez de cuadrado: el badge de Python es una imagen ancha
+  // (nombre + badge circular) y se ve ilegible forzada a un cuadro pequeño.
+  width: 96px;
+  height: 60px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: var(--ion-background-color-secondary);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-xs);
+
+  @media (max-width: 480px) {
+    width: 80px;
+    height: 50px;
+  }
+}
+
+.certification-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.certification-verify-button {
+  flex-shrink: 0;
+}
+
+// ========================================
 // DIFERENCIAL ÚNICO
 // ========================================
 .unique-value-section {

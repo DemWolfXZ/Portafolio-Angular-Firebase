@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
     // Aquí puedes integrar con SEO Service si lo tienes
     // Por ahora solo actualizamos el título
     const titles: { [key: string]: string } = {
-      '/home': 'Alejandro Villa - QA Técnico & Soporte TI N2',
+      '/home': 'Alejandro Villa - Analista TI & Soporte N1/N2',
       '/about': 'Sobre Mí - Alejandro Villa',
       '/experience': 'Experiencia - Alejandro Villa',
       '/projects': 'Proyectos - Alejandro Villa',

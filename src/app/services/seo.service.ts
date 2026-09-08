@@ -5,7 +5,9 @@
  * Servicio para optimización SEO del portafolio de Alejandro Villa.
  * Maneja meta tags, títulos, descripciones y structured data para
  * mejorar la visibilidad en motores de búsqueda y redes sociales.
- * Optimizado para búsquedas relacionadas con "QA Técnico Chile" y "Soporte TI N2".
+ * Optimizado para búsquedas relacionadas con "Analista TI", "Soporte N1/N2" e ITSM.
+ * NOTA: sin geo.region/geo.placename ni dirección en structured data a propósito
+ * (búsqueda de trabajo 100% remoto, sin ubicación/país indexado).
  */
 
 import { Injectable } from '@angular/core';
@@ -30,29 +32,28 @@ export class SeoService {
 
   // Configuración base del sitio
   private readonly SITE_CONFIG = {
-    siteName: 'Alejandro Villa - QA Técnico & Soporte TI N2',
+    siteName: 'Alejandro Villa - Analista TI & Soporte N1/N2',
     baseUrl: 'https://portafolio-alejandro-villa.web.app',
     defaultImage: 'assets/images/placeholder.svg',
     author: 'Alejandro Villa Villavicencio',
-    locale: 'es_CL'
+    locale: 'es'
   };
 
-  // Keywords principales para SEO (orientado a QA + Soporte + Dev Jr)
+  // Keywords principales para SEO (orientado a Soporte TI/ITSM + Desarrollo Frontend Jr)
   private readonly PRIMARY_KEYWORDS = [
-    'QA Técnico',
-    'QA Manual',
-    'Quality Assurance',
-    'Soporte TI N2',
-    'Ingeniero Informático Chile',
+    'Analista TI',
+    'Soporte TI N1/N2',
+    'ITSM',
+    'GLPI',
+    'ServiceNow',
+    'Active Directory',
+    'Ingeniero Informático',
     'Soporte técnico e infraestructura',
-    'Testing funcional',
-    'Pruebas de software',
-    'Postman básico',
-    'Jira básico',
     'Angular Junior',
+    'Ionic',
     'Firebase',
+    'Python Django',
     'Alejandro Villa',
-    'Santiago Chile',
     'Trabajo remoto TI'
   ];
 
@@ -95,8 +96,6 @@ export class SeoService {
     // Meta tags adicionales
     this.meta.updateTag({ name: 'robots', content: 'index, follow' });
     this.meta.updateTag({ name: 'language', content: 'Spanish' });
-    this.meta.updateTag({ name: 'geo.region', content: 'CL-RM' });
-    this.meta.updateTag({ name: 'geo.placename', content: 'Santiago, Chile' });
   }
 
   /**
@@ -104,9 +103,9 @@ export class SeoService {
    */
   setHomeMeta(): void {
     this.setMetaTags({
-      title: 'Alejandro Villa - QA Técnico & Soporte TI N2 | Ingeniero Informático',
+      title: 'Alejandro Villa - Analista TI & Soporte N1/N2 | Ingeniero Informático',
       description:
-        'QA Técnico & Soporte TI N2 con más de 5 años de experiencia en soporte e infraestructura y formación en desarrollo web (Angular, Firebase, Python). Enfocado en testing funcional, documentación clara y mejora continua.',
+        'Analista TI & Soporte N1/N2 con experiencia en ITSM (GLPI/ServiceNow), Active Directory e infraestructura, más desarrollo frontend con Angular, Ionic y bases de Python/Django. Disponible 100% remoto.',
       keywords: this.getDefaultKeywords(),
       type: 'profile'
     });
@@ -117,11 +116,11 @@ export class SeoService {
    */
   setAboutMeta(): void {
     this.setMetaTags({
-      title: 'Sobre Mí - Alejandro Villa | QA Técnico & Soporte TI N2',
+      title: 'Sobre Mí - Alejandro Villa | Analista TI & Soporte N1/N2',
       description:
-        'Ingeniero Informático que comenzó en soporte técnico y hoy se orienta a QA Manual y soporte TI N2. Experiencia real con usuarios, documentación, análisis de incidencias y formación constante en testing y desarrollo.',
+        'Ingeniero Informático que comenzó en soporte técnico y hoy combina soporte TI N1/N2 con desarrollo frontend. Experiencia real con usuarios, documentación, análisis de incidencias y formación constante.',
       keywords:
-        'Sobre mí QA, Perfil QA técnico, Ingeniero Informático soporte TI, transición a QA manual'
+        'Sobre mí Analista TI, Perfil soporte técnico, Ingeniero Informático soporte TI, trabajo remoto'
     });
   }
 
@@ -130,11 +129,11 @@ export class SeoService {
    */
   setExperienceMeta(): void {
     this.setMetaTags({
-      title: 'Experiencia Laboral - Alejandro Villa | QA Técnico & Soporte TI N2',
+      title: 'Experiencia Laboral - Alejandro Villa | Analista TI & Soporte N1/N2',
       description:
-        'Experiencia en mesa de ayuda N1/N2, soporte técnico nacional, capacitación de usuarios, documentación en herramientas como ServiceNow y trabajo con metodologías ágiles. Enfoque actual: roles de QA técnico y soporte TI.',
+        'Experiencia en mesa de ayuda N1/N2, soporte técnico, gestión de tickets en GLPI y ServiceNow, administración de Active Directory y desarrollo frontend con Angular/Ionic en proyectos reales.',
       keywords:
-        'Experiencia QA técnico, Soporte TI N2, ServiceNow, documentación técnica, capacitación usuarios'
+        'Experiencia Soporte TI N1/N2, GLPI, ServiceNow, Active Directory, documentación técnica'
     });
   }
 
@@ -143,11 +142,11 @@ export class SeoService {
    */
   setProjectsMeta(): void {
     this.setMetaTags({
-      title: 'Proyectos - Alejandro Villa | Portafolio QA & Desarrollo Junior',
+      title: 'Proyectos - Alejandro Villa | Portafolio TI & Desarrollo Junior',
       description:
-        'Proyectos personales y académicos con Angular, Ionic y Firebase, orientados a aprender buenas prácticas, flujos de autenticación y manejo de datos. Uso del portafolio como apoyo para roles QA y desarrollo junior.',
+        'Proyectos profesionales, académicos y personales con Angular, Ionic y Firebase, incluyendo una app Android de gestión de compras y un sitio web propio desplegado en GitHub Pages.',
       keywords:
-        'Proyectos Angular junior, Portafolio QA, Firebase, aplicaciones web de práctica'
+        'Proyectos Angular junior, Ionic, Firebase, aplicaciones web y móviles'
     });
   }
 
@@ -156,11 +155,11 @@ export class SeoService {
    */
   setSkillsMeta(): void {
     this.setMetaTags({
-      title: 'Competencias Técnicas - Alejandro Villa | QA Manual, Soporte TI y Dev Junior',
+      title: 'Competencias Técnicas - Alejandro Villa | Soporte TI, ITSM y Dev Junior',
       description:
-        'Competencias en QA manual básico, pruebas funcionales, documentación de incidencias, soporte TI N1/N2, además de desarrollo web junior con Angular, Ionic, Firebase y bases de datos SQL.',
+        'Competencias en soporte TI N1/N2, ITSM (GLPI/ServiceNow), Active Directory e infraestructura, además de desarrollo web junior con Angular, Ionic, Firebase, Python/Django y bases de datos SQL.',
       keywords:
-        'Skills QA manual, testing funcional, Soporte TI N2, Angular junior, Firebase, SQL'
+        'Skills Soporte TI N1/N2, GLPI, ServiceNow, Active Directory, Angular junior, Firebase, SQL'
     });
   }
 
@@ -169,11 +168,11 @@ export class SeoService {
    */
   setContactMeta(): void {
     this.setMetaTags({
-      title: 'Contacto - Alejandro Villa | QA Técnico & Soporte TI N2 (Remoto/Chile)',
+      title: 'Contacto - Alejandro Villa | Analista TI & Soporte N1/N2 (100% Remoto)',
       description:
-        'Contacta a Alejandro Villa para oportunidades de QA Manual, Soporte TI N1/N2 o Desarrollo Junior. Disponible para trabajo remoto o híbrido desde Santiago, Chile.',
+        'Contacta a Alejandro Villa para oportunidades 100% remotas en Soporte TI N1/N2, ITSM o Desarrollo Frontend Junior.',
       keywords:
-        'Contacto QA técnico, Soporte TI remoto, QA junior Chile, Alejandro Villa contacto'
+        'Contacto Analista TI, Soporte TI remoto, Desarrollo frontend junior, Alejandro Villa contacto'
     });
   }
 
@@ -181,23 +180,19 @@ export class SeoService {
    * Añade structured data para mejorar SEO
    */
   addStructuredData(): void {
+    // NOTA: sin "address"/"occupationLocation" a propósito (búsqueda de trabajo 100% remoto,
+    // sin ubicación/país indexado en el sitio público).
     const structuredData = {
       '@context': 'https://schema.org',
       '@type': 'Person',
       name: 'Alejandro Villa Villavicencio',
-      jobTitle: 'QA Técnico & Soporte TI N2',
+      jobTitle: 'Analista TI & Soporte N1/N2',
       description:
-        'Ingeniero Informático con experiencia en soporte TI N1/N2 y orientación a QA Manual y desarrollo web junior.',
+        'Ingeniero Informático con experiencia en soporte TI N1/N2, ITSM (GLPI/ServiceNow) y Active Directory, además de desarrollo web frontend con Angular e Ionic.',
       url: this.SITE_CONFIG.baseUrl,
       image: this.SITE_CONFIG.defaultImage,
       email: 'alejandro.villa91@gmail.com',
-      telephone: '+56920913551',
-      address: {
-        '@type': 'PostalAddress',
-        addressLocality: 'San Bernardo',
-        addressRegion: 'Región Metropolitana',
-        addressCountry: 'Chile'
-      },
+      telephone: '+524925599064',
       alumniOf: {
         '@type': 'EducationalOrganization',
         name: 'DuocUC',
@@ -205,21 +200,20 @@ export class SeoService {
       },
       hasOccupation: {
         '@type': 'Occupation',
-        name: 'QA Manual & Soporte TI N2',
-        occupationLocation: {
-          '@type': 'City',
-          name: 'Santiago, Chile'
-        }
+        name: 'Analista TI & Soporte N1/N2'
       },
       knowsAbout: [
-        'QA Manual',
-        'Testing funcional',
         'Soporte TI N1/N2',
+        'ITSM',
+        'GLPI',
+        'ServiceNow',
+        'Active Directory',
         'Mesa de ayuda',
-        'Angular básico',
-        'Firebase básico',
-        'Postman básico',
-        'Jira básico',
+        'Angular',
+        'Ionic',
+        'Firebase',
+        'Python',
+        'Django',
         'Documentación técnica'
       ],
       sameAs: [

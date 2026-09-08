@@ -24,7 +24,7 @@
               <div class="avatar">
                 <img
                   src="assets/images/placeholder.jpeg"
-                  alt="Alejandro Villa Villavicencio - QA Técnico &amp; Soporte TI N2 - Desarrollo Frontend Jr"
+                  alt="Alejandro Villa Villavicencio - Analista TI &amp; Soporte N1/N2 - Desarrollador Frontend Jr"
                   class="avatar-image"
                   (error)="onAvatarError($event)"
                 />
@@ -110,17 +110,38 @@
               </div>
             </div>
 
-            <!-- Acción de descarga CV -->
+            <!-- Selector de CV: dos perfiles vigentes, cada uno accesible por igual -->
             <div class="cv-download">
-              <ion-button
-                expand="block"
-                fill="outline"
-                class="cv-button"
-                (click)="downloadCV()"
-              >
-                <ion-icon name="download" slot="start"></ion-icon>
-                Descargar CV Completo
-              </ion-button>
+              <div class="cv-card" *ngFor="let cv of cvFiles">
+                <div class="cv-card-icon">
+                  <ion-icon name="document-text-outline"></ion-icon>
+                </div>
+                <div class="cv-card-info">
+                  <span class="cv-card-name">{{ cv.name }}</span>
+                  <span class="cv-card-desc">{{ cv.description }}</span>
+                </div>
+                <div class="cv-card-actions">
+                  <ion-button
+                    fill="solid"
+                    size="small"
+                    class="cv-card-button primary"
+                    [attr.aria-label]="'Descargar ' + cv.name"
+                    (click)="downloadCvFile(cv.id)"
+                  >
+                    <ion-icon name="download" slot="icon-only"></ion-icon>
+                  </ion-button>
+
+                  <ion-button
+                    fill="outline"
+                    size="small"
+                    class="cv-card-button secondary"
+                    [attr.aria-label]="'Ver ' + cv.name"
+                    (click)="viewCvFile(cv.id)"
+                  >
+                    <ion-icon name="eye" slot="icon-only"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

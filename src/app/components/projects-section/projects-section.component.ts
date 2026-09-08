@@ -13,13 +13,14 @@ import { Component, OnInit, OnDestroy, ChangeDetectorRef, HostListener } from '@
 import { Location } from '@angular/common';
 import { AnimationService } from '@services/animation.service';
 import { DownloadService } from '@services/download.service';
-import { 
-  Project, 
-  ALEJANDRO_PROJECTS, 
-  CREATIVE_PROJECTS, 
+import {
+  Project,
+  ALEJANDRO_PROJECTS,
+  PERSONAL_PROJECTS,
+  CREATIVE_PROJECTS,
   ProjectCategory,
   getCreativeProjects,
-  getFeaturedProjects 
+  getFeaturedProjects
 } from '@models/project.model';
 
 @Component({
@@ -32,8 +33,9 @@ public window = window;
 
   // Datos de proyectos importados desde el modelo
   public professionalProjects = ALEJANDRO_PROJECTS;
+  public personalProjects = PERSONAL_PROJECTS;
   public creativeProjects = CREATIVE_PROJECTS;
-  
+
   // Estado del componente
   public activeFilter: ProjectCategory | 'all' = 'all';
   public animationsLoaded = false;
@@ -43,7 +45,7 @@ public window = window;
   public selectedWAD: Project | null = null;
   public showWADModal = false;
 
-  // Configuración de filtros
+  // Configuración de filtros (conteos calculados por categoría real, no por array de origen)
   public filters = [
     {
       id: 'all' as const,
@@ -57,7 +59,7 @@ public window = window;
       label: 'Proyectos Profesionales',
       description: 'Sistemas en producción',
       icon: 'briefcase',
-      count: this.professionalProjects.length
+      count: this.professionalProjects.filter(p => p.category === 'professional').length
     },
     {
       id: 'academic' as ProjectCategory,
@@ -65,6 +67,13 @@ public window = window;
       description: 'Desarrollos universitarios',
       icon: 'school',
       count: this.professionalProjects.filter(p => p.category === 'academic').length
+    },
+    {
+      id: 'personal' as ProjectCategory,
+      label: 'Proyectos Personales',
+      description: 'Desarrollados por cuenta propia',
+      icon: 'person',
+      count: this.personalProjects.length
     },
     {
       id: 'creative' as ProjectCategory,
@@ -132,7 +141,7 @@ ngOnDestroy(): void {
    * @returns Array con todos los proyectos
    */
   getAllProjects(): Project[] {
-    return [...this.professionalProjects, ...this.creativeProjects]
+    return [...this.professionalProjects, ...this.personalProjects, ...this.creativeProjects]
       .sort((a, b) => a.displayOrder - b.displayOrder);
   }
 
@@ -356,6 +365,21 @@ getYouTubeEmbedUrl(videoUrl: string): SafeResourceUrl {
       'personal': 'person'
     };
     return icons[category] || 'folder';
+  }
+
+  /**
+   * Obtiene el label en español para cada categoría de proyecto
+   * @param category - Categoría del proyecto
+   * @returns Nombre legible de la categoría
+   */
+  getCategoryLabel(category: ProjectCategory): string {
+    const labels = {
+      'professional': 'Profesional',
+      'academic': 'Académico',
+      'personal': 'Personal',
+      'creative': 'Creativo'
+    };
+    return labels[category] || category;
   }
 
   /**

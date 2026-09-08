@@ -4,8 +4,8 @@
  * DESCRIPCIÓN:
  * Componente para la sección de contacto del portafolio.
  * ACTUALIZADO: Información de contacto alineada con el posicionamiento actual:
- * QA Técnico & Soporte TI N2 · Desarrollo Frontend Jr, buscando oportunidades
- * remotas en QA, soporte y desarrollo frontend.
+ * Analista TI & Soporte N1/N2 · Desarrollador Frontend Jr, buscando oportunidades
+ * 100% remotas en soporte TI, ITSM y desarrollo frontend.
  */
 
 import { Component, OnInit } from '@angular/core';
@@ -49,14 +49,17 @@ export class ContactSectionComponent implements OnInit {
   public contactInfo = {
     name: 'Alejandro Villa Villavicencio',
     // Alineado con el título principal del portafolio
-    title: 'QA Técnico & Soporte TI N2 · Desarrollo Frontend Jr',
+    title: 'Analista TI & Soporte N1/N2 · Desarrollador Frontend Jr',
     email: 'alejandro.villa91@gmail.com',
-    phone: '+56 920913551',
-    // Unificamos ubicación con el resto del sitio
-    location: 'Macul, Santiago, Chile',
+    // Número mexicano: es el que usa para llamadas
+    phone: '+52 4925599064',
+    // Número chileno: es el que usa en WhatsApp
+    whatsapp: '+56920913551',
+    // Sin ubicación específica: búsqueda de trabajo 100% remoto
+    location: 'Remoto · LATAM',
     linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/',
     // Enfoque realista según tu perfil actual
-    availability: 'Disponible para roles en QA, Soporte TI N2 y desarrollo frontend junior (idealmente remoto).',
+    availability: 'Disponible para roles 100% remotos en Soporte TI N1/N2, ITSM y desarrollo frontend junior.',
     responseTime: 'Respuesta típica: 24-48 horas'
   };
 
@@ -65,7 +68,7 @@ export class ContactSectionComponent implements OnInit {
     {
       day: 'Lunes a Viernes',
       hours: '9:00 - 18:00',
-      timezone: 'CLT (Chile)',
+      timezone: 'Zona horaria LATAM',
       icon: 'business'
     },
     {
@@ -76,6 +79,12 @@ export class ContactSectionComponent implements OnInit {
     }
   ];
 
+  /**
+   * CVs disponibles (hay más de un perfil de postulación: Analista TI y Desarrollador Jr).
+   * Se muestran ambos como tarjetas independientes en vez de un único botón genérico.
+   */
+  public cvFiles: ReturnType<DownloadService['getCvFiles']>;
+
   constructor(
     private fb: FormBuilder,
     private contactService: ContactService,
@@ -84,6 +93,7 @@ export class ContactSectionComponent implements OnInit {
   ) {
     // Inicializamos el formulario reactivo en el constructor
     this.initializeForm();
+    this.cvFiles = this.downloadService.getCvFiles();
   }
 
   ngOnInit(): void {
@@ -273,13 +283,26 @@ export class ContactSectionComponent implements OnInit {
   }
 
   /**
-   * Descarga el CV desde la sección de contacto
+   * Descarga un CV específico (elegido directamente desde su tarjeta).
+   * @param fileId - ID del CV a descargar (ver cvFiles)
    */
-  async downloadCV(): Promise<void> {
+  async downloadCvFile(fileId: string): Promise<void> {
     try {
-      await this.downloadService.downloadCV();
+      await this.downloadService.downloadCV(fileId);
     } catch (error) {
       console.error('Error al descargar CV:', error);
+    }
+  }
+
+  /**
+   * Abre en una pestaña nueva un CV específico (elegido directamente desde su tarjeta).
+   * @param fileId - ID del CV a visualizar (ver cvFiles)
+   */
+  async viewCvFile(fileId: string): Promise<void> {
+    try {
+      await this.downloadService.viewFile(fileId);
+    } catch (error) {
+      console.error('Error al visualizar CV:', error);
     }
   }
 
@@ -311,7 +334,7 @@ export class ContactSectionComponent implements OnInit {
    */
   openWhatsApp(): void {
     const message = 'Hola Alejandro, te contacto desde tu portafolio web para...';
-    const phoneNumber = this.contactInfo.phone.replace(/[^\d]/g, '');
+    const phoneNumber = this.contactInfo.whatsapp.replace(/[^\d]/g, '');
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   }

@@ -24,11 +24,16 @@ export class FooterComponent implements OnInit {
   public personalInfo = {
     name: 'Alejandro Villa Villavicencio',
     // Alineado con el hero y el CV
-    title: 'QA Técnico & Soporte TI N2 · Desarrollo Frontend Jr',
+    title: 'Analista TI & Soporte N1/N2 · Desarrollador Frontend Jr',
     email: 'alejandro.villa91@gmail.com',
-    phone: '+56 920913551',
-    location: 'Macul, Santiago, Chile',
-    linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/'
+    // Número mexicano: es el que usa para llamadas
+    phone: '+52 4925599064',
+    // Número chileno: es el que usa en WhatsApp
+    whatsapp: '+56920913551',
+    // Sin ubicación específica: búsqueda de trabajo 100% remoto
+    location: 'Remoto · LATAM',
+    linkedin: 'https://www.linkedin.com/in/alejandro-villa-villavicencio/',
+    github: 'https://github.com/DemWolfXZ'
   };
 
   // Enlaces de navegación del sitio
@@ -42,10 +47,17 @@ export class FooterComponent implements OnInit {
   ];
 
   // Enlaces rápidos (acciones directas desde el footer)
+  // Hay dos CVs vigentes (Analista TI y Desarrollador Jr): se ofrecen ambos por
+  // igual en vez de un "Descargar CV" genérico que obligue a elegir en un menú aparte.
   public quickLinks = [
     {
-      label: 'Descargar CV',
-      action: () => this.downloadCV(),
+      label: 'CV Analista TI',
+      action: () => this.downloadCvFile('cv-analista-ti'),
+      icon: 'download'
+    },
+    {
+      label: 'CV Desarrollador Jr',
+      action: () => this.downloadCvFile('cv-desarrollador-jr'),
       icon: 'download'
     },
     {
@@ -114,11 +126,12 @@ export class FooterComponent implements OnInit {
   }
 
   /**
-   * Descarga el CV de Alejandro usando el servicio centralizado.
+   * Descarga un CV específico usando el servicio centralizado.
+   * @param fileId - ID del CV a descargar (ver DownloadService.getCvFiles())
    */
-  async downloadCV(): Promise<void> {
+  async downloadCvFile(fileId: string): Promise<void> {
     try {
-      await this.downloadService.downloadCV();
+      await this.downloadService.downloadCV(fileId);
     } catch (error) {
       console.error('Error al descargar CV:', error);
     }
@@ -143,6 +156,13 @@ export class FooterComponent implements OnInit {
   }
 
   /**
+   * Abre GitHub en una nueva pestaña.
+   */
+  openGitHub(): void {
+    window.open(this.personalInfo.github, '_blank', 'noopener,noreferrer');
+  }
+
+  /**
    * Abre el cliente de email del usuario con asunto predefinido.
    */
   sendEmail(): void {
@@ -163,7 +183,7 @@ export class FooterComponent implements OnInit {
    */
   openWhatsApp(): void {
     const message = 'Hola Alejandro, te contacto desde tu portafolio web para...';
-    const phoneNumber = this.personalInfo.phone.replace(/[^\d]/g, '');
+    const phoneNumber = this.personalInfo.whatsapp.replace(/[^\d]/g, '');
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   }
@@ -224,9 +244,9 @@ export class FooterComponent implements OnInit {
    */
   getStatusMessage(): string {
     const messages = [
-      '🚀 Disponible para nuevos proyectos en QA y TI',
+      '🚀 Disponible para nuevas oportunidades remotas en TI y desarrollo',
       '💻 Asegurando calidad y estabilidad en sistemas',
-      '🔧 Soporte TI N2 y resolución de incidentes',
+      '🔧 Soporte TI N1/N2 y resolución de incidentes',
       '📚 Siempre aprendiendo y mejorando mis skills',
       '⚡ 10+ años resolviendo problemas técnicos en la práctica'
     ];
